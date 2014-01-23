@@ -1,0 +1,79 @@
+\usepackage{zref-abspos}
+\newcommand*{\SEP}[1]{
+
+  \zsaveposy{#1}
+
+}
+
+\let\oldqunlist\qunlist
+\let\oldendqunlist\endqunlist
+\renewenvironment{qunlist}{
+  \SEP{begin_questions}
+  \oldqunlist
+  \let\oldqns\qns
+  \renewcommand\qns{\SEP{new_question}\oldqns}
+}
+{
+  \oldendqunlist
+  \SEP{end_questions}
+}
+
+\newenvironment{Choices}{
+  \SEP{begin_choices}
+  \newcommand{\TrueChoice}{\SEP{true_choice}}
+  \newcommand{\FalseChoice}{\SEP{false_choice}}
+  \newcommand{\Hint}{\SEP{hint}}
+}{
+  \SEP{end_choices}
+}
+
+\newenvironment{Multi}{
+  \SEP{begin_multi}
+  \newcommand{\TrueChoice}{\SEP{true_choice}}
+  \newcommand{\FalseChoice}{\SEP{false_choice}}
+  \newcommand{\Hint}{\SEP{hint}}
+}{
+  \SEP{end_multi}
+}
+
+\newenvironment{TrueFalse}{
+  \SEP{begin_tf}
+  \newcommand{\TrueChoice}{\SEP{true_choice}}
+  \newcommand{\FalseChoice}{\SEP{false_choice}}
+  \newcommand{\Hint}{\SEP{hint}}
+}{
+  \SEP{end_tf}
+}
+
+\newenvironment{TrueFalsePossible}{
+  \SEP{begin_tfp}
+  \newcommand{\TrueChoice}{\SEP{true_choice}}
+  \newcommand{\FalseChoice}{\SEP{false_choice}}
+  \newcommand{\PossibleChoice}{\SEP{possible_choice}}
+  \newcommand{\Hint}{\SEP{hint}}
+}{
+  \SEP{end_tfp}
+}
+
+\newenvironment{YesNo}{
+  \SEP{begin_yn}
+  \newcommand{\TrueChoice}{\SEP{true_choice}}
+  \newcommand{\FalseChoice}{\SEP{false_choice}}
+  \newcommand{\Hint}{\SEP{hint}}
+}{
+  \SEP{end_yn}
+}
+
+\newenvironment{Freeform}[1]{
+  \SEP{begin_freeform}
+  \SEP{ans_equals@#1}
+  \newcommand{\Hint}{\SEP{hint}}
+}{
+  \SEP{end_freeform}
+}
+
+\let\olddocument\document
+\renewcommand\document{\olddocument\SEP{begin_document}}
+
+\let\oldenddocument\enddocument
+\renewcommand\enddocument{\SEP{end_document}\oldenddocument}
