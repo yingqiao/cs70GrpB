@@ -12,19 +12,20 @@
 \wedge \neg B$ and $\neg (A\wedge B) \,\equiv\, \neg A \vee \neg
 B$. These two equivalences are known as DeMorgan's Law.
 
-%\begin{table}[h!]
-%\center
-%{\color{blue}{
-%\begin{tabular}{c|c||c|c||c|c}
-%$A$ & $B$ & $\lnot (A \lor B)$ & $ \lnot A \wedge \lnot B$ & $\lnot (A \wedge B)$ & $ \lnot A \lor \lnot B$ \\
-%\hline
-%0 & 0 & 1 & 1 & 1 & 1 \\
-%0 & 1 & 0 & 0 & 1 & 1 \\
-%1 & 0 & 0 & 0 & 1 & 1 \\
-%1 & 1 & 0 & 0 & 0 & 0 \\
-%\end{tabular}
-%}}
-%\end{table}
+
+\begin{table}[h!]
+\center
+{\color{blue}{
+\begin{tabular}{c|c||c|c||c|c}
+$A$ & $B$ & $\lnot (A \lor B)$ & $ \lnot A \wedge \lnot B$ & $\lnot (A \wedge B)$ & $ \lnot A \lor \lnot B$ \\
+\hline
+0 & 0 & 1 & 1 & 1 & 1 \\
+0 & 1 & 0 & 0 & 1 & 1 \\
+1 & 0 & 0 & 0 & 1 & 1 \\
+1 & 1 & 0 & 0 & 0 & 0 \\
+\end{tabular}
+}}
+\end{table}
 
 \item Which of the following statements are true? Let $Q(n)$
   be the statement ``$n$ is divisible by $2$.''  $\mathbb{N}$ denotes the
@@ -35,38 +36,38 @@ B$. These two equivalences are known as DeMorgan's Law.
     \item $\exists \ x\in \mathbb{N}, \neg(\exists \ y\in \mathbb{N}, y < x)$.
   \end{enumerate}
 
-%{\color{blue}{(a) false, (b) true, (c) true}}
+{\color{blue}{(a) false, (b) true, (c) true}}
 
 \item Write the following statements using the notation covered in class. Use $\mathbb{N}$ to denote the set of natural numbers and $\mathbb{Z}$ to denote the
 set of integers.  Also write $P(n)$ for the statement ``$n$ is odd''.
 \begin{enumerate}
-\item For all natural numbers $n$, $2n$ is even.
-%{\color{blue}{$\forall \ n \in \mathbb{N}, \lnot P(2n)$}}
-\item For all natural numbers $n$, $n$ is odd if $n^2$ is odd.
-%{\color{blue}{$\forall \ n \in \mathbb{N}, P(n^2) \implies P(n)$}}
-\item There are no integer solutions to the equation $x^2 - y^2 = 10$.
-%{\color{blue}{$\lnot (\exists \ x,y \in \mathbb{Z}, x^2 - y^2 = 10)$}}
+\item For all natural numbers $n$, $2n$ is even. \\
+{\color{blue}{$\forall \ n \in \mathbb{N}, \lnot P(2n)$}}
+\item For all natural numbers $n$, $n$ is odd if $n^2$ is odd. \\
+{\color{blue}{$\forall \ n \in \mathbb{N}, P(n^2) \implies P(n)$}}
+\item There are no integer solutions to the equation $x^2 - y^2 = 10$. \\
+{\color{blue}{$\lnot (\exists \ x,y \in \mathbb{Z}, x^2 - y^2 = 10)$}}
 \end{enumerate}
 
 
 
 \item You are on an island inhabited by two types of people: the Liars and the Truthtellers. Liars always make false statements, and Truthtellers always make true statements. In all other respects, the two types are indistinguishable. You meet an attractive local and ask him/her on a date. The local responds, ``I will go on a date with you if and only if I am a Truthteller.'' Is this good news?
 
-%{\color{blue}{Yes. Let $T$ be the proposition that the local is a Truthteller, and $D$ be the proposition that he/she will go on a date with you. If $T$ is true, then the statement $D \iff T$ is true, so we can find the value of $D$ in the last line of the truth table below.  It is a 1, so $D$ is true.  If $T$ is false, then the statement $T \iff D$ is false, so we can find the value of $D$ in the third line of the truth table below.  It is a 1 as well.}}
+{\color{blue}{Yes. Let $T$ be the proposition that the local is a Truthteller, and $D$ be the proposition that he/she will go on a date with you. If $T$ is true, then the statement $D \iff T$ is true, so we can find the value of $D$ in the last line of the truth table below.  It is a 1, so $D$ is true.  If $T$ is false, then the statement $T \iff D$ is false, so we can find the value of $D$ in the third line of the truth table below.  It is a 1 as well.}}
 
-%\begin{table}[h!]
-%\center
-%{\color{blue}{
-%\begin{tabular}{c|c|c}
-%T & D & $D \iff T$ \\
-%\hline
-%0 & 0 & 1 \\
-%0 & 1 & 0 \\
-%1 & 0 & 0 \\
-%1 & 1 & 1
-%\end{tabular}
-%}}
-%\end{table}
+\begin{table}[h!]
+\center
+{\color{blue}{
+\begin{tabular}{c|c|c}
+T & D & $D \iff T$ \\
+\hline
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+1 & 1 & 1
+\end{tabular}
+}}
+\end{table}
 
 %\item 
 %  Which of the following implications is/are true?
@@ -100,9 +101,9 @@ set of integers.  Also write $P(n)$ for the statement ``$n$ is odd''.
 %\item A straight tetromino is a tile consisting of four contiguous squares. Prove or disprove: A $10 \times 10$ chessboard can be tiled with straight tetrominoes.
 %\end{enumerate}
 
-\item Prove that if you put $n+1$ apples into $n$ boxes, any way you like, then at least one box must contain 2 apples.  This is known as the {\em pigeon hole principle}.
+\item Prove that if you put $n+1$ apples into $n$ boxes, any way you like, then at least one box must contain 2 apples.  This is known as the {\em pigeon hole principle}. \\
 
-%{\color{blue}{Suppose this is not the case.  Then all the boxes would contain at most 1 apple. Then the maximum number of apples we could have would be $n$, but this is a contradiction since we have $n+1$ apples.}}
+{\color{blue}{Suppose this is not the case.  Then all the boxes would contain at most 1 apple. Then the maximum number of apples we could have would be $n$, but this is a contradiction since we have $n+1$ apples.}}
 
 \item Prove that the length of the hypotenuse of a non-degenerate right triangle is strictly greater than the sum of the two remaining sides.
 \begin{enumerate}
@@ -111,12 +112,12 @@ set of integers.  Also write $P(n)$ for the statement ``$n$ is odd''.
 \item Prove the statement directly.
 \end{enumerate}
 
-%{\color{blue}{Definition of a right triangle: $a^2 + b^2 = c^2$.  Claim to be proven: $a+b > c$. We can prove this directly by adding $2ab$ (a positive number) to the LHS of the definition of a right triangle.
-%\[ a^2 + b^2 = c^2 \implies a^2 + 2ab + b^2 > c^2 \implies (a+b)^2 > c^2 \implies a+b > c \]
-%We can prove the claim with contradiction by assuming it is not true. This is basically the reverse of the previous proof:
-%\[ a + b \leq c \implies (a+b)^2 \leq c^2 \implies a^2 + 2ab + b^2 \leq c^2 \implies a^2 +b^2 < c^2 \]
-%\[ \implies \Longleftarrow \]
-%}}
+{\color{blue}{Definition of a right triangle: $a^2 + b^2 = c^2$.  Claim to be proven: $a+b > c$. We can prove this directly by adding $2ab$ (a positive number) to the LHS of the definition of a right triangle.
+\[ a^2 + b^2 = c^2 \implies a^2 + 2ab + b^2 > c^2 \implies (a+b)^2 > c^2 \implies a+b > c \]
+We can prove the claim with contradiction by assuming it is not true. This is basically the reverse of the previous proof:
+\[ a + b \leq c \implies (a+b)^2 \leq c^2 \implies a^2 + 2ab + b^2 \leq c^2 \implies a^2 +b^2 < c^2 \]
+\[ \implies \Longleftarrow \]
+}}
 
 \end{enumerate}
 \end{document}
