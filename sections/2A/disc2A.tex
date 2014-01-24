@@ -1,5 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage{../../svn_sty/cs70}
+\usepackage{color}
+
 \def\title{Discussion 2A}
 \begin{document}
 \maketitle
@@ -9,6 +11,20 @@
 \item Use truth tables to show that $\neg (A\vee B) \,\equiv\, \neg A
 \wedge \neg B$ and $\neg (A\wedge B) \,\equiv\, \neg A \vee \neg
 B$. These two equivalences are known as DeMorgan's Law.
+
+%{\color{blue}{
+%\begin{table}[h!]
+%\center
+%\begin{tabular}{c|c|c|c}
+%$A$ & $B$ & $\lnot (A \lor B)$ & $ \lnot A \wedge \lnot B$ \\
+%\hline
+%0 & 0 & 1 & 1 \\
+%0 & 1 & 0 & 0 \\
+%1 & 0 & 0 & 0 \\
+%1 & 1 & 0 & 0 \\
+%\end{tabular}
+%\end{table}
+%}}
 
 \item Which of the following statements are true? Let $Q(n)$
   be the statement ``$n$ is divisible by $2$.''  $\mathbb{N}$ denotes the
@@ -29,36 +45,45 @@ set of integers.  Also write $P(n)$ for the statement ``$n$ is odd''.
 
 \item You are on an island inhabited by two types of people: the Liars and the Truthtellers. Liars always lie, and Truthtellers always tell the truth. In all other respects, the two types are indistinguishable. You meet a very attractive local and ask him/her on a date. The local responds, ``I will go on a date with you if and only if I am a Truthteller.'' Is this good news?
 
-\item 
-  Which of the following implications is/are true?
-  \begin{enumerate}
-    \item $\forall x\forall y \; P(x,y)$ implies $\forall y\forall x \; P(x,y)$.
-    \item $\exists x\exists y \; P(x,y)$ implies $\exists y\exists x \; P(x,y)$.
-    \item $\forall x\exists y \; P(x,y)$ implies $\exists y\forall x \; P(x,y)$.
-    \item $\exists x\forall y \; P(x,y)$ implies $\forall y\exists x \; P(x,y)$.
-  \end{enumerate}
-  Also, for the implication in part (c), what is its converse? And its
-  contrapositive?
+%\item 
+%  Which of the following implications is/are true?
+%  \begin{enumerate}
+%    \item $\forall x\forall y \; P(x,y)$ implies $\forall y\forall x \; P(x,y)$.
+%    \item $\exists x\exists y \; P(x,y)$ implies $\exists y\exists x \; P(x,y)$.
+%    \item $\forall x\exists y \; P(x,y)$ implies $\exists y\forall x \; P(x,y)$.
+%    \item $\exists x\forall y \; P(x,y)$ implies $\forall y\exists x \; P(x,y)$.
+%  \end{enumerate}
+%  Also, for the implication in part (c), what is its converse? And its
+%  contrapositive?
+%
+%\item Prove or disprove each of the following:
+%\begin{enumerate}
+%\item $\forall x \bigl( P(x) \wedge Q(x) \bigr)~\equiv~\forall x P(x) \wedge \forall x Q(x)$
+%\item $\forall x \bigl( P(x) \vee Q(x) \bigr)~\equiv~\forall x P(x) \vee \forall x Q(x)$
+%\item $\forall x \bigl( P(x) \Rightarrow Q(x) \bigr)~\equiv~\bigl( \forall x P(x) \bigr) \Rightarrow \bigl( \forall x Q(x) \bigr)$
+%\item $\exists x \bigl( P(x) \wedge Q(x) \bigr)~\equiv~\exists x P(x) \wedge \exists x Q(x)$
+%\item $\exists x \bigl( P(x) \vee Q(x) \bigr)~\equiv~\exists x P(x) \vee \exists x Q(x)$
+%\item $\exists x \bigl( P(x) \Rightarrow Q(x) \bigr)~\equiv~\bigl( \exists x P(x) \bigr) \Rightarrow \bigl( \exists x Q(x) \bigr)$
+%\end{enumerate}
+%
+%\item Complete the following expression so that it states that: ``There is one
+%  and only one natural number $n$ for which the proposition formula $P(n)$
+%  holds.''
+%  \[ (\exists n\in \N) \dots \]
 
-\item Prove or disprove each of the following:
+%\item A valid tiling for a chessboard is an arrangement of tiles such that no two tiles overlap and every square of the board is covered by a tile.
+%\begin{enumerate}
+%\item A domino is a tile consisting of two contiguous squares. Is there a valid domino tiling for the $8 \times 8$ chessboard where the squares in the bottom left and top right corners have been removed?
+%\item A straight tetromino is a tile consisting of four contiguous squares. Prove or disprove: A $10 \times 10$ chessboard can be tiled with straight tetrominoes.
+%\end{enumerate}
+
+\item Prove that if you put $n+1$ apples into $n$ boxes, any way you like, then at least one box must contain 2 apples.  This is known as the {\em pigeon hole principle}.
+
+\item Prove that the length of hypotenuse of a right triangle is strictly greater than the sum of the two remaining sides.
 \begin{enumerate}
-\item $\forall x \bigl( P(x) \wedge Q(x) \bigr)~\equiv~\forall x P(x) \wedge \forall x Q(x)$
-\item $\forall x \bigl( P(x) \vee Q(x) \bigr)~\equiv~\forall x P(x) \vee \forall x Q(x)$
-\item $\forall x \bigl( P(x) \Rightarrow Q(x) \bigr)~\equiv~\bigl( \forall x P(x) \bigr) \Rightarrow \bigl( \forall x Q(x) \bigr)$
-\item $\exists x \bigl( P(x) \wedge Q(x) \bigr)~\equiv~\exists x P(x) \wedge \exists x Q(x)$
-\item $\exists x \bigl( P(x) \vee Q(x) \bigr)~\equiv~\exists x P(x) \vee \exists x Q(x)$
-\item $\exists x \bigl( P(x) \Rightarrow Q(x) \bigr)~\equiv~\bigl( \exists x P(x) \bigr) \Rightarrow \bigl( \exists x Q(x) \bigr)$
-\end{enumerate}
-
-\item Complete the following expression so that it states that: ``There is one
-  and only one natural number $n$ for which the proposition formula $P(n)$
-  holds.''
-  \[ (\exists n\in \N) \dots \]
-
-\item A valid tiling for a chessboard is an arrangement of tiles such that no two tiles overlap and every square of the board is covered by a tile.
-\begin{enumerate}
-\item A domino is a tile consisting of two contiguous squares. Is there a valid domino tiling for the $8 \times 8$ chessboard where the squares in the bottom left and top right corners have been removed?
-\item A straight tetromino is a tile consisting of four contiguous squares. Prove or disprove: A $10 \times 10$ chessboard can be tiled with straight tetrominoes.
+\item Write down the definition of a right triangle and the claim to be proven in mathematical notaion.
+\item Prove the statement by contradiction.
+\item Prove the statement directly.
 \end{enumerate}
 
 \end{enumerate}
