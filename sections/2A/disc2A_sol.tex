@@ -8,6 +8,30 @@
 
 \begin{enumerate}
 
+\item Write the following statements using the notation covered in class. Use $\mathbb{N}$ to denote the set of natural numbers and $\mathbb{Z}$ to denote the
+set of integers.  Also write $P(n)$ for the statement ``$n$ is odd''.
+\begin{enumerate}
+\item For all natural numbers $n$, $2n$ is even. \\
+{\color{blue}{$\forall \ n \in \mathbb{N}, \lnot P(2n)$}}
+\item For all natural numbers $n$, $n$ is odd if $n^2$ is odd. \\
+{\color{blue}{$\forall \ n \in \mathbb{N}, P(n^2) \implies P(n)$}}
+\item There are no integer solutions to the equation $x^2 - y^2 = 10$. \\
+{\color{blue}{$\lnot (\exists \ x,y \in \mathbb{Z}, x^2 - y^2 = 10)$}}
+\end{enumerate}
+
+
+
+\item Which of the following statements are true? Let $Q(n)$
+  be the statement ``$n$ is divisible by $2$.''  $\mathbb{N}$ denotes the
+  set of natural numbers.
+  \begin{enumerate}
+    \item $\exists \ k\in \mathbb{N}, \ Q(k) \wedge Q(k+1)$.
+    \item $\forall \ k\in \mathbb{N}, \ Q(k)\implies Q(k^2)$.
+    \item $\exists \ x\in \mathbb{N}, \neg(\exists \ y\in \mathbb{N}, y < x)$.
+  \end{enumerate}
+
+{\color{blue}{(a) false, (b) true, (c) true}}
+
 \item Use truth tables to show that $\neg (A\vee B) \,\equiv\, \neg A
 \wedge \neg B$ and $\neg (A\wedge B) \,\equiv\, \neg A \vee \neg
 B$. These two equivalences are known as DeMorgan's Law.
@@ -26,29 +50,6 @@ $A$ & $B$ & $\lnot (A \lor B)$ & $ \lnot A \wedge \lnot B$ & $\lnot (A \wedge B)
 \end{tabular}
 }}
 \end{table}
-
-\item Which of the following statements are true? Let $Q(n)$
-  be the statement ``$n$ is divisible by $2$.''  $\mathbb{N}$ denotes the
-  set of natural numbers.
-  \begin{enumerate}
-    \item $\exists \ k\in \mathbb{N}, \ Q(k) \wedge Q(k+1)$.
-    \item $\forall \ k\in \mathbb{N}, \ Q(k)\implies Q(k^2)$.
-    \item $\exists \ x\in \mathbb{N}, \neg(\exists \ y\in \mathbb{N}, y < x)$.
-  \end{enumerate}
-
-{\color{blue}{(a) false, (b) true, (c) true}}
-
-\item Write the following statements using the notation covered in class. Use $\mathbb{N}$ to denote the set of natural numbers and $\mathbb{Z}$ to denote the
-set of integers.  Also write $P(n)$ for the statement ``$n$ is odd''.
-\begin{enumerate}
-\item For all natural numbers $n$, $2n$ is even. \\
-{\color{blue}{$\forall \ n \in \mathbb{N}, \lnot P(2n)$}}
-\item For all natural numbers $n$, $n$ is odd if $n^2$ is odd. \\
-{\color{blue}{$\forall \ n \in \mathbb{N}, P(n^2) \implies P(n)$}}
-\item There are no integer solutions to the equation $x^2 - y^2 = 10$. \\
-{\color{blue}{$\lnot (\exists \ x,y \in \mathbb{Z}, x^2 - y^2 = 10)$}}
-\end{enumerate}
-
 
 
 \item You are on an island inhabited by two types of people: the Liars and the Truthtellers. Liars always make false statements, and Truthtellers always make true statements. In all other respects, the two types are indistinguishable. You meet an attractive local and ask him/her on a date. The local responds, ``I will go on a date with you if and only if I am a Truthteller.'' Is this good news?
