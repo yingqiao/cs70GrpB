@@ -1,0 +1,182 @@
+\documentclass[11pt]{article}
+\usepackage{../../cs70}
+%\usepackage{../../markup}
+\newif\ifsolutions
+\solutionsfalse
+\def\title{Homework 3}
+\begin{document}
+\maketitle
+
+\vspace{0.5em}
+{\Large{\textbf{This homework is due Feb 10 2014, at 12:00 noon.}}}
+
+
+\begin{qunlist}
+
+\qns{Matrix Induction} \\
+Guess a formula for the matrix computation 
+$\begin{pmatrix}
+1 & 1 \\
+0 & 1
+\end{pmatrix}^n$ and prove by induction that your formula is correct. 
+
+\ifsolutions
+\textbf{Solution:} The guessed formula is
+$$\begin{pmatrix}1 & 1\\0 & 1\end{pmatrix}^n = \begin{pmatrix}1 & n\\ 0 & 1\end{pmatrix}$$
+Easily checked by induction.
+\fi
+
+\qns{Binary relations}
+A binary relation on a set $A$ is a collection of ordered pairs of elements of $A$. For example, if $A = \{a,b,c\}$ then a binary relation $R$ over $A$ could be $\{(a,b),(a,c),(b,c),(b,b),(c,a)\}$; here, one would say that $a$ is $R$-related to $b$ (or ``$aRb$'') and so on.
+
+Given a set $A$ such that $|A| = n$ (in other words, there are $n$ elements in $A$), prove that there are $2^{n^2}$ possible binary relations. (Hint: What is the total number of subsets of a given set?)
+
+\ifsolutions
+\textbf{Solution:} The set $A\times A$ is of size $n^2$. The number of subsets it has is therefore $2^{n^2}$.
+\fi
+
+\qns{Equivalence relations}
+  A binary relation $\sim$ on a set $A$ is said to be an equivalence relation if and only if it is reflexive, symmetric and transitive. This means, for all $a,b,c \in A$:
+
+  \begin{enumerate}
+  \item
+    $a\sim a$. (Reflexivity)
+  \item
+    If $a\sim b$, then $b\sim a$. (Symmetry)
+  \item
+    If $a\sim b$ and $b\sim c$, then $a\sim c$. (Transitivity)
+  \end{enumerate}
+
+\textbf{Part 1.} Show that the relation $\sim$ over the set of integers $\mathbb{Z}$ such that $a\sim b$ if and only if $a=b$ is an equivalence relation.
+
+\ifsolutions
+\textbf{Solutions:} One just needs to go over them one by one. Clearly $a=a$ and if $a=b$ then $b=a$. Also if $a=b$ and $b=c$ then $a=c$.
+\fi
+
+\textbf{Part 2.} Consider the relation $\sim$ over the set of integers $\mathbb{Z}$ such that $a\sim b$ if and only if 3 divides $a-b$. Is this an equivalence relation?
+
+\ifsolutions
+\textbf{Solutions:} It is. It is reflexive since $3|0$. Symmetric because if $a\sim b$ then $3|a-b$ and therefore $3|-(a-b)=b-a$. It is also transitive since $3|a-b$ and $3|b-c$ mean that $3|(a-b)+(b-c)=a-c$.
+\fi
+
+\textbf{Part 3.} Consider the relation $\sim$ over the set of integers $\mathbb{Z}$ such that $a\sim b$ if and only if 3 divides $a+b$. Is this an equivalence relation?
+
+\ifsolutions
+\textbf{Solutions:} No it is not reflexive. If $a=2$ then $3 {\not|} 2+2$.
+\fi
+
+Consider an equivalence relation $\sim$ over the set $A$. The equivalence class of $a \in A$ under $\sim$, denoted by $[a]$, is defined as $[a] = \{b\in A | a\sim b\}$. 
+I.e., it is the set of all elements in $A$ related to $a$ under $\sim$.
+
+\textbf{Part 4.} Show that, if $a\sim b$, then $[a] = [b]$. (Hint: To show two sets are equal, you need to show that every element of one set is in the other and vice versa.) 
+
+\ifsolutions
+\textbf{Solutions:} If $c\in[a]$ then $a\sim c$ and since $a\sim b$, then $b\sim c$ and therefore $c\in[b]$. The reverse is the same.
+\fi
+
+\textbf{Part 5.} Similarly, show that, if $a\not\sim b$, then $[a]$ and $[b]$ have no elements in common. (Hint: What kind of proof do you think would work here?)
+
+\ifsolutions
+\textbf{Solutions:} If $c\in[a], [b]$, then $a\sim c$ and $b\sim c$ which means that $a\sim b$, which means that $a\sim b$, contradiction.
+\fi
+
+\qns{Binary Search} \\
+We have an array $A$, with sorted values from left to right. There are $n$ values. Two arbitrary numbers are picked from $1$ to $n$, denoting the start and end index of the search range, respectively. Given a value $x$, we want to use a binary search algorithm to see if this value is contained in the specified range. If $x$ is found in this range, then the program should return the index of where it is in the array. However, if it is not found, it will return 0. An outline of the algorithm goes like this: 
+
+\begin{figure}[htbp]
+\centering
+%	\includegraphics[scale=0.6]{resources/figures/array.png}
+\end{figure}
+
+\begin{itemize}
+\item[(1)] Divide the search range in half and look at $A[m]$ where $m$ is the middle index. If $A[m] = x$, we've found it and the program returns index $m$. 
+\item[(2)] If not, and $A[m] < x$, search the remaining right part of the array by setting the range from index $(m+1)$ to $b$. If $A[m] > x$, set the range from $a$ to $(m-1)$. 
+\item[(3)] If the search range is empty, return 0. Otherwise, repeat from step (1).  
+\end{itemize}
+
+\textbf{Part 1.} 
+Write pseudocode (be as detailed as you can) of a recursive function that would follow the steps outlined above. No explicit \texttt{for} or \texttt{while} loops are allowed.
+
+\ifsolutions
+\textbf{Solution:}
+
+\begin{verbatim}
+global array A
+global variable x
+function binary_search(index_start, index_end):
+  if index_end<index_start then return 0
+  middle_index = (index_end + index_start) / 2
+  if A[middle_index] = x then return middle_index
+  if A[middle_index] < x then return binary_search(middle_index+1, index_end)
+  if A[middle_index] > x then return binary_search(index_start, middle_index-1)
+\end{verbatim}
+\fi
+
+\textbf{Part 2.}
+We want to know if this pseudocode is doing what it's supposed to, returning a single index if $x$ is in the search range or returning 0 if it's not. Try using induction to prove that your pseudocode is correct. Please outline all the steps in the proof.
+
+\ifsolutions
+\textbf{Solution:}
+The hypothesis is given to them in the statement. The induction is on the length of the subarray.
+For induction basis they need to show lengths of 1 and 2.
+For inductive step, they simply first prove that if x is in the array our checks find the correct subarray, and then use induction to show that the algorithm will return the correct answer.
+\fi
+
+\qns{Series Induction}
+Prove that: $\sum_{i=0}^n i \cdot r^i = \frac{n \cdot r^{n+1}}{r-1} - \frac{r \cdot (r^n - 1)}{(r-1)^2}$.
+
+\ifsolutions
+\textbf{Solution:}
+For the inductive step we have
+$$\frac{(n+1)\cdot r^{n+2}}{r-1}-\frac{r(r^{n+1}-1)}{(r-1)^2}-\frac{n\cdot r^{n+1}}{r-1}+\frac{r(r^n-1)}{(r-1)^2} =
+\frac{r^{n+1}((n+1)r(r-1)-r-n(r-1)+1)}{(r-1)^2}
+$$
+and this can be simplified to
+$$r^{n+1}\frac{(r-1)((n+1)r-n-1)}{(r-1)^2}=r^{n+1}\frac{(r-1)^2(n+1)}{(r-1)^2}=(n+1)r^{n+1}$$
+\fi
+
+
+\qns{The War with Three-headed Dragons}
+
+In this problem, we will think about an ongoing war with warriors and a massive three-headed dragon. The war starts with an unknown number of warriors fighting the dragon. The dragon is rather complicated; one head is compassionate and lets the warriors live, whereas the other two are always hungry for warriors. Every time an hour passes by, one warrior is added to the war. However, when the number of warriors is divisible by 3, the dragon heads each take one third of the warriors and do as they please. One third of the warriors under the compassionate head live on, but the remaining two thirds are eaten (killed) by the two heads. Moreover, if there is only 1 warrior left on the field, this warrior will get scared and run away. If there are 1000 warriors or more on the field, the three-headed dragon will flee. Prove that the battle always ends with one side fleeing the field and characterize how many warriors you need to start with in order to win. 
+
+\ifsolutions
+\textbf{Solution:} We use strong induction on the number of warriors. If this number is divisible by $3$ we are done in one step (reduce to our hypothesis). Otherwise we are done in either 1 or 2 steps (need to check explicitly).
+We can add to our induction hypothesis that the number of warriors never goes up by more than $2$ plus what we started with, and then we can see that we need to have at least $998$ originally. But $998$ and $999$ both reduce to cases that can't go above $333+2$ in two steps. So we need at least $1000$ from the very beginning.
+\fi
+
+
+
+\qns{The Fibonacci Number Basis}
+
+The Fibonacci numbers are defined as follows.
+
+\begin{eqnarray*}
+F_{1} & = & 0\\
+F_{2} & = & 1\\
+F_{n} & = & F_{n-1}+F_{n-2} \hspace{10pt} \forall n\geq3
+\end{eqnarray*}
+
+
+Prove that you can write any positive integer as a sum of distinct Fibonacci
+numbers, no two of which have consecutive Fibonacci indices. For example, 27 = 21 + 5 + 1.
+
+\ifsolutions
+\textbf{Solution sketch:} you always subtract the largest Fibonacci
+number you can from the number. At no time will you subtract two consecutive
+elements, because if you do, you could have taken out the next Fibonacci
+number at first.
+\fi
+
+\qns{Write your own problem} \\
+
+Write your own problem related to this week's material and solve it. You may still work in groups to brainstorm problems, but each student should submit a unique problem. What is the problem? How to formulate it? How to
+solve it? What is the solution?
+
+
+\end{qunlist}
+
+\end{document}
+
+
+
