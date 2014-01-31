@@ -55,21 +55,21 @@ so $T_2 = 3$.
 
 
 
-\qns{Title NA} \\
-Let $x,y$ be real numbers such that the numbers $x+y$, $x^2+y^2$, $x^3+y^3$, and $x^4+y^4$ are integers. \\ 
-Prove that for all positive integers $n$, the number $x^n + y^n$ is an integer.
-
-\ifsolutions
-\textbf{Solutions:}
-Use strong induction. Use the identity
-\[ x^{k+1} + y^{k+1} = (x+y)(x^k + y^k) - xy(x^{k-1} + y^{k-1}) \]
-
-We are given that $x+y$ is an integer, and by our inductive hypothesis $x^k + y^k$ and $x^{k-1} + y^{k-1}$ 
-are also both integers. So we need to show that $xy$ is an integer.  This can be shown because:
-\[ x^3 + y^3 = (x+y)(x^2+y^2) - xy(x+y) \]
-
-So our base cases are $n=5$ and $n=6$.  After that we can use strong induction.
-\fi
+%\qns{Title NA} \\
+%Let $x,y$ be real numbers such that the numbers $x+y$, $x^2+y^2$, $x^3+y^3$, and $x^4+y^4$ are integers. \\ 
+%Prove that for all positive integers $n$, the number $x^n + y^n$ is an integer.
+%
+%\ifsolutions
+%\textbf{Solutions:}
+%Use strong induction. Use the identity
+%\[ x^{k+1} + y^{k+1} = (x+y)(x^k + y^k) - xy(x^{k-1} + y^{k-1}) \]
+%
+%We are given that $x+y$ is an integer, and by our inductive hypothesis $x^k + y^k$ and $x^{k-1} + y^{k-1}$ 
+%are also both integers. So we need to show that $xy$ is an integer.  This can be shown because:
+%\[ x^3 + y^3 = (x+y)(x^2+y^2) - xy(x+y) \]
+%
+%So our base cases are $n=5$ and $n=6$.  After that we can use strong induction.
+%\fi
 
 
 
@@ -79,8 +79,8 @@ Does the sum
 \[ A_n = \sum_{k=1}^n \frac{1}{a_k} \]
 
 diverge (i.e. approach infinity) as $n \to \infty$, or does it converge to a finite number?  
-Prove why or why not.  \\
-{\em Hint: is there a series you can compare it to whose behavior is known?}
+Prove why or why not.
+{\em Hint: plot $A_n$, and think about discussion 2b.}
 
 \ifsolutions
 \textbf{Solutions:}
@@ -101,24 +101,18 @@ Adding a constant (i.e. the first three terms) does not change the fact that it 
 
 
 \qns{Title NA} \\ 
-Given a natural number $n$, it has been claimed that the number $1$ can be produced 
+Given a natural number $n$, can the number $1$ be produced 
 by repeatedly applying the function:
-\[ f(n) = \left\{ \begin{array}{cl} n/2 & \text{if $n$ is even} \\
-3n + 1 & \text{if $n$ is odd} \end{array} \right. \]
-
-\begin{itemize}
-\item[(a)] Explain why standard induction fails to prove this claim.
-\item[(b)] Consider the following related function:
 \[ f(n) = \left\{ \begin{array}{cl} n/4 & \text{if $n$ is divisible by 4} \\
 (n+2)/4 & \text{if $n$ is even but not divisible by 4} \\
-3n + 1 & \text{if $n$ is odd} \end{array} \right. \]
-
-By repeatedly applying this function, can any natural number $n$ be transformed into the number $1$?  
-Prove why or why not?
-\end{itemize}
+3n - 1 & \text{if $n$ is odd} \end{array} \right. \]
+Prove why or why not.
 
 \ifsolutions
 \textbf{Solutions:}
+You can always get to 1. We can prove this by strong induction. If $n=1$, we are done.  If $n=2$, we add 2 and divide by 4, and then are done.  For our inductive hypothesis, we assume we can get to 1 from any number less than $n$. Then if $n$ is dividible by 4, dividing $n$ by 4 reduces the problem to one we have already solved.  If $n$ is divisible by 2 but not 4, $(n+2)/4 < n$, so we've again reduced the problem to one we have already solved. \\
+
+So the remaining case is if $n$ is odd.  In this case, $3n-1$ will be even, so then we would either divide by 4, or add 2 and divide by 4, in either case $(3n-1)/4$ and $(3n+1)/4$ are both less than $n$ if $n \geq 2$.
 \fi
 
 
