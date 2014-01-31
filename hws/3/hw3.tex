@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage{../../cs70}
 %\usepackage{../../markup}
-%\usepackage{color}
+\usepackage{color}
 \newif\ifsolutions
 \solutionsfalse
 \def\title{Homework 3}
@@ -17,12 +17,12 @@
 
 \qns{A tiling problem} \\
 You are given three kinds of tiles, \textbf{A,B,C} of dimensions $1 \times 2$, $2 \times 1$
-and $2 \times 2$ respectively(as shown in the figure below).
+and $2 \times 2$ respectively (as shown in the figure below).
 \textit{Note that rotations of the tiles are not allowed, so tiles \textbf{A} and \textbf{B} are NOT the same!}
 
 \begin{figure}[tile]
 \centering
-%	\includegraphics[scale=0.6]{resources/figures/array.png}
+\includegraphics[scale=0.6]{resources/figures/tile.png}
 \end{figure}
 
 Your goal is to tile a board of dimension $2 \times n$, and you are interested in the number of
@@ -32,15 +32,23 @@ Let $T_n$ denote the number of tiling configurations for a board of dimension $2
 \item[(a)] Show the base cases of this problem by direct enumeration.
 
 \ifsolutions
-\textbf{Solutions:}
+\textcolor{blue}{
+\textbf{Solutions:} $T_1 = 1$ as there is exactly one way to tile a $2 \times 1$ board, using tile \textbf{B}.
+A $2 \times 2$ board can be tiled in exactly three different ways using the tiles \textbf{AA,BB} and \textbf{C},
+so $T_2 = 3$.
+}
 \fi
 
+\item[(b)] 
 
-\item[(b)] Prove by induction that for all $n \geq 1$
+
+\item[(c)] Prove by induction that for all $n \geq 1$
 \[ T_n = \frac{2^{n+1}+(-1)^n}{3} \]. 
 
 \ifsolutions
-\textbf{Solutions:}
+\textcolor{blue}{
+\textbf{Solutions:} 
+}
 \fi
 
 \end{itemize}
