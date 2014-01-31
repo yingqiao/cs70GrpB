@@ -180,13 +180,12 @@ So by the inductive hypothsis, $x-1 \leq y-1  \implies x \leq y$, completing the
 
 
 
-\qns{Title NA} \\ 
-Consider the following stable marriage instance:
+\qns{Marty's Marriage Mistake} \\ 
 
 \begin{itemize}
-\item[(a)] My friend Marty and I run a match-making business. Of course, we both paid attention during CS70 and use the same propose-and-reject algorithm you covered in class. Marty, being a traditionalist, insists on having the Men propose, while I, in a subtle attempt to subvert the patriarchy, have the Women propose. Prove that if both Marty and I come up with the same pairings, there is no other possible stable pairing (i.e. a pairing with no rogue pairs)
+\item[(a)] My friend Marty and I run a match-making business. We receive preference lists from men and women and use the same propose-and-reject algorithm you covered in class. Marty, being a traditionalist, insists on having the men propose, while I, in a subtle attempt to subvert the patriarchy, have the women propose. Prove that if both Marty and I come up with the same pairings, there is no other possible stable pairing (i.e. a pairing with no rogue pairs)
 
-\item[(b)] Marty receives preferences from three men and three women when I'm on vacation. Marty loses track of some of the preference lists. He is too embarrassed to ask them for their preferences again. He has something that looks like this:
+\item[(b)] While I'm on vacation, things get a little disorganized. Marty loses track of some of the preference lists. He is too embarrassed to ask the women for their preferences again. He knows the following preferences:
 
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
@@ -206,9 +205,11 @@ Woman&\multicolumn{3}{|c|}{Men}\\\hline
    
    Marty decides to assume that 1 and 3 would have the same preferences as 2. Show the steps of Marty running the propose-and-reject algorithm (with men proposing). Please indicate the final pairing clearly and note how many days it took to reach that pairing.
 
-\item[(c)] When I come back from my vacation, I'm horrified with Marty's pairings. He tells me that none of the couples have switched, and therefore there are no rogue pairs. Because of this, I shouldn't bother running the algorithm having women propose. I want to convince him that another pairing could exist! Show that (without changing any of the known preferences) there exists a list of preferences for 1 and 3 in which I would pair everyone with somebody different that terminates in the same number of days that his terminated in. Remember, in my version, I have the women propose.
+\item[(c)] When I come back from my vacation, Marty explains the previous situation. He smugly informs me that none of the couples have switched after he proposed a matching, and therefore there are no rogue pairs. Because of this, I shouldn't bother running the algorithm having women propose. I am not so certain that he is correct. After all, he ran the algorithm on incomplete data. I want to convince him that another pairing could exist. Show that (without changing any of the known preferences) there exists a list of preferences for 1 and 3 in which I would pair everyone with somebody different. Remember, in my version, I have the women propose.
 
-\item[(d)] Marty, tries to figure out how I came up with my solution. I notice that he has two drafts, shown below:
+\item[(d)] At the homework party, two of your friends attempt part c, above. 
+
+Here is your first friend's work: 
 
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
@@ -217,8 +218,11 @@ Woman&\multicolumn{3}{|c|}{Men}\\\hline
 2&A&B&C\\\hline 
 3&?&?&?\\\hline
 \end{tabular} 
-or 
-\hspace{2cm}
+\end{center}
+
+Here is your second friend's work:
+
+\begin{center}
 \begin{tabular}{|c|ccc|}\hline 
 Woman&\multicolumn{3}{|c|}{Men}\\\hline 
 1&?&?&?\\\hline 
@@ -227,16 +231,16 @@ Woman&\multicolumn{3}{|c|}{Men}\\\hline
 \end{tabular}
 \end{center}
  
- Show that both of these attempts are incorrect in terms of creating a completely new stable pairing.
+ No matter how the rest of the preferences are filled out, these will result in invalid solutions to part c. Explain why.
 \end{itemize} 
     
 
 
 
         
-\qns{Title NA} \\
+\qns{All is fair in love and adversaries} \\
 \begin{itemize}
-\item[(a)] It turns out that Marty has gotten his fair share of enemies over the years. We receive a stable marriage pairing but one of his rivals has maliciously eliminated some of the preferences:
+\item[(a)] It turns out that Marty has gotten his fair share of enemies over the years. We receive a stable marriage pairing, but one of his rivals has maliciously eliminated some of the preferences:
 
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
@@ -254,29 +258,14 @@ Woman&\multicolumn{3}{|c|}{Men}\\\hline
 \end{tabular}
 \end{center}
         
-        Luckily, we correctly guess a stable pairing is \{(A,1), (B,2), (C,3)\}. Show all possible ways that the preferences could be before they were eliminated.
+        Luckily, we correctly guess a stable pairing is \{(A,1), (B,2), (C,3)\}. List all the possibilities of filling in the missing preferences such that the pairing we guessed is stable. 
         
-\item[(b)] I begin to suspect that one of Marty's adversaries may have done worse than eliminate preferences. Some of the preferences may be switched! Marty isn't too worried. He says that if the adversary switches the order of only two of the preferences for one person, than it's possible our pairing will have no rogue couples. Show that he's right.
+\item[(b)] I begin to suspect that one of Marty's adversaries may have done worse than eliminate preferences. Some of the preferences may be switched! Marty isn't too worried. He says that if the adversary switches the order of only two of the preferences for one person, than it's possible our pairing (based on corrupted preferences) will still have no rogue couples. Assuming the information we received in part a is not corrupted, tell us which two preferences can be switched such that after Marty runs the propose-and-reject algorithm, he will get a pairing that is stable. (You should note it by index. For example, "The adversary switches A's 1st and 3rd preference").
         
-\item[(c)] I tell Marty it's possible that even with just two preferences being switched, we could get a lot of rogue pairs. How many rogue pairs could we have?
+\item[(c)] I tell Marty it's possible that even with just two preferences being switched, we could get a lot of rogue pairs. For an arbitrary stable marriage instance, how many rogue pairs could be generated by an adversary switching the order of two preferences for one person?
         
-\item[(d)] If an adversary looks at one person's preference list and switches it around to do the most damage possible, what are the least number of rogue pairs that will be generated?
+\item[(d)] Marty counters by suggesting some preferences are very stable. If an adversary looks at one person's preference list and switches it around to do the most damage possible, what are the least number of rogue pairs that will be generated? For a Stable Marriage problem with n men and women, describe this stable list of preferences.
 
-\begin{center}
-\begin{tabular}{|c|ccc|}\hline 
-Man&\multicolumn{3}{|c|}{Women}\\\hline 
-A&1&2&3\\\hline 
-B&3&2&1\\\hline 
-C&1&3&2\\\hline
-\end{tabular} 
-\hspace{2cm}
-\begin{tabular}{|c|ccc|}\hline 
-Woman&\multicolumn{3}{|c|}{Men}\\\hline 
-1&A&B&C\\\hline 
-2&A&B&C\\\hline 
-3&A&B&C\\\hline
-\end{tabular}
-\end{center}
 
 \end{itemize}
 
