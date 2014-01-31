@@ -1,16 +1,15 @@
 \documentclass[11pt]{article}
 \usepackage{../../cs70}
 %\usepackage{../../markup}
-\usepackage{color}
+%\usepackage{color}
 \newif\ifsolutions
-\solutionsfalse
+\solutionstrue %flag for solutions
 \def\title{Homework 3}
 \begin{document}
 \maketitle
 
 \vspace{0.5em}
 {\Large{\textbf{This homework is due Feb 10 2014, at 12:00 noon.}}}
-
 
 
 \begin{qunlist}
@@ -20,42 +19,61 @@ You are given three kinds of tiles, \textbf{A,B,C} of dimensions $1 \times 2$, $
 and $2 \times 2$ respectively (as shown in the figure below).
 \textit{Note that rotations of the tiles are not allowed, so tiles \textbf{A} and \textbf{B} are NOT the same!}
 
-\begin{figure}[tile]
+\begin{minipage}{\linewidth}
 \centering
 \includegraphics[scale=0.6]{resources/figures/tile.png}
-\end{figure}
+\end{minipage}
 
 Your goal is to tile a board of dimension $2 \times n$, and you are interested in the number of
 tiling configurations possible using the three types of tiles given. \\
 Let $T_n$ denote the number of tiling configurations for a board of dimension $2 \times n$.
 \begin{itemize}
-\item[(a)] Show the base cases of this problem by direct enumeration.
+\item[(a)] As preparation for the inductive steps, derive the relations between $T_n$, $T_{n-1}$ 
+and $T_{n-2}$ for all $n \geq 3$. \textit{Hint: compute $T_n$ by direct enumeration for small $n$'s.}
 
 \ifsolutions
-\textcolor{blue}{
-\textbf{Solutions:} $T_1 = 1$ as there is exactly one way to tile a $2 \times 1$ board, using tile \textbf{B}.
-A $2 \times 2$ board can be tiled in exactly three different ways using the tiles \textbf{AA,BB} and \textbf{C},
-so $T_2 = 3$.
-}
+\textbf{Solutions:} $T_n = T_{n-1} + 2T_{n-2}$ for all $n \geq 3$\\
+We enumerate the tilings for a $2 \times n$ board by considering three cases depending on
+the tile covering the bottom square of the first column. 
+\begin{itemize}
+\item[(i)] The tile is \textbf{A}: then the first two columns of the board must be tiled with \textbf{AA}.
+The remaining $2 \times (n-2)$ board can be tiled in $T_{n-2}$ ways.
+\item[(ii)] The tile is \textbf{B}: the first column is tiled with \textbf{A}, and
+the remaining $2 \times (n-1)$ board can be tiled in $T_{n-1}$ ways.
+\item[(iii)] The tile is \textbf{C}: the first two columns of the board are tiled with \textbf{C}, and
+the remaining $2 \times (n-2)$ board can be tiled in $T_{n-2}$ ways.
+\end{itemize}
+Note that the three cases are exhaustive and mutually exclusive. The number of tilings for a $2 \times n$
+board therefore satisfies the recurrence relation as proposed.
 \fi
 
-\item[(b)] 
 
-
-\item[(c)] Prove by induction that for all $n \geq 1$
+\item[(b)] Prove by induction that for all $n \geq 1$
 \[ T_n = \frac{2^{n+1}+(-1)^n}{3} \]. 
 
 \ifsolutions
-\textcolor{blue}{
-\textbf{Solutions:} 
-}
+\textbf{Solutions:} (Strong Induction) $P(n)$ asserts that $T_n = \frac{2^{n+1}+(-1)^n}{3}$. 
+We prove the statement by (strong) induction on $n$, showing that $P(n-2) \wedge P(n-1) \implies P(n)$. \\
+\underline{Base cases:} $T_1 = 1$ as there is exactly one way to tile a $2 \times 1$ board, using tile \textbf{B}.
+A $2 \times 2$ board can be tiled in exactly three different ways using the tiles \textbf{AA, BB} and \textbf{C},
+so $T_2 = 3$. The base cases are true as $P(1)=T_1=1=(2^2-1)/3$ and $P(2)=T_2=3=(2^3+1)/3$.\\
+\underline{Induction Hypothesis:} Assume $P(n-1)$ and $P(n-2)$ are true. \\
+\underline{Inductive step:} Using the recurrence relation derived in part (a), we have,
+\begin{align*} 
+T_n &= T_{n-1} + 2T_{n-2} \\
+&= \frac{2^n + (-1)^{n-1}}{3}+2\cdot\frac{2^{n-1}+(-1)^{n-2}}{3}  &\text{[by induction hypothesis]} \\
+&= \frac{2^{n+1}+(-1)^{n-2}(2-1)}{3} \\
+&= \frac{2^{n+1}+(-1)^n}{3}  &\text{[as } (-1)^{n-2} = (-1)^n \text{]} \\
+\end{align*}
+The claim is therefore true by (strong) induction for all natural numbers $n \geq 1$.
 \fi
+
 
 \end{itemize}
 
 
 
-%\qns{Title NA} \\
+%\qns{backup prob} \\
 %Let $x,y$ be real numbers such that the numbers $x+y$, $x^2+y^2$, $x^3+y^3$, and $x^4+y^4$ are integers. \\ 
 %Prove that for all positive integers $n$, the number $x^n + y^n$ is an integer.
 %
@@ -103,16 +121,25 @@ Adding a constant (i.e. the first three terms) does not change the fact that it 
 \qns{Title NA} \\ 
 Given a natural number $n$, can the number $1$ be produced 
 by repeatedly applying the function:
-\[ f(n) = \left\{ \begin{array}{cl} n/4 & \text{if $n$ is divisible by 4} \\
-(n+2)/4 & \text{if $n$ is even but not divisible by 4} \\
-3n - 1 & \text{if $n$ is odd} \end{array} \right. \]
+\[ f(n) = \left\{ 
+    \begin{array}{cl} 
+        n/4 & \text{if $n$ is divisible by 4} \\
+        (n+2)/4 & \text{if $n$ is even but not divisible by 4} \\
+        3n - 1 & \text{if $n$ is odd} 
+    \end{array} 
+\right. \]
 Prove why or why not.
 
 \ifsolutions
 \textbf{Solutions:}
-You can always get to 1. We can prove this by strong induction. If $n=1$, we are done.  If $n=2$, we add 2 and divide by 4, and then are done.  For our inductive hypothesis, we assume we can get to 1 from any number less than $n$. Then if $n$ is dividible by 4, dividing $n$ by 4 reduces the problem to one we have already solved.  If $n$ is divisible by 2 but not 4, $(n+2)/4 < n$, so we've again reduced the problem to one we have already solved. \\
-
-So the remaining case is if $n$ is odd.  In this case, $3n-1$ will be even, so then we would either divide by 4, or add 2 and divide by 4, in either case $(3n-1)/4$ and $(3n+1)/4$ are both less than $n$ if $n \geq 2$.
+You can always get to 1. We can prove this by strong induction. 
+If $n=1$, we are done.  If $n=2$, we add 2 and divide by 4, and then we are done.  
+For our inductive hypothesis, we assume we can get to 1 from any number less than $n$. 
+Then if $n$ is dividible by 4, dividing $n$ by 4 reduces the problem to one we have already solved.  
+If $n$ is divisible by 2 but not 4, $(n+2)/4 < n$, 
+so we've again reduced the problem to one we have already solved. \\
+So the remaining case is if $n$ is odd. In this case, $3n-1$ will be even, so then we would either divide by 4, 
+or add 2 and divide by 4, in either case $(3n-1)/4$ and $(3n+1)/4$ are both less than $n$ if $n \geq 2$.
 \fi
 
 
@@ -126,54 +153,63 @@ If you think the proof is correct, you do not need to give any explanation. \\
 \begin{itemize}
 \item[(a)] \textbf{Claim:} $\forall n \in \N$ , $n^2 \leq n$. \\
 \textbf{Proof:} \\
-Base case: for $n = 1$, the claim is $1^2 \leq 1$, which is true. \\
-Induction hypothesis: Assume that $k^2 \leq k$. \\
-Inductive step: We need to show that \[ (k+1)^2 \leq k+1\] \\
-Working backwards we see that \[ k^2 \leq (k+1)^2 - 1 \leq (k+1) - 1 = k \] \\
+\textit{Base case:} for $n = 1$, the claim is $1^2 \leq 1$, which is true. \\
+\textit{Induction hypothesis:} Assume that $k^2 \leq k$. \\
+\textit{Inductive step:} We need to show that 
+\[ (k+1)^2 \leq k+1\]
+Working backwards we see that 
+\[ k^2 \leq (k+1)^2 - 1 \leq (k+1) - 1 = k \]
 So we get back to our original hypothesis which is assumed to be true.\\
 Hence, for every $n \in \N$, we know that $n^2 \leq n$. 
 
 \ifsolutions
-\textbf{Solutions:}
+\textbf{Solutions:} The claim is clearly false as $2^2 > 2$, so the proof must be incorrect.\\
+The base case and the induction hypothesis do not have any errors. The flaw lies in the inductive step.
+In fact, working backwards, the proof \textit{implicitly} assumes that $(k+1)^2 \leq k+1$.
+But this is what we are trying to prove, we cannot assume it!
 \fi
 
 
 \item[(b)]\textbf{Claim:} $\forall n \in \N$ , $7^n = 1$. \\
 \textbf{Proof:} \\
-Base case: Certainly $7^0 = 1$. \\
-Induction hypothesis: Assume that $7^j = 1$ for all $0\leq j \leq k$.\\
-Inductive step: We need to prove that $7^{k+1} = 1$, and we have,
+\textit{Base case:} Certainly $7^0 = 1$. \\
+\textit{Induction hypothesis:} Assume that $7^j = 1$ for all $0\leq j \leq k$.\\
+\textit{Inductive step:} We need to prove that $7^{k+1} = 1$, and we have,
 \[ 7^{k+1} = \frac{7^k \cdot 7^k}{7^{k-1}} = \frac{1 \cdot 1}{1} = 1\]
-
 Hence, by the Principle of Strong Induction, $7^n = 1$ for all $n \in \N$.
 
 \ifsolutions
-\textbf{Solutions:}
+\textbf{Solutions:} The claim is clearly false as $7 \ne 1$, so there must be an error in the proof.
+The (strong) induction hypothesis is stated correctly, however, not all required base cases are checked.
+The inductive step uses both $P(k)$ and $P(k-1)$ to prove $P(k+1)$, which breaks down for $k=0$.
+When $k=0$, $k-1 = -1$ and $P(k-1)=P(-1)$ is not defined!
 \fi
 
 
-\item[(c)]\textbf{Claim:} $\forall n \in \N$, if $n \geq 4$, then $2^n < n!$. \\
-\textbf{Proof:} \\
-Base case: $2^4 = 16$ and $4! = 24$, so the claim is true for $n=4$. \\
-Induction hypothesis: Assume $n \geq 4$ and $2^n < n!$. \\
-Inductive step: \[ 2^{n+1} = 2(2^n) < 2(n!) < (n+1)(n!) = (n+1)!\]
-So we have shown that $2^{n+1} < (n+1)!$ and this completes the proof.
-
-\ifsolutions
-\textbf{Solutions:} This proof is correct.
-\fi
+%\item[(c)]\textbf{Claim:} $\forall n \in \N$, if $n \geq 4$, then $2^n < n!$. \\
+%\textbf{Proof:} \\
+%Base case: $2^4 = 16$ and $4! = 24$, so the claim is true for $n=4$. \\
+%Induction hypothesis: Assume $n \geq 4$ and $2^n < n!$. \\
+%Inductive step: \[ 2^{n+1} = 2(2^n) < 2(n!) < (n+1)(n!) = (n+1)!\]
+%So we have shown that $2^{n+1} < (n+1)!$ and this completes the proof.
+%\ifsolutions
+%\textbf{Solutions:} This proof is correct.
+%\fi
 
 
 \item[(d)]\textbf{Claim:} $\forall x,y,n \in \N$, if $\max(x,y) = n$, then $x \leq y$. \\
 \textbf{Proof:} \\
-Base case: For $n=0$, if $\max(x,y) = 0$ and $x,y \in \N$, then $x=0, y=0$, hence $x \leq y$. \\
-Induction hypothesis: Assume that whenever we have $\max(x,y) = n$, $x \leq y$ mush hold. \\
-Inductive step: We must prove that if $\max(x,y) = n+1$, then $x \leq y$. \\
+\textit{Base case:} For $n=0$, if $\max(x,y) = 0$ and $x,y \in \N$, then $x=0, y=0$, hence $x \leq y$. \\
+\textit{Induction hypothesis:} Assume that whenever we have $\max(x,y) = n$, $x \leq y$ must hold. \\
+\textit{Inductive step:} We must prove that if $\max(x,y) = n+1$, then $x \leq y$. \\
 Suppose $x,y$ are such that $\max(x,y) = n+1$, then it follows that $\max(x-1,y-1) = n$. \\
 So by the inductive hypothsis, $x-1 \leq y-1  \implies x \leq y$, completing the proof.
 
 \ifsolutions
-\textbf{Solutions:}
+\textbf{Solutions:} This proof is incorrect. The use of $\max(x-1, y-1)$ is not correct, 
+since $x-1$ and $y-1$ will be negative when $x=0$ or $y=0$.
+Then the inductive hypothesis no longer applies, since $x-1$ and $y-1$ 
+fall outside the range of natural numbers. We cannot conclude that $x-1 \leq y-1$ and the proof fails.
 \fi
 
 
@@ -185,9 +221,21 @@ So by the inductive hypothsis, $x-1 \leq y-1  \implies x \leq y$, completing the
 \qns{Marty's Marriage Mistake} \\ 
 
 \begin{itemize}
-\item[(a)] My friend Marty and I run a match-making business. We receive preference lists from men and women and use the same propose-and-reject algorithm you covered in class. Marty, being a traditionalist, insists on having the men propose, while I, in a subtle attempt to subvert the patriarchy, have the women propose. Prove that if both Marty and I come up with the same pairings, there is no other possible stable pairing (i.e. a pairing with no rogue pairs)
+\item[(a)] My friend Marty and I run a match-making business. 
+We receive preference lists from men and women and use the same propose-and-reject algorithm you covered in class. 
+Marty, being a traditionalist, insists on having the men propose, 
+while I, in a subtle attempt to subvert the patriarchy, have the women propose. 
+Prove that if both Marty and I come up with the same pairings, there is no other possible stable pairing 
+(i.e. a pairing with no rogue pairs)
 
-\item[(b)] While I'm on vacation, things get a little disorganized. Marty loses track of some of the preference lists. He is too embarrassed to ask the women for their preferences again. He knows the following preferences:
+\ifsolutions
+\textbf{Solutions:}
+\fi
+
+
+\item[(b)] While I'm on vacation, things get a little disorganized. 
+Marty loses track of some of the preference lists. 
+He is too embarrassed to ask the women for their preferences again. He knows the following preferences:
 
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
@@ -205,14 +253,33 @@ Woman&\multicolumn{3}{|c|}{Men}\\\hline
 \end{tabular}
 \end{center}
    
-   Marty decides to assume that 1 and 3 would have the same preferences as 2. Show the steps of Marty running the propose-and-reject algorithm (with men proposing). Please indicate the final pairing clearly and note how many days it took to reach that pairing.
+Marty decides to assume that 1 and 3 would have the same preferences as 2. 
+Show the steps of Marty running the propose-and-reject algorithm (with men proposing). 
+Please indicate the final pairing clearly and note how many days it took to reach that pairing.
 
-\item[(c)] When I come back from my vacation, Marty explains the previous situation. He smugly informs me that none of the couples have switched after he proposed a matching, and therefore there are no rogue pairs. Because of this, I shouldn't bother running the algorithm having women propose. I am not so certain that he is correct. After all, he ran the algorithm on incomplete data. I want to convince him that another pairing could exist. Show that (without changing any of the known preferences) there exists a list of preferences for 1 and 3 in which I would pair everyone with somebody different. Remember, in my version, I have the women propose.
+\ifsolutions
+\textbf{Solutions:}
+\fi
 
-\item[(d)] At the homework party, two of your friends attempt part c, above. 
+
+\item[(c)] When I come back from my vacation, Marty explains the previous situation. 
+He smugly informs me that none of the couples have switched after he proposed a matching, 
+and therefore there are no rogue pairs. 
+Because of this, I shouldn't bother running the algorithm having women propose. 
+I am not so certain that he is correct. After all, he ran the algorithm on incomplete data. 
+I want to convince him that another pairing could exist. 
+Show that (without changing any of the known preferences) 
+there exists a list of preferences for 1 and 3 in which I would pair everyone with somebody different. 
+Remember, in my version, I have the women propose.
+
+\ifsolutions
+\textbf{Solutions:}
+\fi
+
+
+\item[(d)] At the homework party, two of your friends attempt part (c) above. 
 
 Here is your first friend's work: 
-
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
 Woman&\multicolumn{3}{|c|}{Men}\\\hline 
@@ -223,7 +290,6 @@ Woman&\multicolumn{3}{|c|}{Men}\\\hline
 \end{center}
 
 Here is your second friend's work:
-
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
 Woman&\multicolumn{3}{|c|}{Men}\\\hline 
@@ -233,16 +299,25 @@ Woman&\multicolumn{3}{|c|}{Men}\\\hline
 \end{tabular}
 \end{center}
  
- No matter how the rest of the preferences are filled out, these will result in invalid solutions to part c. Explain why.
+No matter how the rest of the preferences are filled out, these will result in invalid solutions to part (c). 
+Explain why.
+
+\ifsolutions
+\textbf{Solutions:}
+\fi
+
+
 \end{itemize} 
     
 
 
 
         
-\qns{All is fair in love and adversaries} \\
+\qns{All is fair in love and adversaries}
+
 \begin{itemize}
-\item[(a)] It turns out that Marty has gotten his fair share of enemies over the years. We receive a stable marriage pairing, but one of his rivals has maliciously eliminated some of the preferences:
+\item[(a)] It turns out that Marty has gotten his fair share of enemies over the years. 
+We receive a stable marriage pairing, but one of his rivals has maliciously eliminated some of the preferences:
 
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
@@ -260,54 +335,164 @@ Woman&\multicolumn{3}{|c|}{Men}\\\hline
 \end{tabular}
 \end{center}
         
-        Luckily, we correctly guess a stable pairing is \{(A,1), (B,2), (C,3)\}. List all the possibilities of filling in the missing preferences such that the pairing we guessed is stable. 
+Luckily, we correctly guess a stable pairing is \{(A,1), (B,2), (C,3)\}. 
+List all the possibilities of filling in the missing preferences such that the pairing we guessed is stable.
+
+\ifsolutions
+\textbf{Solutions:}
+\fi
+ 
         
-\item[(b)] I begin to suspect that one of Marty's adversaries may have done worse than eliminate preferences. Some of the preferences may be switched! Marty isn't too worried. He says that if the adversary switches the order of only two of the preferences for one person, than it's possible our pairing (based on corrupted preferences) will still have no rogue couples. Assuming the information we received in part a is not corrupted, tell us which two preferences can be switched such that after Marty runs the propose-and-reject algorithm, he will get a pairing that is stable. (You should note it by index. For example, "The adversary switches A's 1st and 3rd preference").
+\item[(b)] I begin to suspect that one of Marty's adversaries may have done worse than eliminate preferences. 
+Some of the preferences may be switched! Marty isn't too worried. 
+He says that if the adversary switches the order of only two of the preferences for one person, 
+than it's possible our pairing (based on corrupted preferences) will still have no rogue couples. 
+Assuming the information we received in part(a) is not corrupted, 
+tell us which two preferences can be switched such that after Marty runs the propose-and-reject algorithm, 
+he will get a pairing that is stable. 
+(You should note it by index. For example, "The adversary switches A's 1st and 3rd preference").
+
+\ifsolutions
+\textbf{Solutions:}
+\fi
+
         
-\item[(c)] I tell Marty it's possible that even with just two preferences being switched, we could get a lot of rogue pairs. For an arbitrary stable marriage instance, how many rogue pairs could be generated by an adversary switching the order of two preferences for one person?
-        
-\item[(d)] Marty counters by suggesting some preferences are very stable. If an adversary looks at one person's preference list and switches it around to do the most damage possible, what are the least number of rogue pairs that will be generated? For a Stable Marriage problem with n men and women, describe this stable list of preferences.
+\item[(c)] I tell Marty it's possible that even with just two preferences being switched, 
+we could get a lot of rogue pairs. For an arbitrary stable marriage instance, 
+how many rogue pairs could be generated by an adversary switching the order of two preferences for one person?
+
+\ifsolutions
+\textbf{Solutions:}
+\fi
+
+
+\item[(d)] Marty counters by suggesting some preferences are very stable. 
+If an adversary looks at one person's preference list and switches it around to do the most damage possible, 
+what are the least number of rogue pairs that will be generated? 
+For a Stable Marriage problem with $n$ men and $n$ women, describe this stable list of preferences.
+
+\ifsolutions
+\textbf{Solutions:}
+\fi
 
 
 \end{itemize}
+
+
 
 
 \qns{College Admissions}\\
-In the College Admissions Problem, we are given $n$ students and $m$ universites. Each university $u$ has some number, $q_u$ of slots, and we assume that the total number of students is larger than the total number of slots
-(i.e. $\sum_{u=1}^m{q_u} < n$). Each student ranks the $m$ universities in order of preference, and each university ranks the $n$ students. Our goal is to find an assignment of students to slots(one student per slot) that is
-\textit{stable} in the following sense:
+In the College Admissions Problem, we are given $n$ students and $m$ universites. 
+Each university $u$ has some number, $q_u$ of slots, 
+and we assume that the total number of students is larger than the total number of slots
+(i.e. $\sum_{u=1}^m{q_u} < n$). 
+Each student ranks the $m$ universities in order of preference, and each university ranks the $n$ students. 
+Our goal is to find an assignment of students to slots (one student per slot) that is \textit{stable} 
+in the following sense:
 \begin{itemize}
-\item There is no student-university pair $(s,u)$ such that s prefers u to her allocated university and u prefers s to one of the students assigned to u.
-\item There is no university u that prefers some unassigned student s to one of the students assigned to u.
+\item There is no student-university pair $(s,u)$ such that $s$ prefers $u$ to her allocated university 
+and $u$ prefers $s$ to one of the students assigned to $u$. 
+(This is like the stability criterion for Stable Marriage: 
+it says there is no student-university pair that would like to change the assignment.)
+\item There is no university $u$ that prefers some unassigned student $s$ to one of the students assigned to $u$.
+(This extends the stability criterion to take account of the fact that 
+some students are not assigned to universities.)
 \end{itemize}
 
-Note that this problem is almost the same as the Stable Marriage Problem, with two differences: \\
-(i)there are more students than slots; \\
-(ii)each university generally has more than one slot.
-
+Note that this problem is almost the same as the Stable Marriage Problem, with two differences:
+(i) there are more students than slots; and
+(ii) each university generally has more than one slot.
 \begin{itemize}
-\item[(a)] Explain how to modify the Propose and Reject algorithm so that it finds a stable assignment of students to slots.
+\item[(a)] Explain how to modify the propose-and-reject algorithm so that 
+it finds a stable assignment of students to slots.
 
-\item[(b)] Carefully state a version of the Improvement Lemma that applies to your algorithmm.
+\ifsolutions
+\textbf{Solutions:} We will extend the propose-and-reject algorithm given in the lecture notes.
+Students will play the role of men and universities will play the role of women.
+Instead of keeping a single person as in the original algorithm, 
+each university will keep a \textit{waitlist} of size equal to its quota.
+The extended procedure works as follows:
+\begin{itemize}
+\item All students apply to their first-choice university.
+\item Each university $u$ with a quota of $q_u$, then places on its waitlist
+the $q_u$ applicants who rank highest
+(or all the applicants if there are fewer than $q_u$ of them) and rejects all the rest.
+\item Rejected applicants then apply to their second-choice university, 
+and again each university $u$ selects the top $q_u$ students 
+from among the new applicants AND those on its waitlist;
+it puts the selected students on its new waitlist, and rejects the rest of its applicants
+(including those who were previously on its waitlist but now are not).
+\item The above procedure is repeated until every applicant is either on a waitlist 
+or has been rejected by every university.
+At this point, each university admits everyone on its waitlist. 
+\end{itemize}
+\fi
 
-\item[(c)] Use your Improvement Lemma to give a proof taht your algorithm does indeed find a stable assignment.
+
+\item[(b)] Carefully state a version of the Improvement Lemma (see Lecture Note 4) 
+that applies to your algorithmm, and prove that it holds.
+
+\ifsolutions
+\textbf{Solutions:}
+\begin{itemize}
+\item[Improvement Lemma] Assume that universities maintain their waitlist in decreasing order of
+their preference for the students on the lists.
+For any university $u$, let $q_u$ be its quota and let $s_i^k \in \{Students\}\cup\{\oplus\}$
+be the student in the $i$'th position on the waitlist after the $k$'th round of the algorithm.
+(If there are fewer than $q_u$ students on the list, we fill the bottom of the list with $\oplus$'s.)
+Then for all $i$ and $k$, $s_i^k \geq s_i^{k-1}$. 
+(Here we assume that the university prefers any student to $\oplus$.)
+\end{itemize}
+In short, the lemma says that no position in the list ever gets worse for the university as the algorithm proceeds.
+To prove the lemma, consider some university $u$, index $i \leq q_u$ and a day $k \geq 2$.\\
+Consider $u$'s waitlist on day $k-1$, from the algorithm, 
+since no student who is in one of the top $i \leq q_u$ spots in the waitlist are rejected on day $k-1$,
+they are all still on the waitlist on day $k$; 
+and thus on day $k$, 
+$u$ can populate the top $i$ spots with candidates at least as good as those on day $k-1$,
+proving the lemma.
+\fi
+
+\item[(c)] Use your Improvement Lemma to give a proof that your algorithm does indeed find a stable assignment.
+
+\ifsolutions
+\textbf{Solutions:} First, the algorithm terminates. 
+This follows by similar reasoning to the original propose-and-reject algorithm:
+in each round (except the last), at least one university is crossed off the list of some rejected students. \\
+Second, every slot is filled. Suppose some university $u$ has an unfilled slot at the end.
+Then the total number of students who applied to $u$ must have been fewer than its quota $q_u$ 
+(since the Improvement Lemma in part(b) ensures that a waitlist slot, once filled, will never later be unfilled).
+But the only students who do \textit{not} apply to $u$ are those who find a slot in some other universities.
+And since we are told that there are more students than slots, 
+the number of students applying to $u$ must be at least $q_u$. \\
+Finally, the assignment is stable:
+\begin{itemize}
+\item Suppose there is a student-university pair $(u,s)$ such that 
+$s$ prefers $u$ to her university $u'$ in the final allocation.
+Then $s$ must have proposed to $u$ prior to proposing to $u'$, and was rejected by $u$.
+Thus immediately after rejecting $s$, 
+$u$ must have had a full waitlist in which every student was preferred to $s$.
+By the Improvement Lemma, the same holds at all future times and hence at the end.
+Thus $u$ does not prefer $s$ to any of its assigned students, as required.
+
+\item Suppose $s$ is a student left unassigned at the end. Consider any university $u$.
+Since $s$ must have applied to and have been rejected by all universities, this holds in particular for $u$.
+Reasoning as in the previous case, using the Improvement Lemma, we see that in the final allocation,
+$u$ prefers all its students to $s$. 
+Therefore $u$ does not prefer $s$ to any of its assigned students, as required.
+\end{itemize}
+This concludes the proof that our algorithm finds a stable assignment. 
+\fi
 
 \end{itemize}
-
-
-
-
-
-
-
 
 
 
 
 \qns{Write your own problem} \\
-
-Write your own problem related to this week's material and solve it. You may still work in groups to brainstorm problems, but each student should submit a unique problem. What is the problem? How to formulate it? How to
-solve it? What is the solution?
+Write your own problem related to this week's material and solve it. 
+You may still work in groups to brainstorm problems, but each student should submit a unique problem. 
+What is the problem? How to formulate it? How to solve it? What is the solution?
 
 
 \end{qunlist}
