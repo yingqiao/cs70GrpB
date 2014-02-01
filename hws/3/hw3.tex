@@ -229,7 +229,7 @@ Prove that if both Marty and I come up with the same pairings, there is no other
 (i.e. a pairing with no rogue pairs)
 
 \ifsolutions
-\textbf{Solutions:}
+\textbf{Solutions:} We know that the propose-and-reject algorithm returns the optimal stable pairing for the people who propose, and the worst stable pairing possible for those who are proposed to. Since Marty and I have the same pairings, the best and worst case must be the same, and there can be no other stable pairings.
 \fi
 
 
@@ -240,25 +240,41 @@ He is too embarrassed to ask the women for their preferences again. He knows the
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
 Man&\multicolumn{3}{|c|}{Women}\\\hline 
-A&1&2&3\\\hline 
-B&3&2&1\\\hline 
-C&1&3&2\\\hline
+1&A&B&C\\\hline 
+2&C&B&A\\\hline 
+3&A&C&B\\\hline
 \end{tabular} 
 \hspace{2cm}
 \begin{tabular}{|c|ccc|}\hline 
 Woman&\multicolumn{3}{|c|}{Men}\\\hline 
-1&?&?&?\\\hline 
-2&A&B&C\\\hline 
-3&?&?&?\\\hline
+A&?&?&?\\\hline 
+B&1&2&3\\\hline 
+C&?&?&?\\\hline
 \end{tabular}
 \end{center}
    
-Marty decides to assume that 1 and 3 would have the same preferences as 2. 
+Marty decides to assume that A and C would have the same preferences as B. 
 Show the steps of Marty running the propose-and-reject algorithm (with men proposing). 
 Please indicate the final pairing clearly and note how many days it took to reach that pairing.
 
 \ifsolutions
-\textbf{Solutions:}
+\textbf{Solutions:} \begin{center}
+    \begin{tabular}{| l | l | l |}
+    \hline
+    Days & Women & Proposals \\ \hline
+    1 & A & \textcircled{1} 3 \\ 
+     & B &  \\ 
+     & C & \ 2 \\ \hline
+     2 & A & \ 1 \\ 
+     & B &  \\ 
+     & C & \textcircled{2} 3 \\ \hline
+     3 & A & \ 1 \\ 
+     & B & \ 3\\ 
+     & C & \ 2 \\ \hline
+    \end{tabular}
+\end{center}
+This takes three days, and returns a potentially stable pairing of \{(A,1), (B,3), (C,2)\}
+
 \fi
 
 
@@ -269,13 +285,48 @@ Because of this, I shouldn't bother running the algorithm having women propose.
 I am not so certain that he is correct. After all, he ran the algorithm on incomplete data. 
 I want to convince him that another pairing could exist. 
 Show that (without changing any of the known preferences) 
-there exists a list of preferences for 1 and 3 in which I would pair everyone with somebody different. 
-Remember, in my version, I have the women propose.
+there exists a list of preferences for A and C in which I would pair them differently. Remember, in my version, I have the women propose. Is it possible to have everyone paired with somebody different? Either provide an example, or prove that it's impossible. 
 
 \ifsolutions
 \textbf{Solutions:}
 \fi
 
+We attempt to construct a set of preferences such that everyone is paired with somebody different.
+From the previous step, we know that A must prefer 1 over 3 and C must prefer 2 over 3. Otherwise, the pairing that Marty gave would not be stable. If A prefers 1 the most, than any pairing in which A is not with 1 would not be stable. Since we are trying to create a pairing where everyone is matched with someone different, and since A prefers 1 over 3, A must rank 1 second. We now use the same logic for C. If C prefers 2 the most, than any pairing in which C is not with 2 would not be stable. Therefore C cannot rank 2 the most. Since C prefers 2 over 3, C must rank 2 second.
+
+ We can fill out the chart by now.
+
+\begin{center}
+\begin{tabular}{|c|ccc|}\hline 
+Woman&\multicolumn{3}{|c|}{Men}\\\hline 
+A&2&1&3\\\hline 
+B&1&2&3\\\hline 
+C&1&2&3\\\hline
+\end{tabular}
+\end{center}
+
+We double check that the propose-and-reject algorithm (with the women proposing) results in a completely different set of preferences:
+
+\begin{center}
+    \begin{tabular}{| l | l | l |}
+    \hline
+    Days & Men & Proposals \\ \hline
+    1 & 1 & \textcircled{B} C \\ 
+     & 2 & \ A \\ 
+     & 3 &  \\ \hline
+     2 & 1 & \ B \\ 
+     & 2 &   \ A \textcircled{C} \\ 
+     & 3 &  \\ \hline
+     3 & 1 & \ B \\ 
+     & 2 & \ C\\ 
+     & 3 & \ A \\ \hline
+    \end{tabular}
+\end{center}
+This takes three days, and returns a potentially stable pairing of \{(A,3), (B,1), (C,2)\}
+
+Unfortunately, C is still paired with 2! We now prove that in all stable pairings, C must be paired with 2. Assume for contradiction that in a stable pairing C is paired with 1. Then (1,B) would be a rogue pair. Contradiction. Now assume for contradiction that C is paired with 3. Then, either A is paired with 2 or A is paired with 1. If A is paired with 2, then (2,B) is a rogue couple. If A is paired with 1, then 2 is paired with B. The, (2,C) is a rogue couple (remember that C prefers 2 over 3).
+
+We have now proven that the only other possible stable pairing is \{(A,3), (B,1), (C,2)\}
 
 \item[(d)] At the homework party, two of your friends attempt part (c) above. 
 
@@ -283,9 +334,9 @@ Here is your first friend's work:
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
 Woman&\multicolumn{3}{|c|}{Men}\\\hline 
-1&A&?&?\\\hline 
-2&A&B&C\\\hline 
-3&?&?&?\\\hline
+A&1&?&?\\\hline 
+B&1&2&3\\\hline 
+C&?&?&?\\\hline
 \end{tabular} 
 \end{center}
 
@@ -293,9 +344,9 @@ Here is your second friend's work:
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
 Woman&\multicolumn{3}{|c|}{Men}\\\hline 
-1&?&?&?\\\hline 
-2&A&B&C\\\hline 
-3&?&C&?\\\hline
+A&?&?&?\\\hline 
+B&1&2&3\\\hline 
+C&?&3&?\\\hline
 \end{tabular}
 \end{center}
  
@@ -303,7 +354,7 @@ No matter how the rest of the preferences are filled out, these will result in i
 Explain why.
 
 \ifsolutions
-\textbf{Solutions:}
+\textbf{Solutions:} The first friend's work is wrong as explained in part c. If A ranks 1 first, than A and 1 must be together in all stable pairings. This will result in exactly the same pairing as Marty found. This is an invalid solution for part c. The second friend's work is also wrong. We know that C prefers 2 over 3 (again, see part c for details), therefore 2 would have to be first on C's preference list. This would also result in the exact same pairing found in part a. Again, this solution would be invalid for part c.
 \fi
 
 
@@ -322,16 +373,16 @@ We receive a stable marriage pairing, but one of his rivals has maliciously elim
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
 Man&\multicolumn{3}{|c|}{Women}\\\hline 
-A&X&1&X\\\hline 
-B&X&X&X\\\hline 
-C&3&X&X\\\hline
+1&X&A&X\\\hline 
+2&X&X&X\\\hline 
+3&C&X&X\\\hline
 \end{tabular} 
 \hspace{2cm}
 \begin{tabular}{|c|ccc|}\hline 
 Woman&\multicolumn{3}{|c|}{Men}\\\hline 
-1&B&A&C\\\hline 
-2&X&X&C\\\hline 
-3&X&X&C\\\hline
+A&2&1&3\\\hline 
+B&X&X&3\\\hline 
+C&X&X&3\\\hline
 \end{tabular}
 \end{center}
         
@@ -340,6 +391,71 @@ List all the possibilities of filling in the missing preferences such that the p
 
 \ifsolutions
 \textbf{Solutions:}
+
+\begin{center}
+\begin{tabular}{|c|ccc|}\hline 
+Man&\multicolumn{3}{|c|}{Women}\\\hline 
+1&B&A&C\\\hline 
+2&B&A&C\\\hline 
+3&C&A&B\\\hline
+\end{tabular} 
+\hspace{2cm}
+\begin{tabular}{|c|ccc|}\hline 
+Woman&\multicolumn{3}{|c|}{Men}\\\hline 
+A&2&1&3\\\hline 
+B&2&1&3\\\hline 
+C&1&2&3\\\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|ccc|}\hline 
+Man&\multicolumn{3}{|c|}{Women}\\\hline 
+1&B&A&C\\\hline 
+2&B&A&C\\\hline 
+3&C&B&A\\\hline
+\end{tabular} 
+\hspace{2cm}
+\begin{tabular}{|c|ccc|}\hline 
+Woman&\multicolumn{3}{|c|}{Men}\\\hline 
+A&2&1&3\\\hline 
+B&2&1&3\\\hline 
+C&1&2&3\\\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|ccc|}\hline 
+Man&\multicolumn{3}{|c|}{Women}\\\hline 
+1&B&A&C\\\hline 
+2&B&A&C\\\hline 
+3&C&A&B\\\hline
+\end{tabular} 
+\hspace{2cm}
+\begin{tabular}{|c|ccc|}\hline 
+Woman&\multicolumn{3}{|c|}{Men}\\\hline 
+A&2&1&3\\\hline 
+B&2&1&3\\\hline 
+C&2&1&3\\\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|c|ccc|}\hline 
+Man&\multicolumn{3}{|c|}{Women}\\\hline 
+1&B&A&C\\\hline 
+2&B&A&C\\\hline 
+3&C&B&A\\\hline
+\end{tabular} 
+\hspace{2cm}
+\begin{tabular}{|c|ccc|}\hline 
+Woman&\multicolumn{3}{|c|}{Men}\\\hline 
+A&2&1&3\\\hline 
+B&2&1&3\\\hline 
+C&2&1&3\\\hline
+\end{tabular}
+\end{center}
+
 \fi
  
         
@@ -353,26 +469,31 @@ he will get a pairing that is stable.
 (You should note it by index. For example, "The adversary switches A's 1st and 3rd preference").
 
 \ifsolutions
-\textbf{Solutions:}
+\textbf{Solutions:} There are two solutions. Either Man 3's 2nd and 3rd preference can be switched or Woman C's 1st and 2nd preferences can be switched. If either of these happens we will get no rogue couples.
 \fi
 
         
 \item[(c)] I tell Marty it's possible that even with just two preferences being switched, 
-we could get a lot of rogue pairs. For an arbitrary stable marriage instance, 
-how many rogue pairs could be generated by an adversary switching the order of two preferences for one person?
+we could get a lot of rogue pairs. For an arbitrary stable marriage instance with n men and n women, how many (at most) rogue pairs could be generated by an adversary switching the order of two preferences for one person?
 
 \ifsolutions
 \textbf{Solutions:}
+
+There can be n-1 rogue pairs generated. We consider by looking at case separately. Let's consider that our adversary switches the preference list of a man, M'. We argue that all rogue couples must involve M'. We consider the man, M, whose preference list is not switched by the adversary. M is matched with some W at the end of the algorithm. Suppose towards contradiction that M prefers some W* to his current partner. We will argue that W* prefers her partner to M, so that (M,W*) cannot be a rogue couple. Since W* occurs before W in M's list, and since his preference list is not switched, he must have proposed to her before he proposed to W. Therefore, according to the algorithm, W* must have rejected him for somebody she prefers. By the Improvement Lemma, W* likes her final partner at least as much, and therefore prefers him to M. Thus no man M whose preference list has not been switched can be involved in a rogue couple. Since M' is currently matched with one woman, there are at most n-1 possible rogue pairs with M'. At the end of this proof, we will demonstrate how to construct such a situation. Next, we consider that the adversary switches the preference list of a woman, W'. We similarly argue that all rogue couples must involve W'. We consider the woman, W, whose preference list is not switched by the adversary. W is matched with some M at the end of the algorithm. Suppose towards contradiction we have a rogue couple such that W prefers some M* to her current partner and M* prefers W over his current partner.  If M* prefers W over his current partner, then he must have proposed to W before he proposed to his current partner. Since W's preferences have not been switched, then the Improvement Lemma holds. Therefore, W must prefer her current partner at least as much as M*. This contradicts the assumption of there existing a rogue couple with W (M*, W). Therefore, only W' can be involved in rogue couples. Again, this indicates a maximum of n-1 possible rogue couples.
+
+We now demonstrate one way to achieve this maximum of n-1 possible rogue couples. If every man ranks the women identically and every women ranks the men identically, the adversary can achieve the most damage by switching the first and last preference of the most-desired man or the most desired-women. Since this person is the most desired, they will end up with the person at the top of the list (which the adversary has manipulated), their least preference. Therefore they prefer all other possible partners, and because they are the most desirable, all other possible partners desire them. Therefore we have n-1 rogue couples.
+
+ Since W's preferences have not been switched, the improvement lemma holds. Therefor
 \fi
 
 
 \item[(d)] Marty counters by suggesting some preferences are very stable. 
-If an adversary looks at one person's preference list and switches it around to do the most damage possible, 
+If an hyper-intelligent adversary looks at one person's preference list and switches it around to do the most damage possible, 
 what are the least number of rogue pairs that will be generated? 
-For a Stable Marriage problem with $n$ men and $n$ women, describe this stable list of preferences.
+For a Stable Marriage problem with $n$ men and $n$ women, describe these adversary-resistant preferences.
 
 \ifsolutions
-\textbf{Solutions:}
+\textbf{Solutions:} It's possible this can generate 0 rogue couples. In order for this to happen, create a pair of men and women such that each pair ranks the other person number one on their preference list. We argue that if a man and a woman rank each other number 1, they must be paired together in all stable pairings. Assume for contradiction that M and W who rank each other number 1 are paired with other people (M,W*) and (M*,W). If this is the case, (M,W) would be a rogue couple because they are both each other's top preference. When the adversary disrupts the preference list of one person, we just proved that the other n-1 men and n-1 women must be paired with their number 1 partner. There is only one way to pair the remaining man and woman (one of whose list is corrupted) together. Therefore there are no rogue couples!
 \fi
 
 
