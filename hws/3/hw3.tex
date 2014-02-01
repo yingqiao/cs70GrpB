@@ -118,9 +118,9 @@ Adding a constant (i.e. the first three terms) does not change the fact that it 
 
 
 
-\qns{Title NA} \\ 
-Given a natural number $n$, can the number $1$ be produced 
-by repeatedly applying the function:
+\qns{The War with the Four-headed Dragon} \\ 
+In this problem, we will consider an ongoing war with ninjas and a massive four-headed dragon. The four heads of the dragon are fair to each other: they will only eat if each of them have an equal share. One of the heads is compassionate. Therefore when the number of ninjas is divisible by 4, the dragons begin eating.  One fourth of the ninjas live on under the compassionate head, but the remaining three fourths of the warriors are eaten. If there are an even number of ninjas, and the dragons aren't eating (the number is not divisible by four), then two ninjas sneak onto the battle field. When there are an odd number of ninjas, the ninjas see this as their time to pounce. Each ninjas summons two of her ninja friends to join the battle, thus the number of ninjas is multiplied by three. However, exactly one ninja fails to answer the call of battle each time. When there is only one ninja left on the battle field, the ninja flees. Prove that all battles (no matter how many ninjas initially start fighting) end with the ninja fleeing.
+You can represent this battle by repeatedly applying the following function:
 \[ f(n) = \left\{ 
     \begin{array}{cl} 
         n/4 & \text{if $n$ is divisible by 4} \\
@@ -128,7 +128,8 @@ by repeatedly applying the function:
         3n - 1 & \text{if $n$ is odd} 
     \end{array} 
 \right. \]
-Prove why or why not.
+
+\textit{Mathematical aside: This problem is reminiscent of the Collatz Conjecture, which you may find interesting. Looking up the Colllatz Conjecture is not necessary for this homework.}
 
 \ifsolutions
 \textbf{Solutions:}
