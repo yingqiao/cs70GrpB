@@ -15,16 +15,16 @@
 \begin{qunlist}
 
 \qns{The War with the Four-headed Dragon} \\ 
-In this problem, we will consider an ongoing war with ninjas and a massive four-headed dragon. 
+In this problem, we will consider an ongoing war between ninjas and a massive four-headed dragon. 
 The four heads of the dragon are fair to each other: 
-they will only eat if each of them have an equal share. 
-One of the heads is compassionate. 
+they will only eat if each of them have an equal share. One of the heads is compassionate. 
 Therefore when the number of ninjas is divisible by 4, the dragons begin eating.  
 One fourth of the ninjas live on under the compassionate head, 
 but the remaining three fourths of the warriors are eaten. 
 If there are an even number of ninjas, and the dragons aren't eating 
 (the number is not divisible by four), then two ninjas sneak onto the battle field. 
-When there are an odd number of ninjas, the ninjas see this as their time to pounce. 
+(The dragon begin eating when again the number of ninjas is divisible by 4.)
+When there is an odd number of ninjas, the ninjas see this as their time to pounce. 
 Each ninjas summons two of her ninja friends to join the battle, 
 thus the number of ninjas is multiplied by three. 
 However, exactly one ninja fails to answer the call of battle each time. 
@@ -56,14 +56,14 @@ or add 2 and divide by 4, in either case $(3n-1)/4$ and $(3n+1)/4$ are both less
 
 
 % need story for this problem
-\qns{Title NA} \\
+\qns{Make it stronger again} \\
 Define the following sequence: $a_1 =2$, $a_2 = 3$ and $a_k = a_{k-1} \cdot a_{k-2}$ for all $n \geq 3$. \\ 
 Does the sum 
 \[ A_n = \sum_{k=1}^n \frac{1}{a_k} \]
 
 diverge (i.e. approach infinity) as $n \to \infty$, or does it converge to a finite number?  
 Prove why or why not.
-{\em Hint: plot $A_n$, and think about discussion 2b.}
+{\em Hint: plot $A_n$ and think about discussion 2B.}
 
 \ifsolutions
 \textbf{Solutions:}
@@ -237,7 +237,6 @@ fall outside the range of natural numbers. We cannot conclude that $x-1 \leq y-1
 
 
 \qns{Marty's Marriage Mistake}
-
 \begin{itemize}
 \item[(a)] My friend Marty and I run a match-making business. 
 We receive preference lists from men and women and use the same propose-and-reject algorithm you covered in class. 
@@ -365,39 +364,38 @@ We have now proven that the only other possible stable pairing is \{(A,3), (B,1)
 \fi
 
 
-\item[(d)] At the homework party, two of your friends attempt part (c) above. 
+%\item[(d)] At the homework party, two of your friends attempt part (c) above. 
+%Here is your first friend's work: 
+%\begin{center}
+%\begin{tabular}{|c|ccc|}\hline 
+%Woman&\multicolumn{3}{|c|}{Men}\\\hline 
+%A&1&?&?\\\hline 
+%B&1&2&3\\\hline 
+%C&?&?&?\\\hline
+%\end{tabular} 
+%\end{center}
 
-Here is your first friend's work: 
-\begin{center}
-\begin{tabular}{|c|ccc|}\hline 
-Woman&\multicolumn{3}{|c|}{Men}\\\hline 
-A&1&?&?\\\hline 
-B&1&2&3\\\hline 
-C&?&?&?\\\hline
-\end{tabular} 
-\end{center}
-
-Here is your second friend's work:
-\begin{center}
-\begin{tabular}{|c|ccc|}\hline 
-Woman&\multicolumn{3}{|c|}{Men}\\\hline 
-A&?&?&?\\\hline 
-B&1&2&3\\\hline 
-C&?&3&?\\\hline
-\end{tabular}
-\end{center}
+%Here is your second friend's work:
+%\begin{center}
+%\begin{tabular}{|c|ccc|}\hline 
+%Woman&\multicolumn{3}{|c|}{Men}\\\hline 
+%A&?&?&?\\\hline 
+%B&1&2&3\\\hline 
+%C&?&3&?\\\hline
+%\end{tabular}
+%\end{center}
  
-No matter how the rest of the preferences are filled out, these will result in invalid solutions to part (c). 
-Explain why.
+%No matter how the rest of the preferences are filled out, these will result in invalid solutions to part (c). 
+%Explain why.
 
 \ifsolutions
-\textbf{Solutions:} The first friend's work is wrong as explained in part (c). 
-If A ranks 1 first, than A and 1 must be together in all stable pairings. 
-This will result in exactly the same pairing as Marty found. This is an invalid solution for part (c). 
-The second friend's work is also wrong. We know that C prefers 2 over 3 (again, see part (c) for details), 
-therefore 2 would have to be first on C's preference list. 
-This would also result in the exact same pairing found in part (a). 
-Again, this solution would be invalid for part (c).
+%\textbf{Solutions:} The first friend's work is wrong as explained in part (c). 
+%If A ranks 1 first, than A and 1 must be together in all stable pairings. 
+%This will result in exactly the same pairing as Marty found. This is an invalid solution for part (c). 
+%The second friend's work is also wrong. We know that C prefers 2 over 3 (again, see part (c) for details),
+%therefore 2 would have to be first on C's preference list. 
+%This would also result in the exact same pairing found in part (a). 
+%Again, this solution would be invalid for part (c).
 \fi
 
 
@@ -503,7 +501,7 @@ C&2&1&3\\\hline
  
         
 \item[(b)] I begin to suspect that one of Marty's adversaries may have done worse than eliminate preferences. 
-Some of the preferences may be switched! Marty isn't too worried. 
+Some of the preferences (no matter eliminated or not) may be switched! Marty isn't too worried. 
 He says that if the adversary switches the order of only two of the preferences for one person, 
 than it's possible our pairing (based on corrupted preferences) will still have no rogue couples. 
 Assuming the information we received in part(a) is not corrupted, 
@@ -518,13 +516,13 @@ If either of these happens we will get no rogue couples.
 \fi
 
         
-\item[(c)] I tell Marty it's possible that even with just two preferences being switched, 
-we could get a lot of rogue pairs. For an arbitrary stable marriage instance with n men and n women, 
+\item[(c)] I tell Marty that it's possible that even with just two preferences being switched, 
+we could get a lot of rogue pairs. For an arbitrary stable marriage instance with $n$ men and $n$ women, 
 how many (at most) rogue pairs could be generated by an adversary switching the order of two preferences for one person?
 
 \ifsolutions
 \textbf{Solutions:}
-There can be n-1 rogue pairs generated. We consider by looking at case separately. 
+There can be $n-1$ rogue pairs generated. We consider by looking at case separately. 
 Let's consider that our adversary switches the preference list of a man, M'. 
 We argue that all rogue couples must involve M'. 
 We consider the man, M, whose preference list is not switched by the adversary. 
@@ -536,7 +534,7 @@ he must have proposed to her before he proposed to W.
 Therefore, according to the algorithm, W* must have rejected him for somebody she prefers. 
 By the Improvement Lemma, W* likes her final partner at least as much, and therefore prefers him to M. 
 Thus no man M whose preference list has not been switched can be involved in a rogue couple. 
-Since M' is currently matched with one woman, there are at most n-1 possible rogue pairs with M'. 
+Since M' is currently matched with one woman, there are at most $n-1$ possible rogue pairs with M'. 
 At the end of this proof, we will demonstrate how to construct such a situation. 
 Next, we consider that the adversary switches the preference list of a woman, W'. 
 We similarly argue that all rogue couples must involve W'. 
@@ -547,13 +545,13 @@ If M* prefers W over his current partner, then he must have proposed to W before
 Since W's preferences have not been switched, then the Improvement Lemma holds. 
 Therefore, W must prefer her current partner at least as much as M*. 
 This contradicts the assumption of there existing a rogue couple with W (M*, W). 
-Therefore, only W' can be involved in rogue couples. Again, this indicates a maximum of n-1 possible rogue couples.
+Therefore, only W' can be involved in rogue couples. Again, this indicates a maximum of $n-1$ possible rogue couples.
 
-We now demonstrate one way to achieve this maximum of n-1 possible rogue couples. 
+We now demonstrate one way to achieve this maximum of $n-1$ possible rogue couples. 
 If every man ranks the women identically and every women ranks the men identically, 
 the adversary can achieve the most damage by switching the first and last preference of the most-desired man or the most desired-women. 
 Since this person is the most desired, they will end up with the person at the top of the list (which the adversary has manipulated), their least preference. 
-Therefore they prefer all other possible partners, and because they are the most desirable, all other possible partners desire them. Therefore we have n-1 rogue couples.
+Therefore they prefer all other possible partners, and because they are the most desirable, all other possible partners desire them. Therefore we have $n-1$ rogue couples.
 
 Since W's preferences have not been switched, the improvement lemma holds.
 \fi
@@ -571,7 +569,7 @@ We argue that if a man and a woman rank each other number 1, they must be paired
 Assume for contradiction that M and W who rank each other number 1 are paired with other people (M,W*) and (M*,W). 
 If this is the case, (M,W) would be a rogue couple because they are both each other's top preference. 
 When the adversary disrupts the preference list of one person, 
-we just proved that the other n-1 men and n-1 women must be paired with their number 1 partner. 
+we just proved that the other $n-1$ men and $n-1$ women must be paired with their number 1 partner. 
 There is only one way to pair the remaining man and woman (one of whose list is corrupted) together. 
 Therefore there are no rogue couples!
 \fi
