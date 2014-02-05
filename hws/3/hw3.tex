@@ -47,7 +47,7 @@ You can represent this battle by repeatedly applying the following function:
 You can always get to 1. We can prove this by strong induction. 
 If $n=1$, we are done.  If $n=2$, we add 2 and divide by 4, and then we are done.  
 For our inductive hypothesis, we assume we can get to 1 from any number less than $n$. 
-Then if $n$ is dividible by 4, dividing $n$ by 4 reduces the problem to one we have already solved.  
+Then if $n$ is divisible by 4, dividing $n$ by 4 reduces the problem to one we have already solved.  
 If $n$ is divisible by 2 but not 4, $(n+2)/4 < n$, 
 so we've again reduced the problem to one we have already solved. \\
 So the remaining case is if $n$ is odd. In this case, $3n-1$ will be even, so then we would either divide by 4, 
@@ -221,7 +221,7 @@ When $k=0$, $k-1 = -1$ and $P(k-1)=P(-1)$ is not defined!
 \textit{Induction hypothesis:} Assume that whenever we have $\max(x,y) = n$, $x \leq y$ must hold. \\
 \textit{Inductive step:} We must prove that if $\max(x,y) = n+1$, then $x \leq y$. \\
 Suppose $x,y$ are such that $\max(x,y) = n+1$, then it follows that $\max(x-1,y-1) = n$. \\
-So by the inductive hypothsis, $x-1 \leq y-1  \implies x \leq y$, completing the proof.
+So by the inductive hypothesis, $x-1 \leq y-1  \implies x \leq y$, completing the proof.
 
 \ifsolutions
 \textbf{Solutions:} This proof is incorrect. The use of $\max(x-1, y-1)$ is not correct, 
@@ -234,7 +234,7 @@ fall outside the range of natural numbers. We cannot conclude that $x-1 \leq y-1
 \end{itemize}
 
 
-
+\newpage
 
 \qns{Marty's Marriage Mistake}
 \begin{itemize}
@@ -581,7 +581,7 @@ Therefore there are no rogue couples!
 
 
 \qns{College Admissions}\\
-In the College Admissions Problem, we are given $n$ students and $m$ universites. 
+In the College Admissions Problem, we are given $n$ students and $m$ universities. 
 Each university $u$ has some number, $q_u$ of slots, 
 and we assume that the total number of students is larger than the total number of slots
 (i.e. $\sum_{u=1}^m{q_u} < n$). 
@@ -629,7 +629,7 @@ At this point, each university admits everyone on its waitlist.
 
 
 \item[(b)] Carefully state a version of the Improvement Lemma (see Lecture Note 4) 
-that applies to your algorithmm, and prove that it holds.
+that applies to your algorithm, and prove that it holds.
 
 \ifsolutions
 \textbf{Solutions:}
