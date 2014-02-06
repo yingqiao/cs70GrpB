@@ -630,9 +630,9 @@ he will get a pairing that is stable.
 (You should note it by index. For example, "The adversary switches A's 1st and 3rd preference").
 
 \ifsolutions
-\textbf{Solutions:} There are two solutions. 
-Either Man 3's 2nd and 3rd preference can be switched or Woman C's 1st and 2nd preferences can be switched. 
-If either of these happens we will get no rogue couples.
+\textbf{Solutions:} There are three solutions. 
+Either Man 2's 2nd and 3rd preference, Man 3's 2nd and 3rd preference can be switched, or Woman C's 1st and 2nd preferences can be switched. 
+If any of these three sets of swithes occur, the algorithm will still return no rogue couples. This questions is meant as an elaboration on the previous part in order to get you to think about how some parts of preference lists may not actually affect the outcome of the traditional propose-and-reject algorithm.
 \fi
 
         
@@ -669,11 +669,8 @@ Therefore, only W' can be involved in rogue couples. Again, this indicates a max
 
 We now demonstrate one way to achieve this maximum of $n-1$ possible rogue couples. 
 If every man ranks the women identically and every women ranks the men identically, 
-the adversary can achieve the most damage by switching the first and last preference of the most-desired man or the most desired-women. 
-Since this person is the most desired, they will end up with the person at the top of the list (which the adversary has manipulated), their least preference. 
-Therefore they prefer all other possible partners, and because they are the most desirable, all other possible partners desire them. Therefore we have $n-1$ rogue couples.
-
-Since W's preferences have not been switched, the improvement lemma holds.
+the adversary can achieve the most damage by switching the first and last preference of the most-desired man or the most desired-woman. 
+Since this person is the most desired, they will end up with the person at the top of their list. Since the adversary has manipulated their list, this person is actually their least preference. Therefore they prefer all other possible partners, and because they are the most desirable, all other possible partners desire them. Therefore we have $n-1$ rogue couples.
 \fi
 
 
@@ -685,7 +682,7 @@ For a Stable Marriage problem with $n$ men and $n$ women, describe these adversa
 \ifsolutions
 \textbf{Solutions:} It's possible this can generate 0 rogue couples. 
 In order for this to happen, create a pair of men and women such that each pair ranks the other person number one on their preference list. 
-We argue that if a man and a woman rank each other number 1, they must be paired together in all stable pairings. 
+We argue that if a man and a woman rank each other as highest preference (they are "soul mates"), they must be paired together in all stable pairings. 
 Assume for contradiction that M and W who rank each other number 1 are paired with other people (M,W*) and (M*,W). 
 If this is the case, (M,W) would be a rogue couple because they are both each other's top preference. 
 When the adversary disrupts the preference list of one person, 
