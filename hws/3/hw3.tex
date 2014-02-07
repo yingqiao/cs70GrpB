@@ -45,14 +45,19 @@ You can represent this battle by repeatedly applying the following function:
 
 \ifsolutions
 \textbf{Solutions:}
-You can always get to 1. We can prove this by strong induction. 
-If $n=1$, we are done.  If $n=2$, we add 2 and divide by 4, and then we are done.  
-For our inductive hypothesis, we assume we can get to 1 from any number less than $n$. 
-Then if $n$ is divisible by 4, dividing $n$ by 4 reduces the problem to one we have already solved.  
-If $n$ is divisible by 2 but not 4, $(n+2)/4 < n$, 
-so we've again reduced the problem to one we have already solved. \\
-So the remaining case is if $n$ is odd. In this case, $3n-1$ will be even, so then we would either divide by 4, 
-or add 2 and divide by 4, in either case $(3n-1)/4$ and $(3n+1)/4$ are both less than $n$ if $n \geq 2$.
+We want to prove that for any natural number $n$, repeatedly applying $f(n)$ will eventually yield 1. Call this property $P(n)$. We can prove $P(n), \forall n \in \mathbb{N}$ by strong induction.
+
+\underline{Base case:} If $n=1$, we have reached 1, so $P(1)$ holds.
+
+\underline{Inductive hypothesis:} We will assume that for $1 \leq k \leq n$, $P(k)$ holds (strong inductive hypothesis).
+
+\underline{Inductive step:} Now we want to show that $P(n+1)$ holds. There are three cases:
+
+\begin{itemize}
+\item $n+1$ divisible by 4: In this case $f(n+1) = (n+1)/4$. Since $(n+1)/4 < n+1$, by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
+\item $n+1$ even but not divisible by 4: In this case $f(n+1) = (n+3)/4$. Since $(n+3)/4 < n+1$, by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
+\item $n+1$ odd: In this case $f(n+1) = 3(n+1) - 1$, which will be even.  So then we can apply $f$ again to reduce to a problem we have already solved.  Then $f(f(n+1)) = (3n+2)/4$ or $f(f(n+1)) = (3n+4)/4$, both of which are less than $n+1$.  Therefore by our inductive hypothesis, $P(f(f(n+1)))$ holds, which implies $P(n+1)$.
+\end{itemize}
 \fi
 
 
@@ -67,18 +72,23 @@ Prove why or why not.
 
 \ifsolutions
 \textbf{Solutions:}
-It does converge. We can first use strong induction to prove the claim
-\[ a_k > 2^k, \quad \forall k \geq 4 \] 
+It does converge. We can prove this by comparing this series with a series who's behavior is known: a geometric series. We will use the fact that
+\[ 1 + r + r^2 + r^3 + \cdots = \sum_{k=1}^{\infty} r^{k-1} = \frac{1}{1-r}, \quad \text{for } |r| < 1, \]
 
-For the base cases we have $a_4 = a_3 \cdot a_2 = 6 \cdot 3 = 18 > 2^4$ 
-and $a_5 = a_4 \cdot a_3 = 18 \cdot 6 = 108 > 2^5$. Then for the inductive step we have
-\[ a_{k+1} = a_k \cdot a_{k-1} > 2^k \cdot 2^{k-1} = 2^{2k-1} > 2^{k+1} \]
+which means that for $|r| < 1$, the sum of this series converges to a finite number. So if we can show that the sum of our series is less than the sum of a geometric series, then our series also converges. We will use the geometric series in the case when $r = \frac{1}{2}$. To prove that each term of our series is less than the corresponding term in the geometric series, we can use strong induction to show:
+\[ \frac{1}{a_k} < \frac{1}{2^{k-1}}, \quad \text{for } k = \{1,2,3,\cdots\} \] 
 
-Therefore:
-\[ \sum_{k=4}^n \frac{1}{a_k} < \sum_{k=4}^n \frac{1}{2^k} \]
+\underline{Base cases:} For $k=1$, $\frac{1}{a_1} = \frac{1}{2} < 1$, and for $k=2$, $\frac{1}{a_2} = \frac{1}{3} < \frac{1}{2}$.
 
-Since the RHS converges as $n \to \infty$, we know the LHS converges.  
-Adding a constant (i.e. the first three terms) does not change the fact that it converges.
+\underline{Inductive hypothesis:} We will assume that for all $j$ where $1 \leq j \leq k$, $\frac{1}{a_j} < \frac{1}{2^{j-1}}$.
+
+\underline{Inductive step:} To get to $k+1$, we can use the recursive definition of our series:
+\[ \frac{1}{a_{k+1}} = \frac{1}{a_k \cdot a_{k-1}} < \frac{1}{2^{k-1} \cdot 2^{k-2}} = \frac{1}{2^{2k-3}} \leq \frac{1}{2^k}, \quad \text{for } k+1 > 2 \]
+
+Since we have proved that each term of our series is smaller than the corresponding term of this geometric series, then the sum our series must be smaller as well:
+\[ \sum_{k=1}^{\infty} \frac{1}{a_k} < \sum_{k=1}^{\infty} \frac{1}{2^{k-1}} = 2 \]
+
+Therefore since sum of the geometric series converges, the sum of our series converges as well.
 \fi
 
 
