@@ -1,11 +1,17 @@
 \documentclass[11pt]{article}
 \usepackage{../../cs70}
 %\usepackage{../../markup}
-%\usepackage{color}
+\usepackage{color}
+\usepackage{amssymb, amsfonts, amsmath, textcomp}
 \newif\ifsolutions
-\solutionsfalse
+\solutionstrue
 %\solutionsfalse %flag for solutions
 \def\title{Homework 3}
+
+\renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{}#1}}
+\definecolor{mydarkblue}{rgb}{0,0.25,1}
+
+
 \begin{document}
 \maketitle
 
@@ -44,6 +50,7 @@ You can represent this battle by repeatedly applying the following function:
 \textit{Mathematical aside: This problem is reminiscent of the Collatz Conjecture, which you may find interesting. Looking up the Colllatz Conjecture is not necessary for this homework.}
 
 \ifsolutions
+\answer{
 \textbf{Solutions:}
 We want to prove that for any natural number $n$, repeatedly applying $f(n)$ will eventually yield 1. Call this property $P(n)$. We can prove $P(n), \forall n \in \mathbb{N}$ by strong induction.
 
@@ -58,6 +65,8 @@ We want to prove that for any natural number $n$, repeatedly applying $f(n)$ wil
 \item $n+1$ even but not divisible by 4: In this case $f(n+1) = (n+3)/4$. Since $(n+3)/4 < n+1$, by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
 \item $n+1$ odd: In this case $f(n+1) = 3(n+1) - 1$, which will be even.  So then we can apply $f$ again to reduce to a problem we have already solved.  Then $f(f(n+1)) = (3n+2)/4$ or $f(f(n+1)) = (3n+4)/4$, both of which are less than $n+1$.  Therefore by our inductive hypothesis, $P(f(f(n+1)))$ holds, which implies $P(n+1)$.
 \end{itemize}
+
+}
 \fi
 
 
@@ -322,6 +331,7 @@ Is it possible to have everyone paired with somebody different?
 Either provide an example, or prove that it's impossible. 
 
 \ifsolutions
+\answer{
 \textbf{Solutions:}
 We attempt to construct a set of preferences such that everyone is paired with somebody different.
 From the previous step, we know that A must prefer 1 over 3 and C must prefer 2 over 3. 
@@ -371,6 +381,8 @@ Now assume for contradiction that C is paired with 3. Then, either A is paired w
 If A is paired with 2, then (2,B) is a rogue couple. If A is paired with 1, then 2 is paired with B. 
 The, (2,C) is a rogue couple (remember that C prefers 2 over 3).
 We have now proven that the only other possible stable pairing is \{(A,3), (B,1), (C,2)\} Therefore it is impossible to have everyone paired with somebody different.
+
+}
 \fi
 
 
