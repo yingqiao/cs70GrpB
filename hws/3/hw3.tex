@@ -1,12 +1,16 @@
 \documentclass[11pt]{article}
 \usepackage{../../cs70}
 %\usepackage{../../markup}
-%\usepackage{color}
+
 \newif\ifsolutions
-\solutionsfalse
-%\solutionsfalse %flag for solutions
+\solutionstrue
+\newcommand{\sketch}{\textbf{Solution sketch:}}
+
 \def\title{Homework 3}
 \begin{document}
+\config{hwnum}{3}
+\config{homework-due}{02/10/2014 13:00}
+\config{grades-due}{02/17/2014 13:00}
 \maketitle
 
 \vspace{0.5em}
@@ -44,7 +48,7 @@ You can represent this battle by repeatedly applying the following function:
 \textit{Mathematical aside: This problem is reminiscent of the Collatz Conjecture, which you may find interesting. Looking up the Colllatz Conjecture is not necessary for this homework.}
 
 \ifsolutions
-\textbf{Solutions:}
+\sketch
 We want to prove that for any natural number $n$, repeatedly applying $f(n)$ will eventually yield 1. Call this property $P(n)$. We can prove $P(n), \forall n \in \mathbb{N}$ by strong induction.
 
 \underline{Base case:} If $n=1$, we have reached 1, so $P(1)$ holds.
@@ -71,7 +75,7 @@ Prove why or why not.
 {\em Hint: plot $A_n$ and think about discussion 2B.}
 
 \ifsolutions
-\textbf{Solutions:}
+\sketch
 It does converge. We can prove this by comparing this series with a series who's behavior is known: a geometric series. We will use the fact that
 \[ 1 + r + r^2 + r^3 + \cdots = \sum_{k=1}^{\infty} r^{k-1} = \frac{1}{1-r}, \quad \text{for } |r| < 1, \]
 
@@ -124,11 +128,13 @@ Your goal is to tile a board of dimension $2 \times n$, and you are interested i
 tiling configurations possible using the three types of tiles given. \\
 Let $T_n$ denote the number of tiling configurations for a board of dimension $2 \times n$.
 \begin{itemize}
+\qpart
 \item[(a)] As preparation for the inductive steps, derive the relations between $T_n$, $T_{n-1}$ 
 and $T_{n-2}$ for all $n \geq 3$. \textit{Hint: compute $T_n$ by direct enumeration for small $n$'s.}
 
 \ifsolutions
-\textbf{Solutions:} $T_n = T_{n-1} + 2T_{n-2}$ for all $n \geq 3$\\
+\sketch 
+$T_n = T_{n-1} + 2T_{n-2}$ for all $n \geq 3$\\
 We enumerate the tilings for a $2 \times n$ board by considering three cases depending on
 the tile covering the bottom square of the first column. 
 \begin{itemize}
@@ -143,12 +149,13 @@ Note that the three cases are exhaustive and mutually exclusive. The number of t
 board therefore satisfies the recurrence relation as proposed.
 \fi
 
-
+\qpart
 \item[(b)] Prove by induction that for all $n \geq 1$
 \[ T_n = \frac{2^{n+1}+(-1)^n}{3} \]. 
 
 \ifsolutions
-\textbf{Solutions:} (Strong Induction) $P(n)$ asserts that $T_n = \frac{2^{n+1}+(-1)^n}{3}$. 
+\sketch 
+(Strong Induction) $P(n)$ asserts that $T_n = \frac{2^{n+1}+(-1)^n}{3}$. 
 We prove the statement by (strong) induction on $n$, showing that $P(n-2) \wedge P(n-1) \implies P(n)$. \\
 \underline{Base cases:} $T_1 = 1$ as there is exactly one way to tile a $2 \times 1$ board, using tile \textbf{B}.
 A $2 \times 2$ board can be tiled in exactly three different ways using the tiles \textbf{AA, BB} and \textbf{C},
@@ -179,6 +186,7 @@ If you think the proof is correct, you do not need to give any explanation. \\
 \textit{Recall that simply saying the inductive hypothesis is false is not a valid explanation.}
 
 \begin{itemize}
+\qpart
 \item[(a)] \textbf{Claim:} $\forall n \in \N$ , $n^2 \leq n$. \\
 \textbf{Proof:} \\
 \textit{Base case:} for $n = 1$, the claim is $1^2 \leq 1$, which is true. \\
@@ -191,13 +199,15 @@ So we get back to our original hypothesis which is assumed to be true.\\
 Hence, for every $n \in \N$, we know that $n^2 \leq n$. 
 
 \ifsolutions
-\textbf{Solutions:} The claim is clearly false as $2^2 > 2$, so the proof must be incorrect.\\
+\sketch 
+The claim is clearly false as $2^2 > 2$, so the proof must be incorrect.\\
 The base case and the induction hypothesis do not have any errors. The flaw lies in the inductive step.
 In fact, working backwards, the proof \textit{implicitly} assumes that $(k+1)^2 \leq k+1$.
 But this is what we are trying to prove, we cannot assume it!
 \fi
 
 
+\qpart
 \item[(b)]\textbf{Claim:} $\forall n \in \N$ , $7^n = 1$. \\
 \textbf{Proof:} \\
 \textit{Base case:} Certainly $7^0 = 1$. \\
@@ -207,7 +217,8 @@ But this is what we are trying to prove, we cannot assume it!
 Hence, by the Principle of Strong Induction, $7^n = 1$ for all $n \in \N$.
 
 \ifsolutions
-\textbf{Solutions:} The claim is clearly false as $7 \ne 1$, so there must be an error in the proof.
+\sketch
+The claim is clearly false as $7 \ne 1$, so there must be an error in the proof.
 The (strong) induction hypothesis is stated correctly, however, not all required base cases are checked.
 The inductive step uses both $P(k)$ and $P(k-1)$ to prove $P(k+1)$, which breaks down for $k=0$.
 When $k=0$, $k-1 = -1$ and $P(k-1)=P(-1)$ is not defined!
@@ -224,7 +235,7 @@ When $k=0$, $k-1 = -1$ and $P(k-1)=P(-1)$ is not defined!
 %\textbf{Solutions:} This proof is correct.
 %\fi
 
-
+\qpart
 \item[(c)]\textbf{Claim:} $\forall x,y,n \in \N$, if $\max(x,y) = n$, then $x \leq y$. \\
 \textbf{Proof:} \\
 \textit{Base case:} For $n=0$, if $\max(x,y) = 0$ and $x,y \in \N$, then $x=0, y=0$, hence $x \leq y$. \\
@@ -234,7 +245,8 @@ Suppose $x,y$ are such that $\max(x,y) = n+1$, then it follows that $\max(x-1,y-
 So by the inductive hypothesis, $x-1 \leq y-1  \implies x \leq y$, completing the proof.
 
 \ifsolutions
-\textbf{Solutions:} This proof is incorrect. The use of $\max(x-1, y-1)$ is not correct, 
+\sketch
+This proof is incorrect. The use of $\max(x-1, y-1)$ is not correct, 
 since $x-1$ and $y-1$ will be negative when $x=0$ or $y=0$.
 Then the inductive hypothesis no longer applies, since $x-1$ and $y-1$ 
 fall outside the range of natural numbers. We cannot conclude that $x-1 \leq y-1$ and the proof fails.
@@ -248,6 +260,7 @@ fall outside the range of natural numbers. We cannot conclude that $x-1 \leq y-1
 
 \qns{Marty's Marriage Mistake}
 \begin{itemize}
+\qpart
 \item[(a)] My friend Marty and I run a match-making business. 
 We receive preference lists from men and women and use the same propose-and-reject algorithm you covered in class. 
 Marty, being a traditionalist, insists on having the men propose, 
@@ -256,13 +269,14 @@ Prove that if both Marty and I come up with the same pairings, there is no other
 (i.e. a pairing with no rogue pairs)
 
 \ifsolutions
-\textbf{Solutions:} We know that the propose-and-reject algorithm returns the optimal stable pairing 
+\sketch
+We know that the propose-and-reject algorithm returns the optimal stable pairing 
 for the people who propose, and the worst stable pairing possible for those who are proposed to. 
 Since Marty and I have the same pairings, the best and worst case must be the same, 
 and there can be no other stable pairings.
 \fi
 
-
+\qpart
 \item[(b)] While I'm on vacation, things get a little disorganized. 
 Marty loses track of some of the preference lists. 
 He is too embarrassed to ask the women for their preferences again. He knows the following preferences:
@@ -288,7 +302,7 @@ Show the steps of Marty running the propose-and-reject algorithm (with men propo
 Please indicate the final pairing clearly and note how many days it took to reach that pairing.
 
 \ifsolutions
-\textbf{Solutions:} 
+\sketch
 \begin{center}
     \begin{tabular}{| l | l | l |}
     \hline
@@ -322,7 +336,7 @@ Is it possible to have everyone paired with somebody different?
 Either provide an example, or prove that it's impossible. 
 
 \ifsolutions
-\textbf{Solutions:}
+\sketch
 We attempt to construct a set of preferences such that everyone is paired with somebody different.
 From the previous step, we know that A must prefer 1 over 3 and C must prefer 2 over 3. 
 Otherwise, the pairing that Marty gave would not be stable. 
@@ -398,7 +412,7 @@ We have now proven that the only other possible stable pairing is \{(A,3), (B,1)
 %No matter how the rest of the preferences are filled out, these will result in invalid solutions to part (c). 
 %Explain why.
 
-\ifsolutions
+%\ifsolutions
 %\textbf{Solutions:} The first friend's work is wrong as explained in part (c). 
 %If A ranks 1 first, than A and 1 must be together in all stable pairings. 
 %This will result in exactly the same pairing as Marty found. This is an invalid solution for part (c). 
@@ -406,7 +420,7 @@ We have now proven that the only other possible stable pairing is \{(A,3), (B,1)
 %therefore 2 would have to be first on C's preference list. 
 %This would also result in the exact same pairing found in part (a). 
 %Again, this solution would be invalid for part (c).
-\fi
+%\fi
 
 
 \end{itemize} 
@@ -418,6 +432,7 @@ We have now proven that the only other possible stable pairing is \{(A,3), (B,1)
 \qns{All is fair in love and adversaries}
 
 \begin{itemize}
+\qpart
 \item[(a)] It turns out that Marty has gotten his fair share of enemies over the years. 
 We receive a stable marriage pairing, but one of his rivals has maliciously eliminated some of the preferences:
 
@@ -441,7 +456,7 @@ Luckily, we correctly guess a stable pairing is \{(A,1), (B,2), (C,3)\}.
 List all the possibilities of filling in the missing preferences such that the pairing we guessed is stable.
 
 \ifsolutions
-\textbf{Solutions:}
+\sketch
 
 First of all, we look at the pairing (C,3) because 3 is C's least favorite. So we know that in order for there to be no rogue pairs with 3, the other men must prefer their current partners to C. Then we have 1 prefers A over C and 2 prefers B over C. We can now entirely fill out the preferences for Man 1, since C cannot be first:
 
@@ -629,7 +644,7 @@ C&2&1&3\\\hline
 
 \fi
  
-        
+\qpart        
 \item[(b)] I begin to suspect that one of Marty's adversaries may have done worse than eliminate preferences. 
 Some of the preferences (no matter eliminated or not) may be switched! Marty isn't too worried. 
 He says that if the adversary switches the order of only two of the preferences for one person, 
@@ -640,18 +655,20 @@ he will get a pairing that is stable.
 (You should note it by index. For example, "The adversary switches A's 1st and 3rd preference").
 
 \ifsolutions
-\textbf{Solutions:} There are three solutions. 
+\sketch 
+There are three solutions. 
 Either Man 2's 2nd and 3rd preference, Man 3's 2nd and 3rd preference can be switched, or Woman C's 1st and 2nd preferences can be switched. 
 If any of these three sets of swithes occur, the algorithm will still return no rogue couples. This questions is meant as an elaboration on the previous part in order to get you to think about how some parts of preference lists may not actually affect the outcome of the traditional propose-and-reject algorithm.
 \fi
 
-        
+
+\qpart 
 \item[(c)] I tell Marty that it's possible that even with just two preferences being switched, 
 we could get a lot of rogue pairs. For an arbitrary stable marriage instance with $n$ men and $n$ women, 
 how many (at most) rogue pairs could be generated by an adversary switching the order of two preferences for one person?
 
 \ifsolutions
-\textbf{Solutions:}
+\sketch
 There can be $n-1$ rogue pairs generated. We consider by looking at case separately. 
 Let's consider that our adversary switches the preference list of a man, M'. 
 We argue that all rogue couples must involve M'. 
@@ -683,14 +700,15 @@ the adversary can achieve the most damage by switching the first and last prefer
 Since this person is the most desired, they will end up with the person at the top of their list. Since the adversary has manipulated their list, this person is actually their least preference. Therefore they prefer all other possible partners, and because they are the most desirable, all other possible partners desire them. Therefore we have $n-1$ rogue couples.
 \fi
 
-
+\qpart
 \item[(d)] Marty counters by suggesting some preferences are very stable. 
 If an hyper-intelligent adversary looks at one person's preference list and switches it around to do the most damage possible, 
 what are the least number of rogue pairs that will be generated? 
 For a Stable Marriage problem with $n$ men and $n$ women, describe these adversary-resistant preferences.
 
 \ifsolutions
-\textbf{Solutions:} It's possible this can generate 0 rogue couples. 
+\sketch
+It's possible this can generate 0 rogue couples. 
 In order for this to happen, create a pair of men and women such that each pair ranks the other person number one on their preference list. 
 We argue that if a man and a woman rank each other as highest preference (they are "soul mates"), they must be paired together in all stable pairings. 
 Assume for contradiction that M and W who rank each other number 1 are paired with other people (M,W*) and (M*,W). 
@@ -729,11 +747,13 @@ Note that this problem is almost the same as the Stable Marriage Problem, with t
 (i) there are more students than slots; and
 (ii) each university generally has more than one slot.
 \begin{itemize}
+\qpart
 \item[(a)] Explain how to modify the propose-and-reject algorithm so that 
 it finds a stable assignment of students to slots.
 
 \ifsolutions
-\textbf{Solutions:} We will extend the propose-and-reject algorithm given in the lecture notes.
+\sketch
+We will extend the propose-and-reject algorithm given in the lecture notes.
 Students will play the role of men and universities will play the role of women.
 Instead of keeping a single person as in the original algorithm, 
 each university will keep a \textit{waitlist} of size equal to its quota.
@@ -754,12 +774,12 @@ At this point, each university admits everyone on its waitlist.
 \end{itemize}
 \fi
 
-
+\qpart
 \item[(b)] Carefully state a version of the Improvement Lemma (see Lecture Note 4) 
 that applies to your algorithm, and prove that it holds.
 
 \ifsolutions
-\textbf{Solutions:}
+\sketch
 \begin{itemize}
 \item[Improvement Lemma] Assume that universities maintain their waitlist in decreasing order of
 their preference for the students on the lists.
@@ -779,10 +799,12 @@ $u$ can populate the top $i$ spots with candidates at least as good as those on 
 proving the lemma.
 \fi
 
+\qpart
 \item[(c)] Use your Improvement Lemma to give a proof that your algorithm does indeed find a stable assignment.
 
 \ifsolutions
-\textbf{Solutions:} First, the algorithm terminates. 
+\sketch
+First, the algorithm terminates. 
 This follows by similar reasoning to the original propose-and-reject algorithm:
 in each round (except the last), at least one university is crossed off the list of some rejected students. \\
 Second, every slot is filled. Suppose some university $u$ has an unfilled slot at the end.
