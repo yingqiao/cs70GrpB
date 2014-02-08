@@ -1,0 +1,98 @@
+\documentclass[11pt]{article}
+\usepackage{../../cs70}
+\usepackage{color}
+\newif\ifsolutions
+\solutionstrue
+\solutionsfalse %flag for solutions
+
+\def\title{Discussion 4B}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+\item What are the last digits of the following numbers?
+\begin{enumerate}
+\item $11^{2014}$
+\item $9^{10001}$
+\item $3^{987654321}$
+\end{enumerate}
+
+\ifsolutions
+\textbf{Solutions:}
+\begin{enumerate}
+\item $11$ is always $1$ mod $10$ therefore the answer to (a) is 1.
+\item $9$ is its own inverse mod $10$, therefore, if $9$ is raised to an odd power, the number will be $9$ mod $10$. So the answer is $9$
+\item $3^4 = 9^2 = 1 $ mod $ 10$. We see that the exponent $987654321 = 1$ mod $4$ so the answer is $3$.
+\end{enumerate}
+\fi
+
+\item Calculate the greatest common divisor (gcd) of the following pairs of numbers using the Euclidean algorithm.
+
+[Hasty refresher: starting with a pair of input values, keep repeating the operation ``Replace the larger value with its remainder modulo the smaller value'' over and over, until one of the values becomes zero. At that point, the other value is the gcd of the original two inputs (as well as of every pair of values along the way).
+
+In pseudocode: gcd(x, y) = if y = 0 then return x else return gcd(y, x mod y)].
+
+\begin{enumerate}
+\item $208$ and $872$
+\item $1952$ and $872$
+\item $1952*n + 872$ and $1952$
+\end{enumerate}
+
+\ifsolutions
+\textbf{Solutions:} 8 for all of these. The first answer students should calculate by hand, the second answer will reduce to the first after one step, and the third answer will reduce to the second in one step.  \fi
+
+
+\item Solve the following system of equations: \[5x\equiv 8y\pmod{13}\]\[x\equiv 9y-11\pmod{13}\]
+
+\ifsolutions
+\textbf{Solutions:}
+We begin by substituting the second equation into the first to get\\
+$$5(9y - 11) \equiv 8y \pmod{13}$$
+Now, we can either distribute the $5$ or multiply both sides by its inverse. Since we need more practice with inverses than with the distributive property, we will do the latter. We see that $8$ is the inverse of $5$ ($8 \cdot 5 = 40 \equiv 1 \mod 13$). Multiplying,
+\begin{eqnarray*}
+8 \cdot 5(9y - 11) &\equiv& 8 (8y) \pmod{13}\\
+9y - 11 &\equiv& 12y \pmod{13}\\
+-11 &\equiv& 3y \pmod{13}\\
+y &\equiv& 2 \cdot 3^{-1} \pmod{13}\\
+y &\equiv& 2 \cdot 9 \pmod{13}\\
+y &\equiv& 5 \pmod{13}
+\end{eqnarray*}
+
+Substituting again, we get 
+\begin{eqnarray*}
+x &\equiv& 9 \cdot 5 - 11 \pmod{13}\\
+x &\equiv& 8\pmod{13}
+\end{eqnarray*}
+
+And so our solution is $x = 8, y = 5$. \fi
+\item Prove that $GCD(7n+4,5n+3)=1$ for all $n\in\mathbb{N}$.
+
+\ifsolutions 
+\textbf{Solutions:} Recall from lecture that $gcd(x, y) = gcd(y, x \text{ mod } y)$ (Euclid's algorithm). This means $gcd(7n+4,5n+3) = gcd(5n + 3, 7n + 4 \text{ mod } 5n + 3)$. We see that
+\begin{eqnarray*}
+7n + 4 &=&  (2n + 1) + (5n + 3)\\
+&\equiv& 2n + 1 \pmod {5n + 3}.
+\end{eqnarray*}
+Substituting, we have $gcd(5n + 3, 2n + 1) = gcd(2n + 1, 5n + 3 \text{ mod } 2n + 1)$. We see that
+\begin{eqnarray*}
+5n + 3 &=& (n + 1) + 2(2n + 1)\\
+&\equiv& n + 1 \pmod {2n + 1}.
+\end{eqnarray*}
+Substituting again, we now have 
+\begin{eqnarray*}
+gcd(2n + 1, n + 1) &=& gcd(n+ 1, 2n + 1 \text{ mod } n + 1) \\
+&=& gcd(n + 1, n) = gcd(n, n + 1 \text{ mod } n) = gcd(n, 1) = 1.
+\end{eqnarray*}
+
+Therefore, $GCD(7n+4,5n+3)=1$.
+\fi
+
+\item  What is $(42^{{42}^{42}})!$ mod $300$?
+\ifsolutions 
+\textbf{Solutions:} $0$. Because $(42^{{42}^{42}}) \gt 300$, then taking the factorial means $300$ is a multiple.
+\fi
+
+
+\end{enumerate}
+\end{document}
