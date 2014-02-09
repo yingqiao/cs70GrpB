@@ -407,32 +407,37 @@ results in a different set of preferences:
      1 & 1 & \textcircled{B} C \\ 
        & 2 & \ A \\ 
        & 3 &  \\ \hline
-     2 & 1 & \ B \\ 
-       & 2 &   \ A \textcircled{C} \\ 
+     2 & 1 & \ B \textcircled{A} \\ 
+       & 2 &   \ C \\ 
        & 3 &  \\ \hline
-     3 & 1 & \ B \\ 
+     3 & 1 & \ A \\ 
        & 2 & \ C\\ 
-       & 3 & \ A \\ \hline
+       & 3 & \ B \\ \hline
     \end{tabular}
 \end{center}
-This takes three days, and returns a potentially stable pairing of \{(A,3), (B,1), (C,2)\}.
+This takes three days, and returns a potentially stable pairing of \{(A,1), (B,3), (C,2)\}.
 
-This is a different pairing than Marty gave, yet C is still paired with 2. 
-We attempted to construct a pairing where everyone was paired with someone different and failed. 
-This makes us consider that maybe we can't create a completely different matching than Marty proposed. 
-We prove that in all stable pairings, C must be paired with 2.
- 
+We attempted to reach a different stable pairing, but this is the exact same stable pairing. We now try to consider if it is possible to construct a pairing where everyone is paired with someone different. We prove that in all stable pairings, C must be paired with 2.
+
 Assume for contradiction that in a stable pairing C is paired with 1. 
 Then (1,B) would be a rogue pair. Contradiction!
 Now assume for contradiction that C is paired with 3. 
-Then, either A is paired with 2 or A is paired with 1. 
-(i)If A is paired with 2, then (2,B) is a rogue couple; 
-(ii)If A is paired with 1, then 2 is paired with B. 
+Then, either A is paired with 2 or A is paired with 1. \begin{itemize}
+\item[i]If A is paired with 2, then (2,B) is a rogue couple; 
+\item[ii]If A is paired with 1, then 2 is paired with B.  \end{itemize}
 Then (2,C) is a rogue couple (remember that C prefers 2 over 3).
 
 We have now proven that the only other possible stable pairing is 
 \{(A,3), (B,1), (C,2)\}.
 Therefore it is impossible to have everyone paired with somebody different.
+
+Is the pairing {(A,3), (B,1), (C,2)} stable? We argue that (A,1) must be a rogue pair. If A prefers 1 over 3 then it is a rogue pair. However if A prefers 3 over 1, then the original pairing that Marty gave is not stable (A,3) would be a rogue pair.
+
+A note on this problem, it was ambiguously worded. The problem can be read to imply another stable pairing is possible, when in fact there is no other stable pairing.
+
+
+ 
+
 }
 \fi
 
