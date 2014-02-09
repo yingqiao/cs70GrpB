@@ -1,20 +1,22 @@
 \documentclass[11pt]{article}
 \usepackage{../../cs70}
 %\usepackage{../../markup}
-
+\usepackage{color}
+%\usepackage{amssymb, amsfonts, amsmath, textcomp}
 \newif\ifsolutions
 \solutionstrue
-\newcommand{\sketch}{\textbf{Solution sketch:}}
-
+%\solutionsfalse %flag for solutions
 \def\title{Homework 3}
+
+\renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solutions: }#1}}
+\definecolor{mydarkblue}{rgb}{0,0.25,1}
+
+
 \begin{document}
-\config{hwnum}{3}
-\config{homework-due}{02/10/2014 13:00}
-\config{grades-due}{02/17/2014 13:00}
 \maketitle
 
 \vspace{0.5em}
-{\Large{\textbf{This homework is due Feb 10 2014, at 12:00 noon.}}}
+{\Large{\textbf{This homework GRADE is due Feb 17 2014, at 12:00 noon.}}}
 
 
 \begin{qunlist}
@@ -48,25 +50,33 @@ You can represent this battle by repeatedly applying the following function:
 \textit{Mathematical aside: This problem is reminiscent of the Collatz Conjecture, which you may find interesting. Looking up the Colllatz Conjecture is not necessary for this homework.}
 
 \ifsolutions
-\sketch
-We want to prove that for any natural number $n$, repeatedly applying $f(n)$ will eventually yield 1. Call this property $P(n)$. We can prove $P(n), \forall n \in \mathbb{N}$ by strong induction.
+\answer{
+We want to prove that for any natural number $n$, repeatedly applying $f(n)$ will eventually yield $1$. 
+Call this property $P(n)$. We can prove $P(n), \forall n \in \mathbb{N}$ by strong induction.
 
-\underline{Base case:} If $n=1$, we have reached 1, so $P(1)$ holds.
+\underline{Base case:} If $n=1$, we have reached $1$, so $P(1)$ holds.
 
-\underline{Inductive hypothesis:} We will assume that for $1 \leq k \leq n$, $P(k)$ holds (strong inductive hypothesis).
+\underline{Inductive hypothesis:} We assume that for $1 \leq k \leq n$, 
+$P(k)$ holds (strong inductive hypotheses).
 
 \underline{Inductive step:} Now we want to show that $P(n+1)$ holds. There are three cases:
-
 \begin{itemize}
-\item $n+1$ divisible by 4: In this case $f(n+1) = (n+1)/4$. Since $(n+1)/4 < n+1$, by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
-\item $n+1$ even but not divisible by 4: In this case $f(n+1) = (n+3)/4$. Since $(n+3)/4 < n+1$, by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
-\item $n+1$ odd: In this case $f(n+1) = 3(n+1) - 1$, which will be even.  So then we can apply $f$ again to reduce to a problem we have already solved.  Then $f(f(n+1)) = (3n+2)/4$ or $f(f(n+1)) = (3n+4)/4$, both of which are less than $n+1$.  Therefore by our inductive hypothesis, $P(f(f(n+1)))$ holds, which implies $P(n+1)$.
+\item $n+1$ is divisible by 4: In this case $f(n+1) = (n+1)/4$. 
+Since $(n+1)/4 < n+1$, by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
+\item $n+1$ is even but not divisible by 4: In this case $f(n+1) = (n+3)/4$. 
+Since $(n+3)/4 < n+1$, by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
+\item $n+1$ is odd: In this case $f(n+1) = 3(n+1) - 1$, which will be even.  
+So then we can apply $f$ again to reduce it to a problem we have already solved.  
+Then $f(f(n+1)) = (3n+2)/4$ or $f(f(n+1)) = (3n+4)/4$, both of which are less than $n+1$.  
+Therefore by our inductive hypothesis, $P(f(f(n+1)))$ holds, which implies $P(n+1)$.
 \end{itemize}
+}
 \fi
 
+\pagebreak
 
 \qns{Make it stronger again} \\
-Define the following sequence: $a_1 =2$, $a_2 = 3$ and $a_k = a_{k-1} \cdot a_{k-2}$ for all $n \geq 3$. \\ 
+Define the following sequence: $a_1 =2$, $a_2 = 3$ and $a_k = a_{k-1} \cdot a_{k-2}$ for all $k \geq 3$. \\ 
 Does the sum 
 \[ A_n = \sum_{k=1}^n \frac{1}{a_k} \]
 
@@ -75,24 +85,40 @@ Prove why or why not.
 {\em Hint: plot $A_n$ and think about discussion 2B.}
 
 \ifsolutions
-\sketch
-It does converge. We can prove this by comparing this series with a series who's behavior is known: a geometric series. We will use the fact that
+\answer{
+It does converge. We can prove this by comparing this series with a series of which the behavior is known: 
+a geometric series. We will use the fact that
 \[ 1 + r + r^2 + r^3 + \cdots = \sum_{k=1}^{\infty} r^{k-1} = \frac{1}{1-r}, \quad \text{for } |r| < 1, \]
 
-which means that for $|r| < 1$, the sum of this series converges to a finite number. So if we can show that the sum of our series is less than the sum of a geometric series, then our series also converges. We will use the geometric series in the case when $r = \frac{1}{2}$. To prove that each term of our series is less than the corresponding term in the geometric series, we can use strong induction to show:
-\[ \frac{1}{a_k} < \frac{1}{2^{k-1}}, \quad \text{for } k = \{1,2,3,\cdots\} \] 
+which means that for $|r| < 1$, the sum of this series converges to a finite number. 
+So if we can show that the sum of our series is less than the sum of a geometric series, 
+then our series also converges. We will use the geometric series in the case when $r = 1/2$.
+To prove that each term of our series is less than the corresponding term in the geometric series, 
+we can use strong induction to show:
+\[ \frac{1}{a_k} < \frac{1}{2^{k-1}}, \quad \text{for all } k \geq 1 \]
 
-\underline{Base cases:} For $k=1$, $\frac{1}{a_1} = \frac{1}{2} < 1$, and for $k=2$, $\frac{1}{a_2} = \frac{1}{3} < \frac{1}{2}$.
+\underline{Base cases:} For $k=1$ and $k=2$, 
+\[ 
+\frac{1}{a_1} = \frac{1}{2} < 1, \qquad 
+\frac{1}{a_2} = \frac{1}{3} < \frac{1}{2} 
+\]
 
-\underline{Inductive hypothesis:} We will assume that for all $j$ where $1 \leq j \leq k$, $\frac{1}{a_j} < \frac{1}{2^{j-1}}$.
+\underline{Inductive hypothesis:} We assume that 
+\[ \frac{1}{a_j} < \frac{1}{2^{j-1}}, \quad \text{for all $j$, } 1 \leq j \leq k \]
 
 \underline{Inductive step:} To get to $k+1$, we can use the recursive definition of our series:
-\[ \frac{1}{a_{k+1}} = \frac{1}{a_k \cdot a_{k-1}} < \frac{1}{2^{k-1} \cdot 2^{k-2}} = \frac{1}{2^{2k-3}} \leq \frac{1}{2^k}, \quad \text{for } k+1 > 2 \]
+\[ 
+\frac{1}{a_{k+1}} = \frac{1}{a_k \cdot a_{k-1}} 
+< \frac{1}{2^{k-1} \cdot 2^{k-2}} = \frac{1}{2^{2k-3}} 
+\leq \frac{1}{2^k}, \quad \text{for } k > 2 
+\]
 
-Since we have proved that each term of our series is smaller than the corresponding term of this geometric series, then the sum our series must be smaller as well:
+Since we have proved that each term of our series is smaller than 
+the corresponding term of this geometric series, then the sum of our series must be smaller as well:
 \[ \sum_{k=1}^{\infty} \frac{1}{a_k} < \sum_{k=1}^{\infty} \frac{1}{2^{k-1}} = 2 \]
 
-Therefore since sum of the geometric series converges, the sum of our series converges as well.
+Therefore, since sum of the geometric series converges, the sum of our series converges as well.
+}
 \fi
 
 
@@ -113,6 +139,7 @@ Therefore since sum of the geometric series converges, the sum of our series con
 %\fi
 
 
+\pagebreak
 
 \qns{A tiling problem} \\
 You are given three kinds of tiles, \textbf{A,B,C} of dimensions $1 \times 2$, $2 \times 1$
@@ -128,47 +155,57 @@ Your goal is to tile a board of dimension $2 \times n$, and you are interested i
 tiling configurations possible using the three types of tiles given. \\
 Let $T_n$ denote the number of tiling configurations for a board of dimension $2 \times n$.
 \begin{itemize}
-\qpart
 \item[(a)] As preparation for the inductive steps, derive the relations between $T_n$, $T_{n-1}$ 
 and $T_{n-2}$ for all $n \geq 3$. \textit{Hint: compute $T_n$ by direct enumeration for small $n$'s.}
 
 \ifsolutions
-\sketch 
-$T_n = T_{n-1} + 2T_{n-2}$ for all $n \geq 3$\\
+\answer{
+\[ T_n = T_{n-1} + 2T_{n-2}, \quad \text{for all } n \geq 3 \]
 We enumerate the tilings for a $2 \times n$ board by considering three cases depending on
-the tile covering the bottom square of the first column. 
+the type of tile covering the bottom square of the first column. 
 \begin{itemize}
-\item[(i)] The tile is \textbf{A}: then the first two columns of the board must be tiled with \textbf{AA}.
+\item[(i)] The tile is of type \textbf{A}: 
+then the first two columns of the board must be tiled with \textbf{AA}.
 The remaining $2 \times (n-2)$ board can be tiled in $T_{n-2}$ ways.
-\item[(ii)] The tile is \textbf{B}: the first column is tiled with \textbf{A}, and
+\item[(ii)] The tile is of type \textbf{B}: the first column is tiled with \textbf{B}, and
 the remaining $2 \times (n-1)$ board can be tiled in $T_{n-1}$ ways.
-\item[(iii)] The tile is \textbf{C}: the first two columns of the board are tiled with \textbf{C}, and
-the remaining $2 \times (n-2)$ board can be tiled in $T_{n-2}$ ways.
+\item[(iii)] The tile is of type \textbf{C}: the first two columns of the board are tiled with \textbf{C}, 
+and the remaining $2 \times (n-2)$ board can be tiled in $T_{n-2}$ ways.
 \end{itemize}
 Note that the three cases are exhaustive and mutually exclusive. The number of tilings for a $2 \times n$
 board therefore satisfies the recurrence relation as proposed.
+}
 \fi
 
-\qpart
+
+\newpage
+
 \item[(b)] Prove by induction that for all $n \geq 1$
-\[ T_n = \frac{2^{n+1}+(-1)^n}{3} \]. 
+\[ T_n = \frac{2^{n+1}+(-1)^n}{3} \]
 
 \ifsolutions
-\sketch 
+\answer{
 (Strong Induction) $P(n)$ asserts that $T_n = \frac{2^{n+1}+(-1)^n}{3}$. 
-We prove the statement by (strong) induction on $n$, showing that $P(n-2) \wedge P(n-1) \implies P(n)$. \\
-\underline{Base cases:} $T_1 = 1$ as there is exactly one way to tile a $2 \times 1$ board, using tile \textbf{B}.
-A $2 \times 2$ board can be tiled in exactly three different ways using the tiles \textbf{AA, BB} and \textbf{C},
-so $T_2 = 3$. The base cases are true as $P(1)=T_1=1=(2^2-1)/3$ and $P(2)=T_2=3=(2^3+1)/3$.\\
-\underline{Induction Hypothesis:} Assume $P(n-1)$ and $P(n-2)$ are true. \\
+We prove the statement by (strong) induction on $n$, showing that $P(n-2) \wedge P(n-1) \implies P(n)$.
+
+\underline{Base cases:} $T_1 = 1$ as there is exactly one way to tile a $2 \times 1$ board, 
+using tile \textbf{B}.
+The $2 \times 2$ board can be tiled in exactly three different ways 
+using the tiles \textbf{AA, BB} and \textbf{C},
+so $T_2 = 3$. The base cases are true as 
+\[P(1)=T_1=1=\frac{2^2+(-1)}{3} \quad\quad\quad P(2)=T_2=3=\frac{2^3+1}{3}\]
+
+\underline{Induction Hypothesis:} Assume $P(n-1)$ and $P(n-2)$ are true for all $n > 2$.
+
 \underline{Inductive step:} Using the recurrence relation derived in part (a), we have,
 \begin{align*} 
 T_n &= T_{n-1} + 2T_{n-2} \\
 &= \frac{2^n + (-1)^{n-1}}{3}+2\cdot\frac{2^{n-1}+(-1)^{n-2}}{3}  &\text{[by induction hypothesis]} \\
-&= \frac{2^{n+1}+(-1)^{n-2}(2-1)}{3} \\
+&= \frac{2\cdot 2^n+(-1)^{n-2}(-1+2)}{3} \\
 &= \frac{2^{n+1}+(-1)^n}{3}  &\text{[as } (-1)^{n-2} = (-1)^n \text{]} \\
 \end{align*}
 The claim is therefore true by (strong) induction for all natural numbers $n \geq 1$.
+}
 \fi
 
 
@@ -176,7 +213,7 @@ The claim is therefore true by (strong) induction for all natural numbers $n \ge
 
 
 
-
+\pagebreak
 
 \qns{Let's grade proofs!} \\
 For each of the induction ``proofs'' below, say whether you think the proof is correct or not.
@@ -186,7 +223,6 @@ If you think the proof is correct, you do not need to give any explanation. \\
 \textit{Recall that simply saying the inductive hypothesis is false is not a valid explanation.}
 
 \begin{itemize}
-\qpart
 \item[(a)] \textbf{Claim:} $\forall n \in \N$ , $n^2 \leq n$. \\
 \textbf{Proof:} \\
 \textit{Base case:} for $n = 1$, the claim is $1^2 \leq 1$, which is true. \\
@@ -199,15 +235,15 @@ So we get back to our original hypothesis which is assumed to be true.\\
 Hence, for every $n \in \N$, we know that $n^2 \leq n$. 
 
 \ifsolutions
-\sketch 
+\answer{
 The claim is clearly false as $2^2 > 2$, so the proof must be incorrect.\\
 The base case and the induction hypothesis do not have any errors. The flaw lies in the inductive step.
 In fact, working backwards, the proof \textit{implicitly} assumes that $(k+1)^2 \leq k+1$.
 But this is what we are trying to prove, we cannot assume it!
+}
 \fi
 
 
-\qpart
 \item[(b)]\textbf{Claim:} $\forall n \in \N$ , $7^n = 1$. \\
 \textbf{Proof:} \\
 \textit{Base case:} Certainly $7^0 = 1$. \\
@@ -217,11 +253,12 @@ But this is what we are trying to prove, we cannot assume it!
 Hence, by the Principle of Strong Induction, $7^n = 1$ for all $n \in \N$.
 
 \ifsolutions
-\sketch
+\answer{
 The claim is clearly false as $7 \ne 1$, so there must be an error in the proof.
 The (strong) induction hypothesis is stated correctly, however, not all required base cases are checked.
 The inductive step uses both $P(k)$ and $P(k-1)$ to prove $P(k+1)$, which breaks down for $k=0$.
 When $k=0$, $k-1 = -1$ and $P(k-1)=P(-1)$ is not defined!
+}
 \fi
 
 % backup
@@ -235,7 +272,7 @@ When $k=0$, $k-1 = -1$ and $P(k-1)=P(-1)$ is not defined!
 %\textbf{Solutions:} This proof is correct.
 %\fi
 
-\qpart
+
 \item[(c)]\textbf{Claim:} $\forall x,y,n \in \N$, if $\max(x,y) = n$, then $x \leq y$. \\
 \textbf{Proof:} \\
 \textit{Base case:} For $n=0$, if $\max(x,y) = 0$ and $x,y \in \N$, then $x=0, y=0$, hence $x \leq y$. \\
@@ -245,11 +282,12 @@ Suppose $x,y$ are such that $\max(x,y) = n+1$, then it follows that $\max(x-1,y-
 So by the inductive hypothesis, $x-1 \leq y-1  \implies x \leq y$, completing the proof.
 
 \ifsolutions
-\sketch
+\answer{
 This proof is incorrect. The use of $\max(x-1, y-1)$ is not correct, 
 since $x-1$ and $y-1$ will be negative when $x=0$ or $y=0$.
 Then the inductive hypothesis no longer applies, since $x-1$ and $y-1$ 
 fall outside the range of natural numbers. We cannot conclude that $x-1 \leq y-1$ and the proof fails.
+}
 \fi
 
 
@@ -260,23 +298,24 @@ fall outside the range of natural numbers. We cannot conclude that $x-1 \leq y-1
 
 \qns{Marty's Marriage Mistake}
 \begin{itemize}
-\qpart
 \item[(a)] My friend Marty and I run a match-making business. 
-We receive preference lists from men and women and use the same propose-and-reject algorithm you covered in class. 
+We receive preference lists from men and women 
+and use the same propose-and-reject algorithm you covered in class. 
 Marty, being a traditionalist, insists on having the men propose, 
 while I, in a subtle attempt to subvert the patriarchy, have the women propose. 
 Prove that if both Marty and I come up with the same pairings, there is no other possible stable pairing 
-(i.e. a pairing with no rogue pairs)
+(i.e. a pairing with no rogue pairs).
 
 \ifsolutions
-\sketch
+\answer{
 We know that the propose-and-reject algorithm returns the optimal stable pairing 
 for the people who propose, and the worst stable pairing possible for those who are proposed to. 
 Since Marty and I have the same pairings, the best and worst case must be the same, 
 and there can be no other stable pairings.
+}
 \fi
 
-\qpart
+
 \item[(b)] While I'm on vacation, things get a little disorganized. 
 Marty loses track of some of the preference lists. 
 He is too embarrassed to ask the women for their preferences again. He knows the following preferences:
@@ -302,7 +341,7 @@ Show the steps of Marty running the propose-and-reject algorithm (with men propo
 Please indicate the final pairing clearly and note how many days it took to reach that pairing.
 
 \ifsolutions
-\sketch
+\answer{
 \begin{center}
     \begin{tabular}{| l | l | l |}
     \hline
@@ -319,10 +358,10 @@ Please indicate the final pairing clearly and note how many days it took to reac
     \end{tabular}
 \end{center}
 This takes three days, and returns a potentially stable pairing of \{(A,1), (B,3), (C,2)\}.
-
+}
 \fi
 
-
+\newpage
 \item[(c)] When I come back from my vacation, Marty explains the previous situation. 
 He smugly informs me that none of the couples have switched after he proposed a matching, 
 and therefore there are no rogue pairs. 
@@ -336,19 +375,20 @@ Is it possible to have everyone paired with somebody different?
 Either provide an example, or prove that it's impossible. 
 
 \ifsolutions
-\sketch
-We attempt to construct a set of preferences such that everyone is paired with somebody different.
-From the previous step, we know that A must prefer 1 over 3 and C must prefer 2 over 3. 
+\answer{
+We attempt to construct a set of preferences such that everyone 
+is paired with somebody different from the stable pairing results in part (b).
+From part (b) results, we know that A must prefer 1 over 3 and C must prefer 2 over 3. 
 Otherwise, the pairing that Marty gave would not be stable. 
 If A prefers 1 the most, than any pairing in which A is not with 1 would not be stable. 
 Since we are trying to create a pairing where everyone is matched with someone different, 
-and since A prefers 1 over 3, A must rank 1 second. 
+and since A prefers 1 over 3, A must rank 1 second in her preference list. 
 We now use the same logic for C. 
 If C prefers 2 the most, than any pairing in which C is not with 2 would not be stable. 
-Therefore C cannot rank 2 the most. Since C prefers 2 over 3, C must rank 2 second.
+Therefore C cannot rank 2 the most. 
+Since C prefers 2 over 3, C must rank 2 second in her preference list.
 
 We can fill out the chart by now.
-
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
 Woman&\multicolumn{3}{|c|}{Men}\\\hline 
@@ -360,7 +400,6 @@ C&1&2&3\\\hline
 
 We double check that the propose-and-reject algorithm (with the women proposing) 
 results in a different set of preferences:
-
 \begin{center}
     \begin{tabular}{| l | l | l |}
     \hline
@@ -376,15 +415,25 @@ results in a different set of preferences:
        & 3 & \ A \\ \hline
     \end{tabular}
 \end{center}
-This takes three days, and returns a potentially stable pairing of \{(A,3), (B,1), (C,2)\}
+This takes three days, and returns a potentially stable pairing of \{(A,3), (B,1), (C,2)\}.
 
-This is a different pairing than Marty gave, yet C is still paired with 2. We attempted to construct a pairing where everyone was paired with someone different and failed. This makes us consider that maybe we can't create a completely different matching than Marty proposed. We prove that in all stable pairings, C must be paired with 2. 
+This is a different pairing than Marty gave, yet C is still paired with 2. 
+We attempted to construct a pairing where everyone was paired with someone different and failed. 
+This makes us consider that maybe we can't create a completely different matching than Marty proposed. 
+We prove that in all stable pairings, C must be paired with 2.
+ 
 Assume for contradiction that in a stable pairing C is paired with 1. 
-Then (1,B) would be a rogue pair. Contradiction. 
-Now assume for contradiction that C is paired with 3. Then, either A is paired with 2 or A is paired with 1. 
-If A is paired with 2, then (2,B) is a rogue couple. If A is paired with 1, then 2 is paired with B. 
-The, (2,C) is a rogue couple (remember that C prefers 2 over 3).
-We have now proven that the only other possible stable pairing is \{(A,3), (B,1), (C,2)\} Therefore it is impossible to have everyone paired with somebody different.
+Then (1,B) would be a rogue pair. Contradiction!
+Now assume for contradiction that C is paired with 3. 
+Then, either A is paired with 2 or A is paired with 1. 
+(i)If A is paired with 2, then (2,B) is a rogue couple; 
+(ii)If A is paired with 1, then 2 is paired with B. 
+Then (2,C) is a rogue couple (remember that C prefers 2 over 3).
+
+We have now proven that the only other possible stable pairing is 
+\{(A,3), (B,1), (C,2)\}.
+Therefore it is impossible to have everyone paired with somebody different.
+}
 \fi
 
 
@@ -428,11 +477,12 @@ We have now proven that the only other possible stable pairing is \{(A,3), (B,1)
 
 
 
+\newpage
+
         
 \qns{All is fair in love and adversaries}
 
 \begin{itemize}
-\qpart
 \item[(a)] It turns out that Marty has gotten his fair share of enemies over the years. 
 We receive a stable marriage pairing, but one of his rivals has maliciously eliminated some of the preferences:
 
@@ -456,9 +506,12 @@ Luckily, we correctly guess a stable pairing is \{(A,1), (B,2), (C,3)\}.
 List all the possibilities of filling in the missing preferences such that the pairing we guessed is stable.
 
 \ifsolutions
-\sketch
-
-First of all, we look at the pairing (C,3) because 3 is C's least favorite. So we know that in order for there to be no rogue pairs with 3, the other men must prefer their current partners to C. Then we have 1 prefers A over C and 2 prefers B over C. We can now entirely fill out the preferences for Man 1, since C cannot be first:
+\answer{
+First of all, we look at the pairing (C,3) because 3 is C's least favorite. 
+So we know that in order for there to be no rogue pairs with 3, 
+the other men must prefer their current partners to C. 
+Then we have 1 prefers A over C and 2 prefers B over C. 
+We can now entirely fill out the preferences for Man 1, since C cannot be first:
 
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
@@ -469,7 +522,8 @@ Man&\multicolumn{3}{|c|}{Women}\\\hline
 \end{tabular} 
 \end{center}
 
-Now, since we know that 1 prefers B the most, in order for (1,B) not to be a rogue pair, B must prefer 2 over 1:
+Now, since we know that 1 prefers B the most, in order for (1,B) not to be a rogue pair, 
+B must prefer 2 over 1:
 
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
@@ -480,7 +534,9 @@ C&X&X&3\\\hline
 \end{tabular}
 \end{center}
 
-2 must prefer C less than B, otherwise (2,C) would be a rogue pair. In addition, 2 must prefer A less than B, otherwise (2,A) would be a rogue pair. Therefore 2 must prefer B the most.
+Also, 2 must prefer C less than B, otherwise (2,C) would be a rogue pair. 
+In addition, 2 must prefer A less than B, otherwise (2,A) would be a rogue pair. 
+Therefore 2 must prefer B the most.
 
 \begin{center}
 \begin{tabular}{|c|ccc|}\hline 
@@ -491,7 +547,12 @@ Man&\multicolumn{3}{|c|}{Women}\\\hline
 \end{tabular} 
 \end{center}
 
-At this point, we don't have anymore clues to work with. With these preference lists, no rogue pairs are generated from the initial pairing that was guessed. To double check this, you can run the traditional propose-and-reject algorithm with the above preferences and we end up with the original pairing. So, there are 8 ways to fill out all the possibilities of this:
+At this point, we don't have anymore clues to work with. 
+With these preference lists, 
+no rogue pairs are generated from the initial pairing that was guessed. 
+To double check this, you can run the traditional propose-and-reject algorithm 
+with the above preferences and we end up with the original pairing. 
+So, there are 8 ways to fill out all the possibilities of this:
 
 
 \begin{center}
@@ -640,11 +701,11 @@ B&2&1&3\\\hline
 C&2&1&3\\\hline
 \end{tabular}
 \end{center}
-
-
+}
 \fi
- 
-\qpart        
+
+\newpage
+        
 \item[(b)] I begin to suspect that one of Marty's adversaries may have done worse than eliminate preferences. 
 Some of the preferences (no matter eliminated or not) may be switched! Marty isn't too worried. 
 He says that if the adversary switches the order of only two of the preferences for one person, 
@@ -655,68 +716,94 @@ he will get a pairing that is stable.
 (You should note it by index. For example, "The adversary switches A's 1st and 3rd preference").
 
 \ifsolutions
-\sketch 
+\answer{
 There are three solutions. 
-Either Man 2's 2nd and 3rd preference, Man 3's 2nd and 3rd preference can be switched, or Woman C's 1st and 2nd preferences can be switched. 
-If any of these three sets of swithes occur, the algorithm will still return no rogue couples. This questions is meant as an elaboration on the previous part in order to get you to think about how some parts of preference lists may not actually affect the outcome of the traditional propose-and-reject algorithm.
+Either Man 2's 2nd and 3rd preference, Man 3's 2nd and 3rd preference can be switched, 
+or Woman C's 1st and 2nd preferences can be switched. 
+If any of these three sets of swithes occur, the algorithm will still return no rogue couples. 
+This questions is meant as an elaboration on the previous part in order to 
+get you to think about how some parts of preference lists 
+may not actually affect the outcome of the traditional propose-and-reject algorithm.
+}
 \fi
 
-
-\qpart 
+        
 \item[(c)] I tell Marty that it's possible that even with just two preferences being switched, 
 we could get a lot of rogue pairs. For an arbitrary stable marriage instance with $n$ men and $n$ women, 
-how many (at most) rogue pairs could be generated by an adversary switching the order of two preferences for one person?
+how many (at most) rogue pairs could be generated 
+by an adversary switching the order of two preferences for one person?
 
 \ifsolutions
-\sketch
-There can be $n-1$ rogue pairs generated. We consider by looking at case separately. 
+\answer{
+There can be $n-1$ rogue pairs generated. 
+
+We consider by looking at case separately. 
 Let's consider that our adversary switches the preference list of a man, M'. 
-We argue that all rogue couples must involve M'. 
-We consider the man, M, whose preference list is not switched by the adversary. 
-M is matched with some W at the end of the algorithm. 
-Suppose towards contradiction that M prefers some W* to his current partner. 
-We will argue that W* prefers her partner to M, so that (M,W*) cannot be a rogue couple. 
-Since W* occurs before W in M's list, and since his preference list is not switched, 
-he must have proposed to her before he proposed to W. 
-Therefore, according to the algorithm, W* must have rejected him for somebody she prefers. 
-By the Improvement Lemma, W* likes her final partner at least as much, and therefore prefers him to M. 
+We argue that all rogue couples must involve M'.
+We consider the man, M, whose preference list is NOT switched by the adversary. 
+M is matched with some W at the end of the algorithm, (M,W). 
+Suppose towards contradiction that M prefers some W* to his current partner W. 
+We will argue that W* prefers her final M* partner to M, so that (M,W*) cannot be a rogue couple. 
+[Since W* occurs before W in M's list, and since his preference list is not switched, 
+he must have proposed to W* before he proposed to W. 
+Therefore, according to the algorithm, W* must have rejected M for somebody she prefers. 
+By the Improvement Lemma, W* likes her final partner M* at least as much, and therefore prefers him to M.] 
 Thus no man M whose preference list has not been switched can be involved in a rogue couple. 
 Since M' is currently matched with one woman, there are at most $n-1$ possible rogue pairs with M'. 
 At the end of this proof, we will demonstrate how to construct such a situation. 
+
 Next, we consider that the adversary switches the preference list of a woman, W'. 
 We similarly argue that all rogue couples must involve W'. 
-We consider the woman, W, whose preference list is not switched by the adversary. 
-W is matched with some M at the end of the algorithm. 
-Suppose towards contradiction we have a rogue couple such that W prefers some M* to her current partner and M* prefers W over his current partner.  
-If M* prefers W over his current partner, then he must have proposed to W before he proposed to his current partner. 
-Since W's preferences have not been switched, then the Improvement Lemma holds. 
-Therefore, W must prefer her current partner at least as much as M*. 
-This contradicts the assumption of there existing a rogue couple with W (M*, W). 
-Therefore, only W' can be involved in rogue couples. Again, this indicates a maximum of $n-1$ possible rogue couples.
+%We consider the woman, W, whose preference list is not switched by the adversary. 
+%W is matched with some M at the end of the algorithm, (M,W). 
+%Suppose towards contradiction we have a rogue couple such that W prefers some M* 
+%to her current partner and M* prefers W over his current partner.  
+%If M* prefers W over his current partner, 
+%then he must have proposed to W before he proposed to his current partner. 
+%Since W's preferences have not been switched, then the Improvement Lemma holds. 
+%Therefore, W must prefer her current partner at least as much as M*. 
+%This contradicts the assumption of there existing a rogue couple with W (M*, W). 
+Therefore, only W' can be involved in rogue couples. 
+Again, this indicates a maximum of $n-1$ possible rogue couples.
 
 We now demonstrate one way to achieve this maximum of $n-1$ possible rogue couples. 
 If every man ranks the women identically and every women ranks the men identically, 
-the adversary can achieve the most damage by switching the first and last preference of the most-desired man or the most desired-woman. 
-Since this person is the most desired, they will end up with the person at the top of their list. Since the adversary has manipulated their list, this person is actually their least preference. Therefore they prefer all other possible partners, and because they are the most desirable, all other possible partners desire them. Therefore we have $n-1$ rogue couples.
+the adversary can achieve the most damage 
+by switching the first and last preference of the most-desired man or the most-desired woman. 
+Since this person is the most desired, he/she will end up with the person on the top of his/her list. 
+Since the adversary has manipulated his/her list, this person is now actually with his/her least preference. 
+Therefore he/she prefers all other possible partners, 
+and because he/she is the most desirable, all other possible partners desire him/her. 
+Therefore we have $n-1$ rogue couples.
+}
 \fi
 
-\qpart
+
+\newpage
+
 \item[(d)] Marty counters by suggesting some preferences are very stable. 
-If an hyper-intelligent adversary looks at one person's preference list and switches it around to do the most damage possible, 
+If an hyper-intelligent adversary looks at one person's preference list 
+and switches it around to do the most damage possible, 
 what are the least number of rogue pairs that will be generated? 
 For a Stable Marriage problem with $n$ men and $n$ women, describe these adversary-resistant preferences.
 
 \ifsolutions
-\sketch
-It's possible this can generate 0 rogue couples. 
-In order for this to happen, create a pair of men and women such that each pair ranks the other person number one on their preference list. 
-We argue that if a man and a woman rank each other as highest preference (they are "soul mates"), they must be paired together in all stable pairings. 
-Assume for contradiction that M and W who rank each other number 1 are paired with other people (M,W*) and (M*,W). 
-If this is the case, (M,W) would be a rogue couple because they are both each other's top preference. 
+\answer{
+It's possible that this can generate 0 rogue couples. 
+
+In order for this to happen, create a list of men and women such that 
+each pair ranks the other person number one on their preference list. 
+We argue that if a man and a woman rank each other as highest preference 
+(they are "soul mates"), 
+they must be paired together in all stable pairings.
+[Assume for contradiction that M and W who rank each other number one 
+are paired with other people (M,W*) and (M*,W). 
+If this is the case, (M,W) would be a rogue couple because they are both each other's top preference.] 
 When the adversary disrupts the preference list of one person, 
-we just proved that the other $n-1$ men and $n-1$ women must be paired with their number 1 partner. 
+we just proved that the other $n-1$ men and $n-1$ women must be paired with their ``soul mates''. 
 There is only one way to pair the remaining man and woman (one of whose list is corrupted) together. 
 Therefore there are no rogue couples!
+}
 \fi
 
 
@@ -724,6 +811,7 @@ Therefore there are no rogue couples!
 
 
 
+\newpage
 
 \qns{College Admissions}\\
 In the College Admissions Problem, we are given $n$ students and $m$ universities. 
@@ -747,12 +835,11 @@ Note that this problem is almost the same as the Stable Marriage Problem, with t
 (i) there are more students than slots; and
 (ii) each university generally has more than one slot.
 \begin{itemize}
-\qpart
 \item[(a)] Explain how to modify the propose-and-reject algorithm so that 
 it finds a stable assignment of students to slots.
 
 \ifsolutions
-\sketch
+\answer{
 We will extend the propose-and-reject algorithm given in the lecture notes.
 Students will play the role of men and universities will play the role of women.
 Instead of keeping a single person as in the original algorithm, 
@@ -772,47 +859,56 @@ it puts the selected students on its new waitlist, and rejects the rest of its a
 or has been rejected by every university.
 At this point, each university admits everyone on its waitlist. 
 \end{itemize}
+}
 \fi
 
-\qpart
+
 \item[(b)] Carefully state a version of the Improvement Lemma (see Lecture Note 4) 
 that applies to your algorithm, and prove that it holds.
 
 \ifsolutions
-\sketch
+\answer{
 \begin{itemize}
 \item[Improvement Lemma] Assume that universities maintain their waitlist in decreasing order of
 their preference for the students on the lists.
 For any university $u$, let $q_u$ be its quota and let $s_i^k \in \{Students\}\cup\{\oplus\}$
 be the student in the $i$'th position on the waitlist after the $k$'th round of the algorithm.
 (If there are fewer than $q_u$ students on the list, we fill the bottom of the list with $\oplus$'s.)
-Then for all $i$ and $k$, $s_i^k \geq s_i^{k-1}$. 
+Then for all $i$ and $k$, preference $s_i^k \geq s_i^{k-1}$. 
 (Here we assume that the university prefers any student to $\oplus$.)
 \end{itemize}
-In short, the lemma says that no position in the list ever gets worse for the university as the algorithm proceeds.
-To prove the lemma, consider some university $u$, index $i \leq q_u$ and a day $k \geq 2$.\\
+In short, the lemma says that no position in the list ever gets worse for the university 
+as the algorithm proceeds.
+To prove the lemma, consider some university $u$, index $i \leq q_u$ and a day $k \geq 2$.
+
 Consider $u$'s waitlist on day $k-1$, from the algorithm, 
 since no student who is in one of the top $i \leq q_u$ spots in the waitlist are rejected on day $k-1$,
 they are all still on the waitlist on day $k$; 
 and thus on day $k$, 
 $u$ can populate the top $i$ spots with candidates at least as good as those on day $k-1$,
 proving the lemma.
+}
 \fi
 
-\qpart
 \item[(c)] Use your Improvement Lemma to give a proof that your algorithm does indeed find a stable assignment.
 
 \ifsolutions
-\sketch
+\answer{
 First, the algorithm terminates. 
 This follows by similar reasoning to the original propose-and-reject algorithm:
-in each round (except the last), at least one university is crossed off the list of some rejected students. \\
-Second, every slot is filled. Suppose some university $u$ has an unfilled slot at the end.
+in each round (except the last), 
+at least one university is crossed off the list of some rejected students.
+
+Second, every slot is filled. 
+Suppose some university $u$ has an unfilled slot at the end.
 Then the total number of students who applied to $u$ must have been fewer than its quota $q_u$ 
-(since the Improvement Lemma in part(b) ensures that a waitlist slot, once filled, will never later be unfilled).
-But the only students who do \textit{not} apply to $u$ are those who find a slot in some other universities.
+(since the Improvement Lemma in part(b) ensures that 
+a waitlist slot, once filled, will never later be unfilled).
+But the only students who do \textit{not} apply to $u$ 
+are those who find a slot in some other universities.
 And since we are told that there are more students than slots, 
-the number of students applying to $u$ must be at least $q_u$. \\
+the number of students applying to $u$ must be at least $q_u$.
+
 Finally, the assignment is stable:
 \begin{itemize}
 \item Suppose there is a student-university pair $(u,s)$ such that 
@@ -824,12 +920,14 @@ By the Improvement Lemma, the same holds at all future times and hence at the en
 Thus $u$ does not prefer $s$ to any of its assigned students, as required.
 
 \item Suppose $s$ is a student left unassigned at the end. Consider any university $u$.
-Since $s$ must have applied to and have been rejected by all universities, this holds in particular for $u$.
-Reasoning as in the previous case, using the Improvement Lemma, we see that in the final allocation,
-$u$ prefers all its students to $s$. 
+Since $s$ must have applied to and have been rejected by all universities, 
+this holds in particular for $u$.
+Reasoning similar as in the previous case, using the Improvement Lemma, 
+we see that in the final allocation, $u$ prefers all its students to $s$. 
 Therefore $u$ does not prefer $s$ to any of its assigned students, as required.
 \end{itemize}
-This concludes the proof that our algorithm finds a stable assignment. 
+This concludes the proof that our algorithm finds a stable assignment when terminates. 
+}
 \fi
 
 \end{itemize}
@@ -842,6 +940,11 @@ Write your own problem related to this week's material and solve it.
 You may still work in groups to brainstorm problems, but each student should submit a unique problem. 
 What is the problem? How to formulate it? How to solve it? What is the solution?
 
+\ifsolutions
+\answer{
+See related piazza posts.
+}
+\fi
 
 \end{qunlist}
 
