@@ -62,12 +62,18 @@ $P(k)$ holds (strong inductive hypotheses).
 \underline{Inductive step:} Now we want to show that $P(n+1)$ holds. There are three cases:
 \begin{itemize}
 \item $n+1$ is divisible by 4: In this case $f(n+1) = (n+1)/4$. 
-Since $(n+1)/4 < n+1$, by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
+Since 
+\[ \frac{n+1}{4} = \frac{n}{4} + \frac{1}{4} < n+1, \quad \forall n \geq 1, \]
+we have reached a number strictly less than $n+1$. So by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
 \item $n+1$ is even but not divisible by 4: In this case $f(n+1) = (n+3)/4$. 
-Since $(n+3)/4 < n+1$, by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
+Since 
+\[ \frac{n+3}{4} = \frac{n}{4} + \frac{3}{4} < n+1, \quad \forall n \geq 1, \]
+we have reached a number strictly less than $n+1$. So by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
 \item $n+1$ is odd: In this case $f(n+1) = 3(n+1) - 1$, which will be even.  
 So then we can apply $f$ again to reduce it to a problem we have already solved.  
-Then $f(f(n+1)) = (3n+2)/4$ or $f(f(n+1)) = (3n+4)/4$, both of which are less than $n+1$.  
+Then $f(f(n+1)) = (3n+2)/4$ or $f(f(n+1)) = (3n+4)/4$. Since
+\[ \frac{3n+4}{4} = \frac{3}{4} n + 1 < n+1, \quad \forall n\geq 1, \]
+both of these options are strictly less than $n+1$. 
 Therefore by our inductive hypothesis, $P(f(f(n+1)))$ holds, which implies $P(n+1)$.
 \end{itemize}
 }
@@ -117,7 +123,7 @@ Since we have proved that each term of our series is smaller than
 the corresponding term of this geometric series, then the sum of our series must be smaller as well:
 \[ \sum_{k=1}^{\infty} \frac{1}{a_k} < \sum_{k=1}^{\infty} \frac{1}{2^{k-1}} = 2 \]
 
-Therefore, since sum of the geometric series converges, the sum of our series converges as well.
+Therefore, since sum of the geometric series converges, the sum of our series at least does not diverge. One possibility is that the sum oscillates, so it doesn't converge, but is still bounded. In our case though, all the $a_n$ terms are positive, so the sum is monotonically increasing. Therefore it must not oscillate, and thus converges to a finite number.
 }
 \fi
 
