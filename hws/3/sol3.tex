@@ -399,8 +399,8 @@ C&1&2&3\\\hline
 \end{tabular}
 \end{center}
 
-We double check that the propose-and-reject algorithm (with the women proposing) 
-results in a different set of preferences:
+We now check whether the propose-and-reject algorithm (with the women proposing) 
+results in a different set of pairings:
 \begin{center}
     \begin{tabular}{| l | l | l |}
     \hline
@@ -728,8 +728,8 @@ he will get a pairing that is stable.
 \ifsolutions
 \answer{
 There are three solutions. 
-Either Man 2's 2nd and 3rd preference, Man 3's 2nd and 3rd preference can be switched, 
-or Woman C's 1st and 2nd preferences can be switched. 
+We can either switch Man 2's 2nd and 3rd preferences, Man 3's 2nd and 3rd preferences, 
+or Woman C's 1st and 2nd preferences. 
 If any of these three sets of swithes occur, the algorithm will still return no rogue couples. 
 This questions is meant as an elaboration on the previous part in order to 
 get you to think about how some parts of preference lists 
@@ -747,8 +747,9 @@ by an adversary switching the order of two preferences for one person?
 \answer{
 There can be $n-1$ rogue pairs generated. 
 
-We consider by looking at cases separately. 
-Let's consider that our adversary switches the preference list of a man, M'. 
+We consider by looking at cases: switching a man's preferences or switching a woman's preferences. 
+\begin{itemize}
+\item Let's consider that our adversary switches the preference list of a man, M'. 
 We argue that all rogue couples must involve M'.
 We consider the man, M, whose preference list is NOT switched by the adversary. 
 M is matched with some W at the end of the algorithm, (M,W). 
@@ -759,9 +760,9 @@ Therefore, according to the algorithm, W* must have rejected M for somebody she 
 By the Improvement Lemma, W* likes her final partner M* at least as much, and therefore prefers him to M.
 Thus no man M whose preference list has not been switched can be involved in a rogue couple. 
 Since M' is currently matched with one woman, there are at most $n-1$ possible rogue pairs with M'. 
-At the end of this proof, we will demonstrate how to construct such a situation. 
+%At the end of this proof, we will demonstrate how to construct such a situation. 
 
-Next, we consider that the adversary switches the preference list of a woman, W'. 
+\item Next, we consider that the adversary switches the preference list of a woman, W'. 
 We similarly argue that all rogue couples must involve W'. 
 We consider the woman, W, whose preference list is not switched by the adversary. 
 W is matched with some M at the end of the algorithm, (M,W). 
@@ -774,12 +775,13 @@ Therefore, W must prefer her current partner at least as much as M*.
 This contradicts the assumption of there existing a rogue couple with W (M*, W). 
 Therefore, only W' can be involved in rogue couples. 
 Again, this indicates a maximum of $n-1$ possible rogue couples.
+\end{itemize}
 
 We now demonstrate one way to achieve this maximum of $n-1$ possible rogue couples. 
 If every man ranks the women identically and every women ranks the men identically, 
 the adversary can achieve the most damage 
 by switching the first and last preference of the most-desired man or the most-desired woman. 
-Since this person is the most desired, he/she will end up with the person on the top of his/her list. 
+Since this person is the most desired, he/she will end up with the person on the top of his/her (incorrect) list. 
 Since the adversary has manipulated his/her list, this person is now actually with his/her least preference. 
 Therefore he/she prefers all other possible partners, 
 and because he/she is the most desirable, all other possible partners desire him/her. 
@@ -809,7 +811,7 @@ they must be paired together in all stable pairings.
 are paired with other people (M,W*) and (M*,W). 
 If this is the case, (M,W) would be a rogue couple because they are both each other's top preference.] 
 When the adversary disrupts the preference list of one person, 
-we just proved that the other $n-1$ men and $n-1$ women must be paired with their ``soul mates''. 
+we just proved (in part c) that the other $n-1$ men and $n-1$ women will not be involved in any rogue couples.  They will still be paired with their ``soul mates''. 
 There is only one way to pair the remaining man and woman (one of whose list is corrupted) together. 
 Therefore there are no rogue couples!
 }
