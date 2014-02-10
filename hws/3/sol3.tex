@@ -64,16 +64,16 @@ $P(k)$ holds (strong inductive hypotheses).
 \item $n+1$ is divisible by 4: In this case $f(n+1) = (n+1)/4$. 
 Since 
 \[ \frac{n+1}{4} = \frac{n}{4} + \frac{1}{4} < n+1, \quad \forall n \geq 1, \]
-we have reached a number strictly less than $n+1$. So by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
+we have reached a number strictly less than $n+1$. We also know that  $(n+1)/4$ is a natural number because $n$ is divisible by $4$. So by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
 \item $n+1$ is even but not divisible by 4: In this case $f(n+1) = (n+3)/4$. 
 Since 
-\[ \frac{n+3}{4} = \frac{n}{4} + \frac{3}{4} < n+1, \quad \forall n \geq 1, \]
-we have reached a number strictly less than $n+1$. So by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
+\[ \frac{n+3}{4} = \frac{n}{4} + \frac{3}{4} < n+1, \quad \forall n > 1, \]
+we have reached a number strictly less than $n+1$. We argue that this number must be a natural number because if $n+1$ is even but not divisible by four, then $n+3$ must be divisible by four. This is because $n+1 = 4k + 2$ for some k, since it is even but not divisible by $4$, it must be two greater than a multiple of $4$. Therefore, $n + 1 + 2 = 4k + 2 + 2 = 4(k+1)$ which is of course divisible by four. So, $(n+3)/4$ is a natural number less than $n+1$ So by our inductive hypothesis $P(f(n+1))$ holds, which implies $P(n+1)$.
 \item $n+1$ is odd: In this case $f(n+1) = 3(n+1) - 1$, which will be even.  
 So then we can apply $f$ again to reduce it to a problem we have already solved.  
 Then $f(f(n+1)) = (3n+2)/4$ or $f(f(n+1)) = (3n+4)/4$. Since
 \[ \frac{3n+4}{4} = \frac{3}{4} n + 1 < n+1, \quad \forall n\geq 1, \]
-both of these options are strictly less than $n+1$. 
+both of these options are strictly less than $n+1$. Also, both of these numbers will be natural numbers for the same reasons specified in the earlier cases.
 Therefore by our inductive hypothesis, $P(f(f(n+1)))$ holds, which implies $P(n+1)$.
 \end{itemize}
 }
