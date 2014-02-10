@@ -308,10 +308,14 @@ Prove that if both Marty and I come up with the same pairings, there is no other
 
 \ifsolutions
 \answer{
-We know that the propose-and-reject algorithm returns the optimal stable pairing 
-for the people who propose, and the worst stable pairing possible for those who are proposed to. 
-Since Marty and I have the same pairings, the best and worst case must be the same, 
-and there can be no other stable pairings.
+
+We use the fact that the traditional propose-and-reject algorithm is male-optimal (among all stable pairings) and female-pessimal (among all stable pairings). This is proved in the lecture notes. This means that each man receives the best possible woman he could receive under a stable pairing. If we have the pair (M,W) returned by the traditional propose-and-reject algorithm, then for all other stable pairs where we have (M, W*), we know that M must prefer W more than W*. Similarly, female pessimal means if we have the pair (M,W) returned by the traditional propose-and-reject algorithm, then for all other stable pairs where we have (M*, W), we know that W must prefer M* more than M. None of our assumptions use the fact that it is actually men proposing. Therefore, we may claim that the algorithm is proposer-optimal and rejector-pessimal. 
+Since Marty and I get the exact same pairing, by Marty's men-proposing and women-rejecting version, the pairing is female-pessimal (among all stable pairing). By my men-rejecting and women-proposing version, the pairing is female-optimal. Therefore the pairing is both female-pessimal and female-optimal. By similar logic, the pairing is both male-optimal and male-pessimal.
+
+Consider a generic pair returned by our algorithm (M,W). We argue by contradiction that there does not exist a stable pairing where W is paired with another man.
+Assume there exists a stable pairing where at least one woman is matched with someone different (M*, W). If W prefers M* more than M, then the original pairing (M,W) is not female-optimal among stable pairings, and we have a contradiction. If W prefers M more than M*, then the original pairing (M,W) is not female-pessimal among stable pairings, and we have a contradiction. Therefore W must prefer M equally to M*. Since the algorithm demands each person has a strict ordering among their preferences (there can be no ties of preference), M* must be the same man as M. Therefore, no woman can be paired with a different man in a stable pairing, and therefore there can be no other stable pairings.
+
+Note: This proof depends on a strict ordering among their preferences, if we try to extend the propose-and-reject algorithm to cover the case of equal preferences, then this proof will no longer hold. Consider the number of stable pairs where everyone ranks everyone equally.
 }
 \fi
 
@@ -376,17 +380,8 @@ Either provide an example, or prove that it's impossible.
 
 \ifsolutions
 \answer{
-We attempt to construct a set of preferences such that everyone 
-is paired with somebody different from the stable pairing results in part (b).
-From part (b) results, we know that A must prefer 1 over 3 and C must prefer 2 over 3. 
-Otherwise, the pairing that Marty gave would not be stable. 
-If A prefers 1 the most, than any pairing in which A is not with 1 would not be stable. 
-Since we are trying to create a pairing where everyone is matched with someone different, 
-and since A prefers 1 over 3, A must rank 1 second in her preference list. 
-We now use the same logic for C. 
-If C prefers 2 the most, than any pairing in which C is not with 2 would not be stable. 
-Therefore C cannot rank 2 the most. 
-Since C prefers 2 over 3, C must rank 2 second in her preference list.
+We attempt to construct a set of preferences such that everyone is paired with somebody different from the stable pairing results in part (b). First, we make some deductions about the preferences of women. If A prefers 3 over 1, we would have the rogue pair (A,3) in Marty's pairing. Therefore, A must prefer 1 over 3. If C prefers 3 over 2, then (C,3) would be a rogue pair in Marty's pairing. Therefore, C must prefer 2 over 3. 
+If A prefers 1 the most, then A and 1 would be "soul mates": if either of them were paired with someone else, they would always form a rogue pair with each other. Since we are attempting to construct a completely different set of preferences, we do not want A and 1 to be together. Therefore, we want to make sure A does not prefer 1 the most. Since A prefers 1 over 3, A must rank 1 second in our preference list (which attempts to create new pairings). We use the same logic for C, noting that if C prefers 2 the most, we would have two "soul mates" again. Since we are trying to come up with a new set of preferences, and since C prefers 2 over 3, C must prefer 2 second in our preference list (which attempts to create new pairings)
 
 We can fill out the chart by now.
 \begin{center}
@@ -423,15 +418,16 @@ results in a different set of preferences:
 \end{center}
 This takes five days, and returns a potentially stable pairing of \{(A,1), (B,3), (C,2)\}.
 
-We attempted to reach a different stable pairing, but this is the exact same stable pairing. We now try to consider if it is possible to construct a pairing where everyone is paired with someone different. We prove that in all stable pairings, C must be paired with 2.
+We attempted to reach a different stable pairing, but this is the exact same stable pairing. We now try to consider if it is possible to construct a pairing where anyone is paired with someone different. We prove that in all stable pairings, C must be paired with 2.
 
 Assume for contradiction that in a stable pairing C is paired with 1. 
 Then (1,B) would be a rogue pair. Contradiction!
+
 Now assume for contradiction that C is paired with 3. 
 Then, either A is paired with 2 or A is paired with 1. \begin{itemize}
-\item[i]If A is paired with 2, then (2,B) is a rogue couple; 
-\item[ii]If A is paired with 1, then 2 is paired with B.  \end{itemize}
-Then (2,C) is a rogue couple (remember that C prefers 2 over 3).
+\item[i]If A is paired with 2, then (2,C) is a rogue couple. Remember that based on our logic above, C must prefer 2 over 3 (other wise the original pairing would not be stable). In addition, by the given male preference list, 2 prefers C over A.
+\item[ii]If A is paired with 1, then 2 is paired with B.  Then (2,C) is a rogue couple. Remember that by our logic, C prefers 2 over 3. In addition, 2 prefers C over B based on the given male preference list. \end{itemize}
+
 
 We have now proven that the only other possible stable pairing is 
 \{(A,3), (B,1), (C,2)\}.
@@ -440,9 +436,6 @@ Therefore it is impossible to have everyone paired with somebody different.
 Is the pairing {(A,3), (B,1), (C,2)} stable? We argue that (A,1) must be a rogue pair. If A prefers 1 over 3 then it is a rogue pair. However if A prefers 3 over 1, then the original pairing that Marty gave is not stable (A,3) would be a rogue pair.
 
 A note on this problem, it was ambiguously worded. The problem can be read to imply another stable pairing is possible, when in fact there is no other stable pairing.
-
-
- 
 
 }
 \fi
@@ -519,7 +512,7 @@ List all the possibilities of filling in the missing preferences such that the p
 \ifsolutions
 \answer{
 First of all, we look at the pairing (C,3) because 3 is C's least favorite. 
-So we know that in order for there to be no rogue pairs with 3, 
+We know that in order for there to be no rogue pairs with 3, 
 the other men must prefer their current partners to C. 
 Then we have 1 prefers A over C and 2 prefers B over C. 
 We can now entirely fill out the preferences for Man 1, since C cannot be first:
@@ -545,7 +538,7 @@ C&X&X&3\\\hline
 \end{tabular}
 \end{center}
 
-Also, 2 must prefer C less than B, otherwise (2,C) would be a rogue pair. 
+Also, 2 must prefer C less than B, otherwise (2,C) would be a rogue pair. Why would it be a rogue pair? Remember that C is paired with her worst choice--this means that C will form a rogue pair with any man who prefers C over his current partner.
 In addition, 2 must prefer A less than B, otherwise (2,A) would be a rogue pair. 
 Therefore 2 must prefer B the most.
 
@@ -748,32 +741,31 @@ by an adversary switching the order of two preferences for one person?
 \answer{
 There can be $n-1$ rogue pairs generated. 
 
-We consider by looking at case separately. 
+We consider by looking at cases separately. 
 Let's consider that our adversary switches the preference list of a man, M'. 
 We argue that all rogue couples must involve M'.
 We consider the man, M, whose preference list is NOT switched by the adversary. 
 M is matched with some W at the end of the algorithm, (M,W). 
 Suppose towards contradiction that M prefers some W* to his current partner W. 
-We will argue that W* prefers her final M* partner to M, so that (M,W*) cannot be a rogue couple. 
-[Since W* occurs before W in M's list, and since his preference list is not switched, 
+We will argue that W* prefers her final M* partner to M, so that (M,W*) cannot be a rogue couple.  Since W* occurs before W in M's list, and since his preference list is not switched, 
 he must have proposed to W* before he proposed to W. 
 Therefore, according to the algorithm, W* must have rejected M for somebody she prefers. 
-By the Improvement Lemma, W* likes her final partner M* at least as much, and therefore prefers him to M.] 
+By the Improvement Lemma, W* likes her final partner M* at least as much, and therefore prefers him to M.
 Thus no man M whose preference list has not been switched can be involved in a rogue couple. 
 Since M' is currently matched with one woman, there are at most $n-1$ possible rogue pairs with M'. 
 At the end of this proof, we will demonstrate how to construct such a situation. 
 
 Next, we consider that the adversary switches the preference list of a woman, W'. 
 We similarly argue that all rogue couples must involve W'. 
-%We consider the woman, W, whose preference list is not switched by the adversary. 
-%W is matched with some M at the end of the algorithm, (M,W). 
-%Suppose towards contradiction we have a rogue couple such that W prefers some M* 
-%to her current partner and M* prefers W over his current partner.  
-%If M* prefers W over his current partner, 
-%then he must have proposed to W before he proposed to his current partner. 
-%Since W's preferences have not been switched, then the Improvement Lemma holds. 
-%Therefore, W must prefer her current partner at least as much as M*. 
-%This contradicts the assumption of there existing a rogue couple with W (M*, W). 
+We consider the woman, W, whose preference list is not switched by the adversary. 
+W is matched with some M at the end of the algorithm, (M,W). 
+Suppose towards contradiction we have a rogue couple such that W prefers some M* 
+to her current partner and M* prefers W over his current partner.  
+If M* prefers W over his current partner, 
+then he must have proposed to W before he proposed to his current partner. 
+Since W's preferencess have not been switched, then the Improvement Lemma holds. 
+Therefore, W must prefer her current partner at least as much as M*. 
+This contradicts the assumption of there existing a rogue couple with W (M*, W). 
 Therefore, only W' can be involved in rogue couples. 
 Again, this indicates a maximum of $n-1$ possible rogue couples.
 
