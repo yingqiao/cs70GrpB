@@ -11,39 +11,6 @@
 
 \begin{enumerate}
 
-\item {\bf Amaze your friends!} 
-\begin{enumerate}
-\item You want to trick your friends into thinking you can perform mental arithmetic with very large numbers
-What are the last digits of the following numbers?
-\begin{enumerate}
-\item[i.] \quad $11^{2014}$
-\item[ii.] \quad $9^{10001}$
-\item[iii.] \quad $3^{987654321}$
-\end{enumerate}
-\item You know that you can quickly tell a number $n$ is divisible by $9$ if and only if the sum of the digits of $n$ is divisible by $9$. Prove that you can use this trick to quickly calculate if a number is divisible by $9$.
-\end{enumerate}
-
-\ifsolutions
-\textbf{Motivation for Problem:} This problem causes students to start recognizing tricks regarding modular arithmetic. This lays the ground later for proving properties of modular arithmetic.
-
-\textbf{Solutions:}
-\begin{enumerate}
-\item
-\begin{enumerate}
-\item[i.] \quad $11$ is always $1$ mod $10$ therefore the answer to (a) is 1.
-\item[ii.] \quad $9$ is its own inverse mod $10$, therefore, if $9$ is raised to an odd power, the number will be $9$ mod $10$. So the answer is $9$
-\item[iii.] \quad $3^4 = 9^2 = 1 $ mod $ 10$. We see that the exponent $987654321 = 1$ mod $4$ so the answer is $3$.
-\end{enumerate}
-\item  Let $n$ be written as $a_k a_{k-1}\cdots a_1 a_0$ where the $a_i$ are digits, base-10.
-       We can write 
-
-       $n = 10^k a_k + 10^{k-1}a_{k-1} + \cdots + 10a_1 + a_0 = (10^k-1) a_k + (10^{k-1}-1)a_{k-1} + \cdots + (10-1)a_1 + \sum_{i=0}^k a_i$
-
-       The first few terms are all divisible 9; they're all of the form $99\cdots 99 \cdot a_i$.
-       So if the sum at the end is divisible by 9, then $n$ is too and vice versa. 
-\end{enumerate}
-\fi
-
 \item {\bf Recursive Calls}  Calculate the greatest common divisor (gcd) of the following pairs of numbers using the Euclidean algorithm.
 
 [Hasty refresher: starting with a pair of input values, keep repeating the operation ``Replace the larger value with its remainder modulo the smaller value'' over and over, until one of the values becomes zero. At that point, the other value is the gcd of the original two inputs (as well as of every pair of values along the way).
@@ -60,6 +27,28 @@ In pseudocode: gcd($x, y$) $\rightarrow$ if $y = 0$ then return $x$ else return 
 \textbf{Motivation for Problem:} This is supposed to be a quick refresher for the gcd algorithm, and attempts to show how gcd creates recursive calls of other gcd that we can use to shortcut.
 
 \textbf{Solutions:} 8 for all of these. The first answer students should calculate by hand, the second answer will reduce to the first after one step, and the third answer will reduce to the second in one step.  \fi
+
+\item Prove that gcd$(7n+4,5n+3)=1$ for all $n\in\mathbb{N}$.
+
+\ifsolutions 
+\textbf{Solutions:} Recall from lecture that $gcd(x, y) = gcd(y, x \text{ mod } y)$ (Euclid's algorithm). This means $gcd(7n+4,5n+3) = gcd(5n + 3, 7n + 4 \text{ mod } 5n + 3)$. We see that
+\begin{eqnarray*}
+7n + 4 &=&  (2n + 1) + (5n + 3)\\
+&\equiv& 2n + 1 \pmod {5n + 3}.
+\end{eqnarray*}
+Substituting, we have $gcd(5n + 3, 2n + 1) = gcd(2n + 1, 5n + 3 \text{ mod } 2n + 1)$. We see that
+\begin{eqnarray*}
+5n + 3 &=& (n + 1) + 2(2n + 1)\\
+&\equiv& n + 1 \pmod {2n + 1}.
+\end{eqnarray*}
+Substituting again, we now have 
+\begin{eqnarray*}
+gcd(2n + 1, n + 1) &=& gcd(n+ 1, 2n + 1 \text{ mod } n + 1) \\
+&=& gcd(n + 1, n) = gcd(n, n + 1 \text{ mod } n) = gcd(n, 1) = 1.
+\end{eqnarray*}
+
+Therefore, $GCD(7n+4,5n+3)=1$.
+\fi
 
 \item {\bf Extend it!}
 
@@ -109,6 +98,39 @@ $= \ [?] \  \times 2328 + \ [?] \ \times 440$ \ifsolutions{$31 \times 2328 - 164
 {\bf Motivation for problem:} This is supposed to provide the students with some understanding of how the extended-gcd works. \fi
 \end{enumerate}
 
+\item {\bf Amaze your friends!} 
+\begin{enumerate}
+\item You want to trick your friends into thinking you can perform mental arithmetic with very large numbers
+What are the last digits of the following numbers?
+\begin{enumerate}
+\item[i.] \quad $11^{2014}$
+\item[ii.] \quad $9^{10001}$
+\item[iii.] \quad $3^{987654321}$
+\end{enumerate}
+\item You know that you can quickly tell a number $n$ is divisible by $9$ if and only if the sum of the digits of $n$ is divisible by $9$. Prove that you can use this trick to quickly calculate if a number is divisible by $9$.
+\end{enumerate}
+
+\ifsolutions
+\textbf{Motivation for Problem:} This problem causes students to start recognizing tricks regarding modular arithmetic. This lays the ground later for proving properties of modular arithmetic.
+
+\textbf{Solutions:}
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item[i.] \quad $11$ is always $1$ mod $10$ therefore the answer to (a) is 1.
+\item[ii.] \quad $9$ is its own inverse mod $10$, therefore, if $9$ is raised to an odd power, the number will be $9$ mod $10$. So the answer is $9$
+\item[iii.] \quad $3^4 = 9^2 = 1 $ mod $ 10$. We see that the exponent $987654321 = 1$ mod $4$ so the answer is $3$.
+\end{enumerate}
+\item  Let $n$ be written as $a_k a_{k-1}\cdots a_1 a_0$ where the $a_i$ are digits, base-10.
+       We can write 
+
+       $n = 10^k a_k + 10^{k-1}a_{k-1} + \cdots + 10a_1 + a_0 = (10^k-1) a_k + (10^{k-1}-1)a_{k-1} + \cdots + (10-1)a_1 + \sum_{i=0}^k a_i$
+
+       The first few terms are all divisible 9; they're all of the form $99\cdots 99 \cdot a_i$.
+       So if the sum at the end is divisible by 9, then $n$ is too and vice versa. 
+\end{enumerate}
+\fi
+
 
 \item {\bf Practicing Extensions} Here is a refresher of the extended gcd algorithm:
 
@@ -122,7 +144,7 @@ algorithm extended-gcd(x,y)
 Using this, find the inverse of 26 mod 35.
 
 \ifsolutions
-\newpage
+%\newpage
  {\bf solutions:} 
 
 extended-gcd(35, 26) \\
@@ -168,27 +190,9 @@ This means that $26^{-1} \bmod{35} \equiv -4 \bmod{35} \equiv 31 \bmod{35}$
 %And so our solution is $x = 8, y = 5$.
 % \fi
 
-\item Prove that gcd$(7n+4,5n+3)=1$ for all $n\in\mathbb{N}$.
 
-\ifsolutions 
-\textbf{Solutions:} Recall from lecture that $gcd(x, y) = gcd(y, x \text{ mod } y)$ (Euclid's algorithm). This means $gcd(7n+4,5n+3) = gcd(5n + 3, 7n + 4 \text{ mod } 5n + 3)$. We see that
-\begin{eqnarray*}
-7n + 4 &=&  (2n + 1) + (5n + 3)\\
-&\equiv& 2n + 1 \pmod {5n + 3}.
-\end{eqnarray*}
-Substituting, we have $gcd(5n + 3, 2n + 1) = gcd(2n + 1, 5n + 3 \text{ mod } 2n + 1)$. We see that
-\begin{eqnarray*}
-5n + 3 &=& (n + 1) + 2(2n + 1)\\
-&\equiv& n + 1 \pmod {2n + 1}.
-\end{eqnarray*}
-Substituting again, we now have 
-\begin{eqnarray*}
-gcd(2n + 1, n + 1) &=& gcd(n+ 1, 2n + 1 \text{ mod } n + 1) \\
-&=& gcd(n + 1, n) = gcd(n, n + 1 \text{ mod } n) = gcd(n, 1) = 1.
-\end{eqnarray*}
 
-Therefore, $GCD(7n+4,5n+3)=1$.
-\fi
+
 
 %\item  What is $(42^{{42}^{42}})!$ mod $300$?
 %\ifsolutions 
