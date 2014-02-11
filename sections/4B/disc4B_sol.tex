@@ -3,7 +3,7 @@
 \usepackage{color}
 \newif\ifsolutions
 \solutionstrue
-\solutionsfalse %flag for solutions
+%\solutionsfalse %flag for solutions
 
 \def\title{Discussion 4B}
 \begin{document}
@@ -44,8 +44,6 @@ What are the last digits of the following numbers?
 \end{enumerate}
 \fi
 
-\vspace{30mm}
-
 \item {\bf Recursive Calls}  Calculate the greatest common divisor (gcd) of the following pairs of numbers using the Euclidean algorithm.
 
 [Hasty refresher: starting with a pair of input values, keep repeating the operation ``Replace the larger value with its remainder modulo the smaller value'' over and over, until one of the values becomes zero. At that point, the other value is the gcd of the original two inputs (as well as of every pair of values along the way).
@@ -62,7 +60,7 @@ In pseudocode: gcd($x, y$) $\rightarrow$ if $y = 0$ then return $x$ else return 
 \textbf{Motivation for Problem:} This is supposed to be a quick refresher for the gcd algorithm, and attempts to show how gcd creates recursive calls of other gcd that we can use to shortcut.
 
 \textbf{Solutions:} 8 for all of these. The first answer students should calculate by hand, the second answer will reduce to the first after one step, and the third answer will reduce to the second in one step.  \fi
-\newpage
+
 \item {\bf Extend it!}
 
 In this problem we will consider extending the gcd algorithm.
@@ -103,6 +101,7 @@ $= \ [?] \ \times 128 + \ [?] \ \times 56$ [Hint: Remember, $16 = 128 - 2 \times
 $= \ [?] \ \times 440 + \ [?] \ \times 128$ \ifsolutions{$-9 \times 440 + 31 \times 128$} \fi
 
 $= \ [?] \  \times 2328 + \ [?] \ \times 440$ \ifsolutions{$31 \times 2328 - 164 \times 440$} \fi
+
 \item In the same way as just illustrated in the previous two parts, calculate the gcd of $17$ and $38$, and determine how to express this as a ``combination" of $17$ and $38$. \ifsolutions{$\gcd(17, 38) = 1 = 13 \times 38 - 29 \times 17; also, more simply, -4 \times 38 + 9 \times 17, but the algorithm produces the former$} \fi
 
 \item What does this imply, in this case, about the multiplicative inverse of $17$, in arithmetic mod $38$? \ifsolutions{It is equal to -29, which is equal to 9}
@@ -110,7 +109,7 @@ $= \ [?] \  \times 2328 + \ [?] \ \times 440$ \ifsolutions{$31 \times 2328 - 164
 {\bf Motivation for problem:} This is supposed to provide the students with some understanding of how the extended-gcd works. \fi
 \end{enumerate}
 
-\vspace{30mm}
+
 \item {\bf Practicing Extensions} Here is a refresher of the extended gcd algorithm:
 
 {\obeylines \tt
