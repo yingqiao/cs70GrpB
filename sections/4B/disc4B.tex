@@ -69,17 +69,17 @@ $ gcd(2328, 440)$
 
 $= gcd(440, 128)$ [$128 \equiv 2328 \bmod{440} \equiv 2328 - 5 \times 440$] 
 
-$= gcd(128, 56)$   [$56 \equiv 440 \bmod {128} \equiv 440 - \ [?] \times 128$]  \ifsolutions  {\bf solution}:  $[?] = 3$ \fi
+$= gcd(128, 56)$   [$56 \equiv 440 \bmod {128} \equiv 440 - \ [\quad \quad] \times 128$]  \ifsolutions  {\bf solution}:  $[?] = 3$ \fi
 
-$= gcd(56, 16)$ \ \  [$16 \equiv 128 \bmod{56} \equiv 128 - \ [?] \times 56$]   \ifsolutions  {\bf solution}:  $[?] = 2$ \fi
+$= gcd(56, 16)$ \ \  [$16 \equiv 128 \bmod{56} \equiv 128 - \ [\quad \quad] \times 56$]   \ifsolutions  {\bf solution}:  $[?] = 2$ \fi
 
-$= gcd(16, 8)$  \ \ [$8 \equiv 56 \bmod{16} \equiv 56 - \ [?] \times 16$] \ifsolutions {\bf solution}: $[?] = 3$ \fi
+$= gcd(16, 8)$  \ \ [$8 \equiv 56 \bmod{16} \equiv 56 - \ [\quad \quad] \times 16$] \ifsolutions {\bf solution}: $[?] = 3$ \fi
 
 $= gcd(8, 0)$  \ \ [$0 \equiv 16 \bmod{8} \equiv 16 - 2 \times 8$]
 
 $= 8$.
 
-(Fill in the ?)
+(Fill in the blanks.)
 
 
 \item Now working back up from the bottom, we will express the final gcd above as a combination of the two arguments on each of the previous lines:
@@ -90,13 +90,13 @@ $= 1 \times 8 + 0 \times 0 = 1 \times 8 + (16 - 2 \times 8)$
 
 $= 1 \times 16 - 1 \times 8$ 
 
-$= \ [?] \ \times 56 + \ [?] \ \times 16$ [Hint: Remember, $8 = 56 - 3 \times 16$. Substitute this into the above line...] \ifsolutions{$1 \times 16 - 1 \times (56 - 3 \times 16) = -1 \times 56 + 4 \times 16$} \fi
+$= [\quad \quad ] \times 56 + \ [\quad \quad ] \times 16$ [Hint: $8 = 56 - 3 \times 16$. Substitute this into the above line...] \ifsolutions{$1 \times 16 - 1 \times (56 - 3 \times 16) = -1 \times 56 + 4 \times 16$} \fi
 
-$= \ [?] \ \times 128 + \ [?] \ \times 56$ [Hint: Remember, $16 = 128 - 2 \times 56$] \ifsolutions{$4 \times 128 - 9 \times 56$} \fi
+$= \ [\quad \quad] \ \times 128 + \ [\quad \quad] \ \times 56$ [Hint: Remember, $16 = 128 - 2 \times 56$] \ifsolutions{$4 \times 128 - 9 \times 56$} \fi
 
-$= \ [?] \ \times 440 + \ [?] \ \times 128$ \ifsolutions{$-9 \times 440 + 31 \times 128$} \fi
+$= \ [\quad \quad] \ \times 440 + \ [\quad \quad] \ \times 128$ \ifsolutions{$-9 \times 440 + 31 \times 128$} \fi
 
-$= \ [?] \  \times 2328 + \ [?] \ \times 440$ \ifsolutions{$31 \times 2328 - 164 \times 440$} \fi
+$= \ [\quad \quad] \  \times 2328 + \ [\quad \quad] \ \times 440$ \ifsolutions{$31 \times 2328 - 164 \times 440$} \fi
 \item In the same way as just illustrated in the previous two parts, calculate the gcd of $17$ and $38$, and determine how to express this as a ``combination" of $17$ and $38$. \ifsolutions{$\gcd(17, 38) = 1 = 13 \times 38 - 29 \times 17; also, more simply, -4 \times 38 + 9 \times 17, but the algorithm produces the former$} \fi
 
 \item What does this imply, in this case, about the multiplicative inverse of $17$, in arithmetic mod $38$? \ifsolutions{It is equal to -29, which is equal to 9}
