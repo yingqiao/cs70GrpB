@@ -2,8 +2,8 @@
 \usepackage{../../cs70}
 \usepackage{color}
 \newif\ifsolutions
-\solutionstrue
-%\solutionsfalse %flag for solutions
+%\solutionstrue
+\solutionsfalse %flag for solutions
 
 \def\title{Discussion 4B}
 \begin{document}
@@ -48,12 +48,12 @@ What are the last digits of the following numbers?
 
 [Hasty refresher: starting with a pair of input values, keep repeating the operation ``Replace the larger value with its remainder modulo the smaller value'' over and over, until one of the values becomes zero. At that point, the other value is the gcd of the original two inputs (as well as of every pair of values along the way).
 
-In pseudocode: gcd(x, y) $\rightarrow$ if y = 0 then return x else return gcd(y, x mod y)].
+In pseudocode: gcd($x, y$) $\rightarrow$ if $y = 0$ then return $x$ else return gcd($y, x\mod y$)].
 
 \begin{enumerate}
 \item $208$ and $872$
 \item $1952$ and $872$
-\item $1952*n + 872$ and $1952$
+\item $1952 \times n + 872$ and $1952$
 \end{enumerate}
 
 \ifsolutions
@@ -71,13 +71,13 @@ In this problem we will consider extending the gcd algorithm.
 
 $ gcd(2328, 440)$ 
 
-$= gcd(440, 128)$ [$128 = 2328 \mod{440} = 2328 - 5 * 440$] 
+$= gcd(440, 128)$ [$128 = 2328 \mod{440} = 2328 - 5 \times 440$] 
 
 $= gcd(128, 56)$   [$56 = 440 \mod {128} = 440 - \ [?] \times 128$]  \ifsolutions $[?] = 3$ \fi
 
 $= gcd(56, 16)$ \ \  [$16 = 128 \mod{56} = 128 - \ [?] \times 56$]   \ifsolutions $[?] = 2$ \fi
 
-$= gcd(16, 8)$  \ \ [$8 = 56 \mod{16} = 56 - \ [?] * 16$] \ifsolutions $[?] = 3$ \fi
+$= gcd(16, 8)$  \ \ [$8 = 56 \mod{16} = 56 - \ [?] \times 16$] \ifsolutions $[?] = 3$ \fi
 
 $= gcd(8, 0)$  \ \ [$0 = 16 \mod{8} = 16 - 2 \times 8$]
 
@@ -100,7 +100,7 @@ $= \ [?] \ \times 128 + \ [?] \ \times 56$ [Hint: Remember, $16 = 128 - 2 \times
 
 $= \ [?] \ \times 440 + \ [?] \ \times 128$ \ifsolutions{$-9 \times 440 + 31 \times 128$} \fi
 
-$= \ [?] \  \times 2328 + \ [?] \ * 440$ \ifsolutions{$31 \times 2328 - 164 \times 440$} \fi
+$= \ [?] \  \times 2328 + \ [?] \ \times 440$ \ifsolutions{$31 \times 2328 - 164 \times 440$} \fi
 
 \item In the same way as just illustrated in the previous two parts, calculate the gcd of $17$ and $38$, and determine how to express this as a ``combination" of $17$ and $38$. \ifsolutions{$\gcd(17, 38) = 1 = 13 \times 38 - 29 \times 17; also, more simply, -4 \times 38 + 9 \times 17, but the algorithm produces the former$} \fi
 
@@ -134,7 +134,7 @@ x &\equiv& 8\pmod{13}
 And so our solution is $x = 8, y = 5$.
  \fi
 
-\item Prove that $GCD(7n+4,5n+3)=1$ for all $n\in\mathbb{N}$.
+\item Prove that gcd$(7n+4,5n+3)=1$ for all $n\in\mathbb{N}$.
 
 \ifsolutions 
 \textbf{Solutions:} Recall from lecture that $gcd(x, y) = gcd(y, x \text{ mod } y)$ (Euclid's algorithm). This means $gcd(7n+4,5n+3) = gcd(5n + 3, 7n + 4 \text{ mod } 5n + 3)$. We see that
