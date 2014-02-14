@@ -5,6 +5,10 @@
 
 }
 
+\newcommand\config[2]{
+  \SEP{config=#1=#2}
+}
+
 \let\oldqunlist\qunlist
 \let\oldendqunlist\endqunlist
 \renewenvironment{qunlist}{
@@ -12,6 +16,7 @@
   \oldqunlist
   \let\oldqns\qns
   \renewcommand\qns{\SEP{new_question}\oldqns}
+  \newcommand\qpart{\SEP{new_part}}
 }
 {
   \oldendqunlist
