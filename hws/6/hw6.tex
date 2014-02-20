@@ -56,9 +56,86 @@
 \qns{RSA - 2} % Sara
 \begin{enumerate}
 \qpart
-\item
+\item {\bf Trust No One}
+
+Gandalf has assembled a fellowship of eight people to transport the One Ring to the fires of Mount Doom: four hobbits, two men, one elf, and one dwarf. The ring has great power that may be of use to the fellowship during their long and dangerous journey. Unfortunately, the use of its immense power will eventually corrupt the user, so it must not be used except in the most dire of circumstances. To safeguard against this possibility, Gandalf wishes to keep the instructions a secret from members of the fellowship. The secret must only be revealed if enough members of the fellowship are present and agree to use it.
+
+Requiring all eight members to agree is certainly a sufficient condition to know the instructions, but it seems excessive. However, we also know that the separate races (hobbits, men, elf, and dwarf) do not completely trust each other so instead we decide to to require members from at least two races in order to use the ring. In particular, we will require a unanimous decision by all members of one race in addition to at least one member of a different race. That is, if only the four hobbits want to use the ring, then they alone should not have sufficient information to figure out the instructions. Same goes for the two men, the elf, and the dwarf.
+
+More explicitly, some examples: only four hobbits agreeing to use the ring is not enough to know the instructions. Only two men agreeing is not enough. Only the elf agreeing is not enough. Only the dwarf agreeing is not enough. All four hobbits and a man agreeing is enough. Both men and a dwarf agreeing is enough. Both the elf and the dwarf agreeing is enough.
+
+Gandalf has hired your services to help him come up with a secret sharing scheme that accomplishes this task, summarized by the following points:
+\begin{itemize}
+\item There is a party of four hobbits, two men, an elf, and a dwarf.
+\item There is a secret message that needs to be known if enough members of the party are in agreeance.
+\item The message must remain unknown to everyone (except Gandalf) if not enough members of the party are in agreeance.
+\item If only the members of one race are in agreeance, the message remains a secret.
+\item If all the members of one race are in agreeance plus at least one additional person, the message can be determined.
+\item Other combinations of members (e.g. two hobbits and a man) can either determine the message or keep it a secret (it is up to your discretion).
+\end{itemize}
+
 \ifsolutions{ \answer 
 {
+
+(\#1) There will be two parts to this secret: a unanimity secret $U$ and a multi-race secret $M$. $U$ ensures that at least all members of one races are in agreement while $M$ ensures that members of at least two races are in agreement. We will discuss these two in order below. Once both $U$ and $M$ are recovered, they can then be combined to reveal the original secret: each will be a point of the degree-1 polynomial $R(x)$ whose y-intercept contains the secret of the ring.
+
+The \textit{unanimity secret} involves creating a separate secret for each race. We will require all members of that race to join forces in order to reveal the secret. For example, the hobbits will each have distinct points of a degree-3 polynomial and the men will each have distinct points of a degree-1 polynomial. When all members of a race come together, they will reveal $U$ (encoded, for example, as the y-intercept of each of these polynomials). Note that the elf and the dwarf each know $U$ already since they are the only members of their race.
+
+The \textit{multi-race secret} involves creating a degree-1 polynomial $P_m(x)$ and giving one point to all members of each race. For example, the hobbits may each get $P_m(1)$ while the elf gets $P_m(2)$ and the men each get $P_m(3)$. In this way if members of any two races are in agreement, they can reveal $M$ (encoded, for example, as the y-intercept of $P_m(x)$).
+
+Once $U$ and $M$ are each known, they can be \textit{combined} to determine the final secret. $U$ and $M$ allow us to uniquely determine $R(x)$ and thus $R(0)$, the secret of the ring.
+
+This scheme is an example of hierarchical secret sharing. Let's work out a specific example.
+
+\textbf{Example:} Suppose the secret is $s=4$, $M=3$, and $U=2$. From now on, we can work in GF(5) since $s<5$ and $n<5$ ($n$ is the number of people who have pieces of the secret).
+
+First we need to create a degree-1 polynomial $R(x)$ such that $R(0)=s=4$, $R(1)=M=3$, and $R(2)=U=2$. By inspection, $R(x) = 4x + 4$ has these properties (e.g. $R(1) = 4\cdot1 + 4 = 8 \equiv 3$).
+
+Now we can create the multi-race secret $M$. We choose degree-1 polynomial $P_m(x) = x+3$ and tell each hobbit $P_m(1)=4$, the elf $P_m(2)=5\equiv0$, each of the men $P_m(3)=6 \equiv 1$, and the dwarf $P_m(4) = 7 \equiv 2$. Now any two members of distinct races can determine $P_m(x)$ and thus $P_m(0)$ by interpolating their two values.
+
+When creating the unanimity secret $U$, we first note that each of the dwarf and the elf will be told $U$ directly since they are the only members of their respective races. On the other hand, the men will each have a point on the degree-1 polynomial $P_{men}(x)$. Suppose $P_{men}(x) = 2x+2$. Then the first man receives $P_{men}(1) = 4$ and the second receives $P_{men}(2) = 4+2 = 6 \equiv 1$. When they interpolate using these values, they will discover the original polynomial and therefore $P_{men}(0) = U = 2$. The hobbits will have a similar secret but with a degree-3 polynomial (e.g. $P_{hobbit}(x) = 4x^3 + x^2 + 2$).
+
+Now suppose that two men and one hobbit come together. The two men work together to determine $U$ as described above. Together the three of them also know $P_m(3)=6$ and $P_m(1)=4$, from which they can find $P_m(x)$ and thus $P_m(0) = M$. Now that they have $U$ and $M$, they can interpolate to find $R(x)$ and thus $R(0) = s = 4$.
+
+
+%I want it to show how to compose secret-sharing schemes hierarchically. So break the secret into two shares --- a unanimity share and a multirace share. Both are required to get the true secret. 
+
+%Then, have the unanimity share be again divided into pieces depending on the race. Only when all the members of a race are together can they recover the u key.
+
+%Have the multirace key be shared as a degree 1 polynomial evaluated once for every race. Each hobbit has the same copy of this piece, etc...
+
+%This two layer process works. If no race is unanimous, they will never get the u key. If only one race is involved, they won't get the m key. Without both u and m keys, they have nothing.
+
+
+
+\answer (\#2) The trick is to construct a degree-4 polynomial (which requires 5 points to determine) $P(x)$ and reveal a varying number of points to each member of the party, depending on their race:
+
+\begin{itemize}
+	\item Hobbits: 1 point each
+	\item Humans: 2 points each
+	\item Dwarf: 4 points
+	\item Elf: 4 points
+\end{itemize}
+
+Since, we need 5 points to determine the polynomial (and thus the secret, which without loss of generality we will assume is encoded as $P(0)$), we see the following behavior (for example):
+\begin{itemize}
+	\item Four hobbits only = 4 points (not enough)
+	\item Two men only = 4 points (not enough)
+	\item Elf only = 4 points (not enough)
+	\item Dwarf only = 4 points (not enough)
+	\item Four hobbits + one man = 4 + 2 = 6 points (enough)
+	\item Two men + dwarf = 4 + 4 = 8 points (enough)
+	\item Elf + dwarf = 4 + 4 = 8 points (enough)
+	\item Three hobbits + one man = 3 + 2 = 5 points (enough) (note this means that unanimity is not guaranteed by this solution)
+	\item Two men + one hobbit = 4 + 1 = 5 points (enough)
+\end{itemize}
+
+Once enough points (at least 5) are known, the polynomial (and thus the secret) can be reconstructed via interpolation.
+
+\textbf{Note:} If you have a different (and correct) solution, please post it on Piazza for potential extra credit.
+
+%\textbf{Solution Sketch}: Construct a 5th degree polynomial with the secret as the y-intercept. Evaluate the polynomial at 8 distinct points (not $x=0$). Each hobbit gets 1 point, each man gets 2, and the dwarf and elf get 4. The polynomial (and thus the secret) can be reconstructed by interpolation given at least 6 of the points.
+
 }}\fi
 
 
@@ -72,10 +149,30 @@
 
 \begin{enumerate}
 \qpart
-\item
+\item \textbf {Polynomials and modular arithmetic}
+  \\Which of the following statements is true?  In each case, if the statement is true give a brief explanation; if it is false, give a simple counterexample.
+  \begin{enumerate}
+  \item For all $a,b\in\mathbf{Z}$, $(a+b)^3 = a^3 + b^3\bmod 3$.
+  \item For all $a,b\in\mathbf{Z}$, $(a+b)^4 = a^4 + b^4\bmod 4$.
+  \item For all $a,b\in\mathbf{Z}$, $(a+b)^5 = a^5 + b^5\bmod 5$.\\
+  \end{enumerate}
 
 \ifsolutions{ \answer 
 {
+
+\begin{enumerate}
+  \item \textbf{True.} Expanding gives:
+    $$ (a+b)^3 \equiv a^3 + 3a^2b + 3ab^2 + b^3 \equiv a^3 + b^3 \pmod 3$$
+    All but the first and last terms are multiples of $3$.
+  \item \textbf{False.} Expanding gives:
+    $$ (a+b)^4 \equiv a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4 \equiv a^4 + 2a^2b^2 + b^4 \pmod 4 $$
+    So any choice of values for which the middle term is non-zero will serve as a counterexample. For example choosing $a=1$, $b=1$:
+    $$0 \equiv 16 \equiv (1+1)^4 \neq 1^4 + 1^4 \equiv 2 \bmod 4 $$
+  \item \textbf{True.} Expanding gives:
+    $$(a+b)^5 \equiv a^5 + 5a^4b + 10a^3b^2 + 10a^2b^3 + 5ab^4 + b^5 \equiv a^5 + b^5 \bmod 5 $$
+    All but the first and last terms are multiples of $5$.\\\\
+  \end{enumerate}
+
 }}\fi
 
 
@@ -89,9 +186,85 @@
 
 \begin{enumerate}
 \qpart
-\item 
+\item (idea) \textbf{Solving systems of equations}
+  \\Consider the following system of equations $\bmod{15}$:
+  
+  \begin{align*}
+    13x &+ 7y &= 2 \\
+    3x &+ 4y &= 8 \\
+  \end{align*}
+  
+  \begin{enumerate}
+  \item Decompose this into two systems of equations, one $\bmod 3$ and one $\bmod 5$.
+  \item Solve for $x$ and $y$ in both systems.
+  \item Combine these solutions to get a solution to the original problem (hint: look at discussion 3, problem 5a)\\
+    
+  \end{enumerate}
 
 \end{enumerate}
+
+\ifsolutions{ \answer 
+{
+
+\\Given a system of 2 linear equations in two unknowns, we are strongly tempted to just attempt to solve it by traditional means. However, we have a problem. Some of these coefficients are not relatively prime to 15. So, we can't necessarily solve for one variable in terms of the other and then use substitution. Looking at 15=3*5 lets us decompose into two different sets of equations, each pair of which is in a finite field where division by nonzero numbers is allowed and safe.
+  \begin{enumerate}
+  \item $\bmod 3$:
+    \begin{align*}
+        1x &+ 1y &= 2 \\
+        0x &+ 1y &= 2 
+      \end{align*}
+      $\bmod 5$:
+      \begin{align*}
+        3x &+ 2y &= 2 \\
+        3x &+ 4y &= 3 \\
+      \end{align*}
+    \item
+      $\bmod 3$:\\
+      We can find $y$ from the second equation$\pmod 3$ and substitute to find $x$:
+      $$y = 2\pmod 3 \Rightarrow x = 0\pmod 3$$
+      $\bmod 5$:\\
+      Solving this as we would any system of linear equations:
+      \begin{align*}
+	3x &+ 2y &= 2 \\
+	3x &+ 4y &= 3 \\
+	\Rightarrow 0x &+ 2y &= 1
+      \end{align*}
+      So $y$ is the inverse of 2$\pmod 5$ which gives us $y = 3\pmod 5$. Substituting and reducing, we find that $x$ is the inverse of 3$\pmod 5$. Hence, $x = 2\pmod 5$\\
+    \item Now, we want to find values of $x$ and $y$ such that they satisfy the above congruences$\pmod 3$ and$\pmod 5$. So let us construct a solution accordingly.
+      \\ Let us first define the following notation $p^{-1}_q$ to be the inverse of $p\pmod q$.
+      \\\\ Now, look at $x$. Consider the following form of $x$:
+      $$x = 3 \cdot 3^{-1}_5 \cdot 2 + 5 \cdot 5^{-1}_3 \cdot 0$$
+      Does this satisfy our congruences? We see that when we take the equation$\pmod 3$, the term with 3 disappears. The remaining term has both $5$ and its inverse modulo 3. They give 1 together and we are left with the original value of $x\pmod 3$. Since this is just 0, it doesn't make a difference. But we see the same happening in the slightly more interesting case of$\pmod 5$. 3 and its inverse give 1 and we are left with just 2$\pmod 5$.
+      \newpage
+      So what do we get overall?
+      \begin{align*}
+	x = 3 \cdot 3^{-1}_5 \cdot 2 + 5 \cdot 5^{-1}_3 \cdot 0 &= 3 \cdot 2 \cdot 2 \\
+	&= 12 \pmod {15}
+      \end{align*}
+      Is this unique$\pmod{15}$? We can show that it is as follows:\\
+      Consider some other $x'$ which satisfies the same congruences as $x$. Therefore, for some integers $k_1$ and $k_2$, we have
+      \begin{align*}
+	x = x'\pmod 3 \Rightarrow x - x' = 3k_1\\
+	x = x'\pmod 5 \Rightarrow x - x' = 5k_2
+      \end{align*}
+      But, since 3 and 5 are prime, we have $x - x' = 15k_3$ for some other integer $k_3$.
+      \\This shows that $x \equiv x'\pmod{15}$ which is what we wanted to show.
+      \\\\Similarly, for $y$, we get
+      \begin{align*}
+	y = 3 \cdot 3^{-1}_5 \cdot 3 + 5 \cdot 5^{-1}_3 \cdot 2 &= 3 \cdot 2 \cdot 3 + 5 \cdot 2 \cdot 2 \\
+	&= 18 + 20 \\
+	&= 8 \pmod{15} \\
+      \end{align*}
+
+      \textit{Alternate method outline:}\\
+      Consider the congruences of $x\pmod 3$ and$\mod 5$. We can write $x$ as follows:
+      $$x = 3t_1 = 5t_2 + 2$$
+      Since $t_1$ and $t_2$ have to be integers, we can solve $t_1 = \frac{5t_2 + 2}{3}$ for possible values of $t_1$ and $t_2$.\\
+      We get that the above equation has integer solutions for $t_1$ and $t_2$ only if $t_2$ is of the form $3k - 1$ for some integer $k$. Then, this forces $t_1$ to be of the form $5k-1$.\\
+      So, we find that $x$ is of the form $15k-3$ for some $k$. Thus, $x \equiv -3 \equiv 12\pmod{15}$. Further, we see that this is unique$\pmod{15}$ because of the $15k$ term.\\\\
+      We can do the same for $y$ to get $y = 8\pmod{15}$.\\\\
+  \end{enumerate}
+}}\fi
 
 
 \qns{Poly - 3} % Ying, cyc
@@ -115,6 +288,15 @@ In this question, we will consider using parts of a stable marriage instance to 
 
 \qns{ECC} % Ian
 \qpart
+(idea) {\bf How many errors?}
+Suppose that the message we want to send consists of 10 numbers. We find a polynomial of degree 9 which goes through all these points and evaluate it on 25 points. How many errors can we recover from?
+
+\ifsolutions{ \answer 
+{
+For $ k $ erasure errors, we need to send $ k $ additional packets for a total of $ n+k $. Here, $ n=10 $ and $ n+k=25 $, so we can recover from 15 erasure errors.
+
+For $ k $ general errors, we need $ 2k $ additional packets. We have 15 additional packets, so we may recover from $ \lfloor 15/2 \rfloor = 7 $ general errors.
+}}\fi
 
 
 \qns{Write your own problem} \\
