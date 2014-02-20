@@ -53,10 +53,15 @@
 \end{enumerate}
 
   
-\qns{RSA - 2} % Sara
-\begin{enumerate}
-\qpart
-\item {\bf Trust No One}
+\qns{Trust No One} % Sara 
+% RSA+SS problem, adapt into Twitch plays Pokemon scenario, break into different parts
+
+% Notes from original source (reuse from sp 13)
+%I want it to show how to compose secret-sharing schemes hierarchically. So break the secret into two shares --- a unanimity share and a multirace share. Both are required to get the true secret. 
+%Then, have the unanimity share be again divided into pieces depending on the race. Only when all the members of a race are together can they recover the u key.
+%Have the multirace key be shared as a degree 1 polynomial evaluated once for every race. Each hobbit has the same copy of this piece, etc...
+%This two layer process works. If no race is unanimous, they will never get the u key. If only one race is involved, they won't get the m key. Without both u and m keys, they have nothing.
+
 
 Gandalf has assembled a fellowship of eight people to transport the One Ring to the fires of Mount Doom: four hobbits, two men, one elf, and one dwarf. The ring has great power that may be of use to the fellowship during their long and dangerous journey. Unfortunately, the use of its immense power will eventually corrupt the user, so it must not be used except in the most dire of circumstances. To safeguard against this possibility, Gandalf wishes to keep the instructions a secret from members of the fellowship. The secret must only be revealed if enough members of the fellowship are present and agree to use it.
 
@@ -98,14 +103,6 @@ When creating the unanimity secret $U$, we first note that each of the dwarf and
 Now suppose that two men and one hobbit come together. The two men work together to determine $U$ as described above. Together the three of them also know $P_m(3)=6$ and $P_m(1)=4$, from which they can find $P_m(x)$ and thus $P_m(0) = M$. Now that they have $U$ and $M$, they can interpolate to find $R(x)$ and thus $R(0) = s = 4$.
 
 
-%I want it to show how to compose secret-sharing schemes hierarchically. So break the secret into two shares --- a unanimity share and a multirace share. Both are required to get the true secret. 
-
-%Then, have the unanimity share be again divided into pieces depending on the race. Only when all the members of a race are together can they recover the u key.
-
-%Have the multirace key be shared as a degree 1 polynomial evaluated once for every race. Each hobbit has the same copy of this piece, etc...
-
-%This two layer process works. If no race is unanimous, they will never get the u key. If only one race is involved, they won't get the m key. Without both u and m keys, they have nothing.
-
 
 
 \answer (\#2) The trick is to construct a degree-4 polynomial (which requires 5 points to determine) $P(x)$ and reveal a varying number of points to each member of the party, depending on their race:
@@ -134,79 +131,31 @@ Once enough points (at least 5) are known, the polynomial (and thus the secret) 
 
 \textbf{Note:} If you have a different (and correct) solution, please post it on Piazza for potential extra credit.
 
-%\textbf{Solution Sketch}: Construct a 5th degree polynomial with the secret as the y-intercept. Evaluate the polynomial at 8 distinct points (not $x=0$). Each hobbit gets 1 point, each man gets 2, and the dwarf and elf get 4. The polynomial (and thus the secret) can be reconstructed by interpolation given at least 6 of the points.
-
 }}\fi
 
 
-\ifsolutions{ \answer {
-\textbf{Motivation} 
-}}\fi 
-\end{enumerate}
 
+\qns{Solving systems of equations}\\ % Sara
+% POLY problem,  reuse from sp13, need to adjust numbers
+Consider the following system of equations $\bmod{15}$:
+\begin{align*}
+13x &+ 7y &= 2 \\
+3x &+ 4y &= 8
+\end{align*}
 
-\qns{Poly - 1} % Sara
-
-\begin{enumerate}
+\begin{itemize}  
 \qpart
-\item \textbf {Polynomials and modular arithmetic}
-  \\Which of the following statements is true?  In each case, if the statement is true give a brief explanation; if it is false, give a simple counterexample.
-  \begin{enumerate}
-  \item For all $a,b\in\mathbf{Z}$, $(a+b)^3 = a^3 + b^3\bmod 3$.
-  \item For all $a,b\in\mathbf{Z}$, $(a+b)^4 = a^4 + b^4\bmod 4$.
-  \item For all $a,b\in\mathbf{Z}$, $(a+b)^5 = a^5 + b^5\bmod 5$.\\
-  \end{enumerate}
+\item[a)] Decompose this into two systems of equations, one $\bmod 3$ and one $\bmod 5$.
+\qpart
+\item[b)] Solve for $x$ and $y$ in both systems.
+\qpart
+\item[c)] Combine these solutions to get a solution to the original problem
+\end{itemize}
+
 
 \ifsolutions{ \answer 
 {
-
-\begin{enumerate}
-  \item \textbf{True.} Expanding gives:
-    $$ (a+b)^3 \equiv a^3 + 3a^2b + 3ab^2 + b^3 \equiv a^3 + b^3 \pmod 3$$
-    All but the first and last terms are multiples of $3$.
-  \item \textbf{False.} Expanding gives:
-    $$ (a+b)^4 \equiv a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4 \equiv a^4 + 2a^2b^2 + b^4 \pmod 4 $$
-    So any choice of values for which the middle term is non-zero will serve as a counterexample. For example choosing $a=1$, $b=1$:
-    $$0 \equiv 16 \equiv (1+1)^4 \neq 1^4 + 1^4 \equiv 2 \bmod 4 $$
-  \item \textbf{True.} Expanding gives:
-    $$(a+b)^5 \equiv a^5 + 5a^4b + 10a^3b^2 + 10a^2b^3 + 5ab^4 + b^5 \equiv a^5 + b^5 \bmod 5 $$
-    All but the first and last terms are multiples of $5$.\\\\
-  \end{enumerate}
-
-}}\fi
-
-
-\ifsolutions{ \answer {
-\textbf{Motivation}
-}}\fi
-    
-\end{enumerate}
-
-\qns{Poly - 2} % Ying, cyc
-
-\begin{enumerate}
-\qpart
-\item (idea) \textbf{Solving systems of equations}
-  \\Consider the following system of equations $\bmod{15}$:
-  
-  \begin{align*}
-    13x &+ 7y &= 2 \\
-    3x &+ 4y &= 8 \\
-  \end{align*}
-  
-  \begin{enumerate}
-  \item Decompose this into two systems of equations, one $\bmod 3$ and one $\bmod 5$.
-  \item Solve for $x$ and $y$ in both systems.
-  \item Combine these solutions to get a solution to the original problem (hint: look at discussion 3, problem 5a)\\
-    
-  \end{enumerate}
-
-\end{enumerate}
-
-\ifsolutions{ \answer 
-{
-
-\\Given a system of 2 linear equations in two unknowns, we are strongly tempted to just attempt to solve it by traditional means. However, we have a problem. Some of these coefficients are not relatively prime to 15. So, we can't necessarily solve for one variable in terms of the other and then use substitution. Looking at 15=3*5 lets us decompose into two different sets of equations, each pair of which is in a finite field where division by nonzero numbers is allowed and safe.
+Given a system of 2 linear equations in two unknowns, we are strongly tempted to just attempt to solve it by traditional means. However, we have a problem. Some of these coefficients are not relatively prime to 15. So, we can't necessarily solve for one variable in terms of the other and then use substitution. Looking at 15=3*5 lets us decompose into two different sets of equations, each pair of which is in a finite field where division by nonzero numbers is allowed and safe.
   \begin{enumerate}
   \item $\bmod 3$:
     \begin{align*}
@@ -265,6 +214,41 @@ Once enough points (at least 5) are known, the polynomial (and thus the secret) 
       We can do the same for $y$ to get $y = 8\pmod{15}$.\\\\
   \end{enumerate}
 }}\fi
+
+
+\qns{Polynomial Interpolations} % Ying
+% POLY problem,  reuse from fa09 and sp10, combined
+\begin{itemize}
+\qpart
+\item[a)] Consider the set of four points $\{(0,1),(1,-2),(3,4),(4,0)\}$,
+construct the unique degree-3 polynomial (over the reals) that passes through these four points 
+by writing down and solving a system of linear equations.
+
+\ifsolutions{ \answer
+{
+\[
+p(x) = (12-99x+76x^2-13x^3)/12
+\]
+}}\fi
+
+
+
+\qpart
+\item[b)] Find a polynomial $h(x)=ax^2 + bx + c$ of degree at most 2
+such that $h(0) \equiv 3 \pmod 7$, $h(1) \equiv 6 \pmod 7$,
+and $h(2) \equiv 6 \pmod 7$ using the method of Lagrange interpolation.
+Show your work clearly and use the same notations as in Lecture Note 7.
+
+\ifsolutions{ \answer
+{
+\[
+ h(x) = 2 x^2 + x + 3 (mod 7)
+\]
+}}\fi
+
+\end{itemize}
+
+
 
 
 \qns{Poly - 3} % Ying, cyc
