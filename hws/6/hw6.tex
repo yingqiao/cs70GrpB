@@ -19,10 +19,10 @@
 %% \usepackage[left=1.5in, right=1.0in, top=1.0in, bottom=1.0in]{geometry}
 
 \newif\ifsolutions
-%\solutionstrue
-\solutionsfalse %flag for solutions
+\solutionstrue
+%\solutionsfalse %flag for solutions
 
-\renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{}#1}}
+\renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solution:}#1}}
 \definecolor{mydarkblue}{rgb}{0,0.25,1}
 
 \def\title{Homework 6}
@@ -217,33 +217,82 @@ Given a system of 2 linear equations in two unknowns, we are strongly tempted to
 
 
 \qns{Polynomial Interpolations} % Ying
-% POLY problem,  reuse from fa09 and sp10, combined
+% POLY problem,  reuse from fa11 and fa10, combined
 \begin{itemize}
 \qpart
-\item[a)] Consider the set of four points $\{(0,1),(1,-2),(3,4),(4,0)\}$,
-construct the unique degree-3 polynomial (over the reals) that passes through these four points 
-by writing down and solving a system of linear equations.
+\item[a)] Consider the set of four points $\{(0,1), (1,-2), (3,4), (4,0)\}$,
+construct the unique degree-$3$ polynomial (over the reals) that passes
+through these four points by writing down and solving a system of linear
+equations.
+
 
 \ifsolutions{ \answer
 {
-\[
-p(x) = (12-99x+76x^2-13x^3)/12
-\]
+Suppose the unique degree $3$ polynomial passing through the four given
+points is $p(x) = a_0 + a_1x + a_2x^2 + a_3x^3$.  The coefficients of $p(x)$
+satisfy the following linear equations:
+\begin{align}
+  p(0) = 1 &\Rightarrow a_0 = 1 \label{p(0)} \\
+  p(1) = -2 &\Rightarrow a_0 + a_1 + a_2 + a_3 = -2 \label{p(1)} \\
+  p(3) = 4 &\Rightarrow a_0 + 3a_1 + 9a_2 + 27a_3 = 4 \label{p(3)} \\
+  p(4) = 0 &\Rightarrow a_0 + 4a_1 + 16a_2 + 64a_3 = \label{p(4)} 0
+\end{align}
+Substituting $a_0 = 1$ and subtracting (i) $3$ times equation \eqref{p(1)} from
+equation \eqref{p(3)} and (ii) 4 times equation \eqref{p(1)} from equation
+\eqref{p(4)}, we obtain the following simultaneous equations:
+\begin{align*}
+  6a_2 + 24a_3 &= 12 \\
+  12a_2 + 60a_3 &= 11
+\end{align*}
+Solving for $a_2$ and $a_3$ we obtain $a_2 = 76/12$ and $a_3 = -13/12$.
+Substituting in equation \eqref{p(1)} we obtain $a_1 = -99/12$. Hence $p(x) =
+(12 - 99x + 76x^2 - 13x^3)/12$ is the unique degree $3$ polynomial passing
+through the given points.
+
 }}\fi
 
 
 
 \qpart
-\item[b)] Find a polynomial $h(x)=ax^2 + bx + c$ of degree at most 2
-such that $h(0) \equiv 3 \pmod 7$, $h(1) \equiv 6 \pmod 7$,
-and $h(2) \equiv 6 \pmod 7$ using the method of Lagrange interpolation.
+\item[b)] Use Lagrange interpolation to find a polynomial $p(x)$ of degree at most $2$ 
+that passes through the points $(1,2)$, $(2,3)$, and $(3,5)$, working in $GF(7)$.
+In other words, we want $p(x)$ to satisfy
+$p(1)\equiv 2 \pmod 7$,
+$p(2)\equiv 3 \pmod 7$, and
+$p(3)\equiv 5 \pmod 7$.
 Show your work clearly and use the same notations as in Lecture Note 7.
+
 
 \ifsolutions{ \answer
 {
-\[
- h(x) = 2 x^2 + x + 3 (mod 7)
-\]
+Alternatively, you could have solved this using Lagrange interpolation.  
+First we would find the three $\Delta_i(x)$ polynomials.
+\begin{align*}
+ \Delta_1(x) &\equiv \frac{(x-2)(x-3)}{(1-2)(1-3)} \equiv \frac{(x-2)(x-3)}{2} \equiv 4(x-2)(x-3) \equiv 4x^2 + x + 3  \pmod 7 \\
+ \Delta_2(x) &\equiv \frac{(x-1)(x-3)}{(2-1)(2-3)} \equiv \frac{(x-1)(x-3)}{-1} \equiv -(x-1)(x-3) \equiv 6x^2 + 4x + 4 \pmod 7\\
+ \Delta_3(x) &\equiv \frac{(x-1)(x-2)}{(3-1)(3-2)} \equiv \frac{(x-1)(x-2)}{2} \equiv 4(x-1)(x-2) \equiv 4x^2 + 2x + 1 \pmod 7
+\end{align*}
+
+Next we compute $p(x)$:
+\begin{align*}
+p(x) &\equiv 2 \Delta_1(x) + 3 \Delta_2(x) + 5 \Delta_3(x)  \pmod 7\\
+&\equiv 2(4x^2+x+3)+3(6x^2+4x+4)+5(4x^2+2x+1)\pmod 7\\
+&\equiv x^2+2x+6+4x^2+5x+5+6x^2+3x+5 \pmod 7\\
+&\equiv 4x^2+3x+2 \pmod 7
+\end{align*}
+
+
+%fa09 old 
+%\begin{eqnarray*}
+%\Delta_2(x)
+%&\equiv&\frac{(x - 0)(x - 1)}{(2 - 0)(2 - 1)} \pmod{7}\\
+%&\equiv&2^{-1} \cdot (x^2 - x) \pmod{7}\\
+%&\equiv&4 \cdot (x^2 - x) \pmod{7}\\
+%&\equiv&4x^2 - 4x \pmod{7}\\
+%&\equiv&4x^2 + 3x \pmod{7}
+%\end{eqnarray*}
+
+
 }}\fi
 
 \end{itemize}
@@ -251,11 +300,58 @@ Show your work clearly and use the same notations as in Lecture Note 7.
 
 
 
-\qns{Poly - 3} % Ying, cyc
+\qns{GCD of Polynomials} % Ying
+% POLY problem,  reuse from fa13
+
+Let $A(x)$ and $B(x)$ be polynomials (with coefficients in $\R$ or $GF(m)$). 
+We say that  $\gcd{A(x), B(x)} = D(x)$ if $D(x)$ divides $A(x)$ and $B(x)$,
+and if every polynomial $C(x)$ that divides both $A(x)$ and $B(x)$ also 
+divides $D(x)$. 
+For example, $\gcd{(x-1)(x+1), (x-1)(x+2)} = x-1$.
+Incidentally, $\gcd{A(x), B(x)}$ is the highest degree polynomial
+that divides both $A(x)$ and $B(x)$ \\
+(and it is only defined up to multiplication by a constant,
+i.e. we could also say $\gcd{(x-1)(x+1), (x-1)(x+2)} = 2x-2$).
+
+
+\begin{itemize}
 \qpart
+\item[a)] Write a recursive program to compute $gcd(A(x),B(x))$. 
+You may assume you already have a subroutine for dividing two polynomials. 
+
+
+\ifsolutions{\answer
+{
+Consider the following recursive definition $F$:
+\begin{itemize}
+\item $F(A(x), 0) = A(x)$.
+\item If $A(x) = B(x) Q(x) + R(x)$ with $\deg{R(x)} < \deg{B(x)}$, then
+\[
+F(A(x), B(x)) = F(B(x), R(x)).
+\] 
+($\deg{P(x)}$ denotes the degree of $P(x)$.) 
+\end{itemize}
+}}\fi
+
+
+\qpart
+\item[b)] Let $P(x) = x^4 - 1$ and $Q(x) = x^3 + x^2$.
+Find polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = x + 1$ for all $x$. 
+
+%Prove there are no polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ for all $x$.
+
+\ifsolutions{\answer
+{
+P(x)
+}}\fi
+
+
+\end{itemize}
+
 
 
 \qns{Poly+SS - 4} % Ying
+% POLY problem,  reuse from 
 \qpart
 
 
