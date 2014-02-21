@@ -39,18 +39,36 @@
 \begin{qunlist}
   
 \qns{RSA - 1} % Ian
-\begin{enumerate}
+In this problem we will consider several tweaks to RSA
+\begin{itemize}
 \qpart
-\item
+\item [a)] Warm up: RSA messages are comprised of bit strings encoding the message we want to send. These bit strings are then treated as an unsigned numbers. One method of encoding a bit string as a number suggests that each $i$th bit represents whether we add the number $2^{i-1}$ or not. For example, "$1011$" Can be represented as $2^3 + 2^1 + 2^0 = 11$ or as $2^0 + 2^2 + 2^3 = 14$ depending on what we interpret as the first bit. How many different messages can we encode with an $n$-bit binary string?
+\qpart
+\item [b)] Warm up: Let's say we choose a different method of generating numbers. What if instead we take a $n$-bit string and generate a number, $C$ as suggested above. We then generate a number $2^C \bmod 10$ How many different messages can we encode such that each binary string gets translated to a different number?
+\qpart
+\item [c)] We see from the last part we aren't able to encode $10$ different numbers. Let's assume we want to make the previous method work. We encode an $n$-bit binary string as a number, $C$ in the range $[0, \ 2^n -1]$. We then generate a number $a*C \bmod{2^n}$. What should $a$ be such that we can encode all $n$ length binary bit strings?
+\qpart
+\item [d)] You want to use the RSA encryption method so your friend can tell you who she thinks the best CS70 TA is. However, you realize that the two largest primes you have multiplied together are still less than the number of TAs that have taught the class for all semesters. Explain how you can modify the RSA encryption method to work with three primes, and thus you can send a larger secret.
+\item [e)] Your friend Marty sends you his favorite TA using the standard RSA (two large primes) encryption method; however, you realize that Marty's algorithm to calculate exponentiation in modular arithmetic has an off by one error. Instead of sending you $x^e \bmod{N}$ he has sent you $x^{e/2} \bmod{N}$. How can you recover the original message simply by changing your private key such that you recover the original message? Prove that this works.
+
+\end{itemize}
+
 \ifsolutions{ \answer 
-{
+{ \begin{enumerate}
+\item $2^n$
+\item $4$. $2$ is a factor of $10$ so we will not be able to reach every number simply by taking successive powers of $2$. In particular, $2^5 = 2 \bmod{10}$.
+\item $2^{n+1}-1$. Remember that according to the midterm, when we are working $\bmod{p}$, $p-1$ is its own inverse, therefore, all numbers multiplied by $p-1$ will be distinct $\bmod{p}$.
+\item $N = pqr$ where $p, q, r$ are all prime. Then, let $e$ be co-prime with $(p-1)(q-1)(r-1)$. Give the public key: $(N, e)$ and calculate $d = e^{-1} \bmod{(p-1)(q-1)(r-1)}$. Does this work? We prove that $x^{ed} - x \equiv 0 \bmod{N}$ and thus $x^{ed} = 1 \bmod{N}$. The argument proceeds almost identically to the one covered in lecture notes.
+\item calculate $d$ such that $de = 2 \bmod{N}$. In other words, $d = (2^{-1}e)^{-1} \bmod{N}$. We wish to prove that $x^{ed} = x^2 \bmod{N}$. We now wish to show that $x^{ed} - x^2 = 0 \bmod{N}$. We now factor out $x^2$ to get $x^2(x^{k(p-1)(q-1)} - 1)$ and the proof continues as the lecture notes of normal RSA.
+
+\end{enumerate}
 }}\fi
 
 
 \ifsolutions{ \answer {
-\textbf{Motivation}
+\textbf{Motivation} Parts d is to make sure students really understand the proof of RSA. Part e is for students to gain some intuition about how to actually go about calculating $e$ and $d$ and why the work. Part a,b serve as warm ups for the problem set and introduce them to counting which they will see a lot more in the second half of the course. Part c is to make sure students are actually learning from the midterms/homeworks, rather than just forgetting everything.
 }}\fi
-\end{enumerate}
+
 
   
 \qns{Trust No One} % Sara 
