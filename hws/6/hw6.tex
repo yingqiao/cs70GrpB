@@ -38,7 +38,7 @@
 
 \begin{qunlist}
   
-\qns{RSA - 1} % Ian
+\qns{Tweaking RSA} % Ian
 In this problem we will consider several tweaks to RSA
 \begin{itemize}
 \qpart
@@ -373,16 +373,29 @@ P(x)
 \qpart
 
 
-\qns{SS+SM - 1} % Ian
-
-
-In this question, we will consider using parts of a stable marriage instance to share secrets. 
-
+\qns{Polynomial Proof} % Ian
+%reuse from su13 and sp10 similar to hw5 q3 (no .tex in repo)
+ In this problem, you will give two different proofs of the following theorem: For every prime $p$, every polynomial over $GF(p)$ is equivalent to a polynomial of degree at most $p-1$. (Two polynomials $f,g$ over $GF(p)$ are said to be equivalent iff $f(x)=g(x)$ for all $x\in GF(p)$.)
 \begin{enumerate}
+
+ \qpart
+\item[a)] Show how the theorem follows from Fermat's Little Theorem. (Hint: Be careful! It is not true that $x^{p-1}\equiv 1\pmod{p}$ for all $x\in\{0,1,\ldots,p-1\}$. Why not?)
 \qpart
-\item  If the secret we want to share is coded as a number representing the final stable pairing reached when we run the traditional propose-and-reject algorithm for a instance of $n$ men and $n$ women, how big of a number can we get? (answer: there are $n!$ total pairs).
+\item[b)] Now prove the theorem using what you know about Lagrange interpolation.
 
 \end{enumerate}
+
+
+\ifsolutions{ \answer
+{
+ From Fermat's Little Theorem, we know $\forall x \not\equiv 0, \text{ } x^{p-1} \equiv 1 \pmod{p}$. \\
+Multiplying both sides by $x$, and noting that $0^p \equiv 0 \pmod{p}$, we can see that 
+$$\forall x, \text{ } x^p \equiv x \pmod{p}.$$
+Therefore, any $x^k$, where $k \geq p$ will be equivalent to $x^n$, where $n \in \{0, 1, \dots, p-1\}$, and will have a degree at most $p - 1$. 
+
+Since a polynomial $f$ of degree $d$ is described completely by $d + 1$ points, we cannot specify a polynomial of degree $\geq p$ because $f(p) = f(0)$ (and so forth for other values larger than $p$) over $GF(p)$. Thus, we can only specify at most $p$ unique points.\\
+Therefore, every polynomial is equivalent to a polynomial of degree at most $p - 1$.
+}} \fi
 
 \qns{ECC} % Ian
 \qpart
