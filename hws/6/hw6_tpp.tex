@@ -1,0 +1,92 @@
+\documentclass[]{article}
+% packages
+\usepackage{../../cs70}
+\usepackage{../../markup}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{color}
+
+\newif\ifsolutions
+% \solutionstrue
+\solutionsfalse %flag for solutions
+
+\renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{}#1}}
+\definecolor{mydarkblue}{rgb}{0,0.25,1}
+
+\def\title{Homework 6}
+
+\begin{document}
+
+\maketitle
+\config{hwnum}{5}
+\config{homework-due}{03/03/2014 13:00}
+\config{grades-due}{03/10/2014 13:00}
+\vspace{0.5em}
+{\Large{\textbf{This homework is due March 03 2014, at 12:00 noon.}}}
+
+\begin{qunlist}
+  
+  \qns{Twitch Plays Pokemon ... a little differently}
+
+  \textbf{Introduction:}
+  If you are familiar with TwitchPlaysPokemon, feel free to skip this section.
+
+  TwitchPlaysPokemon is a social experiment based on the game Pokemon, which you are probably familiar with.
+  Twitch, which is a website for streaming games, has a chat service where individuals viewing the streams can chat with other viewers.
+  TwitchPlaysPokemon is a stream which takes messages entered as chat as input commands into a game of Pokemon Red.
+
+  The result? Around 70,000 individuals playing a single player game of Pokemon all together, 
+  entering several hundred commands every second.
+  As you can imagine, it is utterly and delightfully chaotic.
+
+  This is a link to the \href{http://www.twitch.tv/twitchplayspokemon}{live stream}.
+
+  \textit{Anarchy vs. Democracy:}
+
+  As it stands, there are two modes to the game, anarchy and democracy.
+  Anarchy is blissful chaos where all the commands from chat are fed into the game to be executed.
+  Democracy aims at more structured approach where it gives the viewers a 20 second window to enter the commands; 
+  it will then choose the command entered the most.
+  The game shifts between the two modes based on votes it receives for the modes, which are also entered in chat.
+
+  \textbf{A new mode: The Republic}
+
+  The creator of TwitchPlaysPokemon has decided that he wants to add a third mode: Republic (or, if you like, Anarcho-Democratic Republican Theocracy). 
+  In this mode, the viewer base will be split into four anarchists, two democrats, the elected president, and the High Priest of the Sacred Helix Fossil. 
+
+  In order to maintain a balance of powers, no one faction can determine what move to make (even if, for example, all four anarchists agree on an action). 
+  Requiring all eight representatives of the Republic to agree is certainly a sufficient condition to make a move, but it seems excessive. 
+  With this in mind, if an entire faction, plus at least one representative from a different faction, agrees to make a certain move, then it shall be done.
+
+  More explicitly, some examples: 
+  Only four anarchists agreeing on the next move is not enough. 
+  Only two democrats agreeing is not enough. 
+  Only the elected President is not enough. 
+  Only the High Priest is not enough. 
+  All four anarchists and one democrat agreeing is enough to execute the next move.
+  Both democrats and the President agreeing is enough.
+  And so on.
+
+  The creator of TwitchPlaysPokemon has hired your services to help him come up with a secret sharing scheme that accomplishes this task, summarized by the following points:
+
+  \begin{enumerate}
+  \item
+    The Republic consists of four anarchists, two democrats, the elected President, and the High Priest of the Sacred Helix Fossil.
+
+  \item
+    There are secret instructions for executing the next move that needs to be known only if enough representatives of the Republic are in agreeance.
+    The instructions must remain unknown to everyone (except the creator) if not enough representatives of the Republic are in agreeance.
+
+  \item
+    If only the representatives of one faction are in agreeance, the instructions remain a secret.
+
+  \item
+    If all the representatives of one faction are in agreeance plus at least one additional representatives,the instructions can be determined.
+
+  \item
+    Other combinations of representatives (e.g. two anarchists and a democrat) can either determine the instructions or be unable to do so (it is up to your discretion). 
+  \end{enumerate}
+
+\end{qunlist}
+
+\end{document}

@@ -3,6 +3,7 @@
 \usepackage{../../cs70}
 \usepackage{../../markup}
 \usepackage{enumerate}
+\usepackage{hyperref}
 %% \usepackage{framed}
 %% \usepackage{MnSymbol}
 %% \usepackage{epstopdf}
@@ -237,7 +238,7 @@ p(x) &\equiv 2 \Delta_1(x) + 3 \Delta_2(x) + 5 \Delta_3(x)  \pmod 7\\
 
 
 
-\qns{GCD of Polynomials} % Ying
+\qns{GCD of Polynomials} \\   % Ying
 % POLY problem,  reuse problem from fa13, new solution
 Let $A(x)$ and $B(x)$ be polynomials (with coefficients in $\R$ or $GF(m)$). We say that  $\gcd{A(x), B(x)} = D(x)$ if $D(x)$ divides $A(x)$ and $B(x)$, and if every polynomial $C(x)$ that divides both $A(x)$ and $B(x)$ also divides $D(x)$. For example, $\gcd{(x-1)(x+1), (x-1)(x+2)} = x-1$. Incidentally, $\gcd{A(x), B(x)}$ is the highest degree polynomial that divides both $A(x)$ and $B(x)$.
 %(and it is only defined up to multiplication by a constant, i.e. we could also say $\gcd{(x-1)(x+1), (x-1)(x+2)} = 2x-2$).
@@ -266,15 +267,15 @@ F(A(x), B(x)) = F(B(x), R(x)).
 Let $P(x) = x^4 - 1$ and $Q(x) = x^3 + x^2$.
 \begin{itemize}
 \qpart
-\item[c)] Prove there are no polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ for all $x$.
+\item[b)] Prove there are no polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ for all $x$.
 
-\ifsolution{ \answer {
+\ifsolutions{ \answer {
 $gcd(P(x), Q(x)) = x+1$
 }}\fi
 
 
 \qpart
-\item[b)] Find polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = x + 1$ for all $x$. 
+\item[c)] Find polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = x + 1$ for all $x$. 
 
 \ifsolutions{ \answer {
 \[
@@ -373,37 +374,61 @@ This homework exercise was loosely modelled after a real-life story, where a gro
 
 
 
-\qns{Trust No One} % Sara 
+\qns{Twitch Plays Pokemon ... a little differently}  % Sara + Sibi 
 % RSA+SS problem, adapt into Twitch plays Pokemon scenario, break into different parts
 
 % Notes from original source (reuse from sp 13)
-%I want it to show how to compose secret-sharing schemes hierarchically. So break the secret into two shares --- a unanimity share and a multirace share. Both are required to get the true secret. 
-%Then, have the unanimity share be again divided into pieces depending on the race. Only when all the members of a race are together can they recover the u key.
-%Have the multirace key be shared as a degree 1 polynomial evaluated once for every race. Each hobbit has the same copy of this piece, etc...
-%This two layer process works. If no race is unanimous, they will never get the u key. If only one race is involved, they won't get the m key. Without both u and m keys, they have nothing.
+%I want it to show how to compose secret-sharing schemes hierarchically. So break the secret into two shares --- a unanimity share and a multirace share. Both are required to get the true secret. Then, have the unanimity share be again divided into pieces depending on the race. Only when all the members of a race are together can they recover the u key. Have the multirace key be shared as a degree 1 polynomial evaluated once for every race. Each hobbit has the same copy of this piece, etc... This two layer process works. If no race is unanimous, they will never get the u key. If only one race is involved, they won't get the m key. Without both u and m keys, they have nothing.
+
+\textbf{Introduction:} If you are familiar with TwitchPlaysPokemon, feel free to skip this section.
+
+TwitchPlaysPokemon is a social experiment based on the game Pokemon, which you are probably familiar with.Twitch, which is a website for streaming games, has a chat service where individuals viewing the streams can chat with other viewers. TwitchPlaysPokemon is a stream which takes messages entered as chat as input commands into a game of Pokemon Red.
+
+The result? Around 70,000 individuals playing a single player game of Pokemon all together, entering several hundred commands every second. As you can imagine, it is utterly and delightfully chaotic. This is a link to the \href{http://www.twitch.tv/twitchplayspokemon}{live stream}.
+
+\textit{Anarchy vs. Democracy:}
+As it stands, there are two modes to the game, anarchy and democracy. Anarchy is blissful chaos where all the commands from chat are fed into the game to be executed. Democracy aims at more structured approach where it gives the viewers a 20 second window to enter the commands; it will then choose the command entered the most. The game shifts between the two modes based on votes it receives for the modes, which are also entered in chat.
 
 
-Gandalf has assembled a fellowship of eight people to transport the One Ring to the fires of Mount Doom: four hobbits, two men, one elf, and one dwarf. The ring has great power that may be of use to the fellowship during their long and dangerous journey. Unfortunately, the use of its immense power will eventually corrupt the user, so it must not be used except in the most dire of circumstances. To safeguard against this possibility, Gandalf wishes to keep the instructions a secret from members of the fellowship. The secret must only be revealed if enough members of the fellowship are present and agree to use it.
+\textbf{A new mode: The Republic}
 
-Requiring all eight members to agree is certainly a sufficient condition to know the instructions, but it seems excessive. However, we also know that the separate races (hobbits, men, elf, and dwarf) do not completely trust each other so instead we decide to to require members from at least two races in order to use the ring. In particular, we will require a unanimous decision by all members of one race in addition to at least one member of a different race. That is, if only the four hobbits want to use the ring, then they alone should not have sufficient information to figure out the instructions. Same goes for the two men, the elf, and the dwarf.
+The creator of TwitchPlaysPokemon has decided that he wants to add a third mode: Republic (or, if you like, Anarcho-Democratic Republican Theocracy). In this mode, the viewer base will be split into four anarchists, two democrats, the elected president, and the High Priest of the Sacred Helix Fossil. 
 
-More explicitly, some examples: only four hobbits agreeing to use the ring is not enough to know the instructions. Only two men agreeing is not enough. Only the elf agreeing is not enough. Only the dwarf agreeing is not enough. All four hobbits and a man agreeing is enough. Both men and a dwarf agreeing is enough. Both the elf and the dwarf agreeing is enough.
+In order to maintain a balance of powers, no one faction can determine what move to make (even if, for example, all four anarchists agree on an action). Requiring all eight representatives of the Republic to agree is certainly a sufficient condition to make a move, but it seems excessive. With this in mind, if an entire faction, plus at least one representative from a different faction, agrees to make a certain move, then it shall be done.
 
-Gandalf has hired your services to help him come up with a secret sharing scheme that accomplishes this task, summarized by the following points:
-\begin{itemize}
-\item There is a party of four hobbits, two men, an elf, and a dwarf.
-\item There is a secret message that needs to be known if enough members of the party are in agreeance.
-\item The message must remain unknown to everyone (except Gandalf) if not enough members of the party are in agreeance.
-\item If only the members of one race are in agreeance, the message remains a secret.
-\item If all the members of one race are in agreeance plus at least one additional person, the message can be determined.
-\item Other combinations of members (e.g. two hobbits and a man) can either determine the message or keep it a secret (it is up to your discretion).
-\end{itemize}
+More explicitly, some examples: 
+Only four anarchists agreeing on the next move is not enough. 
+Only two democrats agreeing is not enough. 
+Only the elected President is not enough. 
+Only the High Priest is not enough. 
+All four anarchists and one democrat agreeing is enough to execute the next move.
+Both democrats and the President agreeing is enough.
+And so on.
+
+The creator of TwitchPlaysPokemon has hired your services to help him come up with a secret sharing scheme that accomplishes this task, summarized by the following points:
 
 \begin{enumerate}
-\item[(a)] Devise a scheme that will ensure the members of a race agree within themselves.  Give an example of how your method will work when the secret $s=4$.
-\item[(b)] Then devise a scheme that will ensure that at least two races agree with each other. Extend your example from part (a) to this step.
+\item  The Republic consists of four anarchists, two democrats, the elected President, and the High Priest of the Sacred Helix Fossil.
+\item  There are secret instructions for executing the next move that needs to be known only if enough representatives of the Republic are in agreeance. The instructions must remain unknown to everyone (except the creator) if not enough representatives of the Republic are in agreeance.
+\item  If only the representatives of one faction are in agreeance, the instructions remain a secret.
+\item  If all the representatives of one faction are in agreeance plus at least one additional representatives,the instructions can be determined.
+\item  Other combinations of representatives (e.g. two anarchists and a democrat) can either determine the instructions or be unable to do so (it is up to your discretion). 
+\end{enumerate}
+
+
+
+%q-part
+\begin{enumerate}
+\qpart
+\item[(a)] Devise a scheme that will ensure the members of a fraction agree within themselves.  Give an example of how your method will work when the secret $s=4$.
+\qpart
+\item[(b)] Then devise a scheme that will ensure that at least two fractions agree with each other. Extend your example from part (a) to this step.
+\qpart
 \item[(c)] Finally, show how to combine (a) and (b) so that they can recover the secret. In your example, show how they will recover $s=4$.
 \end{enumerate}
+
+
+
 
 \ifsolutions{ \answer 
 {
@@ -461,17 +486,15 @@ Once enough points (at least 5) are known, the polynomial (and thus the secret) 
 
 
 
-\qns{ECC} % Ian
-\qpart
-(idea) {\bf How many errors?}
+\qns{How many errors?} \\ % Ian
 Suppose that the message we want to send consists of 10 numbers. We find a polynomial of degree 9 which goes through all these points and evaluate it on 25 points. How many errors can we recover from?
 
-\ifsolutions{ \answer 
-{
+\ifsolutions{ \answer {
 For $ k $ erasure errors, we need to send $ k $ additional packets for a total of $ n+k $. Here, $ n=10 $ and $ n+k=25 $, so we can recover from 15 erasure errors.
 
 For $ k $ general errors, we need $ 2k $ additional packets. We have 15 additional packets, so we may recover from $ \lfloor 15/2 \rfloor = 7 $ general errors.
 }}\fi
+
 
 
 \qns{Write your own problem} \\
