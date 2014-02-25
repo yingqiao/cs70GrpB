@@ -49,7 +49,7 @@ In this problem we will consider several tweaks to RSA.
 \qpart
 \item [c)] We see from the last part that we aren't able to encode $10$ different numbers. Let's assume we want to make the previous method work. We encode an $n$-bit binary string as a number, $C$, in the range of $[0, \ 2^n -1]$. We then generate a number $a*C \bmod {2^n}$. What should $a$ be such that we can encode all $n$-length binary bit strings?
 \qpart
-\item [d)] You want to use the RSA encryption method so that your friend can tell you who she thinks the best CS70 TA is. However, you realize that the two largest primes you have multiplied together are still less than the number of TAs that have taught the class during all semesters. Explain how you can modify the RSA encryption method to work with three primes, and thus you can send a larger secret.
+\item [d)] You want to use the RSA encryption method so that your friend can tell you a secrect. However, you realize that the two largest primes you have multiplied together are still less than ideal. Explain how you can modify the RSA encryption method to work with three primes, and thus you can send a larger secret.
 \qpart
 \item [e)] Your friend Marty sends you his favorite TA using the standard RSA (two large primes) encryption method; however, you realize that Marty's algorithm to calculate exponentiation in modular arithmetic has an off by one error. Instead of sending you $x^e \bmod{N}$ he has sent you $x^{e/2} \bmod{N}$. How can you recover the original message simply by changing your private key? Prove that this works.
 \end{itemize}
@@ -180,7 +180,7 @@ The coefficients of $p(x)$ satisfy the following linear equations:
   p(0) = 1 &\Rightarrow a_0 = 1 \label{p(0)} \\
   p(1) = -2 &\Rightarrow a_0 + a_1 + a_2 + a_3 = -2 \label{p(1)} \\
   p(3) = 4 &\Rightarrow a_0 + 3a_1 + 9a_2 + 27a_3 = 4 \label{p(3)} \\
-  p(4) = 0 &\Rightarrow a_0 + 4a_1 + 16a_2 + 64a_3 = 0 \label{p(4)}
+  p(4) = 0 &\Rightarrow a_0 + 4a_1 + 16a_2 + 64a_3 = \label{p(4)} 0
 \end{align}
 Substituting $a_0 = 1$ and subtracting (i) $3$ times equation \eqref{p(1)} from equation \eqref{p(3)} and (ii) 4 times equation \eqref{p(1)} from equation \eqref{p(4)}, we obtain the following simultaneous equations:
 \begin{align*}
@@ -264,7 +264,7 @@ F(A(x), B(x)) = F(B(x), R(x)).
 \end{itemize}
 
 
-Let $P(x) = x^4 - 1$ and $Q(x) = x^3 + x^2$.
+Let $P(x) = x^4 - 1$ and $Q(x) = x^3 + x^2$ in standard form.
 \begin{itemize}
 \qpart
 \item[b)] Prove there are no polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ for all $x$.
@@ -292,7 +292,7 @@ A(x)=-(x+1) \quad B(x)=x^2
 
 \qns{Proofs about polynomials} \\   % Ian
 %reuse from su13 and sp10 similar to hw5 q3 (no .tex in repo)
-In this problem, you will give two different proofs of the following theorem: For every prime $p$, every polynomial over $GF(p)$ is equivalent to a polynomial of degree at most $p-1$. (Two polynomials $f,g$ over $GF(p)$ are said to be equivalent iff $f(x)=g(x)$ for all $x\in GF(p)$.)
+In this problem, you will give two different proofs of the following theorem: For every prime $p$, every polynomial over $GF(p)$, even polynomials with degree $\geq p$, is equivalent to a polynomial of degree at most $p-1$. (Two polynomials $f,g$ over $GF(p)$ are said to be equivalent iff $f(x)=g(x)$ for all $x\in GF(p)$.)
 
 \begin{enumerate}
 \qpart
@@ -389,12 +389,15 @@ The result? Around 70,000 individuals playing a single player game of Pokemon al
 \textit{Anarchy vs. Democracy:}
 As it stands, there are two modes to the game, anarchy and democracy. Anarchy is blissful chaos where all the commands from chat are fed into the game to be executed. Democracy aims at more structured approach where it gives the viewers a 20 second window to enter the commands; it will then choose the command entered the most. The game shifts between the two modes based on votes it receives for the modes, which are also entered in chat.
 
-
+\newpage
 \textbf{A new mode: The Republic}
 
-The creator of TwitchPlaysPokemon has decided that he wants to add a third mode: Republic (or, if you like, Anarcho-Democratic Republican Theocracy). In this mode, the viewer base will be split into four anarchists, two democrats, the elected president, and the High Priest of the Sacred Helix Fossil. 
+The creator of TwitchPlaysPokemon has decided that he wants to add a third mode: Republic (or, if you like, Anarcho-Democratic Republican Theocracy). 
+In this mode, the viewer base is reduced in number slightly from around 70,000 to 8 representatives. 
+These eight representatives are split into four anarchists, two democrats, the elected president, and the High Priest of the Sacred Helix Fossil. 
 
 In order to maintain a balance of powers, no one faction can determine what move to make (even if, for example, all four anarchists agree on an action). Requiring all eight representatives of the Republic to agree is certainly a sufficient condition to make a move, but it seems excessive. With this in mind, if an entire faction, plus at least one representative from a different faction, agrees to make a certain move, then it shall be done.
+The creator of TwitchPlaysPokemon has hired your services to help him come up with a secret sharing scheme that accomplishes this task.
 
 More explicitly, some examples: 
 Only four anarchists agreeing on the next move is not enough. 
@@ -405,19 +408,27 @@ All four anarchists and one democrat agreeing is enough to execute the next move
 Both democrats and the President agreeing is enough.
 And so on.
 
-The creator of TwitchPlaysPokemon has hired your services to help him come up with a secret sharing scheme that accomplishes this task, summarized by the following points:
+It is of course possible that multiple factions could recover the secret instructions simultaneously.
+Consider for example: All the democrats and one anarchist come together and decide a move. 
+At the same time, the President and one other anarchist decide a move together. 
+And finally, the High Priest and the remaining anarchists decide another move together. 
+Here, these individiual groups can all recover the secret instructions from the specified conditions.
+If such a rivalry arises, then, true to the original spirit of the game, there is fallback to anarchy: one of the multiple moves is chosen at random.
+You do not need to concern yourself with this outcome.
+
+The secret sharing scheme is summarized by the following points:
 
 \begin{enumerate}
 \item  The Republic consists of four anarchists, two democrats, the elected President, and the High Priest of the Sacred Helix Fossil.
 \item  There are secret instructions for executing the next move that needs to be known only if enough representatives of the Republic are in agreeance. The instructions must remain unknown to everyone (except the creator) if not enough representatives of the Republic are in agreeance.
 \item  If only the representatives of one faction are in agreeance, the instructions remain a secret.
-\item  If all the representatives of one faction are in agreeance plus at least one additional representatives,the instructions can be determined.
-\item  Other combinations of representatives (e.g. two anarchists and a democrat) can either determine the instructions or be unable to do so (it is up to your discretion). 
+\item  If all the representatives of one faction are in agreeance plus at least one additional representatives, the instructions can be determined.
+\item  Other combinations of representatives (e.g. two anarchists and a democrat) cannot determine the instructions.
 \end{enumerate}
 
 
+Now, please design the required secrect sharing scheme using the guided parts given below.
 
-%q-part
 \begin{enumerate}
 \qpart
 \item[(a)] Devise a scheme that will ensure the members of a fraction agree within themselves.  Give an example of how your method will work when the secret $s=4$.
@@ -456,7 +467,9 @@ Now suppose that two men and one hobbit come together. The two men work together
 
 
 
-\answer (\#2) The trick is to construct a degree-4 polynomial (which requires 5 points to determine) $P(x)$ and reveal a varying number of points to each member of the party, depending on their race:
+\answer (\#2) \textbf{NO LONGER WORKS WITH THE NEW ``POINT-5'' IN SUMMARY}
+
+The trick is to construct a degree-4 polynomial (which requires 5 points to determine) $P(x)$ and reveal a varying number of points to each member of the party, depending on their race:
 
 \begin{itemize}
 	\item Hobbits: 1 point each
@@ -487,7 +500,7 @@ Once enough points (at least 5) are known, the polynomial (and thus the secret) 
 
 
 \qns{How many errors?} \\ % Ian
-Suppose that the message we want to send consists of 10 numbers. We find a polynomial of degree 9 which goes through all these points and evaluate it on 25 points. How many errors can we recover from?
+Suppose that the message we want to send consists of 10 numbers. We find a polynomial of degree 9 which goes through all these points and evaluate it on 25 points. How many erasure errors can we recover from?
 
 \ifsolutions{ \answer {
 For $ k $ erasure errors, we need to send $ k $ additional packets for a total of $ n+k $. Here, $ n=10 $ and $ n+k=25 $, so we can recover from 15 erasure errors.
