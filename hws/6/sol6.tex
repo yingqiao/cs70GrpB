@@ -291,8 +291,13 @@ Let $P(x) = x^4 - 1$ and $Q(x) = x^3 + x^2$ in standard form.
 \qpart
 \item[b)] Prove there are no polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ for all $x$.
 
-\ifsolutions{ \answer {
-$gcd(P(x), Q(x)) = x+1$
+\ifsolutions{ \answer { We can compute the GCD of $P(x)$ and $Q(x)$, and show it is not 1. Dividing $P(x)$ (higher degree) by $Q(x)$, we get
+\[ x^4 - 1 = (x^3 + x^2)(x-1) + (x^2 -1). \]
+So now we've reduced $gcd(x^4-1, x^3 + x^2)$ to the problem of $gcd(x^2-1,x^3+x^2)$. Now dividing $x^3 + x^2$ by $x^2-1$, we get
+\[ x^3 + x^2 = (x^2-1)(x+1) + (x+1). \]
+Now we've reduced the problem to $gcd(x^2-1, x+1)$. Dividing again, we get a remainder of 0:
+\[ x^2 - 1 = (x+1)(x-1) + 0. \]
+So therefore $gcd(P(x), Q(x)) = x+1$, so there do not exist $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ $\forall x$.
 }}\fi
 
 
@@ -300,9 +305,13 @@ $gcd(P(x), Q(x)) = x+1$
 \item[c)] Find polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = x + 1$ for all $x$. 
 
 \ifsolutions{ \answer {
-\[
-A(x)=-(x+1) \quad B(x)=x^2
-\]
+Using extended gcd for polynomials, we can work our way backwards from the result of part (b) to find $A(x)$ and $B(x)$. We know that 
+\[ x+1 = (x^3 + x^2) - (x+1)(x^2-1) \]
+Plugging in the formula for $x^2-1$, we get
+\begin{align*}
+x+1 & = (x^3 + x^2) - (x+1)[(x^4 - 1) - (x^3 + x^2)(x-1)] \\
+& = -(x+1)(x^4 - 1) + x^2(x^3+x^2) \end{align*}
+So therefore, $A(x)=-(x+1)$ and $B(x)=x^2$.
 }}\fi
 
 \end{itemize}
