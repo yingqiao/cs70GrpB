@@ -411,7 +411,7 @@ The result? Around 70,000 individuals playing a single player game of Pokemon al
 \textit{Anarchy vs. Democracy:}
 As it stands, there are two modes to the game, anarchy and democracy. Anarchy is blissful chaos where all the commands from chat are fed into the game to be executed. Democracy aims at more structured approach where it gives the viewers a 20 second window to enter the commands; it will then choose the command entered the most. The game shifts between the two modes based on votes it receives for the modes, which are also entered in chat.
 
-\newpage
+%\newpage
 \textbf{A new mode: The Republic}
 
 The creator of TwitchPlaysPokemon has decided that he wants to add a third mode: Republic (or, if you like, Anarcho-Democratic Republican Theocracy). 
@@ -466,54 +466,59 @@ Now, please devise the required secrect sharing scheme using the guided parts gi
 \ifsolutions{ \answer 
 {
 
-(\#1) There will be two parts to this secret: a unanimity secret $U$ and a multi-race secret $M$. $U$ ensures that at least all members of one races are in agreement while $M$ ensures that members of at least two races are in agreement. We will discuss these two in order below. Once both $U$ and $M$ are recovered, they can then be combined to reveal the original secret: each will be a point of the degree-1 polynomial $R(x)$ whose y-intercept contains the secret of the ring.
+There will be two parts to this secret: a unanimity secret $U$ and a multi-faction secret $M$. $U$ ensures that at least all members of one faction are in agreement while $M$ ensures that members of at least two races are in agreement. Once both $U$ and $M$ are recovered, they can then be combined to reveal the original secret: each will be a point of the degree-1 polynomial $R(x)$ whose $y$-intercept contains the secret instructions. \\
+As an example, suppose the secret is $s=4$, $M=3$, and $U=2$. From now on, we can work in GF(5) since $s<5$ and $n<5$ ($n$ is the number of people who have pieces of the secret). First we need to create a degree-1 polynomial $R(x)$ such that $R(0)=s=4$, $R(1)=M=3$, and $R(2)=U=2$. By inspection, 
+\[ R(x) = 4x + 4 \]
+has these properties, since $R(0) = 4 \bmod 5$, $R(1) = 4\cdot1 + 4 = 8 \equiv 3 \bmod 5$, and $R(2) = 4 \cdot 2 + 4 = 12 \equiv 2 \bmod 5$.
 
-The \textit{unanimity secret} involves creating a separate secret for each race. We will require all members of that race to join forces in order to reveal the secret. For example, the hobbits will each have distinct points of a degree-3 polynomial and the men will each have distinct points of a degree-1 polynomial. When all members of a race come together, they will reveal $U$ (encoded, for example, as the y-intercept of each of these polynomials). Note that the elf and the dwarf each know $U$ already since they are the only members of their race.
+\begin{enumerate}
 
-The \textit{multi-race secret} involves creating a degree-1 polynomial $P_m(x)$ and giving one point to all members of each race. For example, the hobbits may each get $P_m(1)$ while the elf gets $P_m(2)$ and the men each get $P_m(3)$. In this way if members of any two races are in agreement, they can reveal $M$ (encoded, for example, as the y-intercept of $P_m(x)$).
+\item[(a)]
 
-Once $U$ and $M$ are each known, they can be \textit{combined} to determine the final secret. $U$ and $M$ allow us to uniquely determine $R(x)$ and thus $R(0)$, the secret of the ring.
+The \textit{unanimity secret} involves creating a separate secret for each faction. We will require all members of that faction to join forces in order to reveal the secret. For example, the anarchists will each have distinct points of a degree-3 polynomial and the democrats will each have distinct points of a degree-1 polynomial. When all members of a faction come together, they will reveal $U$ (encoded, for example, as the $y$-intercept of each of these polynomials). Note that the President and the High Priest will each be told $U$ directly since they are the only members of their faction.
+%When creating the unanimity secret $U$, we first note that each of the dwarf and the elf will be told $U$ directly since they are the only members of their respective races.
+On the other hand, the democrats will each have a point on the degree-1 polynomial $P_d(x)$. Suppose $P_d(x) = 2x+2$. Then the first democrat receives $P_d(1) = 4$ and the second receives $P_d(2) = 4+2 = 6 \equiv 1 \bmod 5$. When they interpolate using these values, they will discover the original polynomial and therefore $P_d(0) = U = 2$. The anarchists will have a similar secret but with a degree-3 polynomial (e.g. $P_a(x) = 4x^3 + x^2 + 2$).
 
-This scheme is an example of hierarchical secret sharing. Let's work out a specific example.
+\item[(b)]
 
-\textbf{Example:} Suppose the secret is $s=4$, $M=3$, and $U=2$. From now on, we can work in GF(5) since $s<5$ and $n<5$ ($n$ is the number of people who have pieces of the secret).
+The \textit{multi-faction secret} involves creating a degree-1 polynomial $P_m(x)$ and giving one point to all members of each faction. For example, the anarchists can each get $P_m(1)$, the democrats each get $P_m(2)$, the President gets $P_m(3)$, and the High Priest gets $P_m(4)$. In this way if members of any two factions are in agreement, they can reveal $M$ (encoded, for example, as the $y$-intercept of $P_m(x)$). To continue our example, we choose degree-1 polynomial $P_m(x) = x+3$ and tell each anarchist $P_m(1)=4$, each democrat $P_m(2)=5\equiv0 \bmod 5$, the President $P_m(3)=6 \equiv 1 \bmod 5$, and the High Priest $P_m(4) = 7 \equiv 2 \bmod 5$. Now any two members of distinct factions can determine $P_m(x)$ and thus $P_m(0) = M = 3$ by interpolating their two values.
 
-First we need to create a degree-1 polynomial $R(x)$ such that $R(0)=s=4$, $R(1)=M=3$, and $R(2)=U=2$. By inspection, $R(x) = 4x + 4$ has these properties (e.g. $R(1) = 4\cdot1 + 4 = 8 \equiv 3$).
+\item[(c)]
 
-Now we can create the multi-race secret $M$. We choose degree-1 polynomial $P_m(x) = x+3$ and tell each hobbit $P_m(1)=4$, the elf $P_m(2)=5\equiv0$, each of the men $P_m(3)=6 \equiv 1$, and the dwarf $P_m(4) = 7 \equiv 2$. Now any two members of distinct races can determine $P_m(x)$ and thus $P_m(0)$ by interpolating their two values.
+Once $U$ and $M$ are each known, they can be \textit{combined} to determine the final secret. $U$ and $M$ allow us to uniquely determine $R(x)$ and thus $R(0)$, the secret instructions. For example, suppose that the two democrats and the High Priest come together. The two democrats work together to determine $U=2$ as described above. Together the three of them also know $P_m(2)=0$ and $P_m(4)=2$, from which they can find $P_m(x)$ and thus $P_m(0) = M=3$. Now that they have $U$ and $M$, they can interpolate to find 
+\[ R(x) = 3 \frac{(x-2)}{(1-2)} + 2 \frac{(x-1)}{(2-1)} = -3x+6 + 2x-2 = -x + 4 \equiv 4x + 4 \pmod 5 \]
+and thus $R(0) = s = 4$. This scheme is an example of hierarchical secret sharing. 
 
-When creating the unanimity secret $U$, we first note that each of the dwarf and the elf will be told $U$ directly since they are the only members of their respective races. On the other hand, the men will each have a point on the degree-1 polynomial $P_{men}(x)$. Suppose $P_{men}(x) = 2x+2$. Then the first man receives $P_{men}(1) = 4$ and the second receives $P_{men}(2) = 4+2 = 6 \equiv 1$. When they interpolate using these values, they will discover the original polynomial and therefore $P_{men}(0) = U = 2$. The hobbits will have a similar secret but with a degree-3 polynomial (e.g. $P_{hobbit}(x) = 4x^3 + x^2 + 2$).
-
-Now suppose that two men and one hobbit come together. The two men work together to determine $U$ as described above. Together the three of them also know $P_m(3)=6$ and $P_m(1)=4$, from which they can find $P_m(x)$ and thus $P_m(0) = M$. Now that they have $U$ and $M$, they can interpolate to find $R(x)$ and thus $R(0) = s = 4$.
-
-
+\end{enumerate}
 
 
-\answer (\#2) \textbf{NO LONGER WORKS WITH THE NEW ``POINT-5'' IN SUMMARY}
 
-The trick is to construct a degree-4 polynomial (which requires 5 points to determine) $P(x)$ and reveal a varying number of points to each member of the party, depending on their race:
 
-\begin{itemize}
-	\item Hobbits: 1 point each
-	\item Humans: 2 points each
-	\item Dwarf: 4 points
-	\item Elf: 4 points
-\end{itemize}
-
-Since, we need 5 points to determine the polynomial (and thus the secret, which without loss of generality we will assume is encoded as $P(0)$), we see the following behavior (for example):
-\begin{itemize}
-	\item Four hobbits only = 4 points (not enough)
-	\item Two men only = 4 points (not enough)
-	\item Elf only = 4 points (not enough)
-	\item Dwarf only = 4 points (not enough)
-	\item Four hobbits + one man = 4 + 2 = 6 points (enough)
-	\item Two men + dwarf = 4 + 4 = 8 points (enough)
-	\item Elf + dwarf = 4 + 4 = 8 points (enough)
-	\item Three hobbits + one man = 3 + 2 = 5 points (enough) (note this means that unanimity is not guaranteed by this solution)
-	\item Two men + one hobbit = 4 + 1 = 5 points (enough)
-\end{itemize}
-
-Once enough points (at least 5) are known, the polynomial (and thus the secret) can be reconstructed via interpolation.
+%\answer (\#2) \textbf{NO LONGER WORKS WITH THE NEW ``POINT-5'' IN SUMMARY}
+%
+%The trick is to construct a degree-4 polynomial (which requires 5 points to determine) $P(x)$ and reveal a varying number of points to each member of the party, depending on their race:
+%
+%\begin{itemize}
+%	\item Hobbits: 1 point each
+%	\item Humans: 2 points each
+%	\item Dwarf: 4 points
+%	\item Elf: 4 points
+%\end{itemize}
+%
+%Since, we need 5 points to determine the polynomial (and thus the secret, which without loss of generality we will assume is encoded as $P(0)$), we see the following behavior (for example):
+%\begin{itemize}
+%	\item Four hobbits only = 4 points (not enough)
+%	\item Two men only = 4 points (not enough)
+%	\item Elf only = 4 points (not enough)
+%	\item Dwarf only = 4 points (not enough)
+%	\item Four hobbits + one man = 4 + 2 = 6 points (enough)
+%	\item Two men + dwarf = 4 + 4 = 8 points (enough)
+%	\item Elf + dwarf = 4 + 4 = 8 points (enough)
+%	\item Three hobbits + one man = 3 + 2 = 5 points (enough) (note this means that unanimity is not guaranteed by this solution)
+%	\item Two men + one hobbit = 4 + 1 = 5 points (enough)
+%\end{itemize}
+%
+%Once enough points (at least 5) are known, the polynomial (and thus the secret) can be reconstructed via interpolation.
 
 \textbf{Note:} If you have a different (and correct) solution, please post it on Piazza for potential extra credit.
 
