@@ -466,7 +466,7 @@ Now, please devise the required secrect sharing scheme using the guided parts gi
 \ifsolutions{ \answer 
 {
 
-There will be two parts to this secret: a unanimity secret $U$ and a multi-faction secret $M$. $U$ ensures that at least all members of one faction are in agreement while $M$ ensures that members of at least two races are in agreement. Once both $U$ and $M$ are recovered, they can then be combined to reveal the original secret: each will be a point of the degree-1 polynomial $R(x)$ whose $y$-intercept contains the secret instructions. \\
+There will be two parts to this secret: a unanimity secret $U$ and a multi-faction secret $M$. $U$ ensures that at least all members of one faction are in agreement while $M$ ensures that members of at least two factions are in agreement. Once both $U$ and $M$ are recovered, they can then be combined to reveal the original secret: each will be a point of the degree-1 polynomial $R(x)$ whose $y$-intercept contains the secret instructions. \\
 As an example, suppose the secret is $s=4$, $M=3$, and $U=2$. From now on, we can work in GF(5) since $s<5$ and $n<5$ ($n$ is the number of people who have pieces of the secret). First we need to create a degree-1 polynomial $R(x)$ such that $R(0)=s=4$, $R(1)=M=3$, and $R(2)=U=2$. By inspection, 
 \[ R(x) = 4x + 4 \]
 has these properties, since $R(0) = 4 \bmod 5$, $R(1) = 4\cdot1 + 4 = 8 \equiv 3 \bmod 5$, and $R(2) = 4 \cdot 2 + 4 = 12 \equiv 2 \bmod 5$.
