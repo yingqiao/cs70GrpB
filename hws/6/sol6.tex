@@ -4,19 +4,7 @@
 \usepackage{../../markup}
 \usepackage{enumerate}
 \usepackage{hyperref}
-%% \usepackage{framed}
-%% \usepackage{MnSymbol}
-%% \usepackage{epstopdf}
 \usepackage{color}
-%% \usepackage[]{amsmath}
-%% \usepackage{graphicx}
-%% \usepackage{amssymb}
-%% \usepackage{parskip}
-%% \usepackage{rotating}
-%% \usepackage{float}
-%% \usepackage{multirow}
-%% \usepackage{subcaption}
-%% \usepackage{indentfirst}
 %% \usepackage[left=1.5in, right=1.0in, top=1.0in, bottom=1.0in]{geometry}
 
 \newif\ifsolutions
@@ -36,6 +24,8 @@
 \config{grades-due}{03/10/2014 13:00}
 \vspace{0.5em}
 {\Large{\textbf{This homework is due Mar 3 2014, at 12:00 noon.}}}
+
+
 
 \begin{qunlist}
   
@@ -61,6 +51,7 @@ In this problem we will consider several tweaks to RSA.
 \item[b)] $5$. We know that $2$ is a factor of $10$ so we will not be able to reach every number simply by taking successive powers of $2$. You can check that the powers repeat themselves every time we multiply by $2^4$. \\ $\forall{i} \in \mathbb{N}:   (2^{1+4i} = 2 \bmod{10}) \land (2^{2+4i} = 4\bmod{10}) \land (2^{3+4i} = 8\bmod{10}) \land (2^{4+4i} = 6\bmod{10})$. So, we can only reach these four numbers by repeatedly multiply by 2. However, if $C=0$, then $2^C = 1$ so we can actually encode 5 numbers.
 
 \item[c)] There are many possible values for $a$. In particular, we want $a$ to be co-prime with $2^n$. This means if $a$ is odd, it will work. We want $a$ to be co-prime with $2^n$ so that an inverse exists. We argue that $a\cdot C$ is a bijection from the numbers $\bmod{2^n}$ to the numbers $\bmod{2^n}$. We use the lemma in lecture note 6, $f: A \rightarrow A$ is a bijection if there is an inverse function $g: A \rightarrow A$ such that $\forall{x} \in A:  g(f(x)) = x$. We have $f(C) = a\cdot C \bmod{2^n}$. Since $a$ is coprime with $2^n$ it has an inverse, $a^{-1}$. let $g(x) = a^{-1} \cdot x \bmod{2^n}$. Then we have $g(f(C)) = a^{-1} \cdot a \cdot C = C$. Therefore, $f$ is a bijection and we can encode all $n$-length binary bit strings.
+
 
 \item[d)] $N = pqr$ where $p, q, r$ are all prime. Then, let $e$ be co-prime with $(p-1)(q-1)(r-1)$. Give the public key: $(N, e)$ and calculate $d = e^{-1} \bmod{(p-1)(q-1)(r-1)}$. People who wish to send me a secret, $x$, send $y = x^e \bmod{N}$. I decrypt an incoming message, $y$, by calculating $y^d \bmod{N}$. 
 
@@ -91,9 +82,8 @@ To prove that it is divisible by $r$:
 
 %\textbf{Motivation} Parts d is to make sure students really understand the proof of RSA. Part e is for students to gain some intuition about how to actually go about calculating $e$ and $d$ and why the work. Part a,b serve as warm ups for the problem set and introduce them to counting which they will see a lot more in the second half of the course. Part c is to make sure students are actually learning from the midterms/homeworks, rather than just forgetting everything.
 
-
-
   
+
 
 
 
@@ -184,6 +174,7 @@ y = 2 \cdot (7 \cdot 7^{-1}_3) + 3 \cdot( 3 \cdot 3^{-1}_7) &= 2 \cdot 7 \cdot 1
 
 
 
+\newpage
 
 \qns{Polynomial Interpolations} % Ying
 % POLY problem,  reuse from fa11 and fa10, combined
@@ -242,15 +233,6 @@ p(x) &\equiv 2 \Delta_1(x) + 3 \Delta_2(x) + 5 \Delta_3(x)  \pmod 7\\
 &\equiv 4x^2+3x+2 \pmod 7
 \end{align*}
 
-%fa09 old solution format
-%\begin{eqnarray*}
-%\Delta_2(x)
-%&\equiv&\frac{(x - 0)(x - 1)}{(2 - 0)(2 - 1)} \pmod{7}\\
-%&\equiv&2^{-1} \cdot (x^2 - x) \pmod{7}\\
-%&\equiv&4 \cdot (x^2 - x) \pmod{7}\\
-%&\equiv&4x^2 - 4x \pmod{7}\\
-%&\equiv&4x^2 + 3x \pmod{7}
-%\end{eqnarray*}
 
 }}\fi
 
@@ -258,6 +240,7 @@ p(x) &\equiv 2 \Delta_1(x) + 3 \Delta_2(x) + 5 \Delta_3(x)  \pmod 7\\
 
 
 
+\newpage
 
 
 \qns{GCD of Polynomials} \\   % Ying
@@ -271,18 +254,42 @@ Let $A(x)$ and $B(x)$ be polynomials (with coefficients in $\R$ or $GF(m)$). We 
 You may assume you already have a subroutine for dividing two polynomials. 
 
 
-\ifsolutions{\answer{
-Consider the following recursive definition $F$:
-\begin{itemize}
-\item $F(A(x), 0) = A(x)$.
-\item If $A(x) = B(x) Q(x) + R(x)$ with $\deg{R(x)} < \deg{B(x)}$, then
-\[
-F(A(x), B(x)) = F(B(x), R(x)).
-\] 
-($\deg{P(x)}$ denotes the degree of $P(x)$.) 
-\end{itemize}
-}}\fi
+%\ifsolutions
+\answer{
+Following similar proofs in integer-based GCD, we have
+\[ gcd(A(x), B(x)) = gcd(B(x), R(x)) \]
+if $\deg{R(x)} < \deg{B(x)}$ and
+\[ A(x) = B(x)Q(x) + R(x) \]
+where Q(x) and R(x) can be calculated using the given function
+%\begin{verbatim}
+%algorithm div (A(x), B(x))
+%  //subroutine defined
+%  return [Q(x), R(x)]
+%\end{verbatim}
 
+The algorithm can be easily extended from the original integer-based GCD as follows: 
+}
+\begin{verbatim}
+function gcd(A(x), B(x))
+  if B(x) = 0, then return (A(x))
+  else
+    (Q(x), R(x)) = div(A(x), B(x))
+     return gcd(B(x), R(x))
+\end{verbatim}
+
+\color{mydarkblue}{
+Note: The algorithms assume that $\deg{A(x)} \geq \deg{B(x)} \geq 0$. 
+Here, $\deg{P(x)}$ denotes the degree of $P(x)$.
+}
+
+%Consider the following recursive definition $F$:
+%\begin{itemize}
+%\item $F(A(x), 0) = A(x)$.
+%\item If $A(x) = B(x) Q(x) + R(x)$ with $\deg{R(x)} < \deg{B(x)}$, then
+%\[ F(A(x), B(x)) = F(B(x), R(x)).\] 
+%\end{itemize}
+%}
+%\fi
 \end{itemize}
 
 
@@ -291,13 +298,16 @@ Let $P(x) = x^4 - 1$ and $Q(x) = x^3 + x^2$ in standard form.
 \qpart
 \item[b)] Prove there are no polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ for all $x$.
 
-\ifsolutions{ \answer { We can compute the GCD of $P(x)$ and $Q(x)$, and show it is not 1. Dividing $P(x)$ (higher degree) by $Q(x)$, we get
-\[ x^4 - 1 = (x^3 + x^2)(x-1) + (x^2 -1). \]
-So now we've reduced $gcd(x^4-1, x^3 + x^2)$ to the problem of $gcd(x^2-1,x^3+x^2)$. Now dividing $x^3 + x^2$ by $x^2-1$, we get
-\[ x^3 + x^2 = (x^2-1)(x+1) + (x+1). \]
-Now we've reduced the problem to $gcd(x^2-1, x+1)$. Dividing again, we get a remainder of 0:
-\[ x^2 - 1 = (x+1)(x-1) + 0. \]
-So therefore $gcd(P(x), Q(x)) = x+1$, so there do not exist $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ $\forall x$.
+\ifsolutions{ \answer { 
+We can compute the GCD of $P(x)$ and $Q(x)$, and show that it is not $1$. 
+Running the algorithm in (a), we get
+\begin{align*}
+gcd(x^4-1, \quad x^3+x^2)  \quad&//\quad x^4 - 1 = (x^3 + x^2)(x-1) + (x^2 -1) \\
+gcd(x^3+x^2, \quad x^2-1)  \quad&//\quad x^3 + x^2 = (x^2-1)(x+1) + (x+1) \\
+gcd(x^2-1, \quad x+1)  \quad&//\quad x^2 - 1 = (x+1)(x-1) + 0 \\
+gcd(x+1, \quad 0)  \quad&//\quad D(x)=x+1
+\end{align*}
+Therefore $gcd(P(x), Q(x)) = x+1$, so there do not exist $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ $\forall x$.
 }}\fi
 
 
@@ -539,9 +549,9 @@ and thus $R(0) = s = 4$. This scheme is an example of hierarchical secret sharin
 Suppose that the message we want to send consists of 10 numbers. We find a polynomial of degree 9 which goes through all these points and evaluate it on 25 points. How many erasure errors can we recover from?
 
 \ifsolutions{ \answer {
-For $ k $ erasure errors, we need to send $ k $ additional packets for a total of $ n+k $. Here, $ n=10 $ and $ n+k=25 $, so we can recover from 15 erasure errors.
+For $k$ erasure errors, we need to send $k$ additional packets for a total of $n+k$. Here, $n=10$ and $n+k=25$, so we can recover from 15 erasure errors.
 
-For $ k $ general errors, we need $ 2k $ additional packets. We have 15 additional packets, so we may recover from $ \lfloor 15/2 \rfloor = 7 $ general errors.
+%For $ k $ general errors, we need $ 2k $ additional packets. We have 15 additional packets, so we may recover from $ \lfloor 15/2 \rfloor = 7 $ general errors.
 }}\fi
 
 
