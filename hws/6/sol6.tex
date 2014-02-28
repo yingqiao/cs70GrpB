@@ -56,7 +56,8 @@ In this problem we will consider several tweaks to RSA.
 \item[d)] $N = pqr$ where $p, q, r$ are all prime. Then, let $e$ be co-prime with $(p-1)(q-1)(r-1)$. Give the public key: $(N, e)$ and calculate $d = e^{-1} \bmod{(p-1)(q-1)(r-1)}$. People who wish to send me a secret, $x$, send $y = x^e \bmod{N}$. I decrypt an incoming message, $y$, by calculating $y^d \bmod{N}$. 
 
 Does this work? We prove that $x^{ed} - x \equiv 0 \bmod{N}$ and thus $x^{ed} = x \bmod{N}$. To prove that  
-$x^{ed} - x \equiv 0 \bmod{N}$, we factor out the $x$ to get \\ $x\cdot (x^{ed-1} -1) = x\cdot (x^{k(p-1)(q-1)(r-1)}-1)$ because $ed \equiv 1 \bmod{(p-1)(q-1)(r-1)}$.
+$x^{ed} - x \equiv 0 \bmod{N}$, we factor out the $x$ to get \\ $x\cdot (x^{ed-1} -1) = x\cdot (x^{k(p-1)(q-1)(r-1)+1-1}-1)$ because $ed \equiv 1 \bmod{(p-1)(q-1)(r-1)}$. As a reminder, we are considering the number: 
+$x\cdot (x^{k(p-1)(q-1)(r-1)}-1)$ \\
 %Proceeding from before we know that $x^{ed} = x*(x^{k*(p-1)*(q-1)*(r-1) } -1)$ 
 We now argue that this number must be divisible by $p$, $q$, and $r$. Thus it is divisible by $N$ and $x^{ed} -x \equiv 0 \bmod{N}$. \\
 To prove that it is divisible by $p$:
@@ -75,7 +76,7 @@ To prove that it is divisible by $r$:
 \item if $x$ is not divisible by $r$, then that means we can use FLT on the inside to show that $(x^{r-1})^{k(p-1)(q-1) } -1 \equiv 1 -1 \equiv 0 \bmod{r} $. Thus it is divisible by $r$. 
 \end{itemize} 
 
-\item[e)] Calculate $d$ such that $de \equiv 2 \bmod{N}$. In other words, $d \equiv (2^{-1}e)^{-1} \equiv 2e^{-1} \bmod{N}$. We wish to prove that $x^{ed} = x^2 \bmod{N}$. We now wish to show that $x^{ed} - x^2 = 0 \bmod{N}$. We now factor out $x^2$ to get $x^2(x^{ed-2} - 1)$. Because $ed \equiv 2 \bmod{(p-1)(q-1)}$, we know that $ed = 2 + k(p-1)(q-1)$. Therefore, \\ $x^{ed} - x^2 = x^2(x^{2+ k(p-1)(q-1) -2} - 1) = x^2(x^{k(p-1)(q-1)} - 1)$. We argue that this number is divisible by both $p$ and $q$, and is thus divisible by $N$ and then $\equiv 0 \bmod{N}$. If $x$ is divisible by $p$, we know that $x^2$ is divisible by $p$, and thus the whole thing is divisible by $p$. If $x$ is not divisible by $p$, we can use FLT in the inside to see it is equal to $0 \bmod{p}$. In essence the proof continues as in the lecture notes for normal RSA. 
+\item[e)] Calculate $d'$ such that $d'e \equiv 2 \bmod{N}$. In other words, $d' \equiv (2^{-1}e)^{-1} \equiv 2e^{-1} \bmod{N}$. We wish to prove that $x^{ed'} = x^2 \bmod{N}$. We now wish to show that $x^{ed'} - x^2 = 0 \bmod{N}$. We now factor out $x^2$ to get $x^2(x^{ed'-2} - 1)$. Because $ed' \equiv 2 \bmod{(p-1)(q-1)}$, we know that $ed' = 2 + k(p-1)(q-1)$. Therefore, \\ $x^{ed'} - x^2 = x^2(x^{2+ k(p-1)(q-1) -2} - 1) = x^2(x^{k(p-1)(q-1)} - 1)$. We argue that this number is divisible by both $p$ and $q$, and is thus divisible by $N$ and then $\equiv 0 \bmod{N}$. If $x$ is divisible by $p$, we know that $x^2$ is divisible by $p$, and thus the whole thing is divisible by $p$. If $x$ is not divisible by $p$, we can use FLT in the inside to see it is equal to $0 \bmod{p}$. In essence the proof continues as in the lecture notes for normal RSA. 
 \end{enumerate}
 }}\fi
 
@@ -111,20 +112,20 @@ Given a system of 2 linear equations in two unknowns, we are strongly tempted to
 \item[a)] 
 $\bmod 3$:
   \begin{align*}
-  1x &+ 2y &= 2 \\
-  0x &+ 2y &= 1 
+  1x &+ 2y &\equiv 2 \\
+  0x &+ 2y &\equiv 1 
   \end{align*}
 $\bmod 7$:
   \begin{align*}
-  2x &+ 5y &= 0 \\
-  2x &+ 4y &= 4 \\
+  2x &+ 5y &\equiv 0 \\
+  2x &+ 4y &\equiv 4 \\
   \end{align*}
 
 \item[b)]
 $\bmod 3$:\\
-We find that $y=2 \bmod 3$ from the second equation, since $2^{-1} \bmod 3 = 2$. We can substitute this into the first equation to find $x$:
+We find that $y\equiv2 \bmod 3$ from the second equation, since $2^{-1} \bmod 3 \equiv 2 \bmod 3$. We can substitute this into the first equation to find $x$:
 \[
-x + 2\cdot2 = 2 \quad \Rightarrow \quad x = -2 \bmod 3 \quad \Rightarrow \quad x = 1 \bmod 3.
+x + 2\cdot2 = 2 \quad \Rightarrow \quad x \equiv -2 \bmod 3 \quad \Rightarrow \quad x \equiv 1 \bmod 3.
 \]
 $\bmod 7$:\\
 We can subtract the two equations to find $y$:
@@ -134,8 +135,8 @@ We can subtract the two equations to find $y$:
 \hline
 \Rightarrow \quad  & \quad \ \ y &= -4
 \end{align*}
-Since $-4 = 3\bmod 7$, this gives us $y = 3\bmod 7$. Substituting and reducing, we find that:
-\[ 2x + 5\cdot 3 = 0 \quad \Rightarrow \quad 2x = -15 \bmod 7 = 6 \bmod 7 \quad \Rightarrow \quad x = 3\bmod 7. \]
+Since $-4 \equiv 3\bmod 7$, this gives us $y \equiv 3\bmod 7$. Substituting and reducing, we find that:
+\[ 2x + 5\cdot 3 = 0 \quad \Rightarrow \quad 2x = -15 \bmod 7 \equiv 6 \bmod 7 \quad \Rightarrow \quad x \equiv 3\bmod 7. \]
 
 \item[c)] Now, we want to find values of $x$ and $y$ such that they satisfy the above congruences $\bmod 3$ and $\bmod 7$. So let us construct a solution accordingly. Let us first define the following notation $p^{-1}_q$ to be the inverse of $p, \bmod q$.
 Now, look at $x$. Consider the following form of $x$, inspired by Lagrange interpolation:
@@ -145,7 +146,7 @@ x = 1 \cdot (7 \cdot 7^{-1}_3) + 3 \cdot (3 \cdot 3^{-1}_7)
 Does this satisfy our congruences? We see that when we take the equation $\bmod 3$, the second term disappears since it is congruent to $0 \bmod 3$. The remaining term has both $7$ and its inverse modulo $3$. They give $1$ together and we are left with the original value of $x\bmod 3$, which is 1. We see the same thing happening in the case of $\bmod 7$. $3$ and its inverse give $1$ and we are left with just $3\bmod 7$. Expanding $x$ and taking it $\bmod 21$, we get:
 \begin{align*}
 x = 1 \cdot (7 \cdot 7^{-1}_3) + 3 \cdot (3 \cdot 3^{-1}_7) &= 1 \cdot 7 \cdot 1 + 3 \cdot 5 \cdot 3 \\
-&= \boxed{10 \pmod {21}}
+&\equiv \boxed{10 \pmod {21}}
 \end{align*}
 %      Is this unique$\pmod{15}$? We can show that it is as follows:\\
 %      Consider some other $x'$ which satisfies the same congruences as $x$. Therefore, for some integers $k_1$ and $k_2$, we have
@@ -159,7 +160,7 @@ x = 1 \cdot (7 \cdot 7^{-1}_3) + 3 \cdot (3 \cdot 3^{-1}_7) &= 1 \cdot 7 \cdot 1
 Similarly, for $y$ we get
 \begin{align*}
 y = 2 \cdot (7 \cdot 7^{-1}_3) + 3 \cdot( 3 \cdot 3^{-1}_7) &= 2 \cdot 7 \cdot 1 + 3 \cdot 5 \cdot 3 \\
-&= \boxed{17 \pmod{21}} \\
+&\equiv \boxed{17 \pmod{21}} \\
 \end{align*}
 
 %      \textit{Alternate method outline:}\\
