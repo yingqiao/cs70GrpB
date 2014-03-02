@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage{../../cs70}
+\usepackage{color}
+\newif\ifsolutions
+\solutionstrue
+\solutionsfalse %flag for solutions
+
+\def\title{Discussion 7B}
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+
+% 
+\item Find (and prove) an upper-bound on the number of times two distinct degree $d$ polynomials can intersect. What if the polynomials' degrees differ?
+
+\ifsolutions
+\textbf{Motivation for Problem:} 
+
+\textbf{Solutions:} 
+\fi
+
+%\vspace{30mm}
+
+% previous #5
+\item Suppose your GSI has chosen another polynomial, $Q(x)$, of degree $\leq 2$, 
+and told the value of $Q(1)$ to their favorite student, $Q(2)$ to their second favorite student, and so on, 
+up through $Q(11)$ this time. (All of this is modulo $11$, as in last week's discussion.)
+\begin{enumerate}
+\item Alas, you are not among your GSI's favorite eleven students. How many of those students would you need to talk to before 
+you could figure out the coefficients of Q(x)?
+
+\item That's assuming the students are honest. But, it turns out, four of your GSI's favorite students are morally 
+bankrupt and perfectly willing to lie to you. (The rest are, thankfully, completely trustworthy.)
+
+If you talk to $7$ students, what is the minimum number of correct answers you will receive?
+\item If you talk to $7$ students, how can you tell whether at least one of them is lying? {\em Hint: You may find it useful to think back to the first question.}
+\item Is there a group of $7$ students with no liars?
+\item With access to all $11$ students, how can you figure out the polynomial $Q(x)$, 
+despite the fact that $4$ students are untrustworthy? [Do not worry how efficient your method is]
+\item If your GSI's polynomial had been of degree up to $4$, instead, how many untrustworthy students could there be before 
+this method would stop working? What should all the 7s above be changed to in that case?
+\end{enumerate}
+
+
+\ifsolutions 
+\textbf{Solutions:} \fi
+
+%\vspace{30mm}
+
+
+\item In this problem we will see how to send 4 bits (each either 0 or 1) using Hamming codes. This will be accomplished by using 3 parity bits (check bits) so that 1 error in the message can be detected and corrected. To encode a 4-bit message $p$, we will multiply it by a code-generator matrix $G$:
+\[ G = \left( \begin{array}{cccc} 1 & 1 & 0 & 1 \\
+1 & 0 & 1 & 1 \\
+1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 1 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{array} \right)
+\]   
+
+\begin{enumerate}
+
+\item Show how to encode the message $p=1101$.  What is the resulting 7-bit transmitted message $x$?
+\item Suppose that there was an error (flipped bit) in the 6th bit of $x$. To find out where it occurred, we can multiply $x$ by a parity check matrix $H$:
+\[ H = \left( \begin{array}{ccccccc} 1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 1 & 1 & 1 & 1
+\end{array} \right)
+\]   
+
+What is the resulting binary number?  What is this number base 10? How can you correct $x$?
+
+\item Now we wish to recover the original message $p$. To do this, we can multiply the corrected $x$ by a recovery matrix $R$ that pulls out the 4 original bits:
+
+\[ R = \left( \begin{array}{ccccccc} 0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 1
+\end{array} \right)
+\]   
+
+Do you get $p$ back?
+\end{enumerate}
+ \end{enumerate}
+
+
+
+
+\end{document}
