@@ -3,7 +3,7 @@
 \usepackage{color}
 \newif\ifsolutions
 \solutionstrue
-\solutionsfalse %flag for solutions
+%\solutionsfalse %flag for solutions
 
 \def\title{Discussion 7B}
 \begin{document}
@@ -17,9 +17,12 @@
 \vspace{20mm}
 
 \ifsolutions
-\textbf{Motivation for Problem:} 
+%\textbf{Motivation for Problem:} 
+\vspace{-20mm}
+{\color{blue}{
+\textbf{Solutions:} They can intersect up to $d$ times. This is because we can specify $d$ points to be the same for both polynomials, then the $(d+1)$th point to be different.  Then the polynomials will be distinct, but still agree at $d$ points.  If $d+1$ points agree, the polynomials will be identical.
 
-\textbf{Solutions:} 
+If the polynomials have degrees $d_1$ and $d_2$, with $d_1 > d_2$, then they can intersect up to $d_1$ times. Pick $d_1$ points on the polynomial of degree $d_2$, and another point not on this polynomial. Then a unique degree $d_1$ polynomial will go through these $d_1+1$ points.}}
 \fi
 
 %\vspace{30mm}
@@ -45,12 +48,51 @@ which could have up to 1 error.
 What is the degree of $E(x)$? What is the degree of $Q(x)$? Using the relation above, write out the form of $E(x)$ and $Q(x)$, and then a system of equations to find both these polynomials.
 \vspace{20mm}
 
+\ifsolutions
+\vspace{-20mm}
+{\color{blue}{
+\textbf{Solutions:} The degree of $E(x)$ will be 1, since there is at most 1 error. The degree of $Q(x)$ will be 3, since $P(x)$ is of degree 2. $E(x)$ will have the form $E(x) = x + e$, and $Q(x)$ will have the form $Q(x) = ax^3 + bx^2 + cx + d$. We can write out a system of equations to solve for these 5 variables:
+\begin{align*}
+d & = 3(0+e) \\
+a+b+c+d & = 7(1+e) \\
+8a+4b+2c+d & = 0(2+e) \\
+27a+9b+3c+d & = 2(3+e) \\
+64a+16b+4c+d & = 10(4+e)
+\end{align*}
+}}
+\fi
+
 \item Ask your GSI for $Q(x)$. What is $E(x)$? Where is the error located?
-%It turns out that $Q(x) = 3x^3 + 6x^2 + 5x + 8$. 
 \vspace{20mm}
 
+\ifsolutions
+\vspace{-20mm}
+{\color{blue}{
+\textbf{Solutions:} Solving this system (with Wolfram Alpha) we get 
+\[ Q(x) = 3x^3 + 6x^2 + 5x + 8\]
+Plugging into the first equation (for example), we see that:
+\[ d = 8 = 3e \quad \Rightarrow \quad e = 8 \cdot 4 = 32 \equiv 10 \bmod 11 \]
+
+This means that 
+\[ E(x) = x+10 \equiv x - 1 \mod 11. \]
+
+Therefore the error occurred when $x=1$ (so the second number sent in this case).
+}}
+\fi
+
 \item Finally, what is $P(x)$? Use $P(x)$ to determine the original message that Hector wanted to send.
-\newpage
+
+\ifsolutions
+%\vspace{-20mm}
+{\color{blue}{
+\textbf{Solutions:} Using polynomial division, we divide $Q(x) = 3x^3 + 6x^2 + 5x + 8$ by $E(x) = x-1$:
+\[ P(x) = 3x^2 + 9x + 3 \]
+
+Then $P(1) = 3+9+3 = 15 \equiv 4 \bmod 11$. This means that our original message was
+\[ 3,4,0 \quad \Rightarrow \quad \text{DEA} \]
+}}
+\fi
+%\newpage
 \end{enumerate}
 
 %Suppose your GSI has chosen another polynomial, $Q(x)$, of degree $\leq 2$, 
@@ -72,10 +114,6 @@ What is the degree of $E(x)$? What is the degree of $Q(x)$? Using the relation a
 %this method would stop working? What should all the 7s above be changed to in that case?
 %\end{enumerate}
 
-
-\ifsolutions 
-\textbf{Solutions:} \fi
-
 %\vspace{30mm}
 
 
@@ -94,6 +132,14 @@ What is the degree of $E(x)$? What is the degree of $Q(x)$? Using the relation a
 
 \item Show how to encode the message $p=1101$.  What is the resulting 7-bit transmitted message $x$?
 \vspace{30mm}
+
+\ifsolutions 
+\vspace{-30mm}
+{\color{blue}{
+\textbf{Solutions:} $Gp = x = 1010101$.
+}}
+\fi
+
 \item Suppose that there was an error (flipped bit) in the 6th bit of $x$. To find out where it occurred, we can multiply $x$ by a parity check matrix $H$:
 \[ H = \left( \begin{array}{ccccccc} 1 & 0 & 1 & 0 & 1 & 0 & 1 \\
 0 & 1 & 1 & 0 & 0 & 1 & 1 \\
@@ -103,6 +149,13 @@ What is the degree of $E(x)$? What is the degree of $Q(x)$? Using the relation a
 
 What is the resulting binary number?  What is this number base 10? How can you correct $x$?
 \vspace{30mm}
+
+\ifsolutions 
+\vspace{-30mm}
+{\color{blue}{
+\textbf{Solutions:} We actually received $x' = 1010111$. Computing $Hx'$, we get the sixth column of $H$, which corresponds to 6 in binary, so we know the 6th bit should be flipped to correct $x$.
+}}
+\fi
 
 \item Now we wish to recover the original message $p$. To do this, we can multiply the corrected $x$ by a recovery matrix $R$ that pulls out the 4 original bits:
 
@@ -114,6 +167,14 @@ What is the resulting binary number?  What is this number base 10? How can you c
 \]   
 
 Do you get $p$ back?
+
+\ifsolutions 
+%\vspace{-20mm}
+{\color{blue}{
+\textbf{Solutions:} After correcting $x$, we compute $Rx = p$, and get back $p=1101$.
+}}
+\fi
+
 \end{enumerate}
  \end{enumerate}
 
