@@ -2,8 +2,8 @@
 \usepackage{../../cs70}
 \usepackage{color}
 \newif\ifsolutions
-%\solutionstrue
-\solutionsfalse %flag for solutions
+\solutionstrue
+%\solutionsfalse %flag for solutions
 
 \def\title{Discussion 7B}
 \begin{document}
@@ -90,12 +90,14 @@ Therefore the error occurred when $x=1$ (so the second number sent in this case)
 
 Then $P(1) = 3+9+3 = 15 \equiv 4 \bmod 11$. This means that our original message was
 \[ 3,4,0 \quad \Rightarrow \quad \text{DEA} \]
+
+{\em Note: In Season 4 of Breaking Bad, Hector Salamanca (who cannot speak), uses a bell to spell out ``DEA'' (Drug Enforcement Agency).}
 }}
 \fi
 
 \end{enumerate}
 
-\newpage
+%\newpage
 
 %Suppose your GSI has chosen another polynomial, $Q(x)$, of degree $\leq 2$, 
 %and told the value of $Q(1)$ to their favorite student, $Q(2)$ to their second favorite student, and so on, 
@@ -152,6 +154,13 @@ Then $P(1) = 3+9+3 = 15 \equiv 4 \bmod 11$. This means that our original message
 What do you notice about the form of $H$?  If you multiply $H$ by $x$, what do you get? Will this be true for any message $m$?
 \vspace{10mm}
 
+\ifsolutions 
+\vspace{-10mm}
+{\color{blue}{
+\textbf{Solutions:} The columns of $H$ spell out the numbers 1-7 in binary (read bottom to top). $Hx = (0,0,0)$, which will be true for the encoding of any message $m$ with no errors.
+}}
+\fi
+
 \item Suppose that there was an error (flipped bit) in the 6th bit of $x$, yielding $x'$. To find out where it occurred, we can multiply $H$ by $x'$. What is the result base 10? How can you correct $x$?
 \vspace{15mm}
 
@@ -183,6 +192,14 @@ Do you get $m$ back?
 \fi
 
 \item Do you think that a code like this could exist that could fix a single binary error in a 4-bit message without using at least 7 bits for the codeword? Why or why not?
+
+\ifsolutions 
+{\color{blue}{
+\textbf{Solutions:} 
+%This last thing will help them digest what they have just seen --- obviously, a successful decoding must reveal the location or absence of the error in addition to the original 4 bits.
+With 7 bits, we need to encode $8$ possible error ``locations'' (1-7, and then the no-error option). And to send 4 bits there are $2^4=16$ possible messages. So there are $8\cdot16 = 128 = 2^7$ possibilities, which requires 7 bits. Any shorter and it wouldn't all fit.
+}}
+\fi
 
 \end{enumerate}
  \end{enumerate}
