@@ -49,7 +49,7 @@ In this problem we will consider several tweaks to RSA.
 \ifsolutions{ \answer { 
 \begin{enumerate}
 \item[a)] $2^n$. In an ideal mapping, each binary string will encode a different number (or message). So, counting the number of messages amounts to counting the number of binary strings of length $n$. We realize that each bit has $2$ choices, and there are $n$ bits, thus there are $2^n$ different ways to choose a binary string.
-\item[b)] $5$. We know that $2$ is a factor of $10$ so we will not be able to reach every number simply by taking successive powers of $2$. You can check that the powers repeat themselves every time we multiply by $2^4$. \\ $\forall{i} \in \mathbb{N}:   (2^{1+4i} = 2 \bmod{10}) \land (2^{2+4i} = 4\bmod{10}) \land (2^{3+4i} = 8\bmod{10}) \land (2^{4+4i} = 6\bmod{10})$. So, we can only reach these four numbers by repeatedly multiply by 2. However, if $C=0$, then $2^C = 1$ so we can actually encode 5 numbers.
+\item[b)] $5$. We know that $2$ is a factor of $10$ so we will not be able to reach every number simply by taking successive powers of $2$. You can check that the powers repeat themselves every time we multiply by $2^4$. \\ $\forall{i} \in \mathbb{N}:   (2^{1+4i} = 2 \bmod{10}) \land (2^{2+4i} = 4\bmod{10}) \land (2^{3+4i} = 8\bmod{10}) \land (2^{4+4i} = 6\bmod{10})$. So, we can only reach these four numbers by repeatedly multiply by 2. However, if $C=0$, then $2^C = 1$ so we can actually encode $5$ numbers. This question assumes that we have at least $3$ bits for $C$.
 
 \item[c)] There are many possible values for $a$. In particular, we want $a$ to be co-prime with $2^n$. This means if $a$ is odd, it will work. We want $a$ to be co-prime with $2^n$ so that an inverse exists. We argue that $a\cdot C$ is a bijection from the numbers $\bmod{2^n}$ to the numbers $\bmod{2^n}$. We use the lemma in lecture note 6, $f: A \rightarrow A$ is a bijection if there is an inverse function $g: A \rightarrow A$ such that $\forall{x} \in A:  g(f(x)) = x$. We have $f(C) = a\cdot C \bmod{2^n}$. Since $a$ is coprime with $2^n$ it has an inverse, $a^{-1}$. let $g(x) = a^{-1} \cdot x \bmod{2^n}$. Then we have $g(f(C)) = a^{-1} \cdot a \cdot C = C$. Therefore, $f$ is a bijection and we can encode all $n$-length binary bit strings.
 
@@ -294,22 +294,14 @@ We can find two polynomials $Q_0(x)$ and $R_0(x)$ by polynomial long division (s
 Notice that a polynomial $C(x)$ divides $A(x)$ and $B(x)$ iff it divides $B(x)$ and $R_0(x)$.
 
 [
-Proof: $C(x)$ divides $A(x),B(x)$, there $\exists S(x)$ and $S'(x)$ s.t. $A(x)=C(x)S(x)$ and $B(x)=C(x)S'(x)$, so $R_0(x) = A(x)-B(x)Q_0(x) = C(x)(S(x)-S'(x)Q_0(x))$, therefore $C(x)$ divides $R_0(x)$ or $\deg{R_0(x)}=0$.  
+Proof: $C(x)$ divides $A(x),B(x)$, there $\exists S(x)$ and $S'(x)$ s.t. $A(x)=C(x)S(x)$ and $B(x)=C(x)S'(x)$, so $R_0(x) = A(x)-B(x)Q_0(x) = C(x)(S(x)-S'(x)Q_0(x))$, therefore $C(x)$ divides $R_0(x)$ or $R_0(x)=0$. 
 ]
 
  
 We deduce that 
 \[ gcd(A(x), B(x)) = gcd(B(x), R(x)) \]
 and set $A_1(x)=B_1(x), B_1(x)=R_0(x)$; we then repeat to get new polynomials $Q_1(x),R_1(x),A_2(x),B_2(x)$ and so on. The degrees of the polynomials keep getting smaller and will eventually reach a point at which $B_N(x)=0$; and we will have found our gcd: 
-\[ gcd(A(x),B(x))=gcd(A_1(x),B_1(x))=\dots=gcd(A_N(x),0)=A_N(x) \]. 
-
-%\begin{verbatim}
-%algorithm div (A(x), B(x))
-%  //subroutine defined
-%  return [Q(x), R(x)]
-%\end{verbatim}
-
-
+\[ gcd(A(x),B(x))=gcd(A_1(x),B_1(x))=\dots=gcd(A_N(x),0)=A_N(x) \] 
 Here, we have the function that can perform the polynomial long division on $A(x)$ and $B(x)$ and return both the quotient $Q(x)$ and the remainder $R(x)$, i.e. [$Q(x)$, $R(x)$] = div($A(x),B(x)$). The algorithm can be extended from the original integer-based GCD as follows:
 }
 \color{mydarkblue}{
@@ -323,18 +315,9 @@ function gcd(A(x), B(x)):
     (Q(x), R(x)) = div(A(x), B(x))
     return gcd(B(x), R(x))
 \end{verbatim}
-
 }
-
-%Consider the following recursive definition $F$:
-%\begin{itemize}
-%\item $F(A(x), 0) = A(x)$.
-%\item If $A(x) = B(x) Q(x) + R(x)$ with $\deg{R(x)} < \deg{B(x)}$, then
-%\[ F(A(x), B(x)) = F(B(x), R(x)).\] 
-%\end{itemize}
-%}
-%\fi
 \end{itemize}
+%\fi
 
 
 Let $P(x) = x^4 - 1$ and $Q(x) = x^3 + x^2$ in standard form.
@@ -342,7 +325,8 @@ Let $P(x) = x^4 - 1$ and $Q(x) = x^3 + x^2$ in standard form.
 \qpart
 \item[b)] Prove there are no polynomials $A(x)$ and $B(x)$ such that $A(x) P(x) + B(x) Q(x) = 1$ for all $x$.
 
-\ifsolutions{ \answer { 
+%\ifsolutions{ 
+\answer { 
 We can compute a gcd  of $P(x)$ and $Q(x)$ using the algorithm in part (a), and show that it is not $1$. 
 \begin{align*}
 gcd(x^4-1, \quad x^3+x^2)  \quad&//\quad x^4 - 1 = (x^3 + x^2)(x-1) + (x^2 -1) \\
@@ -352,8 +336,10 @@ gcd(x+1, \quad 0)  \quad&//\quad D(x)=x+1
 \end{align*}
 
 We can also derive that $gcd(P(x),Q(x))$ has the smallest degree among all the polynomials that can be expressed as a linear combination of $P(x)$ and $Q(x)$ (see proof below). And since $1$ is of degree 0, which is smaller than 1, the degree of $gcd(P(x),Q(x))=x+1$, there exists no such linear combination.
+}
 
-
+\newpage
+%\color{mydarkblue}{
 [
 Consider the following set:
 \[ I= \{S(x)P(x)+T(x)Q(x) : S(x),T(x) \text{in the same field as} P(x),Q(x) \}  \]
@@ -361,7 +347,7 @@ Pick a polynomial $D(x) \in I$ of the smallest degree. We have
 \begin{align} 
 D(x)=S(x)P(x)+T(x)Q(x) \label{lin} 
 \end{align}
-From polynomial long division, we also obtain
+From polynomial long division of $P(x)$ and $D(x)$, we also obtain
 \begin{align}
 P(x)=D(x)E(x)+R(x) \label{div} 
 \end{align}
@@ -372,8 +358,9 @@ R(x) = P(x) - D(x)E(x) &= P(x) - [S(x)P(x)+T(x)Q(x)] \cdot E(x) \\
 \end{align} 
 So $R(x)$ is also a linear combination of $P(x)$ and $Q(x)$, but $D(x)$ is defined to have the smallest degree; therefore $R(x)=0$, which means that $D(x)$ divides $P(x)$. A similar argument shows that $D(x)$ divides $Q(x)$.
 ]
+%}
+%}\fi
 
-}}\fi
 
 
 \qpart
@@ -413,12 +400,16 @@ In this problem, you will give two different proofs of the following theorem: Fo
 \ifsolutions{ \answer {
 \begin{itemize}
 \item[a)]
-From Fermat's Little Theorem, we know $\forall x \not\equiv 0, \text{ } x^{p-1} \equiv 1 \pmod{p}$. \\
-Multiplying both sides by $x$, and noting that $0^p \equiv 0 \pmod{p}$, we can see that 
+From Fermat's Little Theorem, we know $\forall x \not\equiv 0, \text{ } x^{p-1} \equiv 1 \bmod{p}$. \\
+Multiplying both sides by $x$, and noting that $0^p \equiv 0 \bmod{p}$, we can see that 
 \[
-\forall x, \text{ } x^p \equiv x \pmod{p}
+\forall x, \text{ } x^p \equiv x \bmod{p}
 \]
-Therefore, any $x^k$, where $k \geq p$ will be equivalent to $x^n$, where $n \in \{0, 1, \dots, p-1\}$, and will have a degree at most $p - 1$. 
+Therefore, any $x^k$, where $k \geq p$ will be equivalent to $x^n$, where $n \in \{0, 1, \dots, p-1\}$, and will have a degree at most $p - 1$. We use Fermat's Little Theorem to see that when $k \geq p$, $x^k = x^{p-1+k'} = x^{p-1}x^{k'} = x^{k'} \bmod{p}$. In other words, $x^k = x^{ k \bmod{p-1}}$
+To transform a polynomial of degree $> d$ in $GF(p)$ to an identical polynomial of degree $\leq d$ in $GF(p)$, we write it as: \\
+$a_d x^d + a_{d-1} x^{d-1} + . . . + a_0$ \\
+where each $a_i$ is equal to the sum of the coefficients of the coefficients preceding each term $x^{i \bmod{p-1}}$. If for some $x^d = x^{0 \bmod{p-1}}$ we add its coefficient to the term $x^{p-1}$ instead of $x^0$. This is because FLT does not apply when $x=0$. For example, working $GF(3)$, we have \\
+$6x^{10} + 2x^5 -x^4 +x^3 + 2x^2 + x + 2 \\ = 6x^{0 \bmod{2}} + 2x^{1 \bmod{2}} -x^{0 \bmod{2}} +x^{1 \bmod{2}} + 2x^2 + x + 2 \\ =  (6-1+2)x^2 + (2+1+1)x + 2 \\ = x^2 + x + 2$
 
 \item[b)]
 Since a polynomial $f$ of degree $d$ is described completely by $d + 1$ points, we cannot specify a polynomial of degree $\geq p$ because $f(p) = f(0)$ (and so forth for other values larger than $p$) over $GF(p)$. Thus, we can only specify at most $p$ unique points. Therefore, every polynomial is equivalent to a polynomial of degree at most $p - 1$.
@@ -605,7 +596,7 @@ and thus $R(0) = s = 4$. This scheme is an example of hierarchical secret sharin
 %
 %Once enough points (at least 5) are known, the polynomial (and thus the secret) can be reconstructed via interpolation.
 
-\textbf{Note:} If you have a different (and correct) solution, please post it on Piazza for potential extra credit.
+\textbf{Note:} If you have a different (and correct) solution, please post it on Piazza for potential extra credit. An interpretation of the problem that requires two entire factions to agree with each other is also accpetable as a solution.
 
 }}\fi
 
