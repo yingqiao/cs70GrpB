@@ -46,6 +46,16 @@ def pois(lmbda):
         p *= u
     return k-1
 
+# simulates from binom or pois depending on size of parameters
+def sample(parameters):
+    if len(parameters) == 1:
+        lmbda = parameters[0]
+        return pois(parameters[0])
+    else:
+        n,p = parameters
+        return binom(n,p)
+        
+
 # asks for type of trial. Returns "coin", "dice", or "bus"
 def getTrialType():
     input = raw_input("Coin, Dice, or Bus?:  ")
@@ -129,11 +139,11 @@ def getInput():
 
 # this asks which mode the student wants. We will have two modes:
 # one that builds a histogram over many trials, and one that
-# runs a single trial.
+# runs a few trials.
 
 def whichMode():
-    print "Single Trial or Multiple Trials?"
-    answer = raw_input("Type 0 for single trial, 1 for multiple trials:  ")
+    print "Seperate Trials or Histogram?"
+    answer = raw_input("Type 0 for separate trials, 1 for a histogram:  ")
     if answer == "0":
         return 0
     if answer == "1":
@@ -142,8 +152,15 @@ def whichMode():
         "Please type 0 or 1"
         return whichMode()
     
-
-
+#Asks input for how many trials
+def howManyTrials():
+    input = raw_input("how many trials do you want to run?  ")
+    try:
+        trials = int(input)
+    except ValueError:
+        print "Please enter a positive integer."
+        return howManyTrials()
+    return trials
 
 #------
 # MAIN
@@ -151,8 +168,23 @@ def whichMode():
 
 #unflag below
 
-whichMode()
-getInput()        
+histogram = whichMode()
+parameters = getInput()
+trials = howManyTrials()
+
+data = []
+
+for i in range(trials):
+    data.append(sample(parameters))
+
+if histogram:
+    plt.hist(data)
+    plt.show()
+else:
+    for i in range (trials):
+        string = "Trial " + str(i+1) + ":    " + str(data[i])
+        print string
+        
 
 L = []
 for i in range(1000):
@@ -163,6 +195,6 @@ for i in range(1000):
     M.append(pois(10))
 
 #plt.hist(L)
-plt.hist(M)
-plt.show()
+#plt.hist(M)
+#plt.show()
 
