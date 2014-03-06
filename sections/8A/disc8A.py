@@ -47,7 +47,7 @@ def pois(lmbda):
     return k-1
 
 # asks for type of trial. Returns "coin", "dice", or "bus"
-def trialType():
+def getTrialType():
     input = raw_input("Coin, Dice, or Bus?:  ")
     input = input.lower()
     if input == "coin" or input == "coins":
@@ -58,9 +58,9 @@ def trialType():
         return "bus"
     else:
         print "Please choose either coin, dice, or bus."
-        return trialType()
+        return getTrialType()
 
-    
+# gets the parameters for the coin tosses    
 def getParametersForCoin():
     input = raw_input("How many flips?  ")
     try:
@@ -73,8 +73,9 @@ def getParametersForCoin():
         return getParametersForCoin()
     return [n, 0.5]
 
+# gets parameters for the die rolls.
 def getParametersForDice():
-    input = raw_input("How many sides does the dice have?  ")
+    input = raw_input("How many sides does the die have?  ")
     try:
         sides = int(input)
     except ValueError:
@@ -85,7 +86,7 @@ def getParametersForDice():
         return getParametersForDice()
     properInput = False
     while not properInput:
-        input = raw_input("How many rolls of the dice?  ")
+        input = raw_input("How many rolls of the die?  ")
         try:
             n = int(input)
         except ValueError:
@@ -121,14 +122,37 @@ def getParameters(type):
     if type == "bus":
         return getParametersForBus()
 
+def getInput():
+    type = getTrialType()
+    params = getParameters(type)
+    return params
+
+# this asks which mode the student wants. We will have two modes:
+# one that builds a histogram over many trials, and one that
+# runs a single trial.
+
+def whichMode():
+    print "Single Trial or Multiple Trials?"
+    answer = raw_input("Type 0 for single trial, 1 for multiple trials:  ")
+    if answer == "0":
+        return 0
+    if answer == "1":
+        return 1
+    else:
+        "Please type 0 or 1"
+        return whichMode()
+    
+
+
 
 #------
 # MAIN
 #------
 
 #unflag below
-#param = getParameters(trialType())
-        
+
+whichMode()
+getInput()        
 
 L = []
 for i in range(1000):
