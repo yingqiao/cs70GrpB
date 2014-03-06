@@ -3,26 +3,67 @@
 
 
 import math
-import matplotlib.pyplot as plt
 import random
-
-
-#---------
-# GLOBALS
-#---------
-
-
-#--------------------------
-# PARSE COMMAND LINE INPUT
-#--------------------------
-
-
 
 
 #---------
 # HELPERS
 #---------
 
+
+# print a histogram to the screen of a list L
+def hist(L):
+    # constants
+    ratio_thres = 4  # increase for narrower histograms
+    rescaling = 2    # decrease for wider histograms
+    width_thres = 5  # this is only for printing the axis
+
+    # set up parameters
+    n = len(L)
+    min_val = min(L)
+    max_val = max(L)
+    w = max_val - min_val
+    bin_size = 1
+    num_bins = float(w)/bin_size
+    L = sorted(L)
+
+    # create counts for each bin
+    bin_counts = []
+    for i in range(min_val,max_val+1):
+        bin_counts.append(L.count(i))
+    h = max(bin_counts)
+
+    # if the ratio of h to w is too big, rescale
+    ratio = float(h)/w
+    if (ratio > ratio_thres):
+        bin_counts = [int(float(x)*rescaling/ratio) for x in bin_counts]
+        h = max(bin_counts)
+
+    # create the histogram string
+    hist_str = ''
+    for j in range(h,-1,-1):
+        j_str = ''
+        for b in bin_counts:
+            if b > j:
+                j_str += '*'
+            elif b == 0 and j == 0:
+                j_str += '.'
+            else:
+                j_str += ' '
+        hist_str += j_str + '\n'
+
+    # axis for histogram
+    hist_str += '-'*(w+1) + '\n'
+    if (w > width_thres):
+        avg_val = (max_val+min_val)/2
+        space_count1 = int(math.floor(float(w-2)/2)) - len(str(min_val)) + 1
+        space_count2 = int(math.ceil(float(w-2)/2)) - len(str(avg_val)) - len(str(max_val)) + 2
+        hist_str += str(min_val) + ' '*space_count1 + str(avg_val) + ' '*space_count2 + str(max_val)
+    else:
+        hist_str += str(min_val) + ' '*(w-1) + str(max_val)
+
+    return hist_str
+        
 
 # simulate from a binomial distribution: count the number of H coin
 # tosses out of n total, with probability p of each toss being H
@@ -45,6 +86,7 @@ def pois(lmbda):
         u = random.random()
         p *= u
     return k-1
+
 
 # simulates from binom or pois depending on size of parameters
 def sample(parameters):
@@ -70,6 +112,7 @@ def getTrialType():
         print "Please choose either coin, dice, or bus."
         return getTrialType()
 
+
 # gets the parameters for the coin tosses    
 def getParametersForCoin():
     input = raw_input("How many flips?  ")
@@ -82,6 +125,7 @@ def getParametersForCoin():
         print "Please enter a positive integer."
         return getParametersForCoin()
     return [n, 0.5]
+
 
 # gets parameters for the die rolls.
 def getParametersForDice():
@@ -132,15 +176,16 @@ def getParameters(type):
     if type == "bus":
         return getParametersForBus()
 
+
 def getInput():
     type = getTrialType()
     params = getParameters(type)
     return params
 
+
 # this asks which mode the student wants. We will have two modes:
 # one that builds a histogram over many trials, and one that
 # runs a few trials.
-
 def whichMode():
     print "Seperate Trials or Histogram?"
     answer = raw_input("Type 0 for separate trials, 1 for a histogram:  ")
@@ -152,7 +197,7 @@ def whichMode():
         "Please type 0 or 1"
         return whichMode()
     
-#Asks input for how many trials
+# Asks input for how many trials
 def howManyTrials():
     input = raw_input("how many trials do you want to run?  ")
     try:
@@ -162,11 +207,11 @@ def howManyTrials():
         return howManyTrials()
     return trials
 
+
 #------
 # MAIN
 #------
 
-#unflag below
 
 histogram = whichMode()
 parameters = getInput()
@@ -178,23 +223,10 @@ for i in range(trials):
     data.append(sample(parameters))
 
 if histogram:
-    plt.hist(data)
-    plt.show()
+    print(hist(data))
 else:
     for i in range (trials):
         string = "Trial " + str(i+1) + ":    " + str(data[i])
         print string
-        
 
-L = []
-for i in range(1000):
-    L.append(binom(10,0.5))
-
-M = []
-for i in range(1000):
-    M.append(pois(10))
-
-#plt.hist(L)
-#plt.hist(M)
-#plt.show()
 
