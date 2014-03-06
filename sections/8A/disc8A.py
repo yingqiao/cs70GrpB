@@ -155,7 +155,7 @@ def getParametersForDice():
 
     
 def getParametersForBus():
-    input = raw_input("How many busses pass by in 20 minutes?  ")
+    input = raw_input("How many busses pass by in 1 hour?  ")
     try:
         lmbda = int(input)
     except ValueError:
