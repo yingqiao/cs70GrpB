@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+\usepackage{../../cs70}
+\usepackage{color}
+\newif\ifsolutions
+\solutionstrue
+\solutionsfalse %flag for solutions
+
+\def\title{Discussion 8A}
+\begin{document}
+\maketitle
+
+\ifsolutions
+\textbf{Birthday Problem:}
+Begin by asking a modification of the birthday problem, seeing if people have a birthday within $n$ days of each other. 
+\begin{itemize}
+\item If there are $23 \geq$ people in your section, there is a more than $1/2$ chance that two people have the same birthday.
+\item If there are $14 \geq$ people in your section, there is a more than $1/2$ chance that two people have a birthday within one day of each other.
+\item If there are $11 \geq$ people in your section, there is a more than $1/2$ chance that two people have a birthday within two days of each other.
+\item If there are $9 \geq$ people in your section, there is a more than $1/2$ chance that two people have a birthday within three days of each other.
+\end{itemize} 
+Each GSI should start by running the birthday problem under one of the above conditions. Amaze the class with the strangeness of probability. Then you can tell them that if everyone came to both your sections, there is a $\geq 97\%$ chance of overlapping birthdays (with $n \geq 50$ people) within your sections. Perhaps make a joke about getting a cake for them.
+\fi
+\begin{enumerate}
+
+
+\item {\bf Coins, revisited}   \\
+Run the program, disc8a.py. We will now look at what happens when we flip coins. For this part of the lab, first type $1$ to see a histogram. Then type "coin." This program now simulates the results of flipping a coin however many times you specify and counts the number of heads. It repeats based on the number of trials you specify and creates a histogram. Play around with different values.
+\begin{enumerate}
+\item[i.] If you flip a coin $8$ times and you run $1000$ trials, what is the most common value (or values) on the histogram? 
+\item[ii.] Try $2$, $4$, $8$, $100$, $1000$, and $10000$ trials. Is it easier to see what the most common value is when your run more or less trials?  Why do you think this might be? After how many trials does it become obvious what the most common value is?
+\item[iii.] What if instead of flipping a coin $8$ times, we flip it $100$ times? What is the most common value? After how many trials does it become obvious what the most common value is?
+\item[iv.] If you flip a coin $n$ times, what do you expect the most common value will be? Remember, this counts the number of tails.
+\end{enumerate}
+Now that we have a sense of where the most common values are, we will start to see how far apart the values are spread. For this part, type $0$ to run individual trials. 
+\begin{enumerate}
+\item[i.] Play around with different number of coin flips and trials. We recommend using less than $20$ trials so it's easy to see the whole output.
+\item[ii.] Flip a coin $10$ times. Run $20$ or so trials. What is the difference between the lowest number of heads and the highest number of heads? Let's call this the spread. Calculate the spread for flipping a coin $100$ and $10000$ times (use the same number of trials for all of these). Try different values. What can you say about the relationship between the spread and the number of coin flips?
+\item[iii.] Now use the predicted most common values for each coin flip to scale the spread. For example, if the most common value of $5$ coin flips is $3$, and the spread you calculated was $4$, then the scaled spread is $\frac{4}{3}$. Calculate the scaled spread for $10$, $100$, and $10000$ flips. What can you say about the relationship between the scaled spread and the number of coin flips?
+\item[iv.] We can be more specific than simply saying a direct or inverse relationship. Is the relationship between the scaled-spread and the number of coin flips linear, polynomial, or logarithmic? Test more values to be sure.
+\end{enumerate}
+
+
+This discussion is not complete right now. The rest of the discussion will work on noting similarities between dice rolls and coin flips. How the histograms look very similar. We also ask similar questions about the spread of a dice roll, does it increase or decrease as the number of sides increases (we only count rolls that land on 1)? We are having them consider how some factors contribute to variance. We also note the characteristic Gaussian shape and show how the Poisson distribution looks like that. 
+
+
+
+   
+ \end{enumerate}
+
+
+
+
+\end{document}
