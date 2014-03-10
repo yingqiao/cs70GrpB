@@ -1,0 +1,131 @@
+\documentclass[11pt]{article}
+\usepackage{../../cs70}
+\usepackage{color}
+\newif\ifsolutions
+\solutionstrue
+\solutionsfalse %flag for solutions
+
+\def\title{Discussion 8A}
+\begin{document}
+\maketitle
+
+\ifsolutions
+{\color{blue}{
+\textbf{Birthday Problem:}
+Begin by asking a modification of the birthday problem, seeing if people have a birthday within $n$ days of each other. 
+\begin{itemize}
+\item If there are $23 \geq$ people in your section, there is a more than $1/2$ chance that two people have the same birthday.
+\item If there are $14 \geq$ people in your section, there is a more than $1/2$ chance that two people have a birthday within one day of each other.
+\item If there are $11 \geq$ people in your section, there is a more than $1/2$ chance that two people have a birthday within two days of each other.
+\item If there are $9 \geq$ people in your section, there is a more than $1/2$ chance that two people have a birthday within three days of each other.
+\end{itemize} 
+Each GSI should start by running the birthday problem under one of the above conditions. Amaze the class with the strangeness of probability. Then you can tell them that if everyone came to both your sections, there is a $\geq 97\%$ chance of overlapping birthdays (with $n \geq 50$ people) within your sections. Perhaps make a joke about getting a cake for them.}}
+\fi
+\begin{enumerate}
+
+
+\item {\bf Coins, revisited}   \\
+Run the program, disc8A.py. We will now look at what happens when we flip coins. For this part of the lab, first type $1$ to see a histogram. Then type "coin" This program now simulates the results of flipping a coin however many times you specify and counts the number of heads. It repeats based on the number of trials you specify and creates a histogram. Play around with different values.
+
+\ifsolutions
+{\color{blue}{Motivation: have students see the LLN in action, how adding more trials makes all these distributions look visually more like a normal distribution. Also, if they have matplotlib installed they can uncomment the relevant lines to get better looking histograms.
+}}
+\fi
+
+\begin{enumerate}
+\item[i.] If you flip a coin $8$ times and you run $1000$ trials, what is the most common value (or values) on the histogram? 
+
+\ifsolutions
+{\color{blue}{Solution: usually 4
+}}
+\fi
+
+\item[ii.] Try $2$, $4$, $8$, $100$, $1000$, and $10000$ trials. Is it easier to see what the most common value is when your run more or less trials?  Why do you think this might be? After how many trials does it become obvious what the most common value is?
+
+\ifsolutions
+{\color{blue}{Solution: after about 100 trials we begin to see 4 as the most common value.
+}}
+\fi
+
+\item[iii.] What if instead of flipping a coin $8$ times, we flip it $100$ times? What is the most common value? After how many trials does it become obvious what the most common value is?
+
+\ifsolutions
+{\color{blue}{Solution: most common value is 50.
+}}
+\fi
+
+\item[iv.] If you flip a coin $n$ times, what do you expect the most common value will be? Remember, this counts the number of heads. To build some intuition why, consider all the ways to flip a coin to get this value for small values of $n$. (For example, $n = 2$ and $n = 4$).
+
+\ifsolutions
+{\color{blue}{Solution: most common value should be $n/2$ for a sufficient number of trials. If we flip a coin twice ($n=2$), the options are HH, HT, TH, and TT. So half the time we should see the most common value be 1 H.
+}}
+\fi
+
+\end{enumerate}
+Now that we have a sense of where the most common values are, we will start to see how far apart the values are spread. For this part, type $0$ to run individual trials. 
+\begin{enumerate}
+\item[v.] Play around with different number of coin flips and trials. We recommend using at most $20$ trials so it's easy to see the whole output.
+
+\item[vi.] Flip a coin $10$ times. Run $20$ or so trials. What is the difference between the lowest number of heads and the highest number of heads? Let's call this the range. Calculate the range for flipping a coin $100$ and $10000$ times (use the same number of trials for all of these). Try different values. What can you say about the relationship between the range and the number of coin flips?
+
+\ifsolutions
+{\color{blue}{Solution: for 10 coin flips, an example range might be 8-3=5. For 100 coin flips, an example range might be 61-40=21. For 10000 coin flips an example range might be 5088-4894=194. We can see that it increases as we flip more coins, even with the same number of trials.
+}}
+\fi
+
+\item[vii.] Now use the number of coin flips to scale the range. For example, if for $5$ coin flips, the range you calculated was $4$, then the scaled range is $\frac{4}{5}$. Calculate a scaled range for $10$, $100$, and $10000$ flips. What can you say about the relationship between the scaled range and the number of coin flips?
+
+\ifsolutions
+{\color{blue}{Our scaled ranges above would be 0.5, 0.21, 0.0194, which decrease with the number of flips.}}
+\fi
+
+\item[viii.] We can be more specific than simply saying a direct or inverse relationship. Is the relationship between the scaled range and the number of coin flips linear, polynomial, or logarithmic? Test more values to be sure.
+
+\ifsolutions
+{\color{blue}{Looks logarithmic.}}
+\fi
+
+\item[ix.] This notion of scaled range gives us a very limited idea of how far the values are spread about. To see how little this tells us about the spread of values, do the following :
+\begin{itemize}
+\item Generate a histogram for some number of coin tosses with a large number of trials.
+\item Now run the program, but type "2" in the beginning. Input the lowest number and the highest number of the previous histogram. Run the same number of trials. This generates a random number in the specified range, using the specified number of trials.
+\item Note that the histograms look very different, even though the scaled-range is exactly the same.
+\item We can attribute this to a difference in $variance$. We will formalize this term later, but think of it as a measure of how far the values are spread from the highest point of the histogram. As you see, the coin tosses seem to be more concentrated towards the "middle" and thus has less variance.
+\item If the difference between the histograms aren't clear, increase the number of trials.
+\end{itemize}
+
+
+\ifsolutions
+{\color{blue}{Students should see that the second hist looks uniform. Also note that a $``.''$ instead of $``*''$ should be interpreted as part of the range in these histograms.}}
+\fi
+\end{enumerate}
+
+So far, we have discovered properties about the most common number of heads out of $n$ coin flips, and we started to investigate how the number of coin flips effects how far we get from this most common value. We will now look at dice rolls to investigate more properties.
+
+\item {\bf Dice}   \\
+Now you will type "dice" instead of "coin" This program now simulates the results of rolling a die and counts \underline{the number of "1"s rolled}. Please note that this program does not count sum of all the rolls. You get to specify how many sides the die has.
+\begin{enumerate}
+\item[i.] Note that if you create a $2$-sided die, this is the exact same thing as counting number of heads in coin flips. Therefore, you would expect all the previous parts to look the same. As before. Repeat parts iii. and iv. above with a $2$-sided dice.
+\item[ii.] Now repeat parts iii. and iv. above with a $4$-sided die, a $10$-sided die, and one other die of your choosing.
+\item[iii.] Try to generalize for a $d$-sided die. When you have a formula, check with your GSI.
+\item[iv.] Compare the histogram for a $d$-sided die with $n$ rolls after $t$ trials and with $n$ flips of a coin with $t$ trials. Note the similarities and differences between the histograms for different values of $d$, $n$, and $t$. Try to characterize the difference.
+\item[v.] Compare the histogram for a $d$-sided die with $\frac{dn}{2}$ rolls after $t$ trials and with $n$ flips of a coin with $t$ trials. Note the similarities and differences between the histograms for different values of $d$, $n$, and $t$. Try to characterize the difference. How do the similarities compare to the previous step?
+\item[vi.] Lastly, calculate the scaled-range of die rolls, for a fixed number of trials and different sides of die. How does the number of sides of the die affect the scaled-range? Characterize how the number of sides of the die effects the shape of the histogram.
+\end{enumerate}
+\item {\bf Bus}   \\
+Now you will type "bus" instead of "coin" This program now simulates how many buses pass by a bus stop. You input the average number of buses that pass by in an hour. These numbers are generated according to a Poisson distribution, something we will cover later in the course.
+\begin{enumerate}
+\item[i.] play around with several different values of trials and number of buses. Look at the histograms and see if you can find any trends.
+\item[ii.] For a large amount of trials, the histogram starts to take on a certain characteristic shape. Note the similarity of this shape for large number of trials for die rolls and coin flips.
+\end{enumerate}
+
+
+
+
+   
+ \end{enumerate}
+
+
+
+
+\end{document}

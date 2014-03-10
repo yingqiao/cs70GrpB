@@ -4,6 +4,8 @@
 
 import math
 import random
+import sys
+#import matplotlib.pyplot as plt
 
 
 #---------
@@ -14,8 +16,8 @@ import random
 # print a histogram to the screen of a list L
 def hist(L):
     # constants
-    ratio_thres = 4  # increase for narrower histograms
-    rescaling = 2    # decrease for wider histograms
+    ratio_thres = 3  # increase for narrower histograms
+    rescaling = 1    # decrease for wider histograms
     width_thres = 5  # this is only for printing the axis
 
     # set up parameters
@@ -34,7 +36,9 @@ def hist(L):
     h = max(bin_counts)
 
     # if the ratio of h to w is too big, rescale
-    ratio = float(h)/w
+    ratio = float(h)
+    if w != 0:
+        ratio = float(h)/w
     if (ratio > ratio_thres):
         bin_counts = [int(float(x)*rescaling/ratio) for x in bin_counts]
         h = max(bin_counts)
@@ -46,7 +50,7 @@ def hist(L):
         for b in bin_counts:
             if b > j:
                 j_str += '*'
-            elif b == 0 and j == 0:
+            elif b == 0 and j == 0 and ratio > ratio_thres:
                 j_str += '.'
             else:
                 j_str += ' '
@@ -59,11 +63,17 @@ def hist(L):
         space_count1 = int(math.floor(float(w-2)/2)) - len(str(min_val)) + 1
         space_count2 = int(math.ceil(float(w-2)/2)) - len(str(avg_val)) - len(str(max_val)) + 2
         hist_str += str(min_val) + ' '*space_count1 + str(avg_val) + ' '*space_count2 + str(max_val)
-    else:
+    elif w > 0:
         hist_str += str(min_val) + ' '*(w-1) + str(max_val)
+    else:
+        hist_str += str(min_val)
 
     return hist_str
         
+# simulate from a uniform distribution with range [a,b]
+def uni(a,b):
+    number = random.randint(a,b)
+    return number
 
 # simulate from a binomial distribution: count the number of H coin
 # tosses out of n total, with probability p of each toss being H
@@ -186,6 +196,7 @@ def getInput():
 # this asks which mode the student wants. We will have two modes:
 # one that builds a histogram over many trials, and one that
 # runs a few trials.
+# there is a "hidden" mode that prints a uniform distribution.
 def whichMode():
     print "Seperate Trials or Histogram?"
     answer = raw_input("Type 0 for separate trials, 1 for a histogram:  ")
@@ -193,6 +204,8 @@ def whichMode():
         return 0
     if answer == "1":
         return 1
+    if answer == "2":
+        return 2
     else:
         "Please type 0 or 1"
         return whichMode()
@@ -214,6 +227,21 @@ def howManyTrials():
 
 
 histogram = whichMode()
+
+#Run the uniform case
+if (histogram == 2):
+    print "Running a different experiment. . . "
+    a = raw_input("What is the lowest number in the range? ")
+    b = raw_input("What is the highest number in the range? ")
+    trials = raw_input("how many trials? ")
+    data = []
+    for i in range(int(trials)):
+        data.append(uni(int(a),int(b)))
+    print (hist(data))
+    #plt.hist(data)
+    #plt.show()
+    sys.exit()
+
 parameters = getInput()
 trials = howManyTrials()
 
