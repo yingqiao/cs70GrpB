@@ -25,7 +25,7 @@ Each GSI should start by running the birthday problem under one of the above con
 
 
 \item {\bf Coins, revisited}   \\
-Run the program, disc8A.py. We will now look at what happens when we flip coins. For this part of the lab, first type $1$ to see a histogram. Then type "coin" This program now simulates the results of flipping a coin however many times you specify and counts the number of heads. It repeats based on the number of trials you specify and creates a histogram. Play around with different values.
+Run the program, disc8A.py. We will now look at what happens when we flip coins. For this part of the lab, first type $1$ to see a histogram. Then type "coin" This program now simulates the results of flipping a coin however many times you specify and counts the number of heads. It repeats based on the number of trials you specify and creates a histogram. Play around with different values. This is an extension of what you have seen in HW7's virtual lab.
 
 \ifsolutions
 {\color{blue}{Motivation: have students see the LLN in action, how adding more trials makes all these distributions look visually more like a normal distribution. Also, if they have matplotlib installed they can uncomment the relevant lines to get better looking histograms.
@@ -33,28 +33,33 @@ Run the program, disc8A.py. We will now look at what happens when we flip coins.
 \fi
 
 \begin{enumerate}
-\item[i.] If you flip a coin $8$ times and you run $1000$ trials, what is the most common value (or values) on the histogram? 
+\item[a)] If you flip a coin $8$ times and you run $1000$ trials, what is the most common value (or values) on the histogram? 
 
 \ifsolutions
 {\color{blue}{Solution: It is usually $4$.
 }}
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{resources/coin_8_1000.png}
+\caption{Coin flip 8 times with 1000 trials.}
+\end{figure}
 \fi
 
-\item[ii.] Try $10$, $100$, $1000$, and $10000$ trials. Is it easier to see what the most common value is when your run more or less trials?  Why do you think this might be? After how many trials does it become obvious what the most common value is?
+\item[b)] Try $10$, $100$, $1000$, and $10000$ trials. Is it easier to see what the most common value is when your run more or less trials?  Why do you think this might be? After how many trials does it become obvious what the most common value is?
 
 \ifsolutions
 {\color{blue}{Solution: After about $100$ trials, we begin to see $4$ as the most common value.
 }}
 \fi
 
-\item[iii.] What if instead of flipping a coin $8$ times, we flip it $100$ times? What is the most common value? After how many trials does it become obvious what the most common value is?
+\item[c)] What if instead of flipping a coin $8$ times, we flip it $100$ times? What is the most common value? After how many trials does it become obvious what the most common value is?
 
 \ifsolutions
 {\color{blue}{Solution: The most common value is usually $50$. Also, after about $100$ trials we begin to see $50$ as the most common value. 
 }}
 \fi
 
-\item[iv.] If you flip a coin $n$ times, what do you expect the most common value will be? Remember, this counts the number of heads. To build some intuition why, consider all the ways to flip a coin to get this value for small values of $n$. (For example, $n = 2$ and $n = 4$).
+\item[d)] If you flip a coin $n$ times, what do you expect the most common value will be? Remember, this counts the number of heads. To build some intuition why, consider all the ways to flip a coin to get this value for small values of $n$. (For example, $n = 2$ and $n = 4$).
 
 \ifsolutions
 {\color{blue}{Solution: The most common value should be $n/2$ for a sufficient number of trials. If we flip a coin twice ($n=2$), the options are HH, HT, TH, and TT. So half the time we should see the most common value be $1$ Head.
@@ -64,28 +69,34 @@ Run the program, disc8A.py. We will now look at what happens when we flip coins.
 \end{enumerate}
 Now that we have a sense of where the most common values are, we will start to see how far apart the values are spread about. For this part, type $0$ to run individual trials. 
 \begin{enumerate}
-\item[v.] Play around with different number of coin flips and trials. We recommend using at most $20$ trials so it's easy to see the whole output.
+\item[e)] Play around with different number of coin flips and trials. We recommend using at most $20$ trials so it's easy to see the whole output.
 
-\item[vi.] Flip a coin $10$ times. Run $20$ or so trials. What is the difference between the lowest number of heads and the highest number of heads? Let's call this the range. Calculate the range for flipping a coin $100$ and $10000$ times (use the same number of trials for all of these). Try different values. What can you say about the relationship between the range and the number of coin flips?
+\item[f)] Flip a coin $10$ times. Run $20$ or so trials. What is the difference between the lowest number of heads and the highest number of heads? Let's call this the range. Calculate the range for flipping a coin $100$ and $10000$ times (use the same number of trials for all of these). Try different values. What can you say about the relationship between the range and the number of coin flips?
 
 \ifsolutions
 {\color{blue}{Solution: For $10$ coin flips, an example range might be $8-3=5$. For $100$ coin flips, an example range might be $61-40=21$. For $10000$ coin flips an example range might be $5088-4894=194$. We can see that it increases as we flip more coins, even with the same number of trials.
 }}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{resources/trial_8_20.png}
+\caption{Trial run with 8 flips and 20 trials.}
+\end{figure}
 \fi
 
-\item[vii.] Now use the number of coin flips to scale the range. For example, if for $5$ coin flips, the range you calculated was $4$, then the scaled range is $4/5=0.8$. Calculate a scaled range for $10$, $100$, and $10000$ flips. What can you say about the relationship between the scaled range and the number of coin flips?
+\item[g)] Now use the number of coin flips to scale the range. For example, if for $5$ coin flips, the range you calculated was $4$, then the scaled range is $4/5=0.8$. Calculate a scaled range for $10$, $100$, and $10000$ flips. What can you say about the relationship between the scaled range and the number of coin flips?
 
 \ifsolutions
 {\color{blue}{Solution: Our scaled ranges above would be $5/10=0.5$, $21/100=0.21$, $194/10000=0.0194$, which decrease with the number of flips.}}
 \fi
 
-\item[viii.] We can be more specific than simply saying a direct or inverse relationship. Is the relationship between the scaled range and the number of coin flips linear, polynomial, or logarithmic? Test more values to be sure.
+\item[h)] We can be more specific than simply saying a direct or inverse relationship. Is the relationship between the scaled range and the number of coin flips linear, polynomial, or logarithmic? Test more values to be sure.
 
 \ifsolutions
 {\color{blue}{Solution: With one more point $59/1000=0.059$, it looks logarithmic.}}
 \fi
 
-\item[ix.] This notion of scaled range gives us a very limited idea of how far the values are spread about. To see how little this tells us about the spread of values, do the following :
+\item[i)] This notion of scaled range gives us a very limited idea of how far the values are spread about. To see how little this tells us about the spread of values, do the following :
 \begin{itemize}
 \item Generate a histogram for some number of coin tosses with a large number of trials.
 \item Now run the program, but type "2" in the beginning. Input the lowest number and the highest number of the previous histogram. Run the same number of trials. This generates a random number in the specified range, using the specified number of trials.
@@ -98,6 +109,11 @@ Now that we have a sense of where the most common values are, we will start to s
 \ifsolutions
 {\color{blue}{Suggested input: $8,10000$ for mode 1 and $0,8,10000$ for mode 2. \\
 Solution: Students should see that the second histogram looks uniform. Also note that a $``.''$ instead of $``*''$ should be interpreted as part of the range in these histograms.}}
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{resources/uniform_0_8_1000.png}
+\caption{Uniform trails.}
+\end{figure}
 \fi
 \end{enumerate}
 
@@ -106,30 +122,37 @@ So far, we have discovered properties about the most common number of heads out 
 \item {\bf Dice}   \\
 Now you will type "dice" instead of "coin" This program now simulates the results of rolling a die and counts \underline{the number of "1"s rolled}. Please note that this program does not count sum of all the rolls. You get to specify how many sides the die has.
 \begin{enumerate}
-\item[i.] Note that if you create a $2$-sided die, this is the exact same thing as counting number of heads in coin flips. Therefore, you would expect all the previous parts to look the same. Repeat 1. parts iii. and iv. above with a $2$-sided dice.
+\item[a)] Note that if you create a $2$-sided die, this is the exact same thing as counting number of heads in coin flips. Therefore, you would expect all the previous parts to look the same. Repeat 1 parts c) and d) above with a $2$-sided dice.
 
 
-\item[ii.] Now repeat 1. parts iii. and iv. above with a $4$-sided die, a $10$-sided die, and one other die of your choosing.
+\item[b)] Now repeat 1 parts c) and d) above with a $4$-sided die, a $10$-sided die, and one other die of your choosing.
 
 \ifsolutions
 {\color{blue}{Solution: Rolling $8$ times with $100$ trails, $4$-sided die gives the most common value of $2$ and $10$-sided die gives the most common value of $0$(or $1$). With $n$ rolls, a $4$-sided die will give the most common value of $n/4$ for the number of ``1''s rolled and a $10$-sided die gives $n/10$.}}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{resources/dice_4_8_1000.png}
+\caption{4-sided die, 8 rolls with 1000 trials.}
+\end{figure}
+
 \fi
 
-\item[iii.] Try to generalize for a $d$-sided die. When you have a formula, check with your GSI.
+\item[c)] Try to generalize for a $d$-sided die. When you have a formula, check with your GSI.
 
 \ifsolutions
 {\color{blue}{Solution: A $d$-sided die with $n$ rolls will give the most common value of $n/d$ for the number of ``1''s rolled.}}
 \fi
 
 
-\item[iv.] Compare the histogram for a $d$-sided die with $n$ rolls after $t$ trials and with $n$ flips of a coin with $t$ trials. Note the similarities and differences between the histograms for different values of $d$, $n$, and $t$. Try to characterize the difference.
+\item[d)] Compare the histogram for a $d$-sided die with $n$ rolls after $t$ trials and with $n$ flips of a coin with $t$ trials. Note the similarities and differences between the histograms for different values of $d$, $n$, and $t$. Try to characterize the difference.
 
 \ifsolutions
 {\color{blue}{Suggested test values: $d=4,n=8,t=10,100$; Guide the students using the following facts: $mean=np$, $var=tnp(1-p)$ with coin of $p=1/2$ and die of $p=1/d$. So, the more sides of a die, the smaller most common value as well as less spread.}}
 \fi
 
 
-\item[v.] Compare the histogram for a $d$-sided die with $\frac{dn}{2}$ rolls after $t$ trials and with $n$ flips of a coin with $t$ trials. Note the similarities and differences between the histograms for different values of $d$, $n$, and $t$. Try to characterize the difference. How do the similarities compare to the previous step?
+\item[e)] Compare the histogram for a $d$-sided die with $\frac{dn}{2}$ rolls after $t$ trials and with $n$ flips of a coin with $t$ trials. Note the similarities and differences between the histograms for different values of $d$, $n$, and $t$. Try to characterize the difference. How do the similarities compare to the previous step?
 
 \ifsolutions
 {\color{blue}{Similar suggested values as in iv.; similar guide as in iv. Here,
@@ -138,7 +161,7 @@ So, we will see similar most common value, but a smaller spread in die rolls.}}
 \fi
 
 
-\item[vi.] Lastly, calculate the scaled-range of die rolls, for a fixed number of trials and different sides of die. How does the number of sides of the die affect the scaled-range? Characterize how the number of sides of the die effects the shape of the histogram.
+\item[f)] Lastly, calculate the scaled-range of die rolls, for a fixed number of trials and different sides of die. How does the number of sides of the die affect the scaled-range? Characterize how the number of sides of the die effects the shape of the histogram.
 
 \ifsolutions
 {\color{blue}{Suggested values: $d=4,6$ and $n=8,t=100$; use the guide above in iv. and v., for a fixed number of trials, the scaled-range decreases as the number of sides increases.}}
@@ -153,14 +176,21 @@ So, we will see similar most common value, but a smaller spread in die rolls.}}
 \item {\bf Bus}   \\
 Now you will type "bus" instead of "coin". This program now simulates how many buses pass by a bus stop. You input the average number of buses that pass by in an hour. These numbers are generated according to a Poisson distribution, something we will cover later in the course.
 \begin{enumerate}
-\item[i.] Play around with several different values of trials and number of buses. Look at the histograms and see if you can find any trends.
+\item[a)] Play around with several different values of trials and number of buses. Look at the histograms and see if you can find any trends.
 
 \ifsolutions
 {\color{blue}{Suggested test values: $t=10,100,1000, \lambda=4$; guide the student that the most common value is usually the number of buses, the spread also scales with that number. As with Poisson, $mean=var=\lambda$}}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.6]{resources/bus_4_1000.png}
+\caption{4 buses with 1000 trals.}
+\end{figure}
+
 \fi
 
 
-\item[ii.] For a large amount of trials, the histogram starts to take on a certain characteristic shape. Note the similarity of this shape for large number of trials for die rolls and coin flips.
+\item[b)] For a large amount of trials, the histogram starts to take on a certain characteristic shape. Note the similarity of this shape for large number of trials for die rolls and coin flips.
 
 \ifsolutions
 {\color{blue}{Solution: (LLN) Normal distribution.}}

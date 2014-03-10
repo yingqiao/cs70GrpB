@@ -252,6 +252,8 @@ for i in range(trials):
 
 if histogram:
     print(hist(data))
+    #plt.hist(data)
+    #plt.show()
 else:
     for i in range (trials):
         string = "Trial " + str(i+1) + ":    " + str(data[i])
