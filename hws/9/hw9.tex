@@ -70,8 +70,8 @@ In this problem we will continue the lab from last HW. We will start from the op
   tosses.
 \qpart
 \item Just a little notation. We will use $X_i$ to denote a random
-  variable that is 1 if you toss a head on the i-th toss, and 0 if you toss a
-  tail on the i-th toss. (This is just so we can more easily express 
+  variable that is 1 if you toss a head on the $i$-th toss, and 0 if you toss a
+  tail on the $i$-th toss. (This is just so we can more easily express 
   things) So a sequence of $k$ coin tosses would be $X_1, X_2, \ldots,
   X_{k-1}, X_k$, with each $X_i$ being 0 or 1 depending on how the run
   actually came out. How would you write the total number $S$ of heads
@@ -124,7 +124,7 @@ In this problem we will continue the lab from last HW. We will start from the op
   powerful bounds we have. A much simpler bound (that we will
   rigorously derive later in the course) is called Chebyshev's
   inequality. For coin tosses, this inequality says 
-$$P(|S_k - k p| \geq \epsilon k) \leq \frac{ p (1-p)}{k \epsilon^2}$$. 
+$$P(|S_k - k p| \geq \epsilon k) \leq \frac{ p (1-p)}{k \epsilon^2}.$$ 
 
 Notice here that Chebyshev's inequality looks at two-sided
 deviations. We count both when $S_k$ is much bigger than $kp$ and when
@@ -141,9 +141,10 @@ inequality's prediction and where the actual frequencies are? Why is
 this hard?
 
 \qpart
-\item Lastly, we would like to explore a function that defines how many ways you can choose $k$ distinct objects out of $n$ possible objects. This is written as $\binom{n} {k}$ and is read aloud as $n$ choose $k$. We define $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ So, for example, $\binom{5}{3} = \frac{5!}{3!(5-3)!} = \frac{5\cdot 4 \cdot 3 \cdot 2 \cdot 1}{(3 \cdot 2 \cdot 1) \cdot (2 \cdot 1)} = \frac{120}{12} = 10$. We wish to explore this function. Plot the value $\binom{10}{k}$ one the y-axis and $k$ on the x-axis for $1 \leq k \leq n$. Does this constantly grow as $k$ gets larger? Let's try plotting this for 
-$n = 4$, $n=10$, $n = 25$, $n = 50$. 
-You should note a defining feature of the graph. 
+\item Lastly, we would like to explore a function that defines how many ways you can choose $k$ distinct objects out of $n$ possible objects. This is written as $\binom{n} {k}$ and is read aloud as ``$n$ choose $k$''. We define $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ So, for example, $\binom{5}{3} = \frac{5!}{3!(5-3)!} = \frac{5\cdot 4 \cdot 3 \cdot 2 \cdot 1}{(3 \cdot 2 \cdot 1) \cdot (2 \cdot 1)} = \frac{120}{12} = 10$. We wish to explore this function. Plot the value $\binom{50}{k}$ on the $y$-axis and $k$ on the $x$-axis for $0 \leq k \leq 50$.
+%Let's try plotting this for $n = 4, 10, 25, 50$.
+Does this constantly grow as $k$ gets larger? What does the shape of the graph remind you of?
+%You should note a defining feature of the graph. 
 
 \end{enumerate}
 
@@ -187,7 +188,7 @@ $\binom{10}{3} + 2*\binom{10}{2} + \binom{10}{1}$
 }}\fi
 
 \qpart
-\item Under the same framework as above, how many pizzas can I order, this time I don't have to order exactly $3$ toppings.
+\item Using the same framework where I can get repeated topping, and not restricting myself to exactly 3 toppings, how many pizzas can I order?
 
 \ifsolutions{ \answer { 
 $\binom{10}{3} + 3*\binom{10}{2} + 3*\binom{10}{1} +binom{10}{0}$
@@ -232,13 +233,13 @@ In this modified version of the book (and movie), Esther is a young adult eligib
 \item How many ways in total are there for Esther to pick 5 out of 100 cards? The order in which she picks these cards does not matter. 
   
   \qpart
-\item How many ways can Esther choose the 5 cards such that all are unmarked? Now what is the probability that she will not go onto the Hunger Games? 
+\item How many ways can Esther choose the 5 cards such that all are unmarked? Now what is the probability that she will not go on to the Hunger Games? 
   
   \qpart
-\item What is the probability that she chooses 5 cards such that 1 is marked and the rest is unmarked? How about the configuration where 2 cards are marked and the rest is unmarked? 
+\item What is the probability that she chooses 5 cards such that 1 is marked and the rest are unmarked? How about the configuration where 2 cards are marked and the rest are unmarked? 
   
   \qpart
-\item What is the probability that Esther will go onto the Hunger Games? 
+\item What is the probability that Esther will go on to the Hunger Games? 
   
   \qpart
 \item Given that Esther picked 1 marked card and 4 unmarked cards (she is going to the Hunger Games), her friend Tommy is now forced to choose 5 cards from the remaining pile. Calculate the probability that he will go to the Hunger Games. 
@@ -250,17 +251,25 @@ In this modified version of the book (and movie), Esther is a young adult eligib
 
 \qns{Clinical Trials}
 
-You are creating a test for a rare disease that only 1 in 1000 people have. If a person has the disease, there is a 95\% chance that your test will be positive.  But if they don't have the disease, there is only an 85\% chance the test will be negative.
+You are creating a test for a rare disease that only 1 in 1000 people have. If a person has the disease, there is a 95\% chance that your test will be positive.  But if the person does not have the disease, there is only an 85\% chance the test will be negative.
 
 \begin{enumerate}
 \qpart 
-\item[a)] Let $D$ be the event that you have the disease, and $H$ be the event that you are healthy.  Let $A$ be the event that the test comes out positive, and $B$ be the event that it comes out negative.  Write an expression for $\mathbb{P}(D|A)$ (the probability you have the disease given a positive test result) in terms of the probabilities given above.  Evaluate your expression.
+\item[a)] Let $D$ be the event that you have the disease, and $H$ be the event that you are healthy.  Let $A$ be the event that the test comes out positive, and $B$ be the event that it comes out negative.  Write an expression for $\mathbb{P}(D|A)$ (the probability you have the disease given a positive test result) in terms of the probabilities given above.  Plug in the given probabilities into your expression and calculate the numerical value of $\mathbb{P}(D|A)$.
+
+\ifsolutions{ \answer {
+\[ P(D|A) = \frac{P(A|D)P(D)}{P(A)} = \frac{P(A|D)P(D)}{P(A|D)P(D) + P(A|H)P(H)} = \frac{0.95 \cdot 0.01}{0.95 \cdot 0.01 + 0.15 \cdot 0.99} = 6\% \]
+}}\fi
 
 \qpart
-\item[b)] Write an expression for $P(H|B)$, the probability you are healthy given a negative test result.
+\item[b)] Write an expression for $\mathbb{P}(H|B)$, the probability you are healthy given a negative test result.  Evaluate the numerical result of this expression as well.
 
-\qpart
-\item[c)] For your test to gain approval, the chance of disease given a positive test result must be above 90\%. What would the accuracy of the test have to be to ensure this result?  (You may now assume the accuracy of the test is the same whether you have the disease or not.)
+\ifsolutions{ \answer {
+\[ P(H|B) = \frac{P(B|H)P(H)}{P(B)} = \frac{P(B|H)P(H)}{P(B|H)P(H) + P(B|D)P(D)} = \frac{0.85 \cdot 0.99}{0.85 \cdot 0.99 + 0.05 \cdot 0.01} = 99.9\% \]
+}}\fi
+
+%\qpart
+%\item[c)] For your test to gain approval, the chance of disease given a positive test result must be above 90\%. What would the accuracy of the test have to be to ensure this result?  (You may now assume the accuracy of the test is the same whether you have the disease or not.)
 
 \end{enumerate}
 
@@ -287,6 +296,31 @@ You are creating a test for a rare disease that only 1 in 1000 people have. If a
 
 \qns{Write your own problem} \\
 Write your own problem related to this week's material and solve it. You may still work in groups to brainstorm problems, but each student should submit a unique problem. What is the problem? How to formulate it? How to solve it? What is the solution?
+
+\qns{Midterm question 3} \\
+Re-do midterm question 3.
+\qns{Midterm question 4} \\
+Re-do midterm question 4.
+\qns{Midterm question 5} \\
+Re-do midterm question 5.
+\qns{Midterm question 6} \\
+Re-do midterm question 6.
+\qns{Midterm question 7} \\
+Re-do midterm question 7.
+\qns{Midterm question 8} \\
+Re-do midterm question 8.
+\qns{Midterm question 9} \\
+Re-do midterm question 9.
+\qns{Midterm question 10} \\
+Re-do midterm question 10.
+\qns{Midterm question 11} \\
+Re-do midterm question 11.
+\qns{Midterm question 12} \\
+Re-do midterm question 12.
+\qns{Midterm question 13} \\
+Re-do midterm question 13.
+\qns{Midterm question 14} \\
+Re-do midterm question 14.
   
   
     
