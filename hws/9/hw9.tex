@@ -100,10 +100,10 @@ In this problem we will continue the lab from last HW. We will start from the op
   For a coin with probability $p$ of being heads, we are interested in
   the frequency by which tossing $k$ such coins results in more than
   $ak$ heads (where $a$ is a number larger than $p$). We are
-  interested in $p=0.3,0.5,0.7$ and $a$ like $p+0.05$,
-  $p+0.1$, $p+0.2$.  Take $m = 10000$ and plot the natural log of the frequencies 
+  interested in $p=0.3,0.7$ and $a = p+0.05$,
+  $p+0.1$.  Take $m = 10000$ and plot the natural log of the frequencies 
   these deviations against $k$ (ranging from 10 to 200). Approximately
-  extract the slopes for all 9 of these.
+  extract the slopes for all 4 of these.
 
   Compare them in a table against the predictions of the following
   formula (which we will derive later in the course)
@@ -112,7 +112,7 @@ In this problem we will continue the lab from last HW. We will start from the op
   This expression is called the Kullback-Liebler divergence and is also
   called the relative entropy. 
 
-  Finally, add $e^{-D(a||p) k}$ to the plots (there should be 9 of
+  Finally, add $e^{-D(a||p) k}$ to the plots (there should be 4 of
   these) you have made as straight lines for immediate visual
   comparison. This straight line is called a ``Chernoff Bound'' on the
   probability in question. 
@@ -268,8 +268,12 @@ You are creating a test for a rare disease that only 1 in 1000 people have. If a
 \[ P(H|B) = \frac{P(B|H)P(H)}{P(B)} = \frac{P(B|H)P(H)}{P(B|H)P(H) + P(B|D)P(D)} = \frac{0.85 \cdot 0.99}{0.85 \cdot 0.99 + 0.05 \cdot 0.01} = 99.9\% \]
 }}\fi
 
-%\qpart
-%\item[c)] For your test to gain approval, the chance of disease given a positive test result must be above 90\%. What would the accuracy of the test have to be to ensure this result?  (You may now assume the accuracy of the test is the same whether you have the disease or not.)
+\qpart
+\item[c)] For your test to gain approval, the chance of disease given a positive test result must be above 90\%. What would the accuracy of the test have to be to ensure this result?  (You may now assume the accuracy of the test is the same whether you have the disease or not.)
+
+\ifsolutions{ \answer {
+\[ P(D|A) = \frac{x \cdot 0.01}{x \cdot 0.01 + (1-x) \cdot 0.99} = 0.9 \quad \Rightarrow \quad x = 99.89\% \]
+}}\fi
 
 \end{enumerate}
 
