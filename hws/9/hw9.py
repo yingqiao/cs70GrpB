@@ -30,7 +30,7 @@ def runTrial(p, k):
 
 # Runs m trials of k tosses of a biased coin (w.p. p of heads)
 # and returns all the numbers of heads
-def runManyTrials (p, k, m):
+def runManyTrials(p, k, m):
     return [runTrial(p, k) for _ in xrange(m)]
 
 
@@ -101,8 +101,19 @@ def partC(p=0.7, k=5000, m=1000):
 
 
 # Q1 part (d)
-def partD(p=0.7, k=5000, m=1000):
-    print('todo')
+def partD(prange=[0.3,0.7], krange=range(10,201), m=1000):
+
+##    for p in prange:
+##        for k in krange:
+##            allTrials = runManyTrials(p, k, m)
+##            arange = [p+0.05,p+0.1]
+##            for a in arange:
+##                fracLst = []
+##                fracAbove = [x > a*p for x in allTrials].count(True)/float(m)
+##                fracLst.append(fracAbove)
+##            plt.plot(krange,fracLst)
+##
+##    plt.show()
 
 
 # Q1 part (e)

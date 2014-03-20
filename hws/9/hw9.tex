@@ -68,6 +68,14 @@ In this problem we will continue the lab from last HW. We will start from the op
 
   This is the heart of the Central Limit Theorem as applied to coin
   tosses.
+
+\ifsolutions{ \answer {
+\begin{figure}[h!]
+\center
+\includegraphics[width=0.5\textwidth]{figs/part_a.png}
+\end{figure}
+}}\fi
+
 \qpart
 \item Just a little notation. We will use $X_i$ to denote a random
   variable that is 1 if you toss a head on the $i$-th toss, and 0 if you toss a
@@ -86,8 +94,15 @@ In this problem we will continue the lab from last HW. We will start from the op
 \item Now, since you had realized earlier that the cliff-faces and the
   histograms have some natural relationship with each other, see if
   you can figure out a way to naturally overlay a smooth plot of
-  $\frac{1}{2\pi} e^{-\frac{x^2}{2}}$ to the normalized
+  $\frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$ to the normalized
   histograms. What does this mean?
+
+\ifsolutions{ \answer {
+\begin{figure}[h!]
+\center
+\includegraphics[width=0.5\textwidth]{figs/part_c.png}
+\end{figure}
+}}\fi
 
 \qpart
 \item The other interesting pattern that you had seen in the previous
@@ -119,6 +134,13 @@ In this problem we will continue the lab from last HW. We will start from the op
 
   Comment. 
 
+\ifsolutions{ \answer {
+\begin{figure}[h!]
+\center
+\includegraphics[width=0.5\textwidth]{figs/part_d.png}
+\end{figure}
+}}\fi
+
 \qpart
 \item In the previous part, we went directly to one of the most
   powerful bounds we have. A much simpler bound (that we will
@@ -145,6 +167,13 @@ this hard?
 %Let's try plotting this for $n = 4, 10, 25, 50$.
 Does this constantly grow as $k$ gets larger? What does the shape of the graph remind you of?
 %You should note a defining feature of the graph. 
+
+\ifsolutions{ \answer {
+\begin{figure}[h!]
+\center
+\includegraphics[width=0.5\textwidth]{figs/part_f.png}
+\end{figure}
+}}\fi
 
 \end{enumerate}
 
@@ -191,7 +220,7 @@ $\binom{10}{3} + 2*\binom{10}{2} + \binom{10}{1}$
 \item Using the same framework where I can get repeated topping, and not restricting myself to exactly 3 toppings, how many pizzas can I order?
 
 \ifsolutions{ \answer { 
-$\binom{10}{3} + 3*\binom{10}{2} + 3*\binom{10}{1} +binom{10}{0}$
+$\binom{10}{3} + 3*\binom{10}{2} + 3*\binom{10}{1} +\binom{10}{0}$
 
 }}\fi
 
@@ -258,21 +287,22 @@ You are creating a test for a rare disease that only 1 in 1000 people have. If a
 \item[a)] Let $D$ be the event that you have the disease, and $H$ be the event that you are healthy.  Let $A$ be the event that the test comes out positive, and $B$ be the event that it comes out negative.  Write an expression for $\mathbb{P}(D|A)$ (the probability you have the disease given a positive test result) in terms of the probabilities given above.  Plug in the given probabilities into your expression and calculate the numerical value of $\mathbb{P}(D|A)$.
 
 \ifsolutions{ \answer {
-\[ P(D|A) = \frac{P(A|D)P(D)}{P(A)} = \frac{P(A|D)P(D)}{P(A|D)P(D) + P(A|H)P(H)} = \frac{0.95 \cdot 0.01}{0.95 \cdot 0.01 + 0.15 \cdot 0.99} = 6\% \]
+\[ P(D|A) = \frac{P(A|D)P(D)}{P(A)} = \frac{P(A|D)P(D)}{P(A|D)P(D) + P(A|H)P(H)} = \frac{0.95 \cdot 0.001}{0.95 \cdot 0.001 + 0.15 \cdot 0.999} \]
 }}\fi
 
 \qpart
 \item[b)] Write an expression for $\mathbb{P}(H|B)$, the probability you are healthy given a negative test result.  Evaluate the numerical result of this expression as well.
 
 \ifsolutions{ \answer {
-\[ P(H|B) = \frac{P(B|H)P(H)}{P(B)} = \frac{P(B|H)P(H)}{P(B|H)P(H) + P(B|D)P(D)} = \frac{0.85 \cdot 0.99}{0.85 \cdot 0.99 + 0.05 \cdot 0.01} = 99.9\% \]
+\[ P(H|B) = \frac{P(B|H)P(H)}{P(B)} = \frac{P(B|H)P(H)}{P(B|H)P(H) + P(B|D)P(D)} = \frac{0.85 \cdot 0.999}{0.85 \cdot 0.999 + 0.05 \cdot 0.001} \]
 }}\fi
 
 \qpart
 \item[c)] For your test to gain approval, the chance of disease given a positive test result must be above 90\%. What would the accuracy of the test have to be to ensure this result?  (You may now assume the accuracy of the test is the same whether you have the disease or not.)
 
 \ifsolutions{ \answer {
-\[ P(D|A) = \frac{x \cdot 0.01}{x \cdot 0.01 + (1-x) \cdot 0.99} = 0.9 \quad \Rightarrow \quad x = 99.89\% \]
+Solve for $x$:
+\[ P(D|A) = \frac{x \cdot 0.001}{x \cdot 0.001 + (1-x) \cdot 0.999} = 0.9 \] %\quad \Rightarrow \quad x = 99.89\% \]
 }}\fi
 
 \end{enumerate}
