@@ -42,6 +42,11 @@ def choose(n,k):
     return math.factorial(n)/(math.factorial(k)*math.factorial(n-k))
 
 
+# compute KL divergence
+def KL(a,p):
+    return a*math.log(float(a)/p) + (1-a)*math.log(float(1-a)/(1-p))
+
+
 # Q1 part (a)
 def partA(p=0.7, k=1000, m=1000):
     print('Question 1 part (a):')
@@ -102,18 +107,30 @@ def partC(p=0.7, k=5000, m=1000):
 
 # Q1 part (d)
 def partD(prange=[0.3,0.7], krange=range(10,201), m=1000):
+    plt.yscale('log')
 
-##    for p in prange:
-##        for k in krange:
-##            allTrials = runManyTrials(p, k, m)
-##            arange = [p+0.05,p+0.1]
-##            for a in arange:
-##                fracLst = []
-##                fracAbove = [x > a*p for x in allTrials].count(True)/float(m)
-##                fracLst.append(fracAbove)
-##            plt.plot(krange,fracLst)
-##
-##    plt.show()
+    # plot fraction of heads above ak
+    for p in prange:
+        allTrials = []
+        for k in krange:
+            trials_k = runManyTrials(p, k, m)
+            allTrials.append(trials_k)
+        arange = [p+0.05,p+0.1]
+        for a in arange:
+            fracLst = []
+            for i in range(len(krange)):
+                k = krange[i]
+                fracAbove = [x > a*k for x in allTrials[i]].count(True)/float(m)
+                fracLst.append(fracAbove)
+            plt.plot(krange,fracLst,'.-')
+
+    # overlay KL divergence
+    for p in prange:
+        arange = [p+0.05,p+0.1]
+        for a in arange:
+            plt.plot(krange,[math.exp(-KL(a,p)*k) for k in krange])
+
+    plt.show()
 
 
 # Q1 part (e)
