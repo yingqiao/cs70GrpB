@@ -24,7 +24,7 @@
 \motivationtrue
 \motivationfalse
 \solutionstrue
-\solutionsfalse %flag for solutions
+%\solutionsfalse %flag for solutions
 
 \renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solution:}#1}}
 \definecolor{mydarkblue}{rgb}{0,0.25,1}
@@ -187,8 +187,7 @@ Suppose that a pizzeria lets me choose toppings for the pizza among $10$ differe
   \qpart 
 \item I choose $3$ distinct toppings. If the order in which I order the toppings matters, (for example: ordering Tomatoes, Onions, Mushrooms is different than ordering Tomatoes, Mushrooms, Onions) how many ways are there to order the toppings?
 
-\ifsolutions{ \answer { 
-$10*9*8$
+\ifsolutions{ \answer { $10*9*8$. Because we are sampling without replacement, there are $10*9*8$ different ways to order the toppings. There are $10$ different things to order first, $9$ different things to order second (we can't order the same thing twice) and $8$ things to order third (remember that we can order the first or second topping again).  \\ {\bf Problem Elaboration: } Consider the generalization of this problem, if could order $k$ toppings ($k \leq n$), we would have $\frac{n!}{(n-k)!}$ possible orders. If we were allowed to order the same topping multiple times we would have $10^k$ different orders (since there would always be $10$ choices for the first, second, third, etc. topping).
 
 }}\fi
   
@@ -196,40 +195,77 @@ $10*9*8$
 \item Now I realize that it doesn't matter what order I ask for the toppings, I still get the same pizza. Again using $3$ distinct toppings out of a possible $10$, how many different types of Pizza can I order?
 
 \ifsolutions{ \answer { 
-$\binom{10}{3}$
+$\binom{10}{3}$. Again, this is read aloud as "$10$ choose $3$. This number represents the number of ways to select $3$ unique items out of a possible of $10$ unique items. By definition, $\binom{10}{3} = \frac{10!}{(10-3)!3!}$ \\ {\bf Problem Elaboration: } Let us briefly walk through the derivation of $\binom{n}{k}$. We see that from the previous problem there are $10*9*8 = \frac{10!}{(10-3)!}$. Take a moment to see why this is true (a lot of terms cancel out). We realize that with the number $ \frac{10!}{(10-3)!}$ we are counting each order multiple times. For example, we count the "Tomatoes, Mushrooms, Onions" and "Tomatoes, Onions, Mushrooms" and "Mushrooms, Onions, Tomatoes", etc. all as different orders when in fact they are the same order. So we wish to realize how many times we are counting each order. So how many ways are there to arrange "Mushrooms, Onions, Tomatoes?" Well, there are $3$ items to arrange so we have $3$ choices for the first thing we order, $2$ for the second order, and $1$ for the first. So we have $3!$ ways to order the same unordered set of three toppings. This means each topping is getting counted $3!$ times when we really should count it once. So we have \\$(\text{Number of 3-topping pizzas when order matters}) = 3! * (\text{Number of 3-topping pizzas when order does not matter})$. Therefore we have \\$ \text{(Number of 3-topping pizzas when order does not matter)} = (\text{Number of 3-topping pizzas when order matters})/{3!} \\ \text{(Number of 3-topping pizzas when order does not matter)} = \frac{10!}{(10-3)!} / 3! = \frac{10!}{(10-3)!3!} = \binom{10}{3} $
 
 }}\fi
 
   \qpart
 \item I don't have to get $3$ toppings. If I can instead choose 0, 1, 2, or 3 distinct toppings. For example I could order tomatoes and onions and no third topping. How many different pizzas can I order now?
 
-\ifsolutions{ \answer { 
-$\binom{10}{3} + \binom{10}{2} + \binom{10}{1} + \binom{10}{0}$
+\ifsolutions{ \answer {  This answer follows simply from the work in the previous answer. We now add up the number of ways to order $3$ unique toppings, $2$ unique toppings, $1$ unique topping, and $0$ unique toppings.
+$\binom{10}{3} + \binom{10}{2} + \binom{10}{1} + \binom{10}{0}$. Please note that $0! = 1$ and therefore $\binom{10}{0} = 1$. In general, it is easy enough to prove that $\binom{n}{0} = 1$ and $\binom{n}{1} = n$.  These identities pop intuitively when you consider reading it as "$n$ choose $1$." How many ways are there to \underline{choose} $1$ item out of $n$ items? Clearly the answer is $n$, or $\binom{n}{1}$.
 
 }}\fi
 
   \qpart
 \item The waiter informs me that I can order repeat toppings (put 2 or 3 portions of the same topping). So now I can order Tomatoes, tomatoes, and onions, for example. Still sticking with my same budget, how many different pizzas can I order, making sure I order exactly $3$ toppings total (although the toppings may not be distinct).
 
-\ifsolutions{ \answer { 
-$\binom{10}{3} + 2*\binom{10}{2} + \binom{10}{1}$
+\ifsolutions{ \answer { This answer is a little tricky. We decide to sum over the number of unique toppings we order. We realize we can order $3$, $2$, or $1$ unique topping (we can't order $0$ unique toppings because we have to order exactly $3$ toppings total). \begin{itemize}
+\item If we order $3$ unique toppings, then this is the same problem as part b. Therefore we have $\binom{10}{3}$.
+\item if we order $2$ unique toppings, then we $2*\binom{10}{2}$ pizzas. Why? Well first, we select the number of ways we can \underline{choose} $2$ different toppings which is $\binom{10}{2}$. We realize that once we have chosen our $2$ toppings (for example, "onions and mushrooms" we have $2$ choices for which topping we want to double (we can order "onions, onions, mushrooms" or "onions, mushrooms, mushrooms"). 
+\item if we order $1$ unique topping, then we have to order $3$ portions of that topping, so we simply \underline{choose} one topping to order. Therefore we have $\binom{10}{1}$.
+\end{itemize}  
+Thus our final answer is $\binom{10}{3} + 2*\binom{10}{2} + \binom{10}{1}$
 
 }}\fi
 
 \qpart
 \item Using the same framework where I can get repeated topping, and not restricting myself to exactly 3 toppings, how many pizzas can I order?
 
-\ifsolutions{ \answer { 
-$\binom{10}{3} + 3*\binom{10}{2} + 3*\binom{10}{1} +\binom{10}{0}$
+\ifsolutions{ \answer { We approach this solution using a similar idea from the last problem. We separately add the number of pizzas we can order with $i$ unique toppings for $i \in {0,1,2,3}$. \begin{itemize}
+\item If we order $3$ unique toppings, then this is the same problem as part b. Therefore we have $\binom{10}{3}$.
+\item If we order $2$ unique toppings we have (number of choices for $2$ toppings)*(choice for doubling a topping or not doubling). In other words, once we pick one of the $\binom{10}{2}$ toppings, we have $3$ more choices: we can double the first topping, we can double the second topping, or we can double neither topping. Therefore we have $3*\binom{10}{2}$
+\item If we order $1$ unique toppings, we still have $3$ more choices. We either order one, two, or three servings of the toppings. Therefore we have $3*\binom{10}{1}$
+\item There is only one pizza we can order if we choose $0$ toppings, so $\binom{10}{0}$
+\end{itemize}
+Thus our final answer is $\binom{10}{3} + 3*\binom{10}{2} + 3*\binom{10}{1} +\binom{10}{0}$
 
 }}\fi
-
+ 
 \qpart
 \item I go to a cheaper pizzeria, I can now order up to $5$ toppings. How many  pizzas can I buy? (Using the same rules as e above).
 
-\ifsolutions{ \answer { 
+\ifsolutions{ \answer { We approach this solution using a similar idea from the last problem. We separately add the number of pizzas we can order with $i$ unique toppings for $i \in {0,1,2,3,4,5}$. \begin{itemize}
+\item If we order $5$ unique toppings, once we choose our $5$ toppings we have no choices left to make regarding ordering multiple servings of a topping. Therefore we have $\binom{10}{5}$ pizzas.
+\item If we order $4$ toppings, once we select which $\binom{10}{4}$ toppings we still have many choices. We must choose which of the $4$ toppings to double (which is $\binom{4}{1}$ choices), or we may choose to not double any topping (which is just $1$ choice). Therefore we have $\binom{10}{4}* (\binom{4}{1} + 1)$.
+\item If we order $3$ toppings, once we select which $\binom{10}{3}$ toppings we still have many choices. We can choose to triple one topping, and we have $\binom{3}{1}$ toppings to choose to triple. We can choose to double one topping, and we have $\binom{3}{1}$ toppings to choose to double. We may choose to double two toppings, in which case we can choose $\binom{3}{2}$ different toppings to double. Lastly, we may choose to simply order exactly $3$ servings, which is only one choice. Therefore we have $\binom{10}{3} * (1 + 2*\binom{3}{1} + \binom{3}{2})$
+\item If we order $2$ toppings, once we select which $\binom{10}{2}$ toppings we still have many choices: \begin{itemize} \item We can choose to quadruple one of the toppings, and we have $\binom{2}{1}$ toppings to choose to quadruple. 
+\item We can choose to triple one topping and double another. We then have $\binom{2}{1}*\binom{1}{1} = \binom{2}{1}$ ways to choose those toppings. 
+\item We can choose to only triple one topping, in which case we have $\binom{2}{1}$ choices. 
+\item We can choose to double both of the toppings, this gives us $\binom{2}{2} = 1$ choices. 
+\item we can choose to double only one of the toppings, giving us $\binom{2}{1}$ choices. 
+\item Lastly, we may choose to only order $1$ serving of each topping, giving us $\binom{2}{0} = 1$ choices \end{itemize}
+ Therefore we have $\binom{10}{2} * (2 + 4*\binom{2}{1} )$
+\item If we order $1$ topping, once we select which $\binom{10}{1}$ topping we can choose to get either $1$, $2$, $3$, $4$, or $5$ servings of it. This counts for a total of $\binom{10}{1}*5$ pizzas. 
+\item Lastly, we may order $1$ zero topping pizza.
+\end{itemize}
+Overall, our answer is
+$$\binom{10}{5} \ + \ \binom{10}{4}* (\binom{4}{1} + 1) \ + \ \binom{10}{3} * (1 + 2*\binom{3}{1} + \binom{3}{2}) \ + \binom{10}{2} * (2 + 4*\binom{2}{1} )\  + \ \binom{10}{1}*5$$
+$$= \binom{10}{5} \ + \ \binom{10}{4}*5 \ + \ \binom{10}{3} * (1 + 2*3 + 3) \ + \binom{10}{2} * (2 + 4*2 )\  + \ \binom{10}{1}*5$$
+$$= \binom{10}{5} \ + \ \binom{10}{4}*5 \ + \ \binom{10}{3} *10 \ + \binom{10}{2} *10\  + \ \binom{10}{1}*5$$
 
-$$ \binom{10}{5} +  [1+\binom{4}{1}]\binom{10}{4} +  [1+ 2\binom{3}{1} + \binom{3}{2}] \binom{10}{3} + [1+ 3*\binom{2}{1} + 3*\binom{2}{2}  ]\binom{10}{2} + 5*\binom{10}{1} + \binom{10}{0}$$
+
+An alternate form of this would be
+
+$$\binom{10}{5} \ + \ \binom{10}{4}* (\binom{4}{1} + \binom{4}{0}) \ + \ \binom{10}{3} * (\binom{3}{2} + 2*\binom{3}{1} + \binom{3}{0}) \ + \ \binom{10}{2} * (\binom{4}{1} + \binom{4}{1} +\binom{2}{1} + \binom{1}{1}) \ + \ \binom{10}{1}(1+1+1+1+1) $$
+
+
+%other scratch work.
+$$1 + 2*\binom{3}{1} + \binom{3}{2}) \ + \binom{10}{2} * (2 + 4*\binom{2}{1} )\  + \ \binom{10}{1}*5$$
+
+$$ \binom{10}{5} \ + \  [\binom{4}{0}+\binom{4}{1}]\binom{10}{4} +  [1+ 2\binom{3}{1} + \binom{3}{2}] \binom{10}{3} + [1+ 3*\binom{2}{1} + 3*\binom{2}{2}  ]\binom{10}{2} + 5*\binom{10}{1} + \binom{10}{0}$$
+
+As a challenge problem, can you give the answer to f if we can order up to $k$ toppings from $n$ choices?
 
 }}\fi
 
