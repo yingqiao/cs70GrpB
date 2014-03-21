@@ -24,7 +24,7 @@
 \motivationtrue
 \motivationfalse
 \solutionstrue
-\solutionsfalse %flag for solutions
+%\solutionsfalse %flag for solutions
 
 \renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solution:}#1}}
 \definecolor{mydarkblue}{rgb}{0,0.25,1}
@@ -69,10 +69,11 @@ In this problem we will continue the lab from last HW. We will start from the op
   This is the heart of the Central Limit Theorem as applied to coin
   tosses.
 
-\ifsolutions{ \answer {
+\ifsolutions{ \answer { \\
+Suggestions for python students: check out the "math.erf()" and investigate its relationship with the normal CDF.
 \begin{figure}[h!]
 \center
-\includegraphics[width=0.5\textwidth]{figs/part_a.png}
+\includegraphics[width=0.45\textwidth]{figs/part_a.png}
 \end{figure}
 }}\fi
 
@@ -97,10 +98,11 @@ In this problem we will continue the lab from last HW. We will start from the op
   $\frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$ to the normalized
   histograms. What does this mean?
 
-\ifsolutions{ \answer {
+\ifsolutions{ \answer { \\
+Suggestions for python students: use "normed=True" in the plt.hist() function to normalize the histogram.
 \begin{figure}[h!]
 \center
-\includegraphics[width=0.5\textwidth]{figs/part_c.png}
+\includegraphics[width=0.45\textwidth]{figs/part_c.png}
 \end{figure}
 }}\fi
 
@@ -134,10 +136,12 @@ In this problem we will continue the lab from last HW. We will start from the op
 
   Comment. 
 
-\ifsolutions{ \answer {
+\ifsolutions{ \answer { \\
+Suggestions for python students: $m=10,000$ takes a long time to run.  Suggest a lower $m$ at first for faster debugging. To fit a line, you can use "numpy.polyfit(xlist,log(ylist),1)" for a degree 1 polynomial.  There will probably be some 0 values, which will mess up this fitting, so they can replace 0 values with $10^-3$ or something like that.
 \begin{figure}[h!]
 \center
-\includegraphics[width=0.5\textwidth]{figs/part_d.png}
+\includegraphics[width=0.65\textwidth]{figs/part_d.png}
+%\caption{1, part d}
 \end{figure}
 }}\fi
 
@@ -168,7 +172,8 @@ this hard?
 Does this constantly grow as $k$ gets larger? What does the shape of the graph remind you of?
 %You should note a defining feature of the graph. 
 
-\ifsolutions{ \answer {
+\ifsolutions{ \answer { \\
+Suggestions for python students: there is a binomial coefficient function in scipy.  If they don't have scipy, they can use the "math.factorial(n)" and write their own choose function.
 \begin{figure}[h!]
 \center
 \includegraphics[width=0.5\textwidth]{figs/part_f.png}

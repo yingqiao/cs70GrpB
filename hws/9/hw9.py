@@ -106,8 +106,11 @@ def partC(p=0.7, k=5000, m=1000):
 
 
 # Q1 part (d)
-def partD(prange=[0.3,0.7], krange=range(10,201), m=1000):
-    plt.yscale('log')
+def partD(prange=[0.3,0.7], krange=range(10,201), m=10000):
+    log_thresh = 1e-3
+    erange=[0.05,0.1]
+    colors = ['b','k','g','r']
+    color_idx = 0
 
     # plot fraction of heads above ak
     for p in prange:
@@ -115,21 +118,33 @@ def partD(prange=[0.3,0.7], krange=range(10,201), m=1000):
         for k in krange:
             trials_k = runManyTrials(p, k, m)
             allTrials.append(trials_k)
-        arange = [p+0.05,p+0.1]
+        arange = [p+e for e in erange]
         for a in arange:
             fracLst = []
             for i in range(len(krange)):
                 k = krange[i]
                 fracAbove = [x > a*k for x in allTrials[i]].count(True)/float(m)
-                fracLst.append(fracAbove)
-            plt.plot(krange,fracLst,'.-')
+                fracLst.append(max(fracAbove,log_thresh))
+            lbl = 'p=' + str(p) + ', a=' + str(a)
+            plt.plot(krange,fracLst,colors[color_idx] + '.-',label=lbl)
 
-    # overlay KL divergence
-    for p in prange:
-        arange = [p+0.05,p+0.1]
-        for a in arange:
-            plt.plot(krange,[math.exp(-KL(a,p)*k) for k in krange])
+            # fit a line to each set of points
+            ls_line = np.polyfit(krange,[math.log(f) for f in fracLst],1)
+            lbl = 'fitted line, slope=' + str("%.5f" % ls_line[0])
+            plt.plot(krange,[math.exp(ls_line[0]*k + ls_line[1]) for k in krange],colors[color_idx],label=lbl)
 
+            # overlay KL divergence
+            lbl = 'KL divergence: ' + str("%.5f" % -KL(a,p))
+            plt.plot(krange,[math.exp(-KL(a,p)*k) for k in krange],colors[color_idx] + '--',label=lbl)
+            color_idx += 1
+
+    # set up plot
+    plt.xlabel('Number of coin flips, k',fontsize='large')
+    plt.ylabel('Fraction of trials with more than a*k heads',fontsize='large')
+    plt.title('p = ' + str(prange) + ', m=' + str(m))
+    plt.yscale('symlog', linthreshy=log_thresh*math.sqrt(1e-1))
+    plt.axis([krange[0]-5,krange[-1]+5,log_thresh*math.sqrt(1e-1),1])
+    plt.legend(loc=3)
     plt.show()
 
 
