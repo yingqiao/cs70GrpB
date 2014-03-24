@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+\usepackage{../../cs70}
+\usepackage{color}
+\newif\ifsolutions
+\solutionstrue
+\solutionsfalse %flag for solutions
+
+\def\title{Discussion 10B}
+\begin{document}
+\maketitle
+
+
+\begin{enumerate}
+
+\item {\bf Balls and bins}
+  
+  You have $n$ bins and you throw balls into them one by one randomly.
+  A collision is when a ball is thrown into a bin which already has another ball.
+  \begin{enumerate}
+  \item What is the probability that the first ball thrown will cause the first collision?
+  \item What is the probability that the second ball thrown will cause the first collision?
+  \item What is the probability that, given the first two balls are not in collision, 
+    the third ball thrown will cause the first collision?
+  \item What is the probability that the third ball thrown will cause the first collision? 
+  \item What is the probability that, given the first $m-1$ balls are not in collision, 
+    the $m^{th}$ ball thrown will cause the first collision?
+  \item What is the probability that the $m^{th}$ ball thrown will cause the first collision? 
+  \end{enumerate}
+
+\ifsolutions
+{\color{blue}{
+  {\bf Solutions:}
+  \begin{enumerate}
+  \item 0
+  \item $\frac{1}{n}$
+  \item $\frac{2}{n}$
+  \item Basically: $P(\text{Ball 3 collides $|$ Ball 1, 2 do not collide}) \cdot P(\text{Ball 1, 2 do not collide})$
+
+    Which is $\frac{2}{n} \cdot \frac{n-1}{n}$
+  \item $\frac{m-1}{n}$
+  \item Similar to (d), $\frac{m-1}{n} \cdot \frac{n-1}{n} \cdot \frac{n-2}{n} \cdot \hdots \cdot \frac{n-m+2}{n} = 
+    \frac{m-1}{n} \cdot \prod\limits_{i=0}^{m-2} \frac{n-i}{n}$
+  \end{enumerate}
+}}
+\fi
+
+\qns{Another Stirling Approximation}
+
+\begin{enumerate}
+\item Consider a deck with $M$ many distinct cards. Suppose one removes a card from this deck at random $x$ many times, recording the ordered sequence of drawn cards. How many possible sequences could one end up with?
+\item Suppose instead that, after each draw, the drawn card is reinserted into the deck. Now how many possible sequences could one get (when drawing randomly with replacement $x$ many times from a deck of $M$ cards)?
+\item What is the probability that no card gets drawn more than once, if one draws randomly with replacement $x$ many times from a deck of $M$ cards?
+\item What happens to this probability as $x$ is held constant but $M$ grows very large?
+\item Show that, for any natural numbers $x$ and $N$, we have that $\displaystyle x! = \frac{(N + x)!}{N!} \prod_{i = 1}^{N} \frac{i}{x + i}$.
+\item Combining the previous parts, show that $\displaystyle x! = \lim_{N \rightarrow \infty} (N + x)^x \prod_{i = 1}^{N} \frac{i}{x + i}$. (\textit{Hint: Think of a deck with $N + x$ many cards.})
+\end{enumerate}
+Note that this last formula can be made sense of even for non-integer $x$; this is often used to generalize the factorial function in mathematics.
+
+
+\ifsolutions
+{\color{blue}{
+  {\bf Solutions:}
+\begin{enumerate}
+\item $M!/(M - x)!$.
+\item $M^x$.
+\item $\frac{M!/(M - x)!}{M^x} = \displaystyle \prod_{i = 0}^{x - 1} \frac{M - i}{M} = \prod_{i = 0}^{x - 1} (1 - i/M)$.
+\item As seen in at the end of the last answer sketch, this is the product of a constant number of factors, each of which approaches $1$ as $M$ grows very large. Thus, this probability itself approaches $1$ as $M$ grows very large.
+\item Simply note that the product on the right is $\frac{N!}{(N + x)!/x!}$, and then cancel out the $N!$ and $(N + x)!$.
+\item Take the result from the previous section, and subsitute $(N + x)^x$ for $\frac{(N + x)!}{N!}$, using the fact that their limiting ratio is $1$ for large $N$ (as established two sections ago).
+\end{enumerate}
+}}
+\fi
+
+   
+\end{enumerate}
+
+\end{document}
