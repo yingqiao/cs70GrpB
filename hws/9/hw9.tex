@@ -69,13 +69,13 @@ In this problem we will continue the lab from last HW. We will start from the op
   This is the heart of the Central Limit Theorem as applied to coin
   tosses.
 
-\ifsolutions{ \answer { \\
-Suggestions for python students: check out the "math.erf()" and investigate its relationship with the normal CDF.
-\begin{figure}[h!]
-\center
-\includegraphics[width=0.45\textwidth]{figs/part_a.png}
-\end{figure}
-}}\fi
+%\ifsolutions{ \answer { \\
+%Suggestions for python students: check out the "math.erf()" and investigate its relationship with the normal CDF.
+%\begin{figure}[h!]
+%\center
+%\includegraphics[width=0.45\textwidth]{figs/part_a.png}
+%\end{figure}
+%}}\fi
 
 \qpart
 \item Just a little notation. We will use $X_i$ to denote a random
@@ -98,13 +98,13 @@ Suggestions for python students: check out the "math.erf()" and investigate its 
   $\frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$ to the normalized
   histograms. What does this mean?
 
-\ifsolutions{ \answer { \\
-Suggestions for python students: use "normed=True" in the plt.hist() function to normalize the histogram.
-\begin{figure}[h!]
-\center
-\includegraphics[width=0.45\textwidth]{figs/part_c.png}
-\end{figure}
-}}\fi
+%\ifsolutions{ \answer { \\
+%Suggestions for python students: use "normed=True" in the plt.hist() function to normalize the histogram.
+%\begin{figure}[h!]
+%\center
+%\includegraphics[width=0.45\textwidth]{figs/part_c.png}
+%\end{figure}
+%}}\fi
 
 \qpart
 \item The other interesting pattern that you had seen in the previous
@@ -136,14 +136,14 @@ Suggestions for python students: use "normed=True" in the plt.hist() function to
 
   Comment. 
 
-\ifsolutions{ \answer { \\
-Suggestions for python students: $m=10,000$ takes a long time to run.  Suggest a lower $m$ at first for faster debugging. To fit a line, you can use "numpy.polyfit(xlist,log(ylist),1)" for a degree 1 polynomial.  There will probably be some 0 values, which will mess up this fitting, so they can replace 0 values with $10^-3$ or something like that.
-\begin{figure}[h!]
-\center
-\includegraphics[width=0.65\textwidth]{figs/part_d.png}
-%\caption{1, part d}
-\end{figure}
-}}\fi
+%\ifsolutions{ \answer { \\
+%Suggestions for python students: $m=10,000$ takes a long time to run.  Suggest a lower $m$ at first for faster debugging. To fit a line, you can use "numpy.polyfit(xlist,log(ylist),1)" for a degree 1 polynomial.  There will probably be some 0 values, which will mess up this fitting, so they can replace 0 values with $10^-3$ or something like that.
+%\begin{figure}[h!]
+%\center
+%\includegraphics[width=0.65\textwidth]{figs/part_d.png}
+%%\caption{1, part d}
+%\end{figure}
+%}}\fi
 
 \qpart
 \item In the previous part, we went directly to one of the most
@@ -172,13 +172,13 @@ this hard?
 Does this constantly grow as $k$ gets larger? What does the shape of the graph remind you of?
 %You should note a defining feature of the graph. 
 
-\ifsolutions{ \answer { \\
-Suggestions for python students: there is a binomial coefficient function in scipy.  If they don't have scipy, they can use the "math.factorial(n)" and write their own choose function.
-\begin{figure}[h!]
-\center
-\includegraphics[width=0.5\textwidth]{figs/part_f.png}
-\end{figure}
-}}\fi
+%\ifsolutions{ \answer { \\
+%Suggestions for python students: there is a binomial coefficient function in scipy.  If they don't have scipy, they can use the "math.factorial(n)" and write their own choose function.
+%\begin{figure}[h!]
+%\center
+%\includegraphics[width=0.5\textwidth]{figs/part_f.png}
+%\end{figure}
+%}}\fi
 
 \end{enumerate}
 
@@ -327,15 +327,23 @@ You are creating a test for a rare disease that only 1 in 1000 people have. If a
 \qpart 
 \item[a)] Let $D$ be the event that you have the disease, and $H$ be the event that you are healthy.  Let $A$ be the event that the test comes out positive, and $B$ be the event that it comes out negative.  Write an expression for $\mathbb{P}(D|A)$ (the probability you have the disease given a positive test result) in terms of the probabilities given above.  Plug in the given probabilities into your expression and calculate the numerical value of $\mathbb{P}(D|A)$.
 
-\ifsolutions{ \answer {
-\[ P(D|A) = \frac{P(A|D)P(D)}{P(A)} = \frac{P(A|D)P(D)}{P(A|D)P(D) + P(A|H)P(H)} = \frac{0.95 \cdot 0.001}{0.95 \cdot 0.001 + 0.15 \cdot 0.999} \]
+\ifsolutions{ \answer { We know from Bayes rule that
+\[ P(D|A) = \frac{P(D)P(A|D)}{P(A)}. \]
+
+We know that $P(D) = 0.001$ and $P(A|D) = 0.95$, but it is unclear how to compute $P(A)$. However, we do know that the probability of a positive test result should be the probability of a positive test result and disease, plus the probability of a positive test result and healthy. This gives us
+\[ P(A) = P(A,D) + P(A,H) = P(D)P(A|D) + P(H)P(A|H). \]
+
+which we have expanded above using Bayes rule.  Now we have $P(A)$ in term of quantities we know, and can write
+\[ P(D|A) = \frac{P(D)P(A|D)}{P(D)P(A|D) + P(H)P(A|H)} = \frac{0.001 \cdot 0.95}{0.001 \cdot 0.95+ 0.999 \cdot 0.15} = 0.62997\%, \]
+
+so even given a positive test result, we get a very very small probability of disease.
 }}\fi
 
 \qpart
 \item[b)] Write an expression for $\mathbb{P}(H|B)$, the probability you are healthy given a negative test result.  Evaluate the numerical result of this expression as well.
 
-\ifsolutions{ \answer {
-\[ P(H|B) = \frac{P(B|H)P(H)}{P(B)} = \frac{P(B|H)P(H)}{P(B|H)P(H) + P(B|D)P(D)} = \frac{0.85 \cdot 0.999}{0.85 \cdot 0.999 + 0.05 \cdot 0.001} \]
+\ifsolutions{ \answer { Similarly, we get
+\[ P(H|B) = \frac{P(H)P(B|H)}{P(B)} = \frac{P(H)P(B|H)}{P(H)P(B|H) + P(D)P(B|D)} = \frac{0.999 \cdot 0.85}{0.999 \cdot 0.85 + 0.001 \cdot 0.05} = 99.9941\%. \]
 }}\fi
 
 \qpart
@@ -343,7 +351,7 @@ You are creating a test for a rare disease that only 1 in 1000 people have. If a
 
 \ifsolutions{ \answer {
 Solve for $x$:
-\[ P(D|A) = \frac{x \cdot 0.001}{x \cdot 0.001 + (1-x) \cdot 0.999} = 0.9 \] %\quad \Rightarrow \quad x = 99.89\% \]
+\[ P(D|A) = \frac{0.001 \cdot x}{0.001 \cdot x + 0.999 \cdot (1-x)} = 0.9 \quad \Rightarrow \quad x = 99.9889\% \]
 }}\fi
 
 \end{enumerate}
