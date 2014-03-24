@@ -300,19 +300,47 @@ In this modified version of the book (and movie), Esther is a young adult eligib
 \begin{enumerate}[a)]
   \qpart
 \item How many ways in total are there for Esther to pick 5 out of 100 cards? The order in which she picks these cards does not matter. 
+
+\ifsolutions{ \answer {
+$\binom{100}{5}$. Again, we read this answer aloud as "$100$ choose $5$." This is equivalent to $\frac{100*99*98*97*96}{5!} = \frac{100!}{5!(100-5)!}$. We can see this derived since we have $100$ choices for the first card, and the second card can be anything but the first card, so we have $99$ choices for the second card, and so on. We have to divide by $5!$ since every combination of $5$ cards has $5!$ permutations. In other words, there are $5!$ to arrange each set of $5$ cards, so we are over counting by a factor of $5!$ Thus, we must divide $10*9*8*7*6$ by $5!$. In the future, you can read this answer and immediately see it as a form of "$n$ choose $k$" and can write $\binom{100}{5}$ immediately.
+
+}}\fi
   
   \qpart
 \item How many ways can Esther choose the 5 cards such that all are unmarked? Now what is the probability that she will not go on to the Hunger Games? 
+
+\ifsolutions{ \answer {
+To answer the first question, we count all the ways to pick $5$ cards from all the unmarked cards. According to the question there are $90$ unmarked cards. Therefore there are $\binom{90}{5}$ ways to pick all unmarked cards and thus $\binom{90}{5}$ ways to avoid going on the Hunger games. We use the rule that since each outcome is equally likely, to calculate the probability she will not go to the hunger games we count the outcomes in which she will not go to the hunger games ($\binom{90}{5}$) and divide by the total number of outcomes ($\binom{100}{5}$). Therefore our answer is $\frac{\binom{90}{5}}{\binom{100}{5}} \approx 0.58$
+}} \fi
   
   \qpart
 \item What is the probability that she chooses 5 cards such that 1 is marked and the rest are unmarked? How about the configuration where 2 cards are marked and the rest are unmarked? 
   
+\ifsolutions{ \answer {
+In order to compute this probability, we need to count the number of outcomes that have $1$ marked card and the $4$ unmarked. Then we have to calculate the number of outcomes that have $2$ marked cards and the $3$ unmarked.
+\begin{itemize}
+\item Without loss of generality, we can imagine the first card pulled is the marked card. (This is safe to do because we don't consider the order as important. All the outcomes have $1$ marked card, so we just think of this card as being pulled first). we first count the number of ways to choose the $1$ marked card. This happens $\binom{10}{1}$ choices. The rest of the $4$ cards there are $90$ choices for the second card (it must not be marked), and $89$ choices for the third card (it must not be marked, and it cannot be the same as the first card). Then $87$ and $86$ choices for the next two cards. However, we are double counting by a factor of $4!$ Since this way of counting does not ignore order So, we have $10*\frac{90*89*88*87}{4!}$. We can think of this answer happening another way, we have $\binom{10}{1}$ choices for the marked card, and to \underline{choose} $4$ unmarked cards out of $90$ unmarked cards we have $\binom{90}{4}$. Therefore our answer can be written as $\binom{10}{1}*\binom{90}{4}$. Then the probability of this occurring is $\frac{\binom{10}{1}*\binom{90}{4}}{\binom{100}{5}} \approx 0.34$. 
+\item Now using the insight from the previous step, we can easily solve this problem. We have to \underline{choose} $2$ marked cards out of the $10$ marked cards, and we have to \underline{choose} $3$ unmarked cards out of the $90$ unmarked cards. We get $\binom{10}{2}*\binom{90}{3}$. Therefore the probability of this occurring is $\frac{\binom{10}{2}*\binom{90}{3}}{\binom{100}{5}} \approx 0.07$
+\end{itemize}
+}} \fi  
+  
   \qpart
 \item What is the probability that Esther will go on to the Hunger Games? 
   
+\ifsolutions{ \answer {
+We can calculate this one of two ways. First, we know that since probabilities have to sum to $1$, we know that the \\ (Probability that Esther goes to hunger games) + (Probability Esther does not) = 1 \\ and therefore Probability Esther does not = 1 - (answer to part b) $\approx 0.42$ Let us derive this another way. The probability that she will go to the hunger games can be computed by calculated all the outcomes in which she goes to the hunger games, she chooses $1$, $2$, $3$, $4$, or $5$ marked cards. \\ Therefore this happens in $\binom{10}{1}*\binom{90}{4} + \binom{10}{2}*\binom{90}{3} + \binom{10}{3}*\binom{90}{2} + \binom{10}{4}*\binom{90}{1} + \binom{10}{5}*\binom{90}{0}$ outcomes. Recall that $\binom{n}{0} = 1$. So our answer is \\ $\frac{\binom{10}{1}*\binom{90}{4} + \binom{10}{2}*\binom{90}{3} + \binom{10}{3}*\binom{90}{2} + \binom{10}{4}*\binom{90}{1} + \binom{10}{5}*\binom{90}{0}}{\binom{100}{5}} \approx 0.42$ 
+}} \fi  
+  
   \qpart
 \item Given that Esther picked 1 marked card and 4 unmarked cards (she is going to the Hunger Games), her friend Tommy is now forced to choose 5 cards from the remaining pile. Calculate the probability that he will go to the Hunger Games. 
+
+\ifsolutions{ \answer {
+Since Esther has picked $5$ cards, there are only $95$ cards left. This means that there are a total of $\binom{95}{5}$ possible hands (combinations of cards) to pull. There are now only $4$ marked cards and $86$ unmarked cards. Therefore the probability Tommy does not go to the hunger games can be calculated by counting the outcomes in which he \underline{chooses} $5$ unmarked cards out of the $95$ remaining cards. Therefore the probability is $\frac{\binom{86}{5}}{\binom{95}{5}} \approx 0.60$
+}} \fi
+
 \end{enumerate}
+
+
 
 \ifmotivation
 {\motivation {Motivation - Basic counting and probability.}}
