@@ -192,7 +192,7 @@ Suppose that a pizzeria lets me choose toppings for the pizza among $10$ differe
   \qpart 
 \item I choose $3$ distinct toppings. If the order in which I order the toppings matters, (for example: ordering Tomatoes, Onions, Mushrooms is different than ordering Tomatoes, Mushrooms, Onions) how many ways are there to order the toppings?
 
-\ifsolutions{ \answer { $10*9*8$. Because we are sampling without replacement, there are $10*9*8$ different ways to order the toppings. There are $10$ different things to order first, $9$ different things to order second (we can't order the same thing twice) and $8$ things to order third (remember that we can order the first or second topping again).  \\ {\bf Problem Elaboration: } Consider the generalization of this problem, if could order $k$ toppings ($k \leq n$), we would have $\frac{n!}{(n-k)!}$ possible orders. If we were allowed to order the same topping multiple times we would have $10^k$ different orders (since there would always be $10$ choices for the first, second, third, etc. topping).
+\ifsolutions{ \answer { $10*9*8 = 720$. Because we are sampling without replacement, there are $10*9*8$ different ways to order the toppings. There are $10$ different things to order first, $9$ different things to order second (we can't order the same thing twice) and $8$ things to order third (remember that we can order the first or second topping again).  \\ {\bf Problem Elaboration: } Consider the generalization of this problem, if could order $k$ toppings ($k \leq n$), we would have $\frac{n!}{(n-k)!}$ possible orders. If we were allowed to order the same topping multiple times we would have $10^k$ different orders (since there would always be $10$ choices for the first, second, third, etc. topping).
 
 }}\fi
   
@@ -200,15 +200,15 @@ Suppose that a pizzeria lets me choose toppings for the pizza among $10$ differe
 \item Now I realize that it doesn't matter what order I ask for the toppings, I still get the same pizza. Again using $3$ distinct toppings out of a possible $10$, how many different types of Pizza can I order?
 
 \ifsolutions{ \answer { 
-$\binom{10}{3}$. Again, this is read aloud as "$10$ choose $3$. This number represents the number of ways to select $3$ unique items out of a possible of $10$ unique items. By definition, $\binom{10}{3} = \frac{10!}{(10-3)!3!}$ \\ {\bf Problem Elaboration: } Let us briefly walk through the derivation of $\binom{n}{k}$. We see that from the previous problem there are $10*9*8 = \frac{10!}{(10-3)!}$. Take a moment to see why this is true (a lot of terms cancel out). We realize that with the number $ \frac{10!}{(10-3)!}$ we are counting each order multiple times. For example, we count the "Tomatoes, Mushrooms, Onions" and "Tomatoes, Onions, Mushrooms" and "Mushrooms, Onions, Tomatoes", etc. all as different orders when in fact they are the same order. So we wish to realize how many times we are counting each order. So how many ways are there to arrange "Mushrooms, Onions, Tomatoes?" Well, there are $3$ items to arrange so we have $3$ choices for the first thing we order, $2$ for the second order, and $1$ for the first. So we have $3!$ ways to order the same unordered set of three toppings. This means each topping is getting counted $3!$ times when we really should count it once. So we have \\$(\text{Number of 3-topping pizzas when order matters}) = 3! * (\text{Number of 3-topping pizzas when order does not matter})$. Therefore we have \\$ \text{(Number of 3-topping pizzas when order does not matter)} = (\text{Number of 3-topping pizzas when order matters})/{3!} \\ \text{(Number of 3-topping pizzas when order does not matter)} = \frac{10!}{(10-3)!} / 3! = \frac{10!}{(10-3)!3!} = \binom{10}{3} $
+$\binom{10}{3} = 120$. Again, this is read aloud as "$10$ choose $3$. This number represents the number of ways to select $3$ unique items out of a possible of $10$ unique items. By definition, $\binom{10}{3} = \frac{10!}{(10-3)!3!}$ \\ {\bf Problem Elaboration: } Let us briefly walk through the derivation of $\binom{n}{k}$. We see that from the previous problem there are $10*9*8 = \frac{10!}{(10-3)!}$. Take a moment to see why this is true (a lot of terms cancel out). We realize that with the number $ \frac{10!}{(10-3)!}$ we are counting each order multiple times. For example, we count the "Tomatoes, Mushrooms, Onions" and "Tomatoes, Onions, Mushrooms" and "Mushrooms, Onions, Tomatoes", etc. all as different orders when in fact they are the same order. So we wish to realize how many times we are counting each order. So how many ways are there to arrange "Mushrooms, Onions, Tomatoes?" Well, there are $3$ items to arrange so we have $3$ choices for the first thing we order, $2$ for the second order, and $1$ for the first. So we have $3!$ ways to order the same unordered set of three toppings. This means each topping is getting counted $3!$ times when we really should count it once. So we have \\$(\text{Number of 3-topping pizzas when order matters}) = 3! * (\text{Number of 3-topping pizzas when order does not matter})$. Therefore we have \\$ \text{(Number of 3-topping pizzas when order does not matter)} = (\text{Number of 3-topping pizzas when order matters})/{3!} \\ \text{(Number of 3-topping pizzas when order does not matter)} = \frac{10!}{(10-3)!} / 3! = \frac{10!}{(10-3)!3!} = \binom{10}{3} $
 
 }}\fi
 
   \qpart
 \item I don't have to get $3$ toppings. If I can instead choose 0, 1, 2, or 3 distinct toppings. For example I could order tomatoes and onions and no third topping. How many different pizzas can I order now?
 
-\ifsolutions{ \answer {  This answer follows simply from the work in the previous answer. We now add up the number of ways to order $3$ unique toppings, $2$ unique toppings, $1$ unique topping, and $0$ unique toppings.
-$\binom{10}{3} + \binom{10}{2} + \binom{10}{1} + \binom{10}{0}$. Please note that $0! = 1$ and therefore $\binom{10}{0} = 1$. In general, it is easy enough to prove that $\binom{n}{0} = 1$ and $\binom{n}{1} = n$.  These identities pop intuitively when you consider reading it as "$n$ choose $1$." How many ways are there to \underline{choose} $1$ item out of $n$ items? Clearly the answer is $n$, or $\binom{n}{1}$.
+\ifsolutions{ \answer {  This answer follows from the work in the previous answer. We now add up the number of ways to order $3$ unique toppings, $2$ unique toppings, $1$ unique topping, and $0$ unique toppings.
+$\binom{10}{3} + \binom{10}{2} + \binom{10}{1} + \binom{10}{0} = 176$. Please note that $0! = 1$ and therefore $\binom{10}{0} = 1$. In general, it is easy enough to prove that $\binom{n}{0} = 1$ and $\binom{n}{1} = n$.  These identities pop intuitively when you consider reading it as "$n$ choose $1$." How many ways are there to \underline{choose} $1$ item out of $n$ items? Clearly the answer is $n$, or $\binom{n}{1}$.
 
 }}\fi
 
@@ -220,7 +220,7 @@ $\binom{10}{3} + \binom{10}{2} + \binom{10}{1} + \binom{10}{0}$. Please note tha
 \item if we order $2$ unique toppings, then we $2*\binom{10}{2}$ pizzas. Why? Well first, we select the number of ways we can \underline{choose} $2$ different toppings which is $\binom{10}{2}$. We realize that once we have chosen our $2$ toppings (for example, "onions and mushrooms" we have $2$ choices for which topping we want to double (we can order "onions, onions, mushrooms" or "onions, mushrooms, mushrooms"). 
 \item if we order $1$ unique topping, then we have to order $3$ portions of that topping, so we simply \underline{choose} one topping to order. Therefore we have $\binom{10}{1}$.
 \end{itemize}  
-Thus our final answer is $\binom{10}{3} + 2*\binom{10}{2} + \binom{10}{1}$
+Thus our final answer is $\binom{10}{3} + 2*\binom{10}{2} + \binom{10}{1} = 220$
 
 }}\fi
 
@@ -233,7 +233,7 @@ Thus our final answer is $\binom{10}{3} + 2*\binom{10}{2} + \binom{10}{1}$
 \item If we order $1$ unique toppings, we still have $3$ more choices. We either order one, two, or three servings of the toppings. Therefore we have $3*\binom{10}{1}$
 \item There is only one pizza we can order if we choose $0$ toppings, so $\binom{10}{0}$
 \end{itemize}
-Thus our final answer is $\binom{10}{3} + 3*\binom{10}{2} + 3*\binom{10}{1} +\binom{10}{0}$
+Thus our final answer is $\binom{10}{3} + 3*\binom{10}{2} + 3*\binom{10}{1} +\binom{10}{0} = 286$
 
 }}\fi
  
@@ -257,18 +257,17 @@ Thus our final answer is $\binom{10}{3} + 3*\binom{10}{2} + 3*\binom{10}{1} +\bi
 Overall, our answer is
 $$\binom{10}{5} \ + \ \binom{10}{4}* (\binom{4}{1} + 1) \ + \ \binom{10}{3} * (1 + 2*\binom{3}{1} + \binom{3}{2}) \ + \binom{10}{2} * (2 + 4*\binom{2}{1} )\  + \ \binom{10}{1}*5$$
 $$= \binom{10}{5} \ + \ \binom{10}{4}*5 \ + \ \binom{10}{3} * (1 + 2*3 + 3) \ + \binom{10}{2} * (2 + 4*2 )\  + \ \binom{10}{1}*5$$
-$$= \binom{10}{5} \ + \ \binom{10}{4}*5 \ + \ \binom{10}{3} *10 \ + \binom{10}{2} *10\  + \ \binom{10}{1}*5$$
+$$= \binom{10}{5} \ + \ \binom{10}{4}*5 \ + \ \binom{10}{3} *10 \ + \binom{10}{2} *10\  + \ \binom{10}{1}*5$$ $$=3002$$
 
 
-An alternate form of this would be
+%An alternate form of this would be
+%
+%$$\binom{10}{5} \ + \ \binom{10}{4}* (\binom{4}{1} + \binom{4}{0}) \ + \ \binom{10}{3} * (\binom{3}{2} + 2*\binom{3}{1} + \binom{3}{0}) \ + \ \binom{10}{2} * (\binom{4}{1} + \binom{3}{1} +\binom{2}{1} + \binom{1}{1}) \ + \ \binom{10}{1}(5) $$
 
-$$\binom{10}{5} \ + \ \binom{10}{4}* (\binom{4}{1} + \binom{4}{0}) \ + \ \binom{10}{3} * (\binom{3}{2} + 2*\binom{3}{1} + \binom{3}{0}) \ + \ \binom{10}{2} * (\binom{4}{1} + \binom{4}{1} +\binom{2}{1} + \binom{1}{1}) \ + \ \binom{10}{1}(1+1+1+1+1) $$
 
 
-%other scratch work.
-$$1 + 2*\binom{3}{1} + \binom{3}{2}) \ + \binom{10}{2} * (2 + 4*\binom{2}{1} )\  + \ \binom{10}{1}*5$$
 
-$$ \binom{10}{5} \ + \  [\binom{4}{0}+\binom{4}{1}]\binom{10}{4} +  [1+ 2\binom{3}{1} + \binom{3}{2}] \binom{10}{3} + [1+ 3*\binom{2}{1} + 3*\binom{2}{2}  ]\binom{10}{2} + 5*\binom{10}{1} + \binom{10}{0}$$
+
 
 As a challenge problem, can you give the answer to f if we can order up to $k$ toppings from $n$ choices?
 
