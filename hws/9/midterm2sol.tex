@@ -1,0 +1,616 @@
+\documentclass[11pt,fleqn]{article}
+\usepackage{../cs70,latexsym,epsf,enumerate}
+\usepackage{lastpage}
+\usepackage{color}
+\def\title{Midterm 2}
+
+\newcommand{\fillin}[1]{\underline{\hskip #1}}
+\newcommand{\doublehrule}{\hrule \vskip 0.02in \hrule}
+%\newcommand{\startnewpage}{\newpage \noindent {\sc Print} your name and student ID: \fillin{5in}\\[0.3in]}
+\newcommand{\startnewpage}{\newpage \noindent \vspace{0mm} {\sc Print} your name and student ID: \fillin{5in}\\[-0.2in]}
+
+\definecolor{mydarkblue}{rgb}{0,0.25,1}
+\renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solution: }#1}}
+
+\newcommand{\charbox}{\fbox{
+	\begin{minipage}{.5cm}
+		\hfill\vspace{.5cm}
+	\end{minipage}
+	}}
+
+
+\addtolength{\parskip}{0.3\baselineskip}
+\begin{document}
+\maketitle
+
+\begin{center}
+\framebox{
+\framebox{
+\Large{
+%% Note: each of the following needs to be compiled, saved as a separate file, and sent for copying.
+
+Exam location: 1 Pimentel, back half: SIDs with second-to-last digit 1 or 3
+%Exam location: 1 Pimentel, front half: SIDs with second-to-last digit 7 or 9
+%Exam location: 2050 VLSB, back half: SIDs with second-to-last digit 0 or 4
+%Exam location: 2050 VLSB, front half: SIDs with second-to-last digit 6 or 8
+%Exam location: 2040 VLSB: SIDs with second-to-last digit 5
+%Exam location: 2060 VLSB: SIDs with second-to-last digit 2
+%Exam location: 540 Cory
+}
+}
+}
+\end{center}
+
+\noindent
+% \vspace{1mm} \\
+{\sc Print} your student ID:   \charbox \charbox \charbox \charbox \charbox \charbox \charbox \vspace{.1mm} \fbox{\charbox} \charbox     \\   % \fillin{3in} 
+\vspace{-2mm} \\
+{\sc Print and Sign} your name:
+\begin{tabular}{ccc}
+\\
+\fillin{1.3in},
+&\fillin{1.3in}
+&\fillin{1.6in}\\
+{\small (last)}
+&{\small (first)}
+&{\small (signature)}\\
+\end{tabular}\\[.1in]
+\vspace{-1mm} \\
+{\sc Print} your Unix account login: cs70-\fillin{1in}\\
+\vspace{1mm} \\
+%{\sc Print} where you are taking this exam: \fillin{3in}\\
+%\vspace{3mm} \\
+{\sc Print} your discussion section and GSI (the one you attend): \fillin{3in}
+\vspace{-7mm} \\
+
+%Names of the people sitting next to you: \fillin{4in}\\
+Name of the person to your left: \fillin{4in}\\
+\vspace{1mm} \\
+Name of the person to your right: \fillin{4in}\\
+\vspace{1mm} \\
+Name of someone in front of you: \fillin{4in}\\
+\vspace{1mm} \\
+Name of someone behind you: \fillin{4in}
+
+
+
+
+\section*{Section 0: Pre-exam questions (3points)}
+
+\begin{qunlist}
+
+\qns{What is your favorite song? (1 pt)}
+
+\vspace{0.5in}
+
+\qns{Describe a sense of accomplishment that you have felt and what
+  prompted it. (2pts)}
+
+\vspace{1.5in}
+
+\begin{center}
+\framebox{
+\framebox{
+Do not turn this page until the proctor tells you to do so.
+%You can work on Section 0 above before time starts.
+}
+}
+\end{center}
+
+
+
+%Number of pages in this exam (some are blank): \pageref{LastPage}.
+
+
+
+%\startnewpage
+%
+%
+%{\sc Some approximations and other useful tricks that may or may not
+%  come in handy:}
+%
+%$$n! \approx \sqrt{2\pi n} (\frac{n}{e})^n \hspace{30mm} {n \choose k} \leq (\frac{n e}{k})^k \hspace{30mm} \lim_{n\rightarrow \infty} (1+\frac{x}{n})^n = e^x$$
+%
+%%$${n \choose k} \leq (\frac{n e}{k})^k$$
+%
+%When $x$ is small, $\ln(1+x) \approx x$
+%
+%When $x$ is small, $(1+x)^n \approx 1+nx$
+%
+%%$$\lim_{n\rightarrow \infty} (1+\frac{x}{n})^n = e^x$$
+%
+%%You probably have others on your note sheet and in your minds. Good
+%%for you.
+%
+%
+%
+%
+%
+%%\startnewpage
+%
+%    \begin{center}
+%      \includegraphics[width=.9\textwidth]{normal_table.png}
+%    \end{center}
+%    
+%    Source: \url{http://www.math.unb.ca/~knight/utility/NormTble.htm}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	STRAIGHTFORWARD SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\startnewpage
+
+\section*{Section 1: Straightforward questions (50 points)}
+
+\textit{You must show work to get credit. You get two drops: do 5 out
+  of the following 7 questions (we will grade all 7 and keep only the
+  5 best scores). However, there will be essentially no partial credit
+  given in this section. Students who get all 7 questions correct will
+  receive some bonus points.}  
+%\vspace{-5mm}
+
+\qns{Interpolate (10 points)}  
+
+Prof.~Sahai decides to share his favorite Pok\'emon among six of the
+GSIs, but to keep it a secret unless enough GSIs come together. Each
+potential favorite Pok\'emon is given a number (Charizard=0,
+Wartortle=1, Pidgeot=2, Ninetales=3, Arcanine=4, Scyther=5, Jolteon=6)
+and the favorite is hidden as the constant term (i.e.~as usual, the
+secret is in $P(0)$) in a polynomial, $P(x)$, of degree $d \leq 4$
+using $GF(7)$. You manage to acquire the following five points by
+attending different GSI office hours: $(1,0), (2,6), (3,0), (4,0),
+(6,0)$. {\bf Use Lagrange Interpolation to find out the secret} (the
+Prof's favorite Pok\'emon).
+
+\answer{ 
+\[ P(x) = 6 \cdot \frac{(x-1)(x-3)(x-4)(x-6)}{(2-1)(2-3)(2-4)(2-6)} \]
+\[ \Rightarrow P(0) = -3 \cdot 3 \cdot 6 = -54 = \boxed{2 \bmod 7} \]
+}
+
+\vspace{1in}
+
+\qns{Compute (10 points)} 
+
+Find $300^{300} \bmod 35$.
+
+\answer{
+The extension of Fermat's Little Theorem says that if $p$ and $q$ are two distinct primes both bigger than 2, then for any $a$ we have 
+\[
+a^{(p-1)(q-1)} \equiv 1$ mod $pq
+\]
+In our case $p=5$ and $q=7$, so we have that $a^{24} = 1$ mod 35 for any $a$. Therefore
+\begin{align*}
+300^{300} &= (300^{24})^{12} \cdot 300^{12} \\
+&= 1^{12} \cdot 20^{12} \\
+&= (400)^6 \\
+&= 15^6 \\
+&= (225)^3 \\
+&=15^3 \\
+&=225\cdot 15 \\
+&= 15 \cdot 15 \\
+&= \boxed{15 \bmod 35}
+\end{align*}
+}
+%\vspace{3in}
+
+%\startnewpage
+
+%[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem's main page.]
+
+\startnewpage
+
+\qns{Argue (10 points)} 
+
+In RSA, if Alice wants to send a confidential message to
+Bob, she uses Bob's public key to encode it. Then Bob uses his
+private key to decode the message. 
+
+Suppose that Bob chose $N = 77$. 
+
+And then Bob chose $e=3$ so his public key is $(3,77)$.
+
+And then Bob chose $d=26$ so his private key is $(26,77)$. 
+
+{\bf Will this work for encoding and decoding messages? If not, where did
+Bob \underline{first} go wrong in the above sequence of steps and what is the
+consequence of that error. If it does work, then show that it works.}
+
+\answer{We know that $e$ and $d$ should be inverses mod $(p-1)(q-1)$, where $pq=N$. So:
+\[ e\cdot d \equiv 1 \mod (p-1)(q-1) \]
+
+In this case, $p=7$ and $q=11$, so $(p-1)(q-1) = 6 \cdot 10 = 60$. However:
+\[ e \cdot d = 3 \cdot 26 = 78 = 18 \bmod 60 \]
+
+So $e$ and $d$ are {\em not} inverses mod 60, so this scheme will not work. Bob probably computed $d$ as the inverse of $e$ mod $pq=77$, which is not what we want for RSA.
+}
+\vspace{1in}
+
+\qns{Prove (10 points)} 
+
+{\bf Prove the following statement:}
+
+If two degree $d \leq n-1$ polynomials $P(x)$ and $Q(x)$ agree at $n$
+distinct $x$s (i.e.~For $x_1, x_2, \ldots, x_n$ distinct,
+$P(x_i)=Q(x_i)$), then they are the same function everywhere else too.  
+
+\answer{ Let $D(x) = P(x) - Q(x)$.  The degree of $D(x)$ is at most $n-1$. However, we know that $D(x)$ has $n$ distinct roots.  But a non-zero degree $n-1$ polynomial can have at most $n-1$ distinct roots.  Therefore $D(x)$ must be zero everywhere, so $P(x)$ and $Q(x)$ must be the same function everywhere.
+}
+\vspace{3in}
+
+%\startnewpage
+
+%[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem's main page.]
+
+\startnewpage
+
+\qns{Recognize (10 points)} 
+
+\begin{itemize}
+
+\item[a. ]{I have a large number of biased coins that tend to come up heads $80\%$ of the time, and tails
+the other $20\%$. A trial consists of my flipping $k$ such coins, and an experiment
+consists of $1000$ such trials. I do $3$ such experiments, with $k$ being $100$, $1000$, and $10000$ respectively. 
+For each experiment, I plot a histogram of the number of heads in each
+trial, minus $0.8 k$. 
+My horizontal axis is the same for all $3$ experiments. {\bf Which histogram below corresponds to which value of $k$?}
+\begin{figure*}[htbp]
+	\vspace{-0.5em}
+	\centering
+	{
+		\hspace{0em}\includegraphics[width=0.7\linewidth]{resources/figures/plots-a.png}
+	}
+	\vspace{-0.5em}
+    %\caption{\label{probability-plots}}
+    \vspace{-0.5em}
+\end{figure*}
+}
+
+\item[b. ]{I do the same experiment as above, but now I plot
+    histograms of the \textit{fraction} of heads (minus 0.8) from each trial. 
+    Now {\bf which histogram below corresponds to which value of $k$?}
+\begin{figure*}[htbp]
+	\vspace{-0.5em}
+	\centering
+	{
+		\hspace{0em}\includegraphics[width=0.70\linewidth]{resources/figures/plots-b.png}
+	}
+	\vspace{-0.5em}
+    %\caption{\label{probability-plots}}
+    \vspace{-0.5em}
+\end{figure*}
+}
+
+\item[c. ]{My friend gives me $3$ bags full of biased coins: coins in these bags come up 
+        heads $40\%$, $50\%$, and $60\%$ of the time respectively. Suppose for each 
+        $q$ in $0 \leq q \leq 1$, I record the fraction $f(q)$ of
+        trials in which I get at most $q$ fraction of heads when I
+        flip $100$ coins drawn from one of these bags.  If I plot
+        $q$ (x axis) vs $f(q)$ (y axis), {\bf which curve below corresponds
+        to which bag? }
+\begin{figure*}[htbp]
+	\vspace{-0.2em}
+	\centering
+	{
+		\hspace{0em}\includegraphics[width=0.35\linewidth]{resources/figures/plots-c-v2-gimped.png}
+	}
+	\vspace{-0.5em}
+    %\caption{\label{probability-plots}}
+    \vspace{-0.5em}
+\end{figure*}
+}
+\end{itemize}
+
+%\vspace{3in}
+
+\startnewpage
+\qns{Derive (10 points)} 
+
+You would like to send a message of length $n>0$ over a lossy
+channel that drops ({\bf erases}) packets. If up to a fraction
+$\frac{1}{4}$ of the {\em total} number of packets you send get {\bf
+  erased, how many extra packets do you need to send (as a function of
+  $n$)?} 
+
+\answer{
+\[ k \geq \frac{1}{4}(n+k) \quad \Rightarrow \quad \boxed{k \geq \frac{n}{3}} \]
+}
+\vspace{1in}
+
+\qns{Solve \ldots (10 points)}
+
+Alice wants to send Bob a message of length 2 in $GF(7)$ over a noisy channel.
+She knows that at most 1 character will get corrupted when she sends
+her message. So, she pads her message with 2 extra characters before
+sending it. (Using standard interpolation-based $0$-indexed Reed
+Solomon codes.)
+
+This is what Bob receives: \textbf{A A E G}
+
+{\bf What was Alice trying to tell him?}
+
+Note: Here, assume that letters correspond to numbers as follows:
+
+$A=0$ \\
+$B=1$ \\
+$C=2$ \\
+$D=3$ \\
+$E=4$ \\
+$F=5$ \\
+$G=6$
+
+%ABCDEFG
+%0123456
+
+%\startnewpage
+
+%[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem's main page.]
+
+%%%
+\answer{ The four points are (0,0), (1,0), (2,4), (3,6). Let $Q(x) = ax^2+bx+c$, and $E(x) = x-e$. This gives the four equations:
+\begin{align*}
+c & = 0(0-e) \quad \Rightarrow \quad c=0 \\
+a+b & = 0(1-e) \quad \Rightarrow \quad b=-a \\
+4a-2a & = 4(2-e) \quad \Rightarrow \quad 2a = 8-4e \\
+9a-3a & = 6(3-e) \quad \Rightarrow \quad 6a = 18-6e
+\end{align*}
+You get $a = 4$, $b = -4$ and $e = 1$.
+This gives $Q(x) = 4x^2 - 4x$ and $E(x) = (x-1)$.
+The actual polynomial is $P(x) = 4x$, plugging in $x=1$, we get that the message was \boxed{\text{AE}}.
+}
+%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	TRUE/FALSE SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\startnewpage
+
+\section*{Section 2: True/False (30 points)}
+
+\textit{For the questions in this section, determine whether the
+  statement is true or false. If true, prove the statement is true. If 
+  false, provide a counterexample demonstrating that it is false.}
+
+%\textit{You get one drop: do 3 out of the following 4 questions.}
+
+
+\qns{Sums (15 points)}
+
+Suppose that $n \geq 1$ is a positive integer, $x_1,x_2,\ldots,x_n$
+are also nonzero positive integers, and $p$ is a prime. Then
+\begin{displaymath}
+	(x_1+x_2+ \cdots +x_n)^p=x_1^p+x_2^p+ \cdots +x_n^p \pmod{p}.
+\end{displaymath}
+
+Mark one: {\sc TRUE} or {\sc FALSE}.
+
+\startnewpage
+
+\qns{Distance (15 points)} 
+
+Let $n \geq 1$ be a positive integer. Let $r \geq 1$ be
+a positive integer. Consider a polynomial based code in which
+$n$ character messages are encoded into polynomials of degree less
+than or equal to $n-1$. The codewords are generated by evaluating
+these polynomials at $n+r$ distinct points (assume the underlying
+finite field has more than $n+r$ elements). 
+
+Then any two codewords corresponding to different messages must
+differ in at least $r+2$ places. 
+
+Mark one: {\sc TRUE} or {\sc FALSE}.
+
+\vspace{3in}
+
+%\startnewpage
+
+
+%[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem's main page.]
+
+\startnewpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	HARDER PROBLEMS SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section*{Section 3: Free-form Problems (45 points)}
+
+%\textit{You get one drop: do 3 out of the following 4 questions (we
+%  will grade all 4 and keep only the 3 best scores). Students who do
+%  better than getting all three perfectly will receive some bonus
+%  points.}  
+
+\qns{You knew this was coming\ldots (20 points)}
+
+As you know from homework, we can mod polynomials themselves. For this
+problem, consider formal polynomials (i.e.~a degree at most $d$ formal
+polynomial is something that can be written $\sum_{i=0}^{d} a_i x^i$)
+with coefficients in $GF(2)$ (i.e.~the $a_i$ are 0 or 1 with usual binary
+math). 
+
+(So, for example, $x^2 + x$ is the remainder of
+poly-long-dividing $x^4$ by $x^3 + x + 1$. Meanwhile, the quotient of
+the same division is just $x$. This is because $x^4 = x(x^3 + x + 1) +
+(x^2 + x)$ when all arithmetic on coefficients is performed mod 2. )
+
+{\bf Compute the multiplicative inverse of the formal polynomial $x+1$ in mod $x^3
++ x + 1$.} That is, give a formal polynomial $P(x)$ so that $P(x)(x+1)
+\bmod (x^3 + x + 1) = 1$. 
+
+{\em (e.g.~The multiplicative inverse of $x$ is $x^2 + 1$ because
+  $x(x^2 + 1) \bmod (x^3 + x + 1) = 1$.)}
+
+\answer{
+We can use egcd to find the multiplicative inverse of $x+1$ mod $x^3+x+1$.  First we divide $x^3+x+1$ by $x+1$, and we get a remainder of 1.
+\begin{align*}
+& \text{egcd}(x+1,x^3+x+1) \\
+= & \text{egcd}(x+1,1) & 1 = (x^3+x+1) - (x^2+x)(x+1) 
+\end{align*}
+
+Therefore the inverse of $(x+1)$ is $-(x^2+x)$. But because we're working mod 2, this is the same as $\boxed{x^2+x}$.
+}
+
+%\startnewpage
+
+%[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem's main page.]
+
+\startnewpage
+
+\qns{Magic Command (25 points)}
+
+You are a young technomage (one who uses technology to create the
+impression of magic) who has been asked to help some people on a
+planet with a fragile new peace treaty. They have a master computer that
+is connected to a doomsday device capable of blowing up the planet if
+given the publicly-known command ``Magic computer, please blow up the
+world now.'' (For the purposes of this problem, feel free to think of
+this as being a publicly-known magic number like 42). 
+
+% unleash a terrible
+% storm if given the command ``superstorm'' that could hurt lots of
+% people. It can also be used for helpful tasks like ``please make a
+% sunny day'' and ``we'd like a gentle rain of 2 inches spread over 4
+% days.'' 
+
+The problem is that the computer has no security on it. It just
+accepts plain text commands. 
+
+\begin{itemize}
+%\qpart
+\item[a. (10 pts)] You have been asked to add some
+security to the system to prevent unauthorized use. You can remove the
+keyboard, add a tamper-proof-decryption module, and force all keyboard
+input to go through the decryption module before it goes to the
+computer. But anyone can walk up to the decryption module to study it
+because it is in the {\bf public} square. {\bf Please show how you
+  would design such a public module that transforms inputs before
+  feeding them into the computer.} This module should effectively make
+the magic number that blows up the world into something secret. 
+
+You can use modulo math operations as you see fit. (You don't have to
+reprove anything you have seen in lecture or notes.)
+
+\startnewpage
+%\qpart
+\item[b. (15 pts)] The people on this planet are divided into two
+  factions: the blues and the golds. Within each color group, there
+  are 4 families. They have agreed on the following behavior: 
+
+If at least 2 blue families and at least 2 gold families come
+together, they should be able to give a valid command to the master
+computer. In addition, if all the blues agree or all the golds agree,
+then they should also be able to give a valid command to the master
+computer. But no other grouping should be able to do it. (e.g.~3 blues
+and 1 gold {\em should not} be able to give a command.)
+
+{\bf Design a scheme and argue why it works as intended.} You can use
+modulo  math operations as you see fit, as well as give pieces of
+information {\bf secretly} to families. (You don't have to reprove
+anything you have seen in lecture or notes.)
+\end{itemize}
+
+\startnewpage
+
+[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem's main page.]
+
+\startnewpage
+
+\qns{(Optional) Multiplication (20 points)}
+
+Suppose you have invented a machine for doing \emph{mod multiplications} 
+extremely fast. 
+
+Given a prime $p$, your invention takes two equal size lists of
+numbers from $\{0,1,\ldots, p-1\}$ as inputs and returns the
+element-wise product of the input lists, mod $p$. Your machine is fast
+and can accomodate any size lists, but it is also prone to
+mistakes. More specifically, you know that at most $\frac{1}{3}$ of
+the results are wrong. For example, suppose $p=29$ and we feed the
+machine the two lists $(1, 2, 6)$ and $(5, 1, 2)$ we might get back
+output $(5, 2, 11)$ where $11 \neq 6 \times 2$ is a mistake. None of
+your potential clients is interested in a device which returns false
+results. 
+
+{\bf Show that you can augment your machine with Reed-Solomon-like
+encoding and decoding schemes such that no wrong outputs are ever
+returned and correct answers are obtained to the $m$ pairs of numbers
+that you actually want to multiply together.} (You will need to ask the
+machine itself to multiply more than $m$ pairs of numbers to
+accomplish this.) You can assume you have access to
+interpolation-based ($1$-indexed) RS-encoders (parameters like $n$ and
+$k$ can be adjusted as you would like) as well as Berlekamp-Welch
+decoders. (Again, internal parameters like $n$ and $k$ can be
+{\bf independently} adjusted as you would like --- in particular, you
+don't have to use the same $n$ and $k$ that you used for the encoders.)
+
+For concreteness, you can assume that the size of the desired input
+lists is $m=6$ and that $p=127$. (This is a prime number)
+
+{\em (HINT: first explore what happens with $m=1$ and $m=2$ to get an
+  idea for what is going on.)}
+
+\startnewpage
+
+[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem's main page.]
+
+
+\startnewpage
+
+%[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem's main page.]
+
+[Doodle page! Draw us something if you want or give us suggestions or complaints.]
+
+
+\end{qunlist}
+
+
+\end{document}
+
+\qns{Indexing Dispute (20 points)}
+
+The EECS 70 Piazza group has blown up around this
+Reed-Solomon puzzle:
+
+Eve and Dan both use Reed-Solomon codes where the encoding is based
+on interpolation and the message symbols are at the beginning of
+codewords. But Eve likes to use $0$-indexing while Dan likes to use
+$1$-indexing. For a prime $p$, Eve's codewords are $(P(0), P(1), P(2),
+\ldots, P(p-1))$ in that order. Dan's codewords are instead $(P(1),
+P(2), P(3), \ldots, P(p-1), P(0))$.
+
+Suppose $n+2k = p$. When Eve uses her encoder to protect $n$ symbols,
+she can tolerate up to $k$ general errors in the received symbols
+since when she feeds them into her own Berlekamp-Welch decoding box,
+that box will reliably emit the original $n$ symbols if $k$ or fewer
+symbols were corrupted. The same for Dan's encoder and decoder when
+used together. 
+
+The question is what happens if we use Eve's encoder together with
+Dan's decoder. Does this still work? If not why not. If so, how well
+and why? 
+
+{\em (HINT: first explore what happens with $n=1$ even with errors and 
+  $n=2$ with no errors to get an idea for what is going on.)}
+
+\startnewpage
+
+[Extra page. If you want the work on this page to be graded, make sure you tell us on the problem's main page.]
+
+\startnewpage
+
+
+% LocalWords:  maketitle noindent sc cs70 hline Ramtin Chenyu Sibi Dwin hskip
+% LocalWords:  framebox newpage tabularnewline qquad vspace mansplains geq2 qns
+% LocalWords:  Rightarrow Rightarrow vfill mbox cdot cdot bmod bmod forall fbox
+% LocalWords:  mathbb charbox charbox charbox charbox charbox charbox charbox
+% LocalWords:  charbox charbox qunlist 2pts pageref startnewpage approx sqrt nx
+% LocalWords:  hspace leq hspace infty includegraphics textwidth textit emon
+% LocalWords:  Wartortle Pidgeot Ninetales Arcanine Scyther Jolteon
