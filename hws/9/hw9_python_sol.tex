@@ -72,6 +72,9 @@ In this problem we will continue the lab from last HW. We will start from the op
   tosses.
 
 \ifsolutions{ \answer {
+We can see that the theoretical curve fits the shape perfectly.
+%for different $p$ values.
+And the zigzags smooth out as $k$ increases.
 %Suggestions for python students: check out the "math.erf()" and investigate its relationship with the normal CDF.
 \begin{figure}[h!]
 \center
@@ -94,7 +97,8 @@ In this problem we will continue the lab from last HW. We will start from the op
  vagaries of the coin tosses.
 
 \ifsolutions{ \answer { We can write $S$ as
-\[ S = \sum_{i=1}^k X_i. \]
+\[ S = \sum_{i=1}^k X_i, \]
+where the subscript $k$ denotes the number of coin flips.
 }}\fi
 
 % c) DONE
@@ -191,7 +195,7 @@ Try to make an appropriate plot that shows both Chebyshev's
 inequality's prediction and where the actual frequencies are? Why is
 this hard?
 
-\ifsolutions{ \answer { This plot is difficult because for small $k$ values, often all the trials will satisfy $P(|S_k - k p| \geq \epsilon k)$. For $\epsilon=0.1$, we need about $k=180$ for the bound to hold.  For $\epsilon=0.2$, we need about $k=160$, and for $\epsilon=0.1$, we need about $k=145$.
+\ifsolutions{ \answer { Looking at the formula, we choose to plot on linear scales. However, since the Chebyshev's bound is a very {\em loose} one, the distance between the actual trial fraction frequency and the theoretical line is quite large. Thus, it is hard to plot them all on the same figure. 
 \begin{figure}[h!]
 \center
 \includegraphics[width=0.8\textwidth]{figs/part_e.png}

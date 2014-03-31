@@ -84,13 +84,12 @@ def partA(p=0.7, krange=[10,100,1000,4000], m=10000):
 
 # Q1 part (c)
 def partC(p=0.7, krange=[10,100,1000,4000], m=10000):
-    bin_sizes = [10,10,20,24]
 
     # plot histograms
     std = math.sqrt(p*(1-p))
     for k in krange:
         results = [(Sk-k*p)/(math.sqrt(k)*std) for Sk in runManyTrials(p, k, m)]
-        plt.hist(results, bins=bin_sizes[krange.index(k)], align='mid', normed=True, label='k=' + str(k))
+        plt.hist(results, bins=20, align='mid', normed=True, label='k=' + str(k))
 
     # overlay normal distribution
     mean = 0
@@ -152,7 +151,7 @@ def partD(prange=[0.3,0.7], krange=range(10,201), m=10000):
 
 
 # Q1 part (e)
-def partE(p=0.5, krange=range(10,201), erange=[0.1,0.2,0.3], m=10000):
+def partE(p=0.3, krange=range(10,201), erange=[0.1,0.2,0.3], m=10000):
     colors = ['b','k','g']
     color_idx = 0
 
@@ -165,7 +164,9 @@ def partE(p=0.5, krange=range(10,201), erange=[0.1,0.2,0.3], m=10000):
 
         # plot the fraction of trials where |S_k - kp| >= epsilon*k
         frac_lst = []
-        for k in krange:
+        for i in range(len(krange)):
+            k = krange[i]
+            trials_k = all_trials[i]
             frac_close = [abs(Sk - k*p) >= e*k for Sk in trials_k].count(True)/float(m)
             frac_lst.append(frac_close)
         plt.plot(krange,frac_lst,COLORS[color_idx],label='epsilon=' + str(e) + ', frac of trials')
@@ -175,8 +176,8 @@ def partE(p=0.5, krange=range(10,201), erange=[0.1,0.2,0.3], m=10000):
         color_idx += 1
 
     # set up plot
-    plt.legend(loc=9)
-    plt.axis([krange[0]-5,krange[-1]+5,0,0.5])
+    plt.legend()
+    plt.axis([krange[0]-5,krange[-1]+5,0,1])
     plt.xlabel('Number of coin flips, k',fontsize=FONTSIZE)
     plt.ylabel("Chebyshev's inequality",fontsize=FONTSIZE)
     plt.title('p=' + str(p) + ', m=' + str(m),fontsize=FONTSIZE)
