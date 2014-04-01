@@ -12,18 +12,133 @@
 
 \begin{enumerate}
 
+
+\item {\bf Prove!} 
+
+  Consider the following identity: $$ \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k} $$
+
+  \begin{enumerate}
+  \item Prove the identity by algebraic manipulation.
+
+	\vspace{30mm}
+
+    \ifsolutions{\color{blue}
+	\vspace{-30mm}
+      {\begin{eqnarray*}
+          \binom{n}{k} &=& \frac{n!} {(n-k)!\cdot k!} \\
+          &=& \frac{n}{k}\cdot \frac{(n-1)!} {(n-k)!\cdot (k-1)!} \\
+          &=& \frac{n+k-k}{k}\cdot \frac{(n-1)!} {(n-k)!\cdot (k-1)!} \\
+          &=& \frac{k}{k}\cdot\frac{(n-1)!} {(n-k)!\cdot (k-1)!} + \frac{n-k}{k}\cdot \frac{(n-1)!} {(n-k)!\cdot (k-1)!}\\
+          &=& \frac{(n-1)!} {(n-k)!\cdot (k-1)!} + \frac{(n-1)!} {(n-k-1)!\cdot k!}\\
+          &=& \binom{n-1}{k-1} + \binom{n-1}{k}
+          \end{eqnarray*}
+    }} \fi
+    
+  \item Prove the identity using a combinatorial argument.  
+
+\vspace{30mm}
+    
+    \ifsolutions{\color{blue}
+\vspace{-30mm}
+      {The left hand side is the number of ways to choose $k$ elements    
+        out of $n$. 
+
+        Looking at this another way, we look at the first element and decide whether 
+        we are going to choose it or not. If we choose it, then we need to choose $k-1$
+        more elements from the remaining $n-1$. If we don't choose it, then we need
+        to choose all our $k$ elements from the remaining $n-1$.
+        We are not double counting any as in one of our cases, we chose the first
+        element and in the other, we did not.
+        We are counting not leaving everything out by separating it into these cases.
+
+        This completes the proof.
+      }} \fi
+  \end{enumerate}
+
+
+  Consider the following identity: $$ \binom{2n}{2} = 2 \binom{n}{2} + n^2. $$
+  \begin{enumerate}
+  \item Prove the identity by algebraic manipulation.
+	\vspace{30mm}
+
+    \ifsolutions{\color{blue}
+	\vspace{-30mm}
+      {\begin{eqnarray*}
+          \binom{2n}{2} &=& \frac{2n(2n-1)} {2} \\
+          &=& n(2n-1) \\
+          &=& n(n-1) + n^2 \\
+          &=& 2\frac{n(n-1)}{2} + n^2 \\
+          &=& 2\binom{n}{2} + n^2.
+          \end{eqnarray*}
+    }} \fi
+    
+  \item Prove the identity using a combinatorial argument.  
+    
+    \ifsolutions{\color{blue}
+      {The left hand side is the number of ways to choose two elements    
+        out of $2n$. Counting in another way, we first divide the $2n$
+        elements (arbitrarily) into two sets of $n$ elements.  Then we consider
+        three cases: either we choose both
+        elements out of the first $n$-element set, both out of the second 
+        $n$-element set, or one element out of each set. The number of ways we
+        can do each of these things is $\binom{n}{2}$, $\binom{n}{2}$, and $n^2$,
+        respectively. Since these three cases are mutually exclusive and cover
+        all the  possibilities, summing them must give the same number 
+        as the left hand side.  This completes the proof.
+      }} \fi
+  \end{enumerate}
+
+  
+\newpage
+\item {\bf Permutations }
+  
+  Consider $n$ people. Each person has a role model among the $n$ people (which could be the person herself/himself) and it turns out that
+  all role models are unique. In other words the role models form a bijection from the set of $n$ people to themselves, which
+  is also called a permutation. In this permutation, we can consider cycles. If we start from a person $A$, then her role model
+  is going to be a person $B$ who also has a role model $C$ and so on.
+  \begin{itemize}
+    \item Prove that if we continue following the chain of role models this way, we have to return to $A$ before we meet any other repetition.
+	\vspace{20mm}
+
+      \ifsolutions{\color{blue}
+	\vspace{-20mm}
+        We must see a repetition at some point. But every person other than $A$ has been seen as a role model of someone else (i.e. the previous person).
+        Since role models are unique, no other person can be the first repetition (otherwise that person will be the role model of two different people).
+      } \fi
+    \item The length of a cycle is an interesting number. Fix a person $A$ and a number $k$. How many different permutations result in that person being in 
+      a cycle of length $k$? If all permutations were equality likely, what is the corresponding probability (i.e. the count divided by the total number
+      of permutations)?
+
+	\vspace{20mm}
+      \ifsolutions{\color{blue}
+	\vspace{-20mm}
+        First we must select the $k$ members of the cycle. This can be done in ${n-1 choose k-1}$ ways. Then we must permute them in order to form a cycle (
+        we keep $A$ as the head of the cycle to avoid repetition). This can be done in $(k-1)!$ ways. Then we construct a permutation on the remaining $n-k$
+        people in $(n-k)!$ ways. So the total number is $(n-k)!(k-1)!{n-1\choose k-1}=(n-1)!$. This translates to a probability of $1/n$.
+      } \fi
+  \end{itemize}
+
+
+
+%\newpage
+
 \item {\bf Balls and bins}
   
   You have $n$ bins and you throw balls into them one by one randomly.
   A collision is when a ball is thrown into a bin which already has another ball.
   \begin{enumerate}
   \item What is the probability that the first ball thrown will cause the first collision?
+	\vspace{5mm}
   \item What is the probability that the second ball thrown will cause the first collision?
+	\vspace{5mm}
   \item What is the probability that, given the first two balls are not in collision, 
     the third ball thrown will cause the first collision?
+	\vspace{10mm}
   \item What is the probability that the third ball thrown will cause the first collision? 
+	\vspace{10mm}
   \item What is the probability that, given the first $m-1$ balls are not in collision, 
     the $m^{th}$ ball thrown will cause the first collision?
+	\vspace{10mm}
   \item What is the probability that the $m^{th}$ ball thrown will cause the first collision? 
   \end{enumerate}
 
@@ -44,32 +159,32 @@
 }}
 \fi
 
-\qns{Another Stirling Approximation}
-
-\begin{enumerate}
-\item Consider a deck with $M$ many distinct cards. Suppose one removes a card from this deck at random $x$ many times, recording the ordered sequence of drawn cards. How many possible sequences could one end up with?
-\item Suppose instead that, after each draw, the drawn card is reinserted into the deck. Now how many possible sequences could one get (when drawing randomly with replacement $x$ many times from a deck of $M$ cards)?
-\item What is the probability that no card gets drawn more than once, if one draws randomly with replacement $x$ many times from a deck of $M$ cards?
-\item What happens to this probability as $x$ is held constant but $M$ grows very large?
-\item Show that, for any natural numbers $x$ and $N$, we have that $\displaystyle x! = \frac{(N + x)!}{N!} \prod_{i = 1}^{N} \frac{i}{x + i}$.
-\item Combining the previous parts, show that $\displaystyle x! = \lim_{N \rightarrow \infty} (N + x)^x \prod_{i = 1}^{N} \frac{i}{x + i}$. (\textit{Hint: Think of a deck with $N + x$ many cards.})
-\end{enumerate}
-Note that this last formula can be made sense of even for non-integer $x$; this is often used to generalize the factorial function in mathematics.
-
-
-\ifsolutions
-{\color{blue}{
-  {\bf Solutions:}
-\begin{enumerate}
-\item $M!/(M - x)!$.
-\item $M^x$.
-\item $\frac{M!/(M - x)!}{M^x} = \displaystyle \prod_{i = 0}^{x - 1} \frac{M - i}{M} = \prod_{i = 0}^{x - 1} (1 - i/M)$.
-\item As seen in at the end of the last answer sketch, this is the product of a constant number of factors, each of which approaches $1$ as $M$ grows very large. Thus, this probability itself approaches $1$ as $M$ grows very large.
-\item Simply note that the product on the right is $\frac{N!}{(N + x)!/x!}$, and then cancel out the $N!$ and $(N + x)!$.
-\item Take the result from the previous section, and subsitute $(N + x)^x$ for $\frac{(N + x)!}{N!}$, using the fact that their limiting ratio is $1$ for large $N$ (as established two sections ago).
-\end{enumerate}
-}}
-\fi
+%\qns{Another Stirling Approximation}
+%
+%\begin{enumerate}
+%\item Consider a deck with $M$ many distinct cards. Suppose one removes a card from this deck at random $x$ many times, recording the ordered sequence of drawn cards. How many possible sequences could one end up with?
+%\item Suppose instead that, after each draw, the drawn card is reinserted into the deck. Now how many possible sequences could one get (when drawing randomly with replacement $x$ many times from a deck of $M$ cards)?
+%\item What is the probability that no card gets drawn more than once, if one draws randomly with replacement $x$ many times from a deck of $M$ cards?
+%\item What happens to this probability as $x$ is held constant but $M$ grows very large?
+%\item Show that, for any natural numbers $x$ and $N$, we have that $\displaystyle x! = \frac{(N + x)!}{N!} \prod_{i = 1}^{N} \frac{i}{x + i}$.
+%\item Combining the previous parts, show that $\displaystyle x! = \lim_{N \rightarrow \infty} (N + x)^x \prod_{i = 1}^{N} \frac{i}{x + i}$. (\textit{Hint: Think of a deck with $N + x$ many cards.})
+%\end{enumerate}
+%Note that this last formula can be made sense of even for non-integer $x$; this is often used to generalize the factorial function in mathematics.
+%
+%
+%\ifsolutions
+%{\color{blue}{
+%  {\bf Solutions:}
+%\begin{enumerate}
+%\item $M!/(M - x)!$.
+%\item $M^x$.
+%\item $\frac{M!/(M - x)!}{M^x} = \displaystyle \prod_{i = 0}^{x - 1} \frac{M - i}{M} = \prod_{i = 0}^{x - 1} (1 - i/M)$.
+%\item As seen in at the end of the last answer sketch, this is the product of a constant number of factors, each of which approaches $1$ as $M$ grows very large. Thus, this probability itself approaches $1$ as $M$ grows very large.
+%\item Simply note that the product on the right is $\frac{N!}{(N + x)!/x!}$, and then cancel out the $N!$ and $(N + x)!$.
+%\item Take the result from the previous section, and subsitute $(N + x)^x$ for $\frac{(N + x)!}{N!}$, using the fact that their limiting ratio is $1$ for large $N$ (as established two sections ago).
+%\end{enumerate}
+%}}
+%\fi
 
    
 \end{enumerate}
