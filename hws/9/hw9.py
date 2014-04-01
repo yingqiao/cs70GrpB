@@ -4,10 +4,10 @@
 
 
 import math
-import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import scipy.integrate
 import sys
 
 
@@ -41,6 +41,16 @@ def runTrial(p, k):
 # and returns all the numbers of heads
 def runManyTrials(p, k, m):
     return [runTrial(p, k) for _ in xrange(m)]
+    
+
+# normal distribution
+def normal(x):
+    return 1/math.sqrt(2*math.pi)*math.exp(-x*x/2)
+    
+    
+# integrate normal distribution
+def integrate_normal(d):
+    return scipy.integrate.quad(lambda x: normal(x), -float('inf'), d)[0]
 
 
 # compute "choose" function
@@ -71,7 +81,7 @@ def partA(p=0.7, krange=[10,100,1000,4000], m=10000):
     num_points = 1000
     min_max = 3
     x_values = [float(x)/num_points for x in range(-min_max*num_points,min_max*num_points)]
-    plt.plot(x_values,[0.5 + 0.5*math.erf(x/math.sqrt(2)) for x in x_values],lw=3,label='normal CDF')
+    plt.plot(x_values,[integrate_normal(x) for x in x_values],lw=3,label='normal CDF')
 
     # set up plot
     plt.legend(loc=2)
@@ -92,11 +102,8 @@ def partC(p=0.7, krange=[10,100,1000,4000], m=10000):
         plt.hist(results, bins=20, align='mid', normed=True, label='k=' + str(k))
 
     # overlay normal distribution
-    mean = 0
-    variance = 1
-    sigma = np.sqrt(variance)
-    x = np.linspace(-3,3,100)
-    plt.plot(x,mlab.normpdf(x,mean,sigma),lw=3,label='normal PDF')
+    x_values = np.linspace(-3,3,100)
+    plt.plot(x_values,[normal(x) for x in x_values],lw=3,label='normal PDF')
 
     # set up plot
     plt.legend()
