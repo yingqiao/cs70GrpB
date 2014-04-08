@@ -1,0 +1,106 @@
+\documentclass[]{article}
+% packages
+\usepackage{../../cs70}
+\usepackage{../../markup}
+\usepackage{enumerate}
+\usepackage{hyperref}
+%% \usepackage{framed}
+%% \usepackage{MnSymbol}
+%% \usepackage{epstopdf}
+\usepackage{color}
+%% \usepackage[]{amsmath}
+%% \usepackage{graphicx}
+%% \usepackage{amssymb}
+%% \usepackage{parskip}
+%% \usepackage{rotating}
+%% \usepackage{float}
+%% \usepackage{multirow}
+%% \usepackage{subcaption}
+%% \usepackage{indentfirst}
+%% \usepackage[left=1.5in, right=1.0in, top=1.0in, bottom=1.0in]{geometry}
+
+\newif\ifsolutions
+\newif\ifmotivation
+\motivationtrue
+\motivationfalse
+\solutionstrue
+%\solutionsfalse %flag for solutions
+
+\renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solution:}#1}}
+\definecolor{mydarkblue}{rgb}{0,0.25,1}
+
+\def\title{Homework 12}
+
+\begin{document}
+
+\maketitle
+\config{hwnum}{12}
+\config{homework-due}{04/21/2014 13:00}
+\config{grades-due}{04/28/2014 13:00}
+\vspace{0.5em}
+{\Large{\textbf{This homework is due April 21 2014, at 12:00 noon.}}}
+
+\begin{qunlist}
+  
+\qns{Binomial variable}
+
+I always thought it would be interesting if instead of simply presenting a distribution to students, we could have them derive it in homework by breaking down the steps at a time. Students have already seen examples when p =1/2 so I figured we could break down the derivation using a dice:
+\begin{itemize}
+\item Introduce the idea of a weighted coin
+\item have them compute probability of a particular sequence with 1 head
+\item ask them how many sequences have exactly 1 head
+\item combine the two previous expressions to see the probability of one head.
+\item do the same two steps for 2 heads.
+\item do the same two steps for k heads.
+\item perhaps we could walk them through the proof that this is indeed a distribution (sums to 1)
+\end{itemize}
+
+%\begin{enumerate}[a)]
+%\qpart 
+%\item 
+%\end{enumerate}
+
+\qns{Expectation Warm up}
+ 
+ I think it would be good to give students a warm up question on expectation. We give them a distribution, say $Pr(X = 1) = 1/2, Pr (X=2) = 1/3, Pr (x=3) = 1/6$ Then we ask them to compute the expectation.
+ 
+ Other warm up problems would be given the expectation, asking some questions about the probability of X. (for example, $X\geq 0, Pr(X=0) = 1/2, \mathbb{E}[X] = 10.$ True or false $Pr(X \geq 20) > 0$
+
+%\begin{enumerate}[a)]
+%\qpart 
+%\item
+%\end{enumerate}
+
+\qns{The James Bond question from previous HWs is really cool expectation}
+
+%\begin{enumerate}[a)]
+%\qpart
+%\item 
+%\end{enumerate}
+
+\qns{Expected number of fixed points in a permutation}
+
+It's 1, done easily through linearity of expectation
+
+%\begin{enumerate}
+%\qpart 
+%\item[a)] 
+%\end{enumerate}
+
+
+ \qns{Other Expectation Stuff}
+ 
+ show that $\mathbb{E}[min(X,Y)] + \mathbb{E}[max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$
+
+%\begin{enumerate}[a)]
+%\qpart
+%\item 
+%\end{enumerate}
+
+
+\qns{Write your own problem} \\
+Write your own problem related to this week's material and solve it. You may still work in groups to brainstorm problems, but each student should submit a unique problem. What is the problem? How to formulate it? How to solve it? What is the solution?
+    
+\end{qunlist}
+
+\end{document}
