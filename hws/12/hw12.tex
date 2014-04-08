@@ -266,6 +266,59 @@ Given an instance, by Lemmas~\ref{lemma:e1-e2}, \ref{lemma:e2-e3}, and \ref{lemm
 \end{Proof}
 }} \fi
 
+
+
+
+\qns{Independent R.V.}\\
+Find four random variables taking values in $\{-1,1\}$ so that any three are independent but all four are not.
+
+\ifsolutions{ \answer{
+Let $X_1,X_2,X_3,X_4$ be i.i.d random variables with $P(X_i=1)=P(X_i=-1)=1/2$. Let $X_4=X_1X_2X_3$. Check that $X_1,X_2,X_3,X_4$ are four random variables such that any three are independent but all four are not. For example, they are not all independent because
+\[
+P(X_1=1,X_2=1,X_3=1,X_4=1)=1/8 \neq
+P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
+\]
+}}
+\fi
+
+
+\qns{Balls and boxes}\\
+Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Let $N$ be the number of empty boxes.
+\begin{itemize}
+\item[a)] Compute $E(N)$
+\item[b)] If $X=N/n$ is the proportion of empty boxes, what are the limiting values of $E(X)$ as $n \rightarrow \infty$?
+\item[c)] In a real situation, given the value of $X$, how would you estimate $\alpha$ if it is unknown?
+\end{itemize}
+
+
+
+\ifsolutions{ \answer{
+\begin{itemize}
+\item[a)] $Y_i=1$ if box $i$ is empty, 0 otherwise;
+\[
+E(N)=E(\sum_{i=1}^n Y_i)=\sum_{i=1}^n E(Y_i)=\sum_{i=1}^n P(Y_i=1)
+=\sum_{i=1}^n (\frac{(n-1)^{\alpha n}}{n^{\alpha n}}) = n(1-\frac{1}{n})^{\alpha n}
+\]
+\item[b)] Using the fact that 
+\[
+\lim_{n\rightarrow \infty}(1-\frac{1}{n})^{\alpha n} = e^{\alpha}
+\]
+
+\[
+E(X)=E(\frac{N}{n})=\frac{E(N)}{n}=(1-\frac{1}{n})^{\alpha n}
+\]
+
+\[\lim_{n \rightarrow \infty}E(X) = e^{\alpha} \]
+
+\item[c)]
+If $n$ is large and we know $X_n$, then our estimate of $\alpha$ would be $\hat{\alpha}=logX_n$
+
+
+\end{itemize}
+}}
+\fi
+
+
 \qns{Write your own problem} \\
 Write your own problem related to this week's material and solve it. You may still work in groups to brainstorm problems, but each student should submit a unique problem. What is the problem? How to formulate it? How to solve it? What is the solution?
     

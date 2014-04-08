@@ -1,3 +1,4 @@
+
 \usepackage{zref-abspos}
 \newcommand*{\SEP}[1]{
 
@@ -9,6 +10,7 @@
   \SEP{config=#1=#2}
 }
 
+\ifdefined\qunlist
 \let\oldqunlist\qunlist
 \let\oldendqunlist\endqunlist
 \renewenvironment{qunlist}{
@@ -22,6 +24,7 @@
   \oldendqunlist
   \SEP{end_questions}
 }
+\fi
 
 \newenvironment{Choices}{
   \SEP{begin_choices}
@@ -39,34 +42,6 @@
   \newcommand{\Hint}{\SEP{hint}}
 }{
   \SEP{end_multi}
-}
-
-\newenvironment{TrueFalse}{
-  \SEP{begin_tf}
-  \newcommand{\TrueChoice}{\SEP{true_choice}}
-  \newcommand{\FalseChoice}{\SEP{false_choice}}
-  \newcommand{\Hint}{\SEP{hint}}
-}{
-  \SEP{end_tf}
-}
-
-\newenvironment{TrueFalsePossible}{
-  \SEP{begin_tfp}
-  \newcommand{\TrueChoice}{\SEP{true_choice}}
-  \newcommand{\FalseChoice}{\SEP{false_choice}}
-  \newcommand{\PossibleChoice}{\SEP{possible_choice}}
-  \newcommand{\Hint}{\SEP{hint}}
-}{
-  \SEP{end_tfp}
-}
-
-\newenvironment{YesNo}{
-  \SEP{begin_yn}
-  \newcommand{\TrueChoice}{\SEP{true_choice}}
-  \newcommand{\FalseChoice}{\SEP{false_choice}}
-  \newcommand{\Hint}{\SEP{hint}}
-}{
-  \SEP{end_yn}
 }
 
 \newenvironment{Freeform}[1]{
