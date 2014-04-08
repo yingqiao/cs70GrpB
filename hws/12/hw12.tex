@@ -19,6 +19,11 @@
 %% \usepackage{indentfirst}
 %% \usepackage[left=1.5in, right=1.0in, top=1.0in, bottom=1.0in]{geometry}
 
+\newtheorem{Definition}{Definition}
+\newtheorem{Lemma}{Lemma}
+\newtheorem{Proof}{Proof}
+\newtheorem{Theorem}{Theorem}
+
 \newif\ifsolutions
 \newif\ifmotivation
 \motivationtrue
@@ -90,13 +95,176 @@ It's 1, done easily through linearity of expectation
 
  \qns{Other Expectation Stuff}
  
- show that $\mathbb{E}[min(X,Y)] + \mathbb{E}[max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$
+-show that $\mathbb{E}[min(X,Y)] + \mathbb{E}[max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$
+
+-show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
+
+-show
+\[\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y].\]
 
 %\begin{enumerate}[a)]
 %\qpart
 %\item 
 %\end{enumerate}
 
+\qns{Geometric distribution} \\ Suppose you flip a weighted coin, with probability $p$ of turning up heads, until the first head occurs. Let $X$ represent the total number of flips prior to getting heads. $X$ is said to be geometrically distributed.
+
+\begin{enumerate}[a)]
+
+\qpart
+\item What is the probability of getting $X=x$ tails, then a head?  This is the probability mass function for $X$, which we can denote $f(x)$.  Show that $f(x)$ is a proper probability distribution.
+
+\ifsolutions{ \answer{ The probability of getting $x$ tails is $(1-p)^x$. Therefore the probability of getting $x$ tails, then getting a head is
+	\[ f(x) = (1-p)^x p. \]
+	To show this is a valid probability distribution, we need to make sure the sum of $f(x)$ over all possible $x$ is 1. Using the formula for an infinite geometric series,
+	\[ \sum_{x=0}^{\infty} f(x) = p \sum_{x=0}^{\infty} (1-p)^x = p \cdot \frac{1}{1-(1-p)} = 1. \]
+}}\fi
+
+\qpart
+\item What is the expected value of $X$?
+
+%\ifsolutions{ \answer{ 
+%\[ \sum_{x=0}^{\infty} x f(x) = p\sum_{x=0}^{\infty} x(1-p)^x \]
+%}}\fi
+
+\qpart
+\item Compute the cumulative mass function) for $X$, $F(x) = \mathbb{P}(X \leq x)$.
+
+\ifsolutions{ \answer{ 
+	We can use the formula for a finite geometric series to find $F(x)$,
+	\[ F(x) = p \sum_{y=0}^x (1-p)^y = p \cdot \frac{1 - (1-p)^x}{1 - (1-p)} = 1 - (1-p)^x. \]
+}}\fi
+
+\end{enumerate}
+
+\qns{Family Planning} \\
+Mr. and Mrs. Brown decide to continue having children until they have their first girl.
+%or until they have five children.
+Assume that each child is equally likely to be a boy or a girl, independent of all other children, and that there are no multiple births.
+%Let B and G denote the numbers of boys and girls respectively that the Browns have.
+Let C be the total number of children they have.
+(potential theming for previous problem)
+
+\qns{Bubblesort} \\
+The well-known Bubblesort algorithm sorts a list $a_1, a_2, \ldots, a_n$ of numbers by repeatedly swapping adjacent numbers that are inverted (i.e., in the wrong relative order) until there are no remaining inversions. Suppose that the input to Bubblesort is a random permutation of the numbers $a_1, a_2, \ldots, a_n$, so that all $n!$ orderings are equally likely, and that all the numbers are distinct. What is the expected number of swaps performed by Bubblesort?
+
+\qns{Machine Failures} \\
+Two faulty machines, $M_1$ and $M_2$, are repeatedly run synchronously in parallel (i.e., both machines execute one run, then both execute a second run, and so on). On each run, $M_1$ fails with probability $p_1$ and $M_2$ with probability $p_2$, all failure events being independent. Let the random variables $X_1$, $X_2$ denote the number of runs until the first failure of $M_1$, $M_2$ respectively; thus $X_1$, $X_2$ have geometric distributions with parameters $p_1$, $p_2$ respectively.
+Let $X$ denote the number of runs until the first failure of either machine. Show that $X$ also has a geometric distribution, with parameter $p_1 + p_2 − p_1p_2.$
+
+\qns{007} \\
+James Bond is imprisoned in a cell from which there are three possible ways to escape: an air-conditioning
+duct, a sewer pipe and the door (which is unlocked). The air-conditioning duct leads him on a two-hour trip
+whereupon he falls through a trap door onto his head, much to the amusement of his captors. The sewer pipe
+is similar but takes five hours to traverse. Each fall produces temporary amnesia and he is returned to the
+cell immediately after each fall. Assume that he always immediately chooses one of the three exits from the
+cell with probability 1 . On the average, how long does it take before he realizes that the door is unlocked 3
+and escapes?
+[HINT: This problem may be tricky unless you think about it the right way. Consider the outcome of Bond's
+first attempt, and see how the expected time to escape changes as a result of this. In particular, you should
+be able to prove that $E(T) = \frac{1}{3}E(T|A) + \frac{1}{3}E(T|S) + \frac{1}{3}E(T|D)$, where the random variable T is the time 333
+to escape, and E(T |A) means the expected time to escape given that Bond went through the AC-duct in his first attempt, etc. To solve the problem, think how $E(T |A)$, $E(T |S)$ and $E(T |D)$ relate to $E(T )$.]
+
+%(a) Write down the sample spaces for each random variable B, G, and C, together with the probability of each sample point.
+%(b) Write down the distributions of the random variables B, G and C.
+%(c) Compute the expectations and variances of B, G and C using a direct calculation.
+%(d) Write down the joint distribution of G and C.
+%(e) Write down the conditional distributions of C given G = i for all possible values i that G can take on.
+
+\qns{Problem from Chung-Wei} \\
+There are $n$ vertices $\{v_1,v_2,\ldots,v_n\}$ on a plane, and the coordinates of $v_i$ are $(x_i,y_i)$. The bounding box of $v_i$ and $v_j$ is a rectangular $\{(x,y)|(x-x_i)(x-x_j)\leq 0\mbox{ and }(y-y_i)(y-y_j)\leq 0\}$. An edge is added between two vertices if and only if there is no other vertex inside or on the boundary of the bounding box of the two vertices. Prove that the expected number of edges is smaller than $(2n+2)\ln n$.
+
+\ifsolutions{ \answer{
+The number of edges in the OASG is $O(n^2)$ in the worst case, but Theorem~\ref{theorem:edge-random-case} shows that the expected number of edges in the OASG is $O(n\lg n)$. To compute the expected number of edges in the OASG, several notations and lemmas are first given.
+
+\begin{Definition}\label{def:g1}
+Given an instance, $G_1:(V_1,E_1)$ is defined as the OASG.
+\end{Definition}
+
+\begin{Definition}\label{def:g2}
+Given an instance, $G_2:(V_2,E_2)$ is defined as the OASG constructed after regarding all corner-vertices as pin-vertices and removing all obstacles from the plane, \emph{i.e.}, there are totally $n$ pin-vertices and no obstacle on the plane.
+\end{Definition}
+
+\begin{Definition}\label{def:g3}
+Given an instance, $G_3:(V_3,E_3)$ is defined as the OASG constructed after regarding all corner-vertices as pin-vertices, removing all obstacles from the plane, and moving a small enough distance, $\varepsilon$, for vertices with the same $x$-coordinate or $y$-coordinate so that all vertices have different $x$-coordinates and $y$-coordinates.
+\end{Definition}
+
+%\begin{figure}
+%\centering
+%\psfig{figure=nlogn-proof1.eps,width=12cm}
+%\caption{\small An example of $G_1$, $G_2$, and $G_3$. (a) Given an instance, (b) $G_1$ has fewer edges than (c) $G_2$ which has fewer edges than (d) $G_3$.} \label{fig:nlogn-proof1}
+%\end{figure}
+
+See Figure~\ref{fig:nlogn-proof1} for an example of $G_1$, $G_2$, and $G_3$.
+
+\begin{Definition}\label{def:gamma}
+Given an instance, a permutation $\Gamma$ is defined by labelling from 1 to $n$ for the vertices in $G_3$ by the order of their $y$-coordinates and permuting these labelled numbers by the order of their $x$-coordinates.
+\end{Definition}
+
+\begin{Definition}\label{def:n4}
+Given a permutation $\Gamma$, $N_4$ is defined as the number of pairs $(i,j)$, where $1\leq i,j\leq n$, and there is no integer whose value is between $i$ and $j$ and whose position in the permutation $\Gamma$ is between the positions of $i$ and $j$.
+\end{Definition}
+
+%\begin{figure}
+%\centering
+%\psfig{figure=nlogn-proof2.eps,width=12cm}
+%\caption{\small (a) Given the $G_3$, $\Gamma$ is defined by (b) labelling from 1 to $n$ for vertices in $G_3$ by the order of their $y$-coordinates and (c) permuting these labelled numbers by the order of their $x$-coordinates, resulting in $\Gamma=<2,1,3,5,4>$. (d) The six pairs make $N_4=6$ which is equal to the number of edges in $G_3$.} \label{fig:nlogn-proof2}
+%\end{figure}
+
+%See Figure~\ref{fig:nlogn-proof2} for an example of the permutation $\Gamma$ and $N_4$. There are the following lemmas.
+
+\begin{Lemma}\label{lemma:e1-e2}
+$|E_1|\leq |E_2|$.
+\end{Lemma}
+
+\begin{Proof}
+For any edge in $G_1$, it is always in $G_2$, but there are some edges in $G_2$ whose corresponding edges in $G_1$ are blocked by obstacles. As a result, $|E_1|\leq |E_2|$.
+\end{Proof}
+
+\begin{Lemma}\label{lemma:e2-e3}
+$|E_2|\leq |E_3|$.
+\end{Lemma}
+
+\begin{Proof}
+For any edge $(v_1,v_2)$ in $G_2$, there is no other vertex inside or on the boundary of the bounding box of $v_1$ and $v_2$. Because the moving of each vertex is small enough, there is still no other vertex inside or on the boundary of the bounding box of $v_1$ and $v_2$. As a result, $(v_1,v_2)$ is still in $G_3$, and $|E_2|\leq |E_3|$.
+\end{Proof}
+
+\begin{Lemma}\label{lemma:e3-n4}
+$|E_3|=N_4$.
+\end{Lemma}
+
+\begin{Proof}
+For vertices $v_1$, $v_2$, and $v_3$ in $G_3$, the $y$-coordinate of $v_3$ is between those of $v_1$ and $v_2$ if and only if its labelled number is between those of $v_1$ and $v_2$; the $x$-coordinate of $v_3$ is between those of $v_1$ and $v_2$ if and only if its position in the permutation $\Gamma$ is between those of $v_1$ and $v_2$. For any edge $(v_1,v_2)$ in $G_3$, there is no other vertex inside or on the boundary of the bounding box of $v_1$ and $v_2$, resulting in a pair of $(i,j)$ in $\Gamma$ where there is no integer whose value is between $i$ and $j$ and whose position in $\Gamma$ is between those of $i$ and $j$. On the other hand, a pair of $(i,j)$ in $\Gamma$ where there is no integer whose value is between $i$ and $j$ and whose position in $\Gamma$ is between those of $i$ and $j$ means that there is no other vertex inside or on the boundary of the bounding box of the two corresponding vertices. As a result, $|E_3|=N_4$ due to the one-to-one mapping.
+\end{Proof}
+
+\begin{Lemma}\label{lemma:n4}
+The expected value of $N_4$ is $O(n\lg n)$.
+\end{Lemma}
+
+\begin{Proof}
+For any pair $(i,i+j)$ where $i\geq 1$, $j\geq 1$, and $i+j\leq n$, there are $(j+1)!$ permutations from $i$ to $i+j$. Among these $(j+1)!$ permutations, $(i,i+j)$ is counted if and only if $i$ and $i+j$ are permuted successively; otherwise, there is at least an integer between $i$ and $i+j$ whose position in $\Gamma$ is between positions of $i$ and $j$. Because there are $2j!$ permutations from $i$ to $i+j$ where $i$ and $i+j$ are permuted successively, and there are $n!$ permutation from 1 to $n$, the pair $(i,i+j)$ is counted $n!\frac{2j!}{(j+1)!}$ times among all permutations from 1 to $n$.
+
+Because there are $(n-j)$ types of pairs $(i,i+j)$, the total count is $\sum_{j=1}^{n-1}((n-j)n!\frac{2j!}{(j+1)!})$ among all permutations from 1 to $n$. Therefore, the expected value of $N_4$ is
+\begin{eqnarray*}
+ & {\textstyle        } & {\textstyle \frac{1}{n!}\sum_{j=1}^{n-1}\left((n-j)n!\frac{2j!}{(j+1)!}\right)}            \nonumber\\
+ & {\textstyle { }={ }} & {\textstyle \sum_{j=1}^{n-1}\left((n-j)\frac{2}{j+1}\right)}                               \nonumber\\
+%& {\textstyle { }={ }} & {\textstyle 2\sum_{j=1}^{n-1}\left(\frac{n}{j+1}-\frac{j}{j+1}\right)}                     \nonumber\\
+ & {\textstyle { }={ }} & {\textstyle 2n\sum_{j=1}^{n-1}\frac{1}{j+1}-2\sum_{j=1}^{n-1}\left(1-\frac{1}{j+1}\right)} \nonumber\\
+ & {\textstyle { }={ }} & {\textstyle (2n+2)\sum_{j=1}^{n-1}\frac{1}{j+1}-2(n-1)}                                    \nonumber\\
+ & {\textstyle { }<{ }} & {\textstyle (2n+2)\int_1^n\left(\frac{1}{x}\right)dx-2(n-1)}                             \nonumber\\
+ & {\textstyle { }={ }} & {\textstyle (2n+2)\ln n-2(n-1)}                                                           \nonumber
+\end{eqnarray*}
+As a result, the expected value of $N_4$ is $O(n\lg n)$.
+\end{Proof}
+
+\begin{Theorem}\label{theorem:edge-random-case}
+The expected number of edges in the OASG is $O(n\lg n)$.
+\end{Theorem}
+
+\begin{Proof}
+Given an instance, by Lemmas~\ref{lemma:e1-e2}, \ref{lemma:e2-e3}, and \ref{lemma:e3-n4}, the number of edges in the OASG is less than its corresponding $N_4$. By Lemma~\ref{lemma:n4}, the expected value of $N_4$ is $O(n\lg n)$. As a result, the expected number of edges in the OASG is $O(n\lg n)$ since the probability for each kind of the permutation $\Gamma$ is the same.
+\end{Proof}
+}} \fi
 
 \qns{Write your own problem} \\
 Write your own problem related to this week's material and solve it. You may still work in groups to brainstorm problems, but each student should submit a unique problem. What is the problem? How to formulate it? How to solve it? What is the solution?
