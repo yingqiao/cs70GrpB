@@ -46,6 +46,35 @@
 {\Large{\textbf{This homework is due April 21 2014, at 12:00 noon.}}}
 
 \begin{qunlist}
+
+\qns{Independent R.V.}\\
+Find four random variables taking values in $\{-1,1\}$ so that any three are independent but all four are not.
+
+\ifsolutions{ \answer{
+Let $X_1,X_2,X_3,X_4$ be i.i.d random variables with $P(X_i=1)=P(X_i=-1)=1/2$. Let $X_4=X_1X_2X_3$. Check that $X_1,X_2,X_3,X_4$ are four random variables such that any three are independent but all four are not. For example, they are not all independent because
+\[
+P(X_1=1,X_2=1,X_3=1,X_4=1)=1/8 \neq
+P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
+\]
+}}
+\fi
+
+\qns{Expectation Basics} \\ For discrete random variables $X$ and $Y$:
+
+\begin{enumerate}[a)]
+\qpart
+\item Show that $\mathbb{E}[min(X,Y)] + \mathbb{E}[max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$.
+
+%-show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
+
+\qpart
+\item Show that $\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y]$.
+
+\end{enumerate}
+
+\qns{Variance of Independent R.V.s}
+
+TODO
   
 \qns{Binomial variable}
 
@@ -65,49 +94,7 @@ I always thought it would be interesting if instead of simply presenting a distr
 %\item 
 %\end{enumerate}
 
-\qns{Expectation Warm up}
- 
- I think it would be good to give students a warm up question on expectation. We give them a distribution, say $Pr(X = 1) = 1/2, Pr (X=2) = 1/3, Pr (x=3) = 1/6$ Then we ask them to compute the expectation.
- 
- Other warm up problems would be given the expectation, asking some questions about the probability of X. (for example, $X\geq 0, Pr(X=0) = 1/2, \mathbb{E}[X] = 10.$ True or false $Pr(X \geq 20) > 0$
-
-%\begin{enumerate}[a)]
-%\qpart 
-%\item
-%\end{enumerate}
-
-\qns{The James Bond question from previous HWs is really cool expectation}
-
-%\begin{enumerate}[a)]
-%\qpart
-%\item 
-%\end{enumerate}
-
-\qns{Expected number of fixed points in a permutation}
-
-It's 1, done easily through linearity of expectation
-
-%\begin{enumerate}
-%\qpart 
-%\item[a)] 
-%\end{enumerate}
-
-
- \qns{Other Expectation Stuff}
- 
--show that $\mathbb{E}[min(X,Y)] + \mathbb{E}[max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$
-
--show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
-
--show
-\[\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y].\]
-
-%\begin{enumerate}[a)]
-%\qpart
-%\item 
-%\end{enumerate}
-
-\qns{Geometric distribution} \\ Suppose you flip a weighted coin, with probability $p$ of turning up heads, until the first head occurs. Let $X$ represent the total number of flips prior to getting heads. $X$ is said to be geometrically distributed.
+\qns{Geometric distribution} \\ TODO: add theming and lab component \\ Suppose you flip a weighted coin, with probability $p$ of turning up heads, until the first head occurs. Let $X$ represent the total number of flips prior to getting heads. $X$ is said to be geometrically distributed.
 
 \begin{enumerate}[a)]
 
@@ -137,20 +124,18 @@ It's 1, done easily through linearity of expectation
 
 \end{enumerate}
 
-\qns{Family Planning} \\
-Mr. and Mrs. Brown decide to continue having children until they have their first girl.
-%or until they have five children.
-Assume that each child is equally likely to be a boy or a girl, independent of all other children, and that there are no multiple births.
-%Let B and G denote the numbers of boys and girls respectively that the Browns have.
-Let C be the total number of children they have.
-(potential theming for previous problem)
+%\qns{Family Planning} \\
+%Mr. and Mrs. Brown decide to continue having children until they have their first girl.
+%%or until they have five children.
+%Assume that each child is equally likely to be a boy or a girl, independent of all other children, and that there are no multiple births.
+%%Let B and G denote the numbers of boys and girls respectively that the Browns have.
+%Let C be the total number of children they have.
+%(potential theming for previous problem)
 
-\qns{Bubblesort} \\
-The well-known Bubblesort algorithm sorts a list $a_1, a_2, \ldots, a_n$ of numbers by repeatedly swapping adjacent numbers that are inverted (i.e., in the wrong relative order) until there are no remaining inversions. Suppose that the input to Bubblesort is a random permutation of the numbers $a_1, a_2, \ldots, a_n$, so that all $n!$ orderings are equally likely, and that all the numbers are distinct. What is the expected number of swaps performed by Bubblesort?
+\qns{St. Petersburg Paradox}
 
-\qns{Machine Failures} \\
-Two faulty machines, $M_1$ and $M_2$, are repeatedly run synchronously in parallel (i.e., both machines execute one run, then both execute a second run, and so on). On each run, $M_1$ fails with probability $p_1$ and $M_2$ with probability $p_2$, all failure events being independent. Let the random variables $X_1$, $X_2$ denote the number of runs until the first failure of $M_1$, $M_2$ respectively; thus $X_1$, $X_2$ have geometric distributions with parameters $p_1$, $p_2$ respectively.
-Let $X$ denote the number of runs until the first failure of either machine. Show that $X$ also has a geometric distribution, with parameter $p_1 + p_2 − p_1p_2.$
+TODO
+
 
 \qns{007} \\
 James Bond is imprisoned in a cell from which there are three possible ways to escape: an air-conditioning
@@ -165,11 +150,41 @@ first attempt, and see how the expected time to escape changes as a result of th
 be able to prove that $E(T) = \frac{1}{3}E(T|A) + \frac{1}{3}E(T|S) + \frac{1}{3}E(T|D)$, where the random variable T is the time 333
 to escape, and E(T |A) means the expected time to escape given that Bond went through the AC-duct in his first attempt, etc. To solve the problem, think how $E(T |A)$, $E(T |S)$ and $E(T |D)$ relate to $E(T )$.]
 
-%(a) Write down the sample spaces for each random variable B, G, and C, together with the probability of each sample point.
-%(b) Write down the distributions of the random variables B, G and C.
-%(c) Compute the expectations and variances of B, G and C using a direct calculation.
-%(d) Write down the joint distribution of G and C.
-%(e) Write down the conditional distributions of C given G = i for all possible values i that G can take on.
+\qns{Balls and boxes}\\
+Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Let $N$ be the number of empty boxes.
+\begin{itemize}
+\item[a)] Compute $E(N)$
+\item[b)] If $X=N/n$ is the proportion of empty boxes, what are the limiting values of $E(X)$ as $n \rightarrow \infty$?
+\item[c)] In a real situation, given the value of $X$, how would you estimate $\alpha$ if it is unknown?
+\end{itemize}
+
+
+
+\ifsolutions{ \answer{
+\begin{itemize}
+\item[a)] $Y_i=1$ if box $i$ is empty, 0 otherwise;
+\[
+E(N)=E(\sum_{i=1}^n Y_i)=\sum_{i=1}^n E(Y_i)=\sum_{i=1}^n P(Y_i=1)
+=\sum_{i=1}^n (\frac{(n-1)^{\alpha n}}{n^{\alpha n}}) = n(1-\frac{1}{n})^{\alpha n}
+\]
+\item[b)] Using the fact that 
+\[
+\lim_{n\rightarrow \infty}(1-\frac{1}{n})^{\alpha n} = e^{\alpha}
+\]
+
+\[
+E(X)=E(\frac{N}{n})=\frac{E(N)}{n}=(1-\frac{1}{n})^{\alpha n}
+\]
+
+\[\lim_{n \rightarrow \infty}E(X) = e^{\alpha} \]
+
+\item[c)]
+If $n$ is large and we know $X_n$, then our estimate of $\alpha$ would be $\hat{\alpha}=logX_n$
+
+
+\end{itemize}
+}}
+\fi
 
 \qns{Problem from Chung-Wei} \\
 There are $n$ vertices $\{v_1,v_2,\ldots,v_n\}$ on a plane, and the coordinates of $v_i$ are $(x_i,y_i)$. The bounding box of $v_i$ and $v_j$ is a rectangular $\{(x,y)|(x-x_i)(x-x_j)\leq 0\mbox{ and }(y-y_i)(y-y_j)\leq 0\}$. An edge is added between two vertices if and only if there is no other vertex inside or on the boundary of the bounding box of the two vertices. Prove that the expected number of edges is smaller than $(2n+2)\ln n$.
@@ -268,55 +283,32 @@ Given an instance, by Lemmas~\ref{lemma:e1-e2}, \ref{lemma:e2-e3}, and \ref{lemm
 
 
 
+\qns{Expectation Warm up}
+ 
+ I think it would be good to give students a warm up question on expectation. We give them a distribution, say $Pr(X = 1) = 1/2, Pr (X=2) = 1/3, Pr (x=3) = 1/6$ Then we ask them to compute the expectation.
+ 
+ Other warm up problems would be given the expectation, asking some questions about the probability of X. (for example, $X\geq 0, Pr(X=0) = 1/2, \mathbb{E}[X] = 10.$ True or false $Pr(X \geq 20) > 0$
 
-\qns{Independent R.V.}\\
-Find four random variables taking values in $\{-1,1\}$ so that any three are independent but all four are not.
+%\begin{enumerate}[a)]
+%\qpart 
+%\item
+%\end{enumerate}
 
-\ifsolutions{ \answer{
-Let $X_1,X_2,X_3,X_4$ be i.i.d random variables with $P(X_i=1)=P(X_i=-1)=1/2$. Let $X_4=X_1X_2X_3$. Check that $X_1,X_2,X_3,X_4$ are four random variables such that any three are independent but all four are not. For example, they are not all independent because
-\[
-P(X_1=1,X_2=1,X_3=1,X_4=1)=1/8 \neq
-P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
-\]
-}}
-\fi
+\qns{Expected number of fixed points in a permutation}
 
+It's 1, done easily through linearity of expectation
 
-\qns{Balls and boxes}\\
-Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Let $N$ be the number of empty boxes.
-\begin{itemize}
-\item[a)] Compute $E(N)$
-\item[b)] If $X=N/n$ is the proportion of empty boxes, what are the limiting values of $E(X)$ as $n \rightarrow \infty$?
-\item[c)] In a real situation, given the value of $X$, how would you estimate $\alpha$ if it is unknown?
-\end{itemize}
+%\begin{enumerate}
+%\qpart 
+%\item[a)] 
+%\end{enumerate}
 
+\qns{Bubblesort} \\
+The well-known Bubblesort algorithm sorts a list $a_1, a_2, \ldots, a_n$ of numbers by repeatedly swapping adjacent numbers that are inverted (i.e., in the wrong relative order) until there are no remaining inversions. Suppose that the input to Bubblesort is a random permutation of the numbers $a_1, a_2, \ldots, a_n$, so that all $n!$ orderings are equally likely, and that all the numbers are distinct. What is the expected number of swaps performed by Bubblesort?
 
-
-\ifsolutions{ \answer{
-\begin{itemize}
-\item[a)] $Y_i=1$ if box $i$ is empty, 0 otherwise;
-\[
-E(N)=E(\sum_{i=1}^n Y_i)=\sum_{i=1}^n E(Y_i)=\sum_{i=1}^n P(Y_i=1)
-=\sum_{i=1}^n (\frac{(n-1)^{\alpha n}}{n^{\alpha n}}) = n(1-\frac{1}{n})^{\alpha n}
-\]
-\item[b)] Using the fact that 
-\[
-\lim_{n\rightarrow \infty}(1-\frac{1}{n})^{\alpha n} = e^{\alpha}
-\]
-
-\[
-E(X)=E(\frac{N}{n})=\frac{E(N)}{n}=(1-\frac{1}{n})^{\alpha n}
-\]
-
-\[\lim_{n \rightarrow \infty}E(X) = e^{\alpha} \]
-
-\item[c)]
-If $n$ is large and we know $X_n$, then our estimate of $\alpha$ would be $\hat{\alpha}=logX_n$
-
-
-\end{itemize}
-}}
-\fi
+\qns{Machine Failures} \\
+Two faulty machines, $M_1$ and $M_2$, are repeatedly run synchronously in parallel (i.e., both machines execute one run, then both execute a second run, and so on). On each run, $M_1$ fails with probability $p_1$ and $M_2$ with probability $p_2$, all failure events being independent. Let the random variables $X_1$, $X_2$ denote the number of runs until the first failure of $M_1$, $M_2$ respectively; thus $X_1$, $X_2$ have geometric distributions with parameters $p_1$, $p_2$ respectively.
+Let $X$ denote the number of runs until the first failure of either machine. Show that $X$ also has a geometric distribution, with parameter $p_1 + p_2 − p_1p_2.$
 
 
 \qns{Write your own problem} \\
