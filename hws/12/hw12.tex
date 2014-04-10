@@ -29,7 +29,7 @@
 \motivationtrue
 \motivationfalse
 \solutionstrue
-%\solutionsfalse %flag for solutions
+\solutionsfalse %flag for solutions
 
 \renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solution:}#1}}
 \definecolor{mydarkblue}{rgb}{0,0.25,1}
@@ -59,19 +59,19 @@ P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
 \]
 }}
 \fi
-%
-%\qns{Expectation Basics} \\ For discrete random variables $X$ and $Y$:
-%
-%\begin{enumerate}[a)]
-%\qpart
-%\item Show that $\mathbb{E}[min(X,Y)] + \mathbb{E}[max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$.
-%
-%%-show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
-%
-%\qpart
-%\item Show that $\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y]$.
-%
-%\end{enumerate}
+
+\qns{Expectation Basics} \\ For discrete random variables $X$ and $Y$:
+
+\begin{enumerate}[a)]
+\qpart
+\item Show that $\mathbb{E}[min(X,Y)] + \mathbb{E}[max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$.
+
+%-show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
+
+\qpart
+\item Show that $\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y]$.
+
+\end{enumerate}
 
 \qns{Variance of Independent R.V.s}
 In this question, we will consider the variance of a sum of random variables. We already know how to compute the expectation of a sum of random variables because Expectation is linear ($\mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y]$).
@@ -79,7 +79,7 @@ In this question, we will consider the variance of a sum of random variables. We
 \qpart
 \item[a)] We want to work with random variables that are pair-wise independent. This means that for a set of random variables: $X_1, X_2, \cdots, X_n$, $\forall{i \neq} j $ Pr$[X_i \cap X_j] = Pr[X_i]Pr[X_j]$. We want to come up with a set of events that are pair-wise independent, even if they may not be totally independent. Let us define for $1 \leq i \leq n/2$ even, $X_i$ represents the event that the $i$ time we flip a fair coin is a head. Let us define for $n/2 + 1 \leq i \leq n$, $X_i$ represents the event that $X_{i-n/2} = X_{i-1}$. Argue that these events are all pair-wise independent, but give a set of three events that are not independent (that is give an $X_i$, $X_j$, and $X_k$ such that $Pr[X_i \cap X_j \cap X_k] \neq Pr[X_i]Pr[X_j]Pr[X_k]$)
 \qpart
-\item[b)] For the rest of the problem, we consider a set of events $X_1, X_2, \cdots, X_n$ such that they are pair-wise independent (we are no longer working with the particular example in part a). In order to compute the variance of the sum of these variables we wish to prove the following lemma: \\ \textbf{Lemma:} If $A$ and $B$ are pair-wise independent random variables, then $\exx[AB] = \exx[A] \exx[B]$ \\ Prove this lemma. (Hint: Let $\Aset$ be the set of all possible values of $A$ and let $\Bset$ be the set of all possible values of $B$. Now use the definition of expectation, $\exx[AB] = \sum\limits_{a \in \Aset} \sum\limits_{b \in \Bset} ab*Pr[A=a \cap B = b]$).
+\item[b)] For the rest of the problem, we consider a set of events $X_1, X_2, \cdots, X_n$ such that they are pair-wise independent (we are no longer working with the particular example in part a). In order to compute the variance of the sum of these variables we wish to prove the following lemma: \\ \textbf{Lemma:} If $A$ and $B$ are pair-wise independent random variables, then $\exx[AB] = \exx[A] \exx[B]$ \\ Prove this lemma. (Hint: Let $\Aset$ be the set of all possible values of $A$ and let $\Bset$ be the set of all possible values of $B$. Now use the definition of expectation, $\exx[AB] = \sum\limits_{a \in \Aset} \sum\limits_{b \in \Bset} ab \cdot Pr[A=a \cap B = b]$).
 \qpart
 \item[c)] Let $X$ be a sum of pair-wise independent random variables. So $X = \sum\nolimits_{i=1}^n X_i$. We wish to solve for $Var[X]$. We break this into a few steps. First note that $Var[X] = \exx[X^2] - \exx[X]^2$. \\ Prove that $\exx[X^2] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum\limits_{i \neq j} \exx[X_iX_j]$ \\ (Hint: Note that $X = X_1 + X_2 + \cdots X_n$. What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
 \qpart
@@ -126,33 +126,44 @@ In this question we will derive the Binomial Distribution. The \underline{distri
 %\item 
 %\end{enumerate}
 
-\qns{Geometric distribution} \\ TODO: add theming and lab component \\ Suppose you flip a weighted coin, with probability $p$ of turning up heads, until the first head occurs. Let $X$ represent the total number of flips prior to getting heads. $X$ is said to be geometrically distributed.
+\qns{Winning the Lottery} \\ Suppose that every day, Lily buys a lottery ticket, and will only stop buying lottery tickets when she wins.  Let $p$ be the probability that on any given day, Lily wins the lottery.  Let $X$ represent the totaly number of lottery tickets Lily buys.
 
 \begin{enumerate}[a)]
 
 \qpart
-\item What is the probability of getting $X=x$ tails, then a head?  This is the probability mass function for $X$, which we can denote $f(x)$.  Show that $f(x)$ is a proper probability distribution.
+\item What is the probability that Lily only buys 1 lottery ticket (i.e. $X=1$)?  What is the probability $X=2$?  What is the probability $X=x$?  We can denote this $f(x)$.
+%This is the probability mass function for $X$, which we can denote $f(x)$.
+Show that $f(x)$ is a proper probability distribution.
 
-\ifsolutions{ \answer{ The probability of getting $x$ tails is $(1-p)^x$. Therefore the probability of getting $x$ tails, then getting a head is
-	\[ f(x) = (1-p)^x p. \]
+\ifsolutions{ \answer{ The probability of getting $(x-1)$ non-winning lottery tickets is $(1-p)^{x-1}$. Therefore the probability of getting $(x-1)$ non-winning tickets, then a winning ticket is
+	\[ P(X=x) = (1-p)^{x-1} p. \]
 	To show this is a valid probability distribution, we need to make sure the sum of $f(x)$ over all possible $x$ is 1. Using the formula for an infinite geometric series,
-	\[ \sum_{x=0}^{\infty} f(x) = p \sum_{x=0}^{\infty} (1-p)^x = p \cdot \frac{1}{1-(1-p)} = 1. \]
+	\[ \sum_{x=1}^{\infty} f(x) = p \sum_{x=1}^{\infty} (1-p)^{x-1} = p \cdot \frac{1}{1-(1-p)} = 1. \]
 }}\fi
 
 \qpart
-\item What is the expected value of $X$?
+\item (Lab) Using a computer, simulate $m=1,000$ trials of Lily buying lottery tickets until she gets a winner. Use $p=0.2$, and plot a histogram with the number of lottery tickets on the $x$-axis and the counts of each of these outcomes on the $y$-axis.  What is the average number of lottery tickets Lily has to buy?
+
+\qpart
+\item (Lab) Now, rescale the histogram so that the sum of all the bars is 1.  Then overlay $f(x)$ from part (a).
+
+\qpart
+\item Using your formula for $f(x)$, compute the $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part (b)? %What is the expected value of $X$?
 
 %\ifsolutions{ \answer{ 
 %\[ \sum_{x=0}^{\infty} x f(x) = p\sum_{x=0}^{\infty} x(1-p)^x \]
 %}}\fi
 
 \qpart
-\item Compute the cumulative mass function) for $X$, $F(x) = \mathbb{P}(X \leq x)$.
+\item Compute the cumulative mass function (cmf) for $X$, $F(x) = \mathbb{P}(X \leq x)$.
 
 \ifsolutions{ \answer{ 
 	We can use the formula for a finite geometric series to find $F(x)$,
-	\[ F(x) = p \sum_{y=0}^x (1-p)^y = p \cdot \frac{1 - (1-p)^x}{1 - (1-p)} = 1 - (1-p)^x. \]
+	\[ F(x) = p \sum_{y=1}^x (1-p)^{y-1} = p \cdot \frac{1 - (1-p)^x}{1 - (1-p)} = 1 - (1-p)^x. \]
 }}\fi
+
+\qpart
+\item (Lab) Use your histogram from part (c) to plot an ``empirical cmf'', then overlay $F(x)$.
 
 \end{enumerate}
 
@@ -166,7 +177,16 @@ In this question we will derive the Binomial Distribution. The \underline{distri
 
 \qns{St. Petersburg Paradox}
 
-TODO
+Consider a single-player game where the pot initially contains \$1. Then a fair coin is tossed until it comes up tails, at which point the player gets all the money in the pot. Each time a head comes up, the amount of money in the pot is doubled.  So if a tails comes up first, the player gets \$1.  If the first tails comes up second, the player gets \$2, if tails comes up third, the player gets \$4, and so on.
+
+\begin{enumerate}[a)]
+
+\qpart
+\item For $m=1,2,3, \cdots 1,000$, simulated $m$ trials of this game.  For each $m$, compute the average winnings of the player.  Plot the average winnings on the $y$-axis vs. $m$ on the $x$-axis.  What do you notice?  Are the average winnings converging to a specific value?
+
+\qpart
+\item Now compute the expected value of the winnings.  How can you reconcile this result with part (a)?
+\end{enumerate}
 
 
 \qns{007} \\
@@ -313,7 +333,14 @@ Given an instance, by Lemmas~\ref{lemma:e1-e2}, \ref{lemma:e2-e3}, and \ref{lemm
 \end{Proof}
 }} \fi
 
+\qns{Write your own problem} \\
+Write your own problem related to this week's material and solve it. You may still work in groups to brainstorm problems, but each student should submit a unique problem. What is the problem? How to formulate it? How to solve it? What is the solution?
 
+\end{qunlist}
+
+OPTIONAL PROBLEMS
+
+\begin{qunlist}
 
 \qns{Expectation Warm up}
  
@@ -342,9 +369,6 @@ The well-known Bubblesort algorithm sorts a list $a_1, a_2, \ldots, a_n$ of numb
 Two faulty machines, $M_1$ and $M_2$, are repeatedly run synchronously in parallel (i.e., both machines execute one run, then both execute a second run, and so on). On each run, $M_1$ fails with probability $p_1$ and $M_2$ with probability $p_2$, all failure events being independent. Let the random variables $X_1$, $X_2$ denote the number of runs until the first failure of $M_1$, $M_2$ respectively; thus $X_1$, $X_2$ have geometric distributions with parameters $p_1$, $p_2$ respectively.
 Let $X$ denote the number of runs until the first failure of either machine. Show that $X$ also has a geometric distribution, with parameter $p_1 + p_2 − p_1p_2.$
 
-
-\qns{Write your own problem} \\
-Write your own problem related to this week's material and solve it. You may still work in groups to brainstorm problems, but each student should submit a unique problem. What is the problem? How to formulate it? How to solve it? What is the solution?
     
 \end{qunlist}
 
