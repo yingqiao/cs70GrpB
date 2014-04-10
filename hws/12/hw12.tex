@@ -29,7 +29,7 @@
 \motivationtrue
 \motivationfalse
 \solutionstrue
-%\solutionsfalse %flag for solutions
+\solutionsfalse %flag for solutions
 
 \renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solution:}#1}}
 \definecolor{mydarkblue}{rgb}{0,0.25,1}
@@ -48,7 +48,7 @@
 
 \begin{qunlist}
 
-\qns{Independent R.V.}\\
+\qns{Independent random variables}\\
 Find four random variables taking values in $\{-1,1\}$ so that any three are independent but all four are not.
 
 \ifsolutions{ \answer{
@@ -73,7 +73,7 @@ P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
 %
 %\end{enumerate}
 
-\qns{Variance of Independent R.V.s}
+\qns{Variance of Independent R.V.s} \\
 In this question, we will consider the variance of a sum of random variables. We already know how to compute the expectation of a sum of random variables because Expectation is linear ($\mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y]$).
 \begin{enumerate}
 \qpart
@@ -91,7 +91,9 @@ In this question, we will consider the variance of a sum of random variables. We
 
 \end{enumerate}
   
-\qns{Binomial Distribution}
+
+
+\qns{Binomial Distribution} \\
 In this question we will derive the Binomial Distribution. The \underline{distribution} of a discrete random variable~$X$ is the collection of values $\{(a \Pr[X=a]):a\in\Aset\}$, where $\Aset$ is the set of all possible values taken by~$X$. The Binomial Distribution is used when we have an event that always has a probability $p$ of occurring during each trial, and we run $n$ trials. If this sounds familiar, it's been the focus of almost all of our labs! For the target of these problems, we imagine we are tossing a weighted-coin with probability $p$ of heads. Remember that $0 < p < 1$.
 \begin{enumerate}
 \qpart
@@ -121,12 +123,11 @@ In this question we will derive the Binomial Distribution. The \underline{distri
 \end{enumerate}
 
 
-%\begin{enumerate}[a)]
-%\qpart 
-%\item 
-%\end{enumerate}
 
-\qns{Geometric distribution} \\ TODO: add theming and lab component \\ Suppose you flip a weighted coin, with probability $p$ of turning up heads, until the first head occurs. Let $X$ represent the total number of flips prior to getting heads. $X$ is said to be geometrically distributed.
+
+\qns{Geometric distribution} \\ 
+TODO: add theming and lab component \\ 
+Suppose you flip a weighted coin, with probability $p$ of turning up heads, until the first head occurs. Let $X$ represent the total number of flips prior to getting heads. $X$ is said to be geometrically distributed.
 
 \begin{enumerate}[a)]
 
@@ -170,23 +171,20 @@ TODO
 
 
 \qns{007} \\
-James Bond is imprisoned in a cell from which there are three possible ways to escape: an air-conditioning
-duct, a sewer pipe and the door (which is unlocked). The air-conditioning duct leads him on a two-hour trip
-whereupon he falls through a trap door onto his head, much to the amusement of his captors. The sewer pipe
-is similar but takes five hours to traverse. Each fall produces temporary amnesia and he is returned to the
-cell immediately after each fall. Assume that he always immediately chooses one of the three exits from the
-cell with probability 1 . On the average, how long does it take before he realizes that the door is unlocked 3
-and escapes?
-[HINT: This problem may be tricky unless you think about it the right way. Consider the outcome of Bond's
-first attempt, and see how the expected time to escape changes as a result of this. In particular, you should
-be able to prove that $E(T) = \frac{1}{3}E(T|A) + \frac{1}{3}E(T|S) + \frac{1}{3}E(T|D)$, where the random variable T is the time 333
-to escape, and E(T |A) means the expected time to escape given that Bond went through the AC-duct in his first attempt, etc. To solve the problem, think how $E(T |A)$, $E(T |S)$ and $E(T |D)$ relate to $E(T )$.]
+James Bond is imprisoned in a cell from which there are three possible ways to escape: an air-conditioning duct, a sewer pipe and the door (which is unlocked). The air-conditioning duct leads him on a two-hour trip whereupon he falls through a trap door onto his head, much to the amusement of his captors. The sewer pipe is similar but takes five hours to traverse. Each fall produces temporary amnesia and he is returned to the cell immediately after each fall. Assume that he always immediately chooses one of the three exits from the cell with probability 1 . On the average, how long does it take before he realizes that the door is unlocked 3 and escapes?
+[HINT: This problem may be tricky unless you think about it the right way. Consider the outcome of Bond's first attempt, and see how the expected time to escape changes as a result of this. In particular, you should be able to prove that $E(T) = \frac{1}{3}E(T|A) + \frac{1}{3}E(T|S) + \frac{1}{3}E(T|D)$, where the random variable T is the time 333 to escape, and E(T |A) means the expected time to escape given that Bond went through the AC-duct in his first attempt, etc. To solve the problem, think how $E(T |A)$, $E(T |S)$ and $E(T |D)$ relate to $E(T )$.]
+
+
+
 
 \qns{Balls and boxes}\\
-Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Let $N$ be the number of empty boxes.
+Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Here, $n$ is large and $\alpha n$ is an integer. 
 \begin{itemize}
-\item[a)] Compute $E(N)$
+\qpart
+\item[a)] Let $N$ be the number of empty boxes. Compute $E(N)$.
+\qpart
 \item[b)] If $X=N/n$ is the proportion of empty boxes, what are the limiting values of $E(X)$ as $n \rightarrow \infty$?
+\qpart
 \item[c)] In a real situation, given the value of $X$, how would you estimate $\alpha$ if it is unknown?
 \end{itemize}
 
@@ -217,6 +215,7 @@ If $n$ is large and we know $X_n$, then our estimate of $\alpha$ would be $\hat{
 \end{itemize}
 }}
 \fi
+
 
 \qns{Problem from Chung-Wei} \\
 There are $n$ vertices $\{v_1,v_2,\ldots,v_n\}$ on a plane, and the coordinates of $v_i$ are $(x_i,y_i)$. The bounding box of $v_i$ and $v_j$ is a rectangular $\{(x,y)|(x-x_i)(x-x_j)\leq 0\mbox{ and }(y-y_i)(y-y_j)\leq 0\}$. An edge is added between two vertices if and only if there is no other vertex inside or on the boundary of the bounding box of the two vertices. Prove that the expected number of edges is smaller than $(2n+2)\ln n$.
@@ -321,22 +320,17 @@ Given an instance, by Lemmas~\ref{lemma:e1-e2}, \ref{lemma:e2-e3}, and \ref{lemm
  
  Other warm up problems would be given the expectation, asking some questions about the probability of X. (for example, $X\geq 0, Pr(X=0) = 1/2, \mathbb{E}[X] = 10.$ True or false $Pr(X \geq 20) > 0$
 
-%\begin{enumerate}[a)]
-%\qpart 
-%\item
-%\end{enumerate}
+
 
 \qns{Expected number of fixed points in a permutation}
 
 It's 1, done easily through linearity of expectation
 
-%\begin{enumerate}
-%\qpart 
-%\item[a)] 
-%\end{enumerate}
+
 
 \qns{Bubblesort} \\
 The well-known Bubblesort algorithm sorts a list $a_1, a_2, \ldots, a_n$ of numbers by repeatedly swapping adjacent numbers that are inverted (i.e., in the wrong relative order) until there are no remaining inversions. Suppose that the input to Bubblesort is a random permutation of the numbers $a_1, a_2, \ldots, a_n$, so that all $n!$ orderings are equally likely, and that all the numbers are distinct. What is the expected number of swaps performed by Bubblesort?
+
 
 \qns{Machine Failures} \\
 Two faulty machines, $M_1$ and $M_2$, are repeatedly run synchronously in parallel (i.e., both machines execute one run, then both execute a second run, and so on). On each run, $M_1$ fails with probability $p_1$ and $M_2$ with probability $p_2$, all failure events being independent. Let the random variables $X_1$, $X_2$ denote the number of runs until the first failure of $M_1$, $M_2$ respectively; thus $X_1$, $X_2$ have geometric distributions with parameters $p_1$, $p_2$ respectively.
