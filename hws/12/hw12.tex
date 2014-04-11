@@ -29,7 +29,7 @@
 \motivationtrue
 \motivationfalse
 \solutionstrue
-\solutionsfalse %flag for solutions
+%\solutionsfalse %flag for solutions
 
 \renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solution:}#1}}
 \definecolor{mydarkblue}{rgb}{0,0.25,1}
@@ -48,7 +48,7 @@
 
 \begin{qunlist}
 
-\qns{Independent R.V.}\\
+\qns{Independent Random Variables}\\
 Find four random variables taking values in $\{-1,1\}$ so that any three are independent but all four are not.
 
 \ifsolutions{ \answer{
@@ -64,16 +64,30 @@ P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
 
 \begin{enumerate}[a)]
 \qpart
-\item Show that $\mathbb{E}[min(X,Y)] + \mathbb{E}[max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$.
+\item Show that for constants $c$ and $d$, $\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$.
+
+
 
 %-show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
 
 \qpart
 \item Show that $\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y]$.
 
+\ifsolutions{ \answer{ Beginning with the LHS:
+		\begin{align*}
+		\mathbb{E}[cX + dY] & = \sum_{x,y} (cx+dy) \mathbb{P}(x,y) \\
+		& = c\sum_{x,y} x \mathbb{P}(x,y) + d\sum_{x,y} y \mathbb{P}(x,y) \\
+		& = c \sum_x x \sum_y \mathbb{P}(x,y) + d \sum_y y \sum_x \mathbb{P}(x,y) \\
+		& = c\sum_x x \mathbb{P}(x) + d\sum_y y \mathbb{P}(y) \\
+		& = c\mathbb{E}[X] + d \mathbb{E}[Y].
+		\end{align*}
+}}
+\fi
+
 \end{enumerate}
 
 \qns{Variance of Independent R.V.s}
+
 In this question, we will consider the variance of a sum of random variables. We already know how to compute the expectation of a sum of random variables because Expectation is linear ($\mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y]$).
 \begin{enumerate}
 \qpart
@@ -163,30 +177,12 @@ Show that $f(x)$ is a proper probability distribution.
 }}\fi
 
 \qpart
-\item (Lab) Use your histogram from part (c) to plot an ``empirical cmf'', then overlay $F(x)$.
+\item (Optional Lab) Use your histogram from part (c) to plot an ``empirical cmf'' (i.e. for each number of tickets $x$, plot the fraction of trials where Lily bought $x$ or fewer tickets). Then overlay $F(x)$.
 
 \end{enumerate}
 
-%\qns{Family Planning} \\
-%Mr. and Mrs. Brown decide to continue having children until they have their first girl.
-%%or until they have five children.
-%Assume that each child is equally likely to be a boy or a girl, independent of all other children, and that there are no multiple births.
-%%Let B and G denote the numbers of boys and girls respectively that the Browns have.
-%Let C be the total number of children they have.
-%(potential theming for previous problem)
 
-\qns{St. Petersburg Paradox}
 
-Consider a single-player game where the pot initially contains \$1. Then a fair coin is tossed until it comes up tails, at which point the player gets all the money in the pot. Each time a head comes up, the amount of money in the pot is doubled.  So if a tails comes up first, the player gets \$1.  If the first tails comes up second, the player gets \$2, if tails comes up third, the player gets \$4, and so on.
-
-\begin{enumerate}[a)]
-
-\qpart
-\item For $m=1,2,3, \cdots 1,000$, simulated $m$ trials of this game.  For each $m$, compute the average winnings of the player.  Plot the average winnings on the $y$-axis vs. $m$ on the $x$-axis.  What do you notice?  Are the average winnings converging to a specific value?
-
-\qpart
-\item Now compute the expected value of the winnings.  How can you reconcile this result with part (a)?
-\end{enumerate}
 
 
 \qns{007} \\
@@ -201,6 +197,15 @@ and escapes?
 first attempt, and see how the expected time to escape changes as a result of this. In particular, you should
 be able to prove that $E(T) = \frac{1}{3}E(T|A) + \frac{1}{3}E(T|S) + \frac{1}{3}E(T|D)$, where the random variable T is the time 333
 to escape, and E(T |A) means the expected time to escape given that Bond went through the AC-duct in his first attempt, etc. To solve the problem, think how $E(T |A)$, $E(T |S)$ and $E(T |D)$ relate to $E(T )$.]
+
+\ifsolutions{ \answer{
+Using the notation in the extremely helpful hint, $E[T]=E[T\,|\, A]\Pr[A]+E[T\,|\, S]\Pr[S]+E[T\,|\, D]\Pr[D]=\frac{1}{3}(E[T\,|\, A]+E[T\,|\, S]+E[T\,|\, D])$.
+Note that $E[T\,|\, A]=E[T]+2$ by the memorylessness of the situation.
+Similarly, $E[T\,|\, S]=E[T]+5$. Lastly, $E[T\,|\, D]=0$ because
+Mr. Bond escapes immediately. So we have that $E[T]=\frac{1}{3}(E[T]+2+E[T]+5+0)$.
+Solving this for $E[T]$, we get that $E[T]=\fbox{\ensuremath{\mathbf{007}}}$.
+}}
+\fi
 
 \qns{Balls and boxes}\\
 Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Let $N$ be the number of empty boxes.
@@ -238,138 +243,170 @@ If $n$ is large and we know $X_n$, then our estimate of $\alpha$ would be $\hat{
 }}
 \fi
 
-\qns{Problem from Chung-Wei} \\
-There are $n$ vertices $\{v_1,v_2,\ldots,v_n\}$ on a plane, and the coordinates of $v_i$ are $(x_i,y_i)$. The bounding box of $v_i$ and $v_j$ is a rectangular $\{(x,y)|(x-x_i)(x-x_j)\leq 0\mbox{ and }(y-y_i)(y-y_j)\leq 0\}$. An edge is added between two vertices if and only if there is no other vertex inside or on the boundary of the bounding box of the two vertices. Prove that the expected number of edges is smaller than $(2n+2)\ln n$.
-
-\ifsolutions{ \answer{
-The number of edges in the OASG is $O(n^2)$ in the worst case, but Theorem~\ref{theorem:edge-random-case} shows that the expected number of edges in the OASG is $O(n\lg n)$. To compute the expected number of edges in the OASG, several notations and lemmas are first given.
-
-\begin{Definition}\label{def:g1}
-Given an instance, $G_1:(V_1,E_1)$ is defined as the OASG.
-\end{Definition}
-
-\begin{Definition}\label{def:g2}
-Given an instance, $G_2:(V_2,E_2)$ is defined as the OASG constructed after regarding all corner-vertices as pin-vertices and removing all obstacles from the plane, \emph{i.e.}, there are totally $n$ pin-vertices and no obstacle on the plane.
-\end{Definition}
-
-\begin{Definition}\label{def:g3}
-Given an instance, $G_3:(V_3,E_3)$ is defined as the OASG constructed after regarding all corner-vertices as pin-vertices, removing all obstacles from the plane, and moving a small enough distance, $\varepsilon$, for vertices with the same $x$-coordinate or $y$-coordinate so that all vertices have different $x$-coordinates and $y$-coordinates.
-\end{Definition}
-
-%\begin{figure}
-%\centering
-%\psfig{figure=nlogn-proof1.eps,width=12cm}
-%\caption{\small An example of $G_1$, $G_2$, and $G_3$. (a) Given an instance, (b) $G_1$ has fewer edges than (c) $G_2$ which has fewer edges than (d) $G_3$.} \label{fig:nlogn-proof1}
-%\end{figure}
-
-See Figure~\ref{fig:nlogn-proof1} for an example of $G_1$, $G_2$, and $G_3$.
-
-\begin{Definition}\label{def:gamma}
-Given an instance, a permutation $\Gamma$ is defined by labelling from 1 to $n$ for the vertices in $G_3$ by the order of their $y$-coordinates and permuting these labelled numbers by the order of their $x$-coordinates.
-\end{Definition}
-
-\begin{Definition}\label{def:n4}
-Given a permutation $\Gamma$, $N_4$ is defined as the number of pairs $(i,j)$, where $1\leq i,j\leq n$, and there is no integer whose value is between $i$ and $j$ and whose position in the permutation $\Gamma$ is between the positions of $i$ and $j$.
-\end{Definition}
-
-%\begin{figure}
-%\centering
-%\psfig{figure=nlogn-proof2.eps,width=12cm}
-%\caption{\small (a) Given the $G_3$, $\Gamma$ is defined by (b) labelling from 1 to $n$ for vertices in $G_3$ by the order of their $y$-coordinates and (c) permuting these labelled numbers by the order of their $x$-coordinates, resulting in $\Gamma=<2,1,3,5,4>$. (d) The six pairs make $N_4=6$ which is equal to the number of edges in $G_3$.} \label{fig:nlogn-proof2}
-%\end{figure}
-
-%See Figure~\ref{fig:nlogn-proof2} for an example of the permutation $\Gamma$ and $N_4$. There are the following lemmas.
-
-\begin{Lemma}\label{lemma:e1-e2}
-$|E_1|\leq |E_2|$.
-\end{Lemma}
-
-\begin{Proof}
-For any edge in $G_1$, it is always in $G_2$, but there are some edges in $G_2$ whose corresponding edges in $G_1$ are blocked by obstacles. As a result, $|E_1|\leq |E_2|$.
-\end{Proof}
-
-\begin{Lemma}\label{lemma:e2-e3}
-$|E_2|\leq |E_3|$.
-\end{Lemma}
-
-\begin{Proof}
-For any edge $(v_1,v_2)$ in $G_2$, there is no other vertex inside or on the boundary of the bounding box of $v_1$ and $v_2$. Because the moving of each vertex is small enough, there is still no other vertex inside or on the boundary of the bounding box of $v_1$ and $v_2$. As a result, $(v_1,v_2)$ is still in $G_3$, and $|E_2|\leq |E_3|$.
-\end{Proof}
-
-\begin{Lemma}\label{lemma:e3-n4}
-$|E_3|=N_4$.
-\end{Lemma}
-
-\begin{Proof}
-For vertices $v_1$, $v_2$, and $v_3$ in $G_3$, the $y$-coordinate of $v_3$ is between those of $v_1$ and $v_2$ if and only if its labelled number is between those of $v_1$ and $v_2$; the $x$-coordinate of $v_3$ is between those of $v_1$ and $v_2$ if and only if its position in the permutation $\Gamma$ is between those of $v_1$ and $v_2$. For any edge $(v_1,v_2)$ in $G_3$, there is no other vertex inside or on the boundary of the bounding box of $v_1$ and $v_2$, resulting in a pair of $(i,j)$ in $\Gamma$ where there is no integer whose value is between $i$ and $j$ and whose position in $\Gamma$ is between those of $i$ and $j$. On the other hand, a pair of $(i,j)$ in $\Gamma$ where there is no integer whose value is between $i$ and $j$ and whose position in $\Gamma$ is between those of $i$ and $j$ means that there is no other vertex inside or on the boundary of the bounding box of the two corresponding vertices. As a result, $|E_3|=N_4$ due to the one-to-one mapping.
-\end{Proof}
-
-\begin{Lemma}\label{lemma:n4}
-The expected value of $N_4$ is $O(n\lg n)$.
-\end{Lemma}
-
-\begin{Proof}
-For any pair $(i,i+j)$ where $i\geq 1$, $j\geq 1$, and $i+j\leq n$, there are $(j+1)!$ permutations from $i$ to $i+j$. Among these $(j+1)!$ permutations, $(i,i+j)$ is counted if and only if $i$ and $i+j$ are permuted successively; otherwise, there is at least an integer between $i$ and $i+j$ whose position in $\Gamma$ is between positions of $i$ and $j$. Because there are $2j!$ permutations from $i$ to $i+j$ where $i$ and $i+j$ are permuted successively, and there are $n!$ permutation from 1 to $n$, the pair $(i,i+j)$ is counted $n!\frac{2j!}{(j+1)!}$ times among all permutations from 1 to $n$.
-
-Because there are $(n-j)$ types of pairs $(i,i+j)$, the total count is $\sum_{j=1}^{n-1}((n-j)n!\frac{2j!}{(j+1)!})$ among all permutations from 1 to $n$. Therefore, the expected value of $N_4$ is
-\begin{eqnarray*}
- & {\textstyle        } & {\textstyle \frac{1}{n!}\sum_{j=1}^{n-1}\left((n-j)n!\frac{2j!}{(j+1)!}\right)}            \nonumber\\
- & {\textstyle { }={ }} & {\textstyle \sum_{j=1}^{n-1}\left((n-j)\frac{2}{j+1}\right)}                               \nonumber\\
-%& {\textstyle { }={ }} & {\textstyle 2\sum_{j=1}^{n-1}\left(\frac{n}{j+1}-\frac{j}{j+1}\right)}                     \nonumber\\
- & {\textstyle { }={ }} & {\textstyle 2n\sum_{j=1}^{n-1}\frac{1}{j+1}-2\sum_{j=1}^{n-1}\left(1-\frac{1}{j+1}\right)} \nonumber\\
- & {\textstyle { }={ }} & {\textstyle (2n+2)\sum_{j=1}^{n-1}\frac{1}{j+1}-2(n-1)}                                    \nonumber\\
- & {\textstyle { }<{ }} & {\textstyle (2n+2)\int_1^n\left(\frac{1}{x}\right)dx-2(n-1)}                             \nonumber\\
- & {\textstyle { }={ }} & {\textstyle (2n+2)\ln n-2(n-1)}                                                           \nonumber
-\end{eqnarray*}
-As a result, the expected value of $N_4$ is $O(n\lg n)$.
-\end{Proof}
-
-\begin{Theorem}\label{theorem:edge-random-case}
-The expected number of edges in the OASG is $O(n\lg n)$.
-\end{Theorem}
-
-\begin{Proof}
-Given an instance, by Lemmas~\ref{lemma:e1-e2}, \ref{lemma:e2-e3}, and \ref{lemma:e3-n4}, the number of edges in the OASG is less than its corresponding $N_4$. By Lemma~\ref{lemma:n4}, the expected value of $N_4$ is $O(n\lg n)$. As a result, the expected number of edges in the OASG is $O(n\lg n)$ since the probability for each kind of the permutation $\Gamma$ is the same.
-\end{Proof}
-}} \fi
-
 \qns{Write your own problem} \\
 Write your own problem related to this week's material and solve it. You may still work in groups to brainstorm problems, but each student should submit a unique problem. What is the problem? How to formulate it? How to solve it? What is the solution?
 
+\qns{Midterm question 3} \\
+Re-do midterm question 3.
+\qns{Midterm question 4} \\
+Re-do midterm question 4.
+\qns{Midterm question 5} \\
+Re-do midterm question 5.
+\qns{Midterm question 6} \\
+Re-do midterm question 6.
+\qns{Midterm question 7} \\
+Re-do midterm question 7.
+\qns{Midterm question 8} \\
+Re-do midterm question 8.
+\qns{Midterm question 9} \\
+Re-do midterm question 9.
+\qns{Midterm question 10} \\
+Re-do midterm question 10.
+\qns{Midterm question 11} \\
+Re-do midterm question 11.
+\qns{Midterm question 12} \\
+Re-do midterm question 12.
+\qns{Midterm question 13} \\
+Re-do midterm question 13.
+\qns{Midterm question 14} \\
+Re-do midterm question 14.
+
 \end{qunlist}
 
-OPTIONAL PROBLEMS
 
-\begin{qunlist}
-
-\qns{Expectation Warm up}
- 
- I think it would be good to give students a warm up question on expectation. We give them a distribution, say $Pr(X = 1) = 1/2, Pr (X=2) = 1/3, Pr (x=3) = 1/6$ Then we ask them to compute the expectation.
- 
- Other warm up problems would be given the expectation, asking some questions about the probability of X. (for example, $X\geq 0, Pr(X=0) = 1/2, \mathbb{E}[X] = 10.$ True or false $Pr(X \geq 20) > 0$
-
+%OPTIONAL PROBLEMS
+%
+%\begin{qunlist}
+%
+%\qns{Expectation Warm up}
+% 
+% I think it would be good to give students a warm up question on expectation. We give them a distribution, say $Pr(X = 1) = 1/2, Pr (X=2) = 1/3, Pr (x=3) = 1/6$ Then we ask them to compute the expectation.
+% 
+% Other warm up problems would be given the expectation, asking some questions about the probability of X. (for example, $X\geq 0, Pr(X=0) = 1/2, \mathbb{E}[X] = 10.$ True or false $Pr(X \geq 20) > 0$
+%
+%
+%\qns{Expected number of fixed points in a permutation}
+%
+%It's 1, done easily through linearity of expectation
+%
+%
+%\qns{Bubblesort} \\
+%The well-known Bubblesort algorithm sorts a list $a_1, a_2, \ldots, a_n$ of numbers by repeatedly swapping adjacent numbers that are inverted (i.e., in the wrong relative order) until there are no remaining inversions. Suppose that the input to Bubblesort is a random permutation of the numbers $a_1, a_2, \ldots, a_n$, so that all $n!$ orderings are equally likely, and that all the numbers are distinct. What is the expected number of swaps performed by Bubblesort?
+%
+%\qns{Machine Failures} \\
+%Two faulty machines, $M_1$ and $M_2$, are repeatedly run synchronously in parallel (i.e., both machines execute one run, then both execute a second run, and so on). On each run, $M_1$ fails with probability $p_1$ and $M_2$ with probability $p_2$, all failure events being independent. Let the random variables $X_1$, $X_2$ denote the number of runs until the first failure of $M_1$, $M_2$ respectively; thus $X_1$, $X_2$ have geometric distributions with parameters $p_1$, $p_2$ respectively.
+%Let $X$ denote the number of runs until the first failure of either machine. Show that $X$ also has a geometric distribution, with parameter $p_1 + p_2 − p_1p_2.$
+%
+%\qns{St. Petersburg Paradox}
+%
+%Consider a single-player game where the pot initially contains \$1. Then a fair coin is tossed until it comes up tails, at which point the player gets all the money in the pot. Each time a head comes up, the amount of money in the pot is doubled.  So if a tails comes up first, the player gets \$1.  If the first tails comes up second, the player gets \$2, if tails comes up third, the player gets \$4, and so on.
+%
 %\begin{enumerate}[a)]
-%\qpart 
-%\item
+%
+%\qpart
+%\item For $m=1,2,3, \cdots 1,000$, simulated $m$ trials of this game.  For each $m$, compute the average winnings of the player.  Plot the average winnings on the $y$-axis vs. $m$ on the $x$-axis.  What do you notice?  Are the average winnings converging to a specific value?
+%
+%\qpart
+%\item Now compute the expected value of the winnings.  How can you reconcile this result with part (a)?
 %\end{enumerate}
+%
 
-\qns{Expected number of fixed points in a permutation}
-
-It's 1, done easily through linearity of expectation
-
-%\begin{enumerate}
-%\qpart 
-%\item[a)] 
-%\end{enumerate}
-
-\qns{Bubblesort} \\
-The well-known Bubblesort algorithm sorts a list $a_1, a_2, \ldots, a_n$ of numbers by repeatedly swapping adjacent numbers that are inverted (i.e., in the wrong relative order) until there are no remaining inversions. Suppose that the input to Bubblesort is a random permutation of the numbers $a_1, a_2, \ldots, a_n$, so that all $n!$ orderings are equally likely, and that all the numbers are distinct. What is the expected number of swaps performed by Bubblesort?
-
-\qns{Machine Failures} \\
-Two faulty machines, $M_1$ and $M_2$, are repeatedly run synchronously in parallel (i.e., both machines execute one run, then both execute a second run, and so on). On each run, $M_1$ fails with probability $p_1$ and $M_2$ with probability $p_2$, all failure events being independent. Let the random variables $X_1$, $X_2$ denote the number of runs until the first failure of $M_1$, $M_2$ respectively; thus $X_1$, $X_2$ have geometric distributions with parameters $p_1$, $p_2$ respectively.
-Let $X$ denote the number of runs until the first failure of either machine. Show that $X$ also has a geometric distribution, with parameter $p_1 + p_2 − p_1p_2.$
-
-    
-\end{qunlist}
+%\qns{Problem from Chung-Wei} \\
+%TODO get figs from Chung-Wei if you use this problem
+%There are $n$ vertices $\{v_1,v_2,\ldots,v_n\}$ on a plane, and the coordinates of $v_i$ are $(x_i,y_i)$. The bounding box of $v_i$ and $v_j$ is a rectangular $\{(x,y)|(x-x_i)(x-x_j)\leq 0\mbox{ and }(y-y_i)(y-y_j)\leq 0\}$. An edge is added between two vertices if and only if there is no other vertex inside or on the boundary of the bounding box of the two vertices. Prove that the expected number of edges is smaller than $(2n+2)\ln n$.
+%
+%\ifsolutions{ \answer{
+%The number of edges in the OASG is $O(n^2)$ in the worst case, but Theorem~\ref{theorem:edge-random-case} shows that the expected number of edges in the OASG is $O(n\lg n)$. To compute the expected number of edges in the OASG, several notations and lemmas are first given.
+%
+%\begin{Definition}\label{def:g1}
+%Given an instance, $G_1:(V_1,E_1)$ is defined as the OASG.
+%\end{Definition}
+%
+%\begin{Definition}\label{def:g2}
+%Given an instance, $G_2:(V_2,E_2)$ is defined as the OASG constructed after regarding all corner-vertices as pin-vertices and removing all obstacles from the plane, \emph{i.e.}, there are totally $n$ pin-vertices and no obstacle on the plane.
+%\end{Definition}
+%
+%\begin{Definition}\label{def:g3}
+%Given an instance, $G_3:(V_3,E_3)$ is defined as the OASG constructed after regarding all corner-vertices as pin-vertices, removing all obstacles from the plane, and moving a small enough distance, $\varepsilon$, for vertices with the same $x$-coordinate or $y$-coordinate so that all vertices have different $x$-coordinates and $y$-coordinates.
+%\end{Definition}
+%
+%%\begin{figure}
+%%\centering
+%%\psfig{figure=nlogn-proof1.eps,width=12cm}
+%%\caption{\small An example of $G_1$, $G_2$, and $G_3$. (a) Given an instance, (b) $G_1$ has fewer edges than (c) $G_2$ which has fewer edges than (d) $G_3$.} \label{fig:nlogn-proof1}
+%%\end{figure}
+%
+%See Figure~\ref{fig:nlogn-proof1} for an example of $G_1$, $G_2$, and $G_3$.
+%
+%\begin{Definition}\label{def:gamma}
+%Given an instance, a permutation $\Gamma$ is defined by labelling from 1 to $n$ for the vertices in $G_3$ by the order of their $y$-coordinates and permuting these labelled numbers by the order of their $x$-coordinates.
+%\end{Definition}
+%
+%\begin{Definition}\label{def:n4}
+%Given a permutation $\Gamma$, $N_4$ is defined as the number of pairs $(i,j)$, where $1\leq i,j\leq n$, and there is no integer whose value is between $i$ and $j$ and whose position in the permutation $\Gamma$ is between the positions of $i$ and $j$.
+%\end{Definition}
+%
+%%\begin{figure}
+%%\centering
+%%\psfig{figure=nlogn-proof2.eps,width=12cm}
+%%\caption{\small (a) Given the $G_3$, $\Gamma$ is defined by (b) labelling from 1 to $n$ for vertices in $G_3$ by the order of their $y$-coordinates and (c) permuting these labelled numbers by the order of their $x$-coordinates, resulting in $\Gamma=<2,1,3,5,4>$. (d) The six pairs make $N_4=6$ which is equal to the number of edges in $G_3$.} \label{fig:nlogn-proof2}
+%%\end{figure}
+%
+%%See Figure~\ref{fig:nlogn-proof2} for an example of the permutation $\Gamma$ and $N_4$. There are the following lemmas.
+%
+%\begin{Lemma}\label{lemma:e1-e2}
+%$|E_1|\leq |E_2|$.
+%\end{Lemma}
+%
+%\begin{Proof}
+%For any edge in $G_1$, it is always in $G_2$, but there are some edges in $G_2$ whose corresponding edges in $G_1$ are blocked by obstacles. As a result, $|E_1|\leq |E_2|$.
+%\end{Proof}
+%
+%\begin{Lemma}\label{lemma:e2-e3}
+%$|E_2|\leq |E_3|$.
+%\end{Lemma}
+%
+%\begin{Proof}
+%For any edge $(v_1,v_2)$ in $G_2$, there is no other vertex inside or on the boundary of the bounding box of $v_1$ and $v_2$. Because the moving of each vertex is small enough, there is still no other vertex inside or on the boundary of the bounding box of $v_1$ and $v_2$. As a result, $(v_1,v_2)$ is still in $G_3$, and $|E_2|\leq |E_3|$.
+%\end{Proof}
+%
+%\begin{Lemma}\label{lemma:e3-n4}
+%$|E_3|=N_4$.
+%\end{Lemma}
+%
+%\begin{Proof}
+%For vertices $v_1$, $v_2$, and $v_3$ in $G_3$, the $y$-coordinate of $v_3$ is between those of $v_1$ and $v_2$ if and only if its labelled number is between those of $v_1$ and $v_2$; the $x$-coordinate of $v_3$ is between those of $v_1$ and $v_2$ if and only if its position in the permutation $\Gamma$ is between those of $v_1$ and $v_2$. For any edge $(v_1,v_2)$ in $G_3$, there is no other vertex inside or on the boundary of the bounding box of $v_1$ and $v_2$, resulting in a pair of $(i,j)$ in $\Gamma$ where there is no integer whose value is between $i$ and $j$ and whose position in $\Gamma$ is between those of $i$ and $j$. On the other hand, a pair of $(i,j)$ in $\Gamma$ where there is no integer whose value is between $i$ and $j$ and whose position in $\Gamma$ is between those of $i$ and $j$ means that there is no other vertex inside or on the boundary of the bounding box of the two corresponding vertices. As a result, $|E_3|=N_4$ due to the one-to-one mapping.
+%\end{Proof}
+%
+%\begin{Lemma}\label{lemma:n4}
+%The expected value of $N_4$ is $O(n\lg n)$.
+%\end{Lemma}
+%
+%\begin{Proof}
+%For any pair $(i,i+j)$ where $i\geq 1$, $j\geq 1$, and $i+j\leq n$, there are $(j+1)!$ permutations from $i$ to $i+j$. Among these $(j+1)!$ permutations, $(i,i+j)$ is counted if and only if $i$ and $i+j$ are permuted successively; otherwise, there is at least an integer between $i$ and $i+j$ whose position in $\Gamma$ is between positions of $i$ and $j$. Because there are $2j!$ permutations from $i$ to $i+j$ where $i$ and $i+j$ are permuted successively, and there are $n!$ permutation from 1 to $n$, the pair $(i,i+j)$ is counted $n!\frac{2j!}{(j+1)!}$ times among all permutations from 1 to $n$.
+%
+%Because there are $(n-j)$ types of pairs $(i,i+j)$, the total count is $\sum_{j=1}^{n-1}((n-j)n!\frac{2j!}{(j+1)!})$ among all permutations from 1 to $n$. Therefore, the expected value of $N_4$ is
+%\begin{eqnarray*}
+% & {\textstyle        } & {\textstyle \frac{1}{n!}\sum_{j=1}^{n-1}\left((n-j)n!\frac{2j!}{(j+1)!}\right)}            \nonumber\\
+% & {\textstyle { }={ }} & {\textstyle \sum_{j=1}^{n-1}\left((n-j)\frac{2}{j+1}\right)}                               \nonumber\\
+%%& {\textstyle { }={ }} & {\textstyle 2\sum_{j=1}^{n-1}\left(\frac{n}{j+1}-\frac{j}{j+1}\right)}                     \nonumber\\
+% & {\textstyle { }={ }} & {\textstyle 2n\sum_{j=1}^{n-1}\frac{1}{j+1}-2\sum_{j=1}^{n-1}\left(1-\frac{1}{j+1}\right)} \nonumber\\
+% & {\textstyle { }={ }} & {\textstyle (2n+2)\sum_{j=1}^{n-1}\frac{1}{j+1}-2(n-1)}                                    \nonumber\\
+% & {\textstyle { }<{ }} & {\textstyle (2n+2)\int_1^n\left(\frac{1}{x}\right)dx-2(n-1)}                             \nonumber\\
+% & {\textstyle { }={ }} & {\textstyle (2n+2)\ln n-2(n-1)}                                                           \nonumber
+%\end{eqnarray*}
+%As a result, the expected value of $N_4$ is $O(n\lg n)$.
+%\end{Proof}
+%
+%\begin{Theorem}\label{theorem:edge-random-case}
+%The expected number of edges in the OASG is $O(n\lg n)$.
+%\end{Theorem}
+%
+%\begin{Proof}
+%Given an instance, by Lemmas~\ref{lemma:e1-e2}, \ref{lemma:e2-e3}, and \ref{lemma:e3-n4}, the number of edges in the OASG is less than its corresponding $N_4$. By Lemma~\ref{lemma:n4}, the expected value of $N_4$ is $O(n\lg n)$. As a result, the expected number of edges in the OASG is $O(n\lg n)$ since the probability for each kind of the permutation $\Gamma$ is the same.
+%\end{Proof}
+%}} \fi
+%    
+%\end{qunlist}
 
 \end{document}
