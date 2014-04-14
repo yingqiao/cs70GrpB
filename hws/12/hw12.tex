@@ -8,7 +8,7 @@
 %% \usepackage{MnSymbol}
 %% \usepackage{epstopdf}
 \usepackage{color}
-%% \usepackage[]{amsmath}
+\usepackage[]{amsmath}
 %% \usepackage{graphicx}
 %% \usepackage{amssymb}
 %% \usepackage{parskip}
@@ -61,14 +61,7 @@ P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
 \fi
 
 \qns{Expectation Basics} \\ For discrete random variables $X$ and $Y$:
-
 \begin{enumerate}[a)]
-\qpart
-\item Show that for constants $c$ and $d$, $\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$.
-
-
-
-%-show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
 
 \qpart
 \item Show that $\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y]$.
@@ -84,22 +77,42 @@ P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
 }}
 \fi
 
+
+\qpart
+\item Show that for constants $c$ and $d$, $\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$.
+
+
+%-show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
+
+
 \end{enumerate}
 
-\qns{Variance of Independent R.V.s}
+\qns{Variance of Random Variables} %Independent R.V.s}
 
-The Variance of an independent variable tells us information about how far the random variable is spread outside the expectation. For this problem, we will use the definition $Var[X] = \exx[X^2] - \exx[X]^2$.  We already know how to compute the expectation of a sum of random variables because Expectation is linear ($\mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y]$). In this problem, we will compute the Variance of a sum of independent random variables.
-\begin{enumerate}
+The variance of a random variable tells us information about how far the random variable is spread outside its expectation. For this problem, we will use the definition $Var[X] = \exx[X^2] - \exx[X]^2$.  We already know how to compute the expectation of a sum of random variables because expectation is linear ($\mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y]$). In this problem, we will compute the variance of $Z$, where $Z$ is a sum of random variables:
+\[ Z = \sum_{i=1}^n X_i \]
+%For the rest of the problem, we consider a set of random variables
+and $X_1, X_2, \cdots, X_n$ are pair-wise independent (this means $\forall{i \neq} j $ Pr$[X_i \cap X_j] = Pr[X_i]Pr[X_j]$ ).
+\begin{enumerate}[a)]
 \qpart
-\item[a)] For the rest of the problem, we consider a set of events $X_1, X_2, \cdots, X_n$ such that they are pair-wise independent (This means $\forall{i \neq} j $ Pr$[X_i \cap X_j] = Pr[X_i]Pr[X_j]$ ). In order to compute the variance of the sum of these variables we wish to prove the following lemma: \\ \textbf{Lemma:} If $A$ and $B$ are pair-wise independent random variables, then $\exx[AB] = \exx[A] \exx[B]$ \\ Prove this lemma. (Hint: Let $\Aset$ be the set of all possible values of $A$ and let $\Bset$ be the set of all possible values of $B$. Now use the definition of expectation, $\exx[AB] = \sum\limits_{a \in \Aset} \sum\limits_{b \in \Bset} ab \cdot Pr[A=a \cap B = b]$).
+\item In order to compute the variance of the sum of these random variables, first  prove the following lemma: \\ \textbf{Lemma:} If $X$ and $Y$ are independent random variables, then $\exx[XY] = \exx[X] \exx[Y]$. \\ 
+%Prove this lemma. 
+(Hint: Let $\mathcal{X}$ be the set of all possible values of $X$ and let $\mathcal{Y}$ be the set of all possible values of $Y$. Now use the definition of expectation, $\exx[XY] = \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} xy \cdot Pr[X=x \cap Y = y]$).
 \qpart
-\item[b)] Let $X$ be a sum of pair-wise independent random variables. So $X = \sum\nolimits_{i=1}^n X_i$. We wish to solve for $Var[X]$. We break this into a few steps. First note that $Var[X] = \exx[X^2] - \exx[X]^2$. \\ Prove that $\exx[X^2] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum\limits_{i \neq j} \exx[X_iX_j]$ \\ (Hint: Note that $X = X_1 + X_2 + \cdots X_n$. What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
+\item
+%Let $X$ be a sum of pair-wise independent random variables. So $X = \sum\nolimits_{i=1}^n X_i$. We wish to solve for $Var[X]$. We break this into a few steps. First note that $Var[X] = \exx[X^2] - \exx[X]^2$. \\ 
+Prove that $\exx[Z^2] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j]$. \\ 
+(Hint: 
+%Note that $X = X_1 + X_2 + \cdots X_n$.
+What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
 \qpart
-\item[c)] Prove that $\exx[X]^2 = \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum\limits_{i \neq j} \exx[X_i] \exx[X_j]$
+\item Prove that $\exx[Z]^2 = \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$.
 \qpart
-\item[d)] We combine c and d to show $Var[X] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum\limits_{i \neq j} \exx[X_iX_j] -  \sum\nolimits_{i=1}^n \exx[X_i]^2 - \sum\limits_{i \neq j} \exx[X_i] \exx[X_j]$. Now use the lemma and rearrange to show that $Var[X] = \sum\nolimits_{i=1}^n \exx[X_i^2] - \exx[X_i]^2$
+\item Combine c) and d) to show $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_iX_j] -  \sum\nolimits_{i=1}^n \exx[X_i]^2 - \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$. Now use the lemma from part a) and rearrange to show that $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] - \exx[X_i]^2$.
 \qpart
-\item[e)] Finally reason that $Var[X] = Var[\sum\nolimits_{i=1}^n X_i] =    \sum\nolimits_{i=1}^n Var[X_i]$. This is true if for all $i \neq j$, $X_i$ and $X_j$ are pair-wise independent. Does this equation hold of $X_i$ and $X_j$ are not pair-wise independent?
+\item Finally reason that $Var[Z] = Var[\sum\nolimits_{i=1}^n X_i] =    \sum\nolimits_{i=1}^n Var[X_i]$. This is true if for all $i \neq j$, $X_i$ and $X_j$ are pair-wise independent.
+\qpart
+\item Does this equation hold if $X_i$ and $X_j$ are not pair-wise independent?  Show why or why not.
 
 \end{enumerate}
   
@@ -119,17 +132,18 @@ In this question we will derive the Binomial Distribution. The \underline{distri
 \qpart
 \item[(f)] Combine part d and e to compute the probability that we flip $k$ heads in $n$ trials. Call this Pr[$X = k$] since our random variable $X$ counts the number of heads after $n$ flips. Let  $0 \leq k \leq n$ 
 \qpart
-\item[(g)] We have now specified the distribution of $X$ where $X$ counts the number of heads after $n$ flips of a biased coin with a probability $p$ of flipping a head. In order to prove that this is indeed a distribution, we must verify that $\sum\nolimits_{i=1}^n Pr[X=i] = 1$ Verify that your distribution is valid (all the probabilities sum to 1) when $n=2$ and $p=1/3$.
+\item[(g)] We have now specified the distribution of $X$ where $X$ counts the number of heads after $n$ flips of a biased coin with a probability $p$ of flipping a head. In order to prove that this is indeed a distribution, we must verify that $\sum\nolimits_{i=0}^n Pr[X=i] = 1$. Verify that your distribution is valid (all the probabilities sum to 1) when $n=2$ and $p=1/3$.
 \qpart
 \item[(h)] Now we want to prove mathematically that this holds for all values of $n$ and $p$. The Binomial Theorem states that $(a+b)^n = \sum\nolimits_{k=0}^n \binom{n}{k} a^{n-k}b^k $. We will use the Binomial Theorem in our proof, so give a brief combinatorial argument to support the Binomial Theorem. Why is the coefficient of each term $\binom{n}{k}$? It may help to try some examples for $n=3$ and $n=4$.
 \qpart
-\item[(i)] Now plug in the correct values for $a$ and $b$ so that this looks like your equation of $\sum\nolimits_{i=1}^n Pr[X=i]$. You should be able to prove that the sum of these probabilities is indeed 1.
+\item[(i)] Use your result from part h) to show that $\sum_{i=0}^n Pr[X=i] =1$ in general, where $Pr[X=i]$ is the probability you calculated in f).
+%Now plug in the correct values for $a$ and $b$ so that this looks like your equation of $\sum\nolimits_{i=1}^n Pr[X=i]$. You should be able to prove that the sum of these probabilities is indeed 1.
 \qpart
 \item[(j)] We can say $X \sim B(n,p)$ Which is read as "$X$ is a binomial random variable with parameters $n$ and $p$. We lastly want to calculate $\mathbb{E}[X]$. An easy way to do this is to see $X$ as as sum of independent random variables. Each $X_i$ is an indicator variable that is $1$ if the $i^{\text{th}}$ flip is heads and $0$ if the $i^{\text{th}}$ flip is tails. Argue briefly that $X = \sum\nolimits_{i=1}^nX_i$.
 \qpart
 \item[(k)] Use the linearity of expectation to calculate $\mathbb{E}[X]$.
 \qpart
-\item[(l)] Looking at what this expectation is, remark on one empirical finding from a virtual lab or the lab we did during discussion that is explained by the expectation you just calculated. Congratulate yourself for finishing a problem by GSI lots-of-parts 
+\item[(l)] Looking at what this expectation is, remark on one empirical finding from a virtual lab or the lab we did during discussion that is explained by the expectation you just calculated. Congratulate yourself for finishing a problem by GSI lots-of-parts.
 \end{enumerate}
 
 
@@ -160,7 +174,7 @@ Show that $f(x)$ is a proper probability distribution.
 \item (Lab) Now, rescale the histogram so that the sum of all the bars is 1.  Then overlay $f(x)$ from part (a).
 
 \qpart
-\item Using your formula for $f(x)$, compute the $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part (b)? %What is the expected value of $X$?
+\item Using your formula for $f(x)$, compute the $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part (b)? (Hint: use the relation $\mathbb{E}(X) = (1-p) \mathbb{E}(X) + 1$, but first explain where this relation comes from.) %What is the expected value of $X$?
 
 %\ifsolutions{ \answer{ 
 %\[ \sum_{x=0}^{\infty} x f(x) = p\sum_{x=0}^{\infty} x(1-p)^x \]
