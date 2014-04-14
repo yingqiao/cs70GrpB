@@ -168,10 +168,20 @@ Show that $f(x)$ is a proper probability distribution.
 }}\fi
 
 \qpart
-\item (Lab) Using a computer, simulate $m=1,000$ trials of Lily buying lottery tickets until she gets a winner. Use $p=0.2$, and plot a histogram with the number of lottery tickets on the $x$-axis and the counts of each of these outcomes on the $y$-axis.  What is the average number of lottery tickets Lily has to buy?
+\item (Lab) Using a computer, simulate $m=10,000$ trials of Lily buying lottery tickets until she gets a winner. Use $p=0.2$, and plot a histogram with the number of lottery tickets on the $x$-axis and the fraction of trials with each of these outcomes on the $y$-axis.  Overlay $f(x)$ from part (a). What is the average number of lottery tickets Lily has to buy?
 
-\qpart
-\item (Lab) Now, rescale the histogram so that the sum of all the bars is 1.  Then overlay $f(x)$ from part (a).
+\ifsolutions{ \answer{
+\begin{figure}[h!]
+\center
+\includegraphics[width=0.5\textwidth]{part_b.png}
+\end{figure}
+Example average: 5.0016.
+}}\fi
+
+
+
+%\qpart
+%\item (Lab) Now, rescale the histogram so that the sum of all the bars is 1.  Then 
 
 \qpart
 \item Using your formula for $f(x)$, compute the $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part (b)? (Hint: use the relation $\mathbb{E}(X) = (1-p) \mathbb{E}(X) + 1$, but first explain where this relation comes from.) %What is the expected value of $X$?
@@ -189,7 +199,14 @@ Show that $f(x)$ is a proper probability distribution.
 }}\fi
 
 \qpart
-\item (Optional Lab) Use your histogram from part (c) to plot an ``empirical cmf'' (i.e. for each number of tickets $x$, plot the fraction of trials where Lily bought $x$ or fewer tickets). Then overlay $F(x)$.
+\item (Optional Lab) Use your histogram from part (b) to plot an ``empirical cmf'' (i.e. for each number of tickets $x$, plot the fraction of trials where Lily bought $x$ or fewer tickets). Then overlay $F(x)$.
+
+\ifsolutions{ \answer{
+\begin{figure}[h!]
+\center
+\includegraphics[width=0.5\textwidth]{part_e.png}
+\end{figure}
+}}\fi
 
 \end{enumerate}
 
