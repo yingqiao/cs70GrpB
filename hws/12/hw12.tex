@@ -92,7 +92,7 @@ P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
 The variance of a random variable tells us information about how far the random variable is spread outside its expectation. For this problem, we will use the definition $Var[X] = \exx[X^2] - \exx[X]^2$.  We already know how to compute the expectation of a sum of random variables because expectation is linear ($\mathbb{E}[X+Y] = \mathbb{E}[X] + \mathbb{E}[Y]$). In this problem, we will compute the variance of $Z$, where $Z$ is a sum of random variables:
 \[ Z = \sum_{i=1}^n X_i \]
 %For the rest of the problem, we consider a set of random variables
-and $X_1, X_2, \cdots, X_n$ are pair-wise independent (this means $\forall{i \neq} j $ Pr$[X_i \cap X_j] = Pr[X_i]Pr[X_j]$ ).
+and $X_1, X_2, \cdots, X_n$ are pair-wise independent (this means $\forall{i \neq} j $ Pr$[X_i = a \cap X_j = b] = Pr[X_i = a]Pr[X_j = b]$ ).
 \begin{enumerate}[a)]
 \qpart
 \item In order to compute the variance of the sum of these random variables, first  prove the following lemma: \\ \textbf{Lemma:} If $X$ and $Y$ are independent random variables, then $\exx[XY] = \exx[X] \exx[Y]$. \\ 
@@ -112,12 +112,13 @@ What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
 \qpart
 \item Finally reason that $Var[Z] = Var[\sum\nolimits_{i=1}^n X_i] =    \sum\nolimits_{i=1}^n Var[X_i]$. This is true if for all $i \neq j$, $X_i$ and $X_j$ are pair-wise independent.
 \qpart
-\item Does this equation hold if $X_i$ and $X_j$ are not pair-wise independent?  Show why or why not.
+\item This equation does not hold if $X_i$ and $X_j$ are not pair-wise independent, because then it is possible that \\ $\exx[X_iX_j] \neq \exx[X_i]\exx[X_j]$ Come up with two random variables, $X$ and $Y$ such that $Var[X+Y] \neq Var[X] + Var[Y]$ (Hint: $X$ and $Y$ must be dependent.)
 
 \end{enumerate}
   
 \qns{Binomial Distribution}
-In this question we will derive the Binomial Distribution. The \underline{distribution} of a discrete random variable~$X$ is the collection of values $\{(a \Pr[X=a]):a\in\Aset\}$, where $\Aset$ is the set of all possible values taken by~$X$. The Binomial Distribution is used when we have an event that always has a probability $p$ of occurring during each trial, and we run $n$ trials. If this sounds familiar, it's been the focus of almost all of our labs! For the target of these problems, we imagine we are tossing a weighted-coin with probability $p$ of heads. Remember that $0 < p < 1$.
+In this question we will derive the Binomial Distribution. First it might help if we define the word "distribution." The distribution of a random variable specifies the probability of every possible value of that random variable. For instance, for a random variable that counts the value of a standard 6-sided die after 1 roll, the distribution is $i \in \{1,2,3,4,5,6\} \ Pr[X = i] = 1/6$. %More formally, the distribution of a discrete random variable~$X$ is the collection of values $\{(a \Pr[X=a]):a\in\Aset\}$, where $\Aset$ is the set of all possible values taken by~$X$. 
+The Binomial Distribution is used when we have an event that always has a probability $p$ of occurring during each trial, and we run $n$ trials. If this sounds familiar, it's been the focus of almost all of our labs! For the target of these problems, we imagine we are tossing a weighted-coin with probability $p$ of  the coin landing on heads. Remember that $0 < p < 1$.
 \begin{enumerate}
 \qpart
 \item[(a)] What is the probability that after $n$ trials, we see exactly $n$ heads? Recall that each coin flip has probability $p$ of being a head.
@@ -132,11 +133,11 @@ In this question we will derive the Binomial Distribution. The \underline{distri
 \qpart
 \item[(f)] Combine part d and e to compute the probability that we flip $k$ heads in $n$ trials. Call this Pr[$X = k$] since our random variable $X$ counts the number of heads after $n$ flips. Let  $0 \leq k \leq n$ 
 \qpart
-\item[(g)] We have now specified the distribution of $X$ where $X$ counts the number of heads after $n$ flips of a biased coin with a probability $p$ of flipping a head. In order to prove that this is indeed a distribution, we must verify that $\sum\nolimits_{i=0}^n Pr[X=i] = 1$. Verify that your distribution is valid (all the probabilities sum to 1) when $n=2$ and $p=1/3$.
+\item[(g)] We have now specified the distribution of $X$ where $X$ counts the number of heads after $n$ flips of a biased coin with a probability $p$ of flipping a head. In order to prove that this is indeed a distribution, we must verify that $\sum\nolimits_{k=0}^n Pr[X=k] = 1$. Verify that your distribution is valid (all the probabilities sum to 1) when $n=2$ and $p=1/3$.
 \qpart
 \item[(h)] Now we want to prove mathematically that this holds for all values of $n$ and $p$. The Binomial Theorem states that $(a+b)^n = \sum\nolimits_{k=0}^n \binom{n}{k} a^{n-k}b^k $. We will use the Binomial Theorem in our proof, so give a brief combinatorial argument to support the Binomial Theorem. Why is the coefficient of each term $\binom{n}{k}$? It may help to try some examples for $n=3$ and $n=4$.
 \qpart
-\item[(i)] Use your result from part h) to show that $\sum_{i=0}^n Pr[X=i] =1$ in general, where $Pr[X=i]$ is the probability you calculated in f).
+\item[(i)] Use your result from part h) to show that $\sum_{k=0}^n Pr[X=k] =1$ in general, where $Pr[X=k]$ is the probability you calculated in f).
 %Now plug in the correct values for $a$ and $b$ so that this looks like your equation of $\sum\nolimits_{i=1}^n Pr[X=i]$. You should be able to prove that the sum of these probabilities is indeed 1.
 \qpart
 \item[(j)] We can say $X \sim B(n,p)$ Which is read as "$X$ is a binomial random variable with parameters $n$ and $p$. We lastly want to calculate $\mathbb{E}[X]$. An easy way to do this is to see $X$ as as sum of independent random variables. Each $X_i$ is an indicator variable that is $1$ if the $i^{\text{th}}$ flip is heads and $0$ if the $i^{\text{th}}$ flip is tails. Argue briefly that $X = \sum\nolimits_{i=1}^nX_i$.
