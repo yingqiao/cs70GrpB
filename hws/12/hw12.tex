@@ -108,7 +108,7 @@ What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
 \qpart
 \item Prove that $\exx[Z]^2 = \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$.
 \qpart
-\item Combine c) and d) to show $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_iX_j] -  \sum\nolimits_{i=1}^n \exx[X_i]^2 - \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$. Now use the lemma from part a) and rearrange to show that $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] - \exx[X_i]^2$.
+\item Combine b) and c) to show $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_iX_j] -  \sum\nolimits_{i=1}^n \exx[X_i]^2 - \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$. Now use the lemma from part a) and rearrange to show that $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] - \exx[X_i]^2$.
 \qpart
 \item Finally reason that $Var[Z] = Var[\sum\nolimits_{i=1}^n X_i] =    \sum\nolimits_{i=1}^n Var[X_i]$. This is true if for all $i \neq j$, $X_i$ and $X_j$ are pair-wise independent.
 \qpart
@@ -119,32 +119,32 @@ What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
 \qns{Binomial Distribution}
 In this question we will derive the Binomial Distribution. First it might help if we define the word "distribution." The distribution of a random variable specifies the probability of every possible value of that random variable. For instance, for a random variable that counts the value of a standard 6-sided die after 1 roll, the distribution is $i \in \{1,2,3,4,5,6\} \ Pr[X = i] = 1/6$. %More formally, the distribution of a discrete random variable~$X$ is the collection of values $\{(a \Pr[X=a]):a\in\Aset\}$, where $\Aset$ is the set of all possible values taken by~$X$. 
 The Binomial Distribution is used when we have an event that always has a probability $p$ of occurring during each trial, and we run $n$ trials. If this sounds familiar, it's been the focus of almost all of our labs! For the target of these problems, we imagine we are tossing a weighted-coin with probability $p$ of  the coin landing on heads. Remember that $0 < p < 1$.
-\begin{enumerate}
+\begin{enumerate}[a)]
 \qpart
-\item[(a)] What is the probability that after $n$ trials, we see exactly $n$ heads? Recall that each coin flip has probability $p$ of being a head.
+\item What is the probability that after $n$ trials, we see exactly $n$ heads? Recall that each coin flip has probability $p$ of being a head.
 \qpart
-\item[(b)] What is the probability that after $n$ trials, we see exactly $0$ heads?
+\item What is the probability that after $n$ trials, we see exactly $0$ heads?
 \qpart
-\item[(c)] How many sequences of $n$ coin flips have exactly 1 head?
+\item How many sequences of $n$ coin flips have exactly 1 head?
 \qpart
-\item[(d)] How many sequences of $n$ coin flips have exactly $k$ heads? Let  $0 \leq k \leq n$ 
+\item How many sequences of $n$ coin flips have exactly $k$ heads? Let  $0 \leq k \leq n$ 
 \qpart
-\item[(e)] What is the probability of a particular outcome of $k$ heads occurring? For example, what is the probability the first $k$ trials are heads, and the rest of the trials are tails? Let  $0 \leq k \leq n$ 
+\item What is the probability of a particular outcome of $k$ heads occurring? For example, what is the probability the first $k$ trials are heads, and the rest of the trials are tails? Let  $0 \leq k \leq n$ 
 \qpart
-\item[(f)] Combine part d and e to compute the probability that we flip $k$ heads in $n$ trials. Call this Pr[$X = k$] since our random variable $X$ counts the number of heads after $n$ flips. Let  $0 \leq k \leq n$ 
+\item Combine part d and e to compute the probability that we flip $k$ heads in $n$ trials. Call this Pr[$X = k$] since our random variable $X$ counts the number of heads after $n$ flips. Let  $0 \leq k \leq n$ 
 \qpart
-\item[(g)] We have now specified the distribution of $X$ where $X$ counts the number of heads after $n$ flips of a biased coin with a probability $p$ of flipping a head. In order to prove that this is indeed a distribution, we must verify that $\sum\nolimits_{k=0}^n Pr[X=k] = 1$. Verify that your distribution is valid (all the probabilities sum to 1) when $n=2$ and $p=1/3$.
+\item We have now specified the distribution of $X$ where $X$ counts the number of heads after $n$ flips of a biased coin with a probability $p$ of flipping a head. In order to prove that this is indeed a distribution, we must verify that $\sum\nolimits_{k=0}^n Pr[X=k] = 1$. Verify that your distribution is valid (all the probabilities sum to 1) when $n=2$ and $p=1/3$.
 \qpart
-\item[(h)] Now we want to prove mathematically that this holds for all values of $n$ and $p$. The Binomial Theorem states that $(a+b)^n = \sum\nolimits_{k=0}^n \binom{n}{k} a^{n-k}b^k $. We will use the Binomial Theorem in our proof, so give a brief combinatorial argument to support the Binomial Theorem. Why is the coefficient of each term $\binom{n}{k}$? It may help to try some examples for $n=3$ and $n=4$.
+\item Now we want to prove mathematically that this holds for all values of $n$ and $p$. The Binomial Theorem states that $(a+b)^n = \sum\nolimits_{k=0}^n \binom{n}{k} a^{n-k}b^k $. We will use the Binomial Theorem in our proof, so give a brief combinatorial argument to support the Binomial Theorem. Why is the coefficient of each term $\binom{n}{k}$? It may help to try some examples for $n=3$ and $n=4$.
 \qpart
-\item[(i)] Use your result from part h) to show that $\sum_{k=0}^n Pr[X=k] =1$ in general, where $Pr[X=k]$ is the probability you calculated in f).
+\item Use your result from part h) to show that $\sum_{k=0}^n Pr[X=k] =1$ in general, where $Pr[X=k]$ is the probability you calculated in f).
 %Now plug in the correct values for $a$ and $b$ so that this looks like your equation of $\sum\nolimits_{i=1}^n Pr[X=i]$. You should be able to prove that the sum of these probabilities is indeed 1.
 \qpart
-\item[(j)] We can say $X \sim B(n,p)$ Which is read as "$X$ is a binomial random variable with parameters $n$ and $p$. We lastly want to calculate $\mathbb{E}[X]$. An easy way to do this is to see $X$ as as sum of independent random variables. Each $X_i$ is an indicator variable that is $1$ if the $i^{\text{th}}$ flip is heads and $0$ if the $i^{\text{th}}$ flip is tails. Argue briefly that $X = \sum\nolimits_{i=1}^nX_i$.
+\item We can say $X \sim B(n,p)$ Which is read as "$X$ is a binomial random variable with parameters $n$ and $p$. We lastly want to calculate $\mathbb{E}[X]$. An easy way to do this is to see $X$ as as sum of independent random variables. Each $X_i$ is an indicator variable that is $1$ if the $i^{\text{th}}$ flip is heads and $0$ if the $i^{\text{th}}$ flip is tails. Argue briefly that $X = \sum\nolimits_{i=1}^nX_i$.
 \qpart
-\item[(k)] Use the linearity of expectation to calculate $\mathbb{E}[X]$.
+\item Use the linearity of expectation to calculate $\mathbb{E}[X]$.
 \qpart
-\item[(l)] Looking at what this expectation is, remark on one empirical finding from a virtual lab or the lab we did during discussion that is explained by the expectation you just calculated. Congratulate yourself for finishing a problem by GSI lots-of-parts.
+\item Looking at what this expectation is, remark on one empirical finding from a virtual lab or the lab we did during discussion that is explained by the expectation you just calculated. Congratulate yourself for finishing a problem by GSI lots-of-parts.
 \end{enumerate}
 
 
@@ -185,7 +185,7 @@ Example average: 5.0016.
 %\item (Lab) Now, rescale the histogram so that the sum of all the bars is 1.  Then 
 
 \qpart
-\item Using your formula for $f(x)$, compute the $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part (b)? (Hint: use the relation $\mathbb{E}(X) = (1-p) \mathbb{E}(X) + 1$, but first explain where this relation comes from.) %What is the expected value of $X$?
+\item Compute $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part b)? (Hint: use the relation $\mathbb{E}(X) = (1-p) \mathbb{E}(X) + 1$, but first explain where this relation comes from.) %What is the expected value of $X$?
 
 %\ifsolutions{ \answer{ 
 %\[ \sum_{x=0}^{\infty} x f(x) = p\sum_{x=0}^{\infty} x(1-p)^x \]
@@ -216,17 +216,11 @@ Example average: 5.0016.
 
 
 \qns{007} \\
-James Bond is imprisoned in a cell from which there are three possible ways to escape: an air-conditioning
-duct, a sewer pipe and the door (which is unlocked). The air-conditioning duct leads him on a two-hour trip
-whereupon he falls through a trap door onto his head, much to the amusement of his captors. The sewer pipe
-is similar but takes five hours to traverse. Each fall produces temporary amnesia and he is returned to the
-cell immediately after each fall. Assume that he always immediately chooses one of the three exits from the
-cell with probability 1 . On the average, how long does it take before he realizes that the door is unlocked 3
-and escapes?
-[HINT: This problem may be tricky unless you think about it the right way. Consider the outcome of Bond's
-first attempt, and see how the expected time to escape changes as a result of this. In particular, you should
-be able to prove that $E(T) = \frac{1}{3}E(T|A) + \frac{1}{3}E(T|S) + \frac{1}{3}E(T|D)$, where the random variable T is the time 333
-to escape, and E(T |A) means the expected time to escape given that Bond went through the AC-duct in his first attempt, etc. To solve the problem, think how $E(T |A)$, $E(T |S)$ and $E(T |D)$ relate to $E(T )$.]
+James Bond is imprisoned in a cell from which there are three possible ways to escape: an air-conditioning duct, a sewer pipe and the door (which is unlocked). The air-conditioning duct leads him on a two-hour trip whereupon he falls through a trap door onto his head, much to the amusement of his captors. The sewer pipe is similar but takes five hours to traverse. Each fall produces temporary amnesia and he is returned to the cell immediately after each fall. Assume that he always immediately chooses one of the three exits from the cell with probability 1/3. On the average, how long does it take before he realizes that the door is unlocked and escapes?
+
+[HINT: This problem may be tricky unless you think about it the right way. Consider the outcome of Bond's first attempt, and see how the expected time to escape changes as a result of this. To solve the problem, think how $E(T|A)$, $E(T|S)$ and $E(T|D)$ relate to $E(T)$. Here, the random variable $T$ is the time to escape, and $E(T|A)$ means the expected time to escape given that Bond went through the AC-duct in his first attempt, etc. ]
+
+%In particular, you should be able to prove that $E(T) = \frac{1}{3}E(T|A) + \frac{1}{3}E(T|S) + \frac{1}{3}E(T|D)$ 
 
 \ifsolutions{ \answer{
 Using the notation in the extremely helpful hint, $E[T]=E[T\,|\, A]\Pr[A]+E[T\,|\, S]\Pr[S]+E[T\,|\, D]\Pr[D]=\frac{1}{3}(E[T\,|\, A]+E[T\,|\, S]+E[T\,|\, D])$.
@@ -237,13 +231,13 @@ Solving this for $E[T]$, we get that $E[T]=\fbox{\ensuremath{\mathbf{007}}}$.
 }}
 \fi
 
-\qns{Balls and boxes}\\
-Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Let $N$ be the number of empty boxes.
-\begin{itemize}
-\item[a)] Compute $E(N)$
-\item[b)] If $X=N/n$ is the proportion of empty boxes, what are the limiting values of $E(X)$ as $n \rightarrow \infty$?
-\item[c)] In a real situation, given the value of $X$, how would you estimate $\alpha$ if it is unknown?
-\end{itemize}
+\qns{(Optional) Balls and boxes}\\
+Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Here, $n$ is large enough so that you can treat $\alpha n$ as a natural number. 
+\begin{enumerate}[a)]
+\item Let $N$ be the number of empty boxes. Compute $E(N)$.
+\item If $X=N/n$ is the proportion of empty boxes, what are the limiting values of $E(X)$ as $n \rightarrow \infty$?
+\item In a real situation, given the value of $X$, how would you estimate $\alpha$ if it is unknown?
+\end{enumerate}
 
 
 
