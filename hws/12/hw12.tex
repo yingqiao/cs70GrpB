@@ -108,7 +108,7 @@ What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
 \qpart
 \item Prove that $\exx[Z]^2 = \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$.
 \qpart
-\item Combine c) and d) to show $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_iX_j] -  \sum\nolimits_{i=1}^n \exx[X_i]^2 - \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$. Now use the lemma from part a) and rearrange to show that $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] - \exx[X_i]^2$.
+\item Combine b) and c) to show $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_iX_j] -  \sum\nolimits_{i=1}^n \exx[X_i]^2 - \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$. Now use the lemma from part a) and rearrange to show that $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] - \exx[X_i]^2$.
 \qpart
 \item Finally reason that $Var[Z] = Var[\sum\nolimits_{i=1}^n X_i] =    \sum\nolimits_{i=1}^n Var[X_i]$. This is true if for all $i \neq j$, $X_i$ and $X_j$ are pair-wise independent.
 \qpart
@@ -185,7 +185,7 @@ Example average: 5.0016.
 %\item (Lab) Now, rescale the histogram so that the sum of all the bars is 1.  Then 
 
 \qpart
-\item Using your formula for $f(x)$, compute the $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part (b)? (Hint: use the relation $\mathbb{E}(X) = (1-p) \mathbb{E}(X) + 1$, but first explain where this relation comes from.) %What is the expected value of $X$?
+\item Compute $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part b)? (Hint: use the relation $\mathbb{E}(X) = (1-p) \mathbb{E}(X) + 1$, but first explain where this relation comes from.) %What is the expected value of $X$?
 
 %\ifsolutions{ \answer{ 
 %\[ \sum_{x=0}^{\infty} x f(x) = p\sum_{x=0}^{\infty} x(1-p)^x \]
@@ -237,7 +237,7 @@ Solving this for $E[T]$, we get that $E[T]=\fbox{\ensuremath{\mathbf{007}}}$.
 }}
 \fi
 
-\qns{Balls and boxes}\\
+\qns{(Optional) Balls and boxes}\\
 Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Let $N$ be the number of empty boxes.
 \begin{itemize}
 \item[a)] Compute $E(N)$
