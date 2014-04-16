@@ -86,7 +86,15 @@ This is often phrased as ``marginalizing out'' a variable, to retain only the va
 
 
 \qpart
-\item Show that $\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)] = \mathbb{E}[X] + \mathbb{E}[Y]$.
+\item Show that $\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)]  = \mathbb{E}[X] + \mathbb{E}[Y]$.
+
+\ifsolutions{ \answer {
+\begin{align*}
+\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)] & =  \mathbb{E}[\min(X,Y) + \max(X,Y)] &  \text{By linearity of expectation} \\ & = \mathbb{E}[X + Y] \\ & = \mathbb{E}[X] + \mathbb{E}[Y] & \text{By linearity of expectation}
+\end{align*}
+
+}}
+\fi
 
 
 %-show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
