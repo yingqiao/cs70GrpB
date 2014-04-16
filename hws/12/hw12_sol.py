@@ -15,8 +15,7 @@ import sys
 #---------
 
 
-FONTSIZE = 24
-COLORS = ['b','k','g','r']
+FONTSIZE = 20
 
 
 #---------
@@ -66,9 +65,9 @@ def partB(p=0.2, m=10000):
     print("average is: " + str(sum(trialList)/float(len(trialList))))
 
     # set up plot
-    plt.xlabel("x = number of lottery tickets")
-    plt.ylabel("fraction of trials with x lottery tickets")
-    plt.title("Q5, part (b)")
+    plt.xlabel("x = number of lottery tickets", fontsize=FONTSIZE)
+    plt.ylabel("fraction of trials with x lottery tickets", fontsize=FONTSIZE)
+    plt.title("Q5, part (b)", fontsize=FONTSIZE)
     plt.legend()
     plt.show()
 
@@ -90,13 +89,11 @@ def partF(p=0.2, m=10000):
     plt.plot(x_values, [lotteryCmf(x,p) for x in x_values], label="F(x)")
 
     # set up plot
-    plt.xlabel("x = number of lottery tickets")
-    plt.ylabel("fraction of trials with x or fewer lottery tickets")
-    plt.title("Q5, part (e)")
+    plt.xlabel("x = number of lottery tickets", fontsize=FONTSIZE)
+    plt.ylabel("fraction of trials with x or fewer lottery tickets", fontsize=FONTSIZE)
+    plt.title("Q5, part (e)", fontsize=FONTSIZE)
     plt.legend()
     plt.show()
-    
-    
     
 
 #------

@@ -10,6 +10,7 @@
 %% \usepackage{epstopdf}
 \usepackage{color}
 \usepackage[]{amsmath}
+\usepackage{cancel}
 %% \usepackage{graphicx}
 %% \usepackage{amssymb}
 %% \usepackage{parskip}
@@ -30,7 +31,7 @@
 \motivationtrue
 \motivationfalse
 \solutionstrue
-\solutionsfalse %flag for solutions
+%\solutionsfalse %flag for solutions
 
 \renewcommand{\answer}[1]{{\color{mydarkblue}\textbf{Solution:}#1}}
 \definecolor{mydarkblue}{rgb}{0,0.25,1}
@@ -67,14 +68,19 @@ P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
 \qpart
 \item Show that for constants $c$ and $d$, $\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y]$.
 
-\ifsolutions{ \answer{ Beginning with the LHS:
+\ifsolutions{ \answer{ Beginning with the left-hand-side:
 		\begin{align*}
-		\mathbb{E}[cX + dY] & = \sum_{x,y} (cx+dy) \mathbb{P}(x,y) \\
-		& = c\sum_{x,y} x \mathbb{P}(x,y) + d\sum_{x,y} y \mathbb{P}(x,y) \\
-		& = c \sum_x x \sum_y \mathbb{P}(x,y) + d \sum_y y \sum_x \mathbb{P}(x,y) \\
-		& = c\sum_x x \mathbb{P}(x) + d\sum_y y \mathbb{P}(y) \\
-		& = c\mathbb{E}[X] + d \mathbb{E}[Y].
+		\mathbb{E}[cX + dY] & = \sum_x \sum_y (cx+dy) \mathbb{P}(x,y) & \text{definition of expectation} \\
+		& = c\sum_x \sum_y x \mathbb{P}(x,y) + d\sum_x \sum_y y \mathbb{P}(x,y) & \text{expand and break up the sum into two parts} \\
+		& = c \sum_x x \sum_y \mathbb{P}(x,y) + d \sum_y y \sum_x \mathbb{P}(x,y) & \text{reorder terms that depend on $x$ or $y$} \\
+		& = c\sum_x x \mathbb{P}(x) + d\sum_y y \mathbb{P}(y) & \text{marginalize over $y$ in the first term and $x$ in the second term} \\
+		& = c\mathbb{E}[X] + d \mathbb{E}[Y]. & \text{arrive at the definition of expectation for $X$ and $Y$}
 		\end{align*}
+
+One of the key steps was using the fact that
+\[ \sum_{y} \mathbb{P}(x,y) = \mathbb{P}(x). \]
+
+This is often phrased as ``marginalizing out'' a variable, to retain only the variables of interest.  In this case we are marginalizing out $y$ and retaining only the probability of $x$.
 }}
 \fi
 
@@ -175,11 +181,6 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
 \end{enumerate}
 
 
-%\begin{enumerate}[a)]
-%\qpart 
-%\item 
-%\end{enumerate}
-
 \qns{Winning the Lottery} \\ Suppose that every day, Lily buys a
 lottery ticket, and will only stop buying lottery tickets when she
 wins.  Let $p$ be the probability that on any given day, Lily wins the
@@ -192,11 +193,10 @@ buys.
 \item What is the probability that Lily only buys 1 lottery ticket
   (i.e. $X=1$)?  What is the probability $X=2$?  What is the
   probability $X=x$?  We can denote this $f(x)$. 
-%This is the probability mass function for $X$, which we can denote $f(x)$.
 Show that $f(x)$ is a proper probability mass function.
 
 \ifsolutions{ \answer{ The probability of getting $(x-1)$ non-winning lottery tickets is $(1-p)^{x-1}$. Therefore the probability of getting $(x-1)$ non-winning tickets, then a winning ticket is
-	\[ P(X=x) = (1-p)^{x-1} p. \]
+	\[ f(x) = \mathbb{P}(X=x) = (1-p)^{x-1} p. \]
 	To show this is a valid probability distribution, we need to make sure the sum of $f(x)$ over all possible $x$ is 1. Using the formula for an infinite geometric series,
 	\[ \sum_{x=1}^{\infty} f(x) = p \sum_{x=1}^{\infty} (1-p)^{x-1} = p \cdot \frac{1}{1-(1-p)} = 1. \]
 }}\fi
@@ -209,27 +209,29 @@ Show that $f(x)$ is a proper probability mass function.
 \center
 \includegraphics[width=0.5\textwidth]{part_b.png}
 \end{figure}
-Example average: 5.0016.
+Example average: 5.057.
 }}\fi
 
 
-
-%\qpart
-%\item (Lab) Now, rescale the histogram so that the sum of all the bars is 1.  Then 
-
 \qpart
-\item Compute $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part (b)? (Hint: use the relation $\mathbb{E}(X) = (1-p) \mathbb{E}(X) + 1$, but first explain where this relation comes from.) %What is the expected value of $X$?
+\item Compute $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part (b)? (Hint: use the relation $\mathbb{E}(X) = (1-p) \mathbb{E}(X) + 1$, but first explain where this relation comes from.)
 
-%\ifsolutions{ \answer{ 
-%\[ \sum_{x=0}^{\infty} x f(x) = p\sum_{x=0}^{\infty} x(1-p)^x \]
-%}}\fi
+\ifsolutions{ \answer{ 
+This relation comes from the fact that with probability $p$, Lily will only need to buy 1 lottery ticket. But if she is not so lucky the first time, with probability $(1-p)$ she will have to try again.  When she tries again, her expectation from that point hasn't changed, so in a sense she is just starting over. Thus we get 1 plus the original expectation multiplied by the probability of failure on the first day:
+\[ \mathbb{E}(X) = 1 + (1-p) \mathbb{E}(X). \]
+
+Solving for $\mathbb{E}(X)$, we get
+\[ \mathbb{E}(X)- (1-p)\mathbb{E}(X) = 1 \quad \Rightarrow \quad \boxed{\mathbb{E}(X) = \frac{1}{p}} \] 
+
+This fits with our answer from part (b), since $\frac{1}{0.2} = 5$, and we got an average about about 5 days before Lily won the lottery.
+}}\fi
 
 \qpart
 \item Compute the cumulative mass function (cmf) for $X$, $F(x) = \mathbb{P}(X \leq x)$.
 
 \ifsolutions{ \answer{ 
-	We can use the formula for a finite geometric series to find $F(x)$,
-	\[ F(x) = p \sum_{y=1}^x (1-p)^{y-1} = p \cdot \frac{1 - (1-p)^x}{1 - (1-p)} = 1 - (1-p)^x. \]
+	To compute $F(x)$ we need to add up $f(y)$, for all the $y$ less than or equal to $x$. We can use the formula for a finite geometric series:
+	\[ F(x) = \sum_{y=1}^x f(x) = p \sum_{y=1}^x (1-p)^{y-1} = p \cdot \frac{1 - (1-p)^x}{1 - (1-p)} = 1 - (1-p)^x. \]
 }}\fi
 
 \qpart
