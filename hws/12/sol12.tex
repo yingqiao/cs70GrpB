@@ -110,22 +110,47 @@ The variance of a random variable tells us information about how far the random 
 and $X_1, X_2, \cdots, X_n$ are pair-wise independent (this means $\forall{i \neq} j $ Pr$[X_i = a \cap X_j = b] = Pr[X_i = a]Pr[X_j = b]$ ).
 \begin{enumerate}[a)]
 \qpart
-\item In order to compute the variance of the sum of these random variables, first  prove the following lemma: \\ \textbf{Lemma:} If $X$ and $Y$ are independent random variables, then $\exx[XY] = \exx[X] \exx[Y]$. \\ 
-%Prove this lemma. 
+\item In order to compute the variance of the sum of these random variables, first  prove the following lemma: \\ \textbf{Lemma:} If $X$ and $Y$ are independent random variables, then $\exx[XY] = \exx[X] \exx[Y]$. \\  
 (Hint: Let $\mathcal{X}$ be the set of all possible values of $X$ and let $\mathcal{Y}$ be the set of all possible values of $Y$. Now use the definition of expectation, $\exx[XY] = \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} xy \cdot Pr[X=x \cap Y = y]$).
+\ifsolutions{ \answer {
+We start with the hint. \\  $\exx[XY] = \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} xy \cdot Pr[X=x \cap Y = y] \\ = \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} xy \cdot Pr[X=x] Pr[Y = y]$ Because $X$ and $Y$ are independent $\\ = \sum\limits_{x \in \mathcal{X}} Pr[X=x] \cdot x \sum\limits_{y \in \mathcal{Y}} y \cdot Pr[Y = y]$ Because $x$ does not change in the inner summation. $\\ = \sum\limits_{x \in \mathcal{X}} Pr[X=x] \cdot x \exx[Y]$ By definition of expectation $\\ = \exx[Y] \cdot \sum\limits_{x \in \mathcal{X}} Pr[X=x] \cdot x = \exx[Y]\exx[X]$
+}}
+\fi
+
 \qpart
 \item
 %Let $X$ be a sum of pair-wise independent random variables. So $X = \sum\nolimits_{i=1}^n X_i$. We wish to solve for $Var[X]$. We break this into a few steps. First note that $Var[X] = \exx[X^2] - \exx[X]^2$. \\ 
 Prove that $\exx[Z^2] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j]$. \\ 
 (Hint: 
-%Note that $X = X_1 + X_2 + \cdots X_n$.
 What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
+\ifsolutions{ \answer {
+We start with the hint, we see that $Z = (X_1 + X_2 + \cdots X_n)$, therefore $Z^2 = (X_1 + X_2 + \cdots X_n)^2$. When we expand this out we get \\ $Z^2 = (X_1 + X_2 + \cdots X_n)\cdot(X_1 + X_2 + \cdots X_n)$ To see what happens here we try a smaller example, $\\ (X_1+X_2+X_3)(X_1+X_2+X_3) = (X_1^2 + X_2^2 + X_3^2 + X_1X_2 + X_1X_3 + X_2X_1 + X_2X_3 + X_3X_1 + X_3X_2)$ In general, we have the squared term of each $X_i$ we are adding, and we have all the possible products of $X_i$ and $X_j$ where order matters and $i \neq j$. Therefore, we can generalize as $\\ (X_1 + X_2 + \cdots X_n)\cdot(X_1 + X_2 + \cdots X_n) = (X_1^2 +X_2^2 + \cdots X_n^2 + X_1X_2 + X_1X_3 + \cdots X_1X_n + X_2X_1 + \cdots X_2X_n + \cdots X_nX_{n-1}) \\ =  \sum\nolimits_{i=1}^n X_i^2 + \sum_{i=1}^n \sum_{j \neq i} X_iX_j$. Therefore, by linearity of expectation. \\ $\exx[Z^2] =  \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j]$
+}}
+\fi
+
 \qpart
 \item Prove that $\exx[Z]^2 = \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$.
+\ifsolutions{ \answer {
+We calculate $\exx[Z]$ and then square it. By linearity of expectation, $\exx[Z] = \exx[X_1] + \exx[X_2] + \cdots + \exx[X_n]$. So, now we wish to calculate $(\exx[X_1] + \cdots + \exx[X_n])^2$. This calculation is similar to what we did before. We will have a term for each $i$ of $\exx[X_i]\exx[X_i]$ and we will have on term for every possible product of $\exx[X_i]$ and $\exx[X_j]$ where order matters and $i \neq j$. Ultimately, \\ $\exx[Z]^2 = \sum\nolimits_{i=1}^n \exx[X_i]\exx[X_i] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j] \\ \exx[Z]^2 = \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$
+}}
+\fi
 \qpart
 \item Combine b) and c) to show $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_iX_j] -  \sum\nolimits_{i=1}^n \exx[X_i]^2 - \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$. Now use the lemma from part a) and rearrange to show that $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] - \exx[X_i]^2$.
+
+\ifsolutions{ \answer {
+Since $Var[Z] = \exx[Z^2] - \exx[Z]^2$ We subtract our answer from c from our answer from b. \\ $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j] - \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j] $ We group our summations together $\\ Var[Z] =  \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) + \sum\limits_{j \neq i} ( \exx[X_iX_j] - \exx[X_i]\exx[X_j])$ Since $X_i$ and $X_j$ are pair-wise independent, we use our lemma that $\exx[X_iX_j] = \exx[X_i]\exx[X_j]$ \\ $Var[X] = \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2)$ 
+
+}}
+\fi
+
 \qpart
 \item Finally reason that $Var[Z] = Var[\sum\nolimits_{i=1}^n X_i] =    \sum\nolimits_{i=1}^n Var[X_i]$. This is true if for all $i \neq j$, $X_i$ and $X_j$ are pair-wise independent.
+\ifsolutions{ \answer {
+We look at the previous expression and we realize that $Var[X_i] = \exx[X_i^2] - \exx[X_i]^2$. So, $\\Var[X] = \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) = \sum\nolimits_{i=1}^n Var[X_i]$
+
+}}
+\fi
+
 \qpart
 \item The proof above does not hold if $X_i$ and $X_j$ are not pair-wise
   independent, because then it is possible that \\ $\exx[X_iX_j] \neq
@@ -134,6 +159,10 @@ What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
   two random variables that are {\em not independent} but for which
   the variance of the sum is nonetheless the sum of the variances.
 
+\ifsolutions{ \answer {
+First we come up with two random variables $X$ and $Y$ such that $Var[X+Y] \neq Var[X] + Var[Y]$. Let us let $X$ count the number of heads after 1 flip of a fair coin and let $Y$ count the number of tails after the same 1 flip of that coin. Then $X+Y = 1$ always, and therefore the Variance is 0. The Variance of a constant number is 0. However, \\ $Var[X] = \exx[X^2] - \exx[X]^2 = Pr[X=1]\cdot1^2 + Pr[X=0]\cdot0^2 - (Pr[X=1]\cdot1 + Pr[X=0]\cdot0)^2$ \\ $= 1/2\cdot1 - (1/2\cdot1)^2 = 1/2 - 1/4 = 1/4$ \\ The calculation for $Var[Y]$ is the exact same. \\ Therefore, $Var[X] + Var[Y] = 1/4 + 1/4 = 1/2 \neq 0 = Var[X+Y] $ \\ Now we wish to come up with two variables $X$ and $Y$ that are dependent but for which $Var[X+Y] = Var[X] + Var[Y]$
+}}
+\fi
 \end{enumerate}
   
 \qns{Binomial Distribution}
