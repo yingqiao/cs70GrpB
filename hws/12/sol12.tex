@@ -160,7 +160,7 @@ We look at the previous expression and we realize that $Var[X_i] = \exx[X_i^2] -
   the variance of the sum is nonetheless the sum of the variances.
 
 \ifsolutions{ \answer {
-First we come up with two random variables $X$ and $Y$ such that $Var[X+Y] \neq Var[X] + Var[Y]$. Let us let $X$ count the number of heads after 1 flip of a fair coin and let $Y$ count the number of tails after the same 1 flip of that coin. Then $X+Y = 1$ always, and therefore the Variance is 0. The Variance of a constant number is 0. However, \\ $Var[X] = \exx[X^2] - \exx[X]^2 = Pr[X=1]\cdot1^2 + Pr[X=0]\cdot0^2 - (Pr[X=1]\cdot1 + Pr[X=0]\cdot0)^2$ \\ $= 1/2\cdot1 - (1/2\cdot1)^2 = 1/2 - 1/4 = 1/4$ \\ The calculation for $Var[Y]$ is the exact same. \\ Therefore, $Var[X] + Var[Y] = 1/4 + 1/4 = 1/2 \neq 0 = Var[X+Y] $ \\ Now we wish to come up with two variables $X$ and $Y$ that are dependent but for which $Var[X+Y] = Var[X] + Var[Y]$
+First we come up with two random variables $X$ and $Y$ such that $Var[X+Y] \neq Var[X] + Var[Y]$. Let us let $X$ count the number of heads after 1 flip of a fair coin and let $Y$ count the number of tails after the same 1 flip of that coin. Then $X+Y = 1$ always, and therefore the Variance is 0. The Variance of a constant number is 0. However, \\ $Var[X] = \exx[X^2] - \exx[X]^2 = Pr[X=1]\cdot1^2 + Pr[X=0]\cdot0^2 - (Pr[X=1]\cdot1 + Pr[X=0]\cdot0)^2$ \\ $= 1/2\cdot1 - (1/2\cdot1)^2 = 1/2 - 1/4 = 1/4$ \\ The calculation for $Var[Y]$ is the exact same. \\ Therefore, $Var[X] + Var[Y] = 1/4 + 1/4 = 1/2 \neq 0 = Var[X+Y] $ \\ Now we wish to come up with two variables $X$ and $Y$ that are dependent but for which $Var[X+Y] = Var[X] + Var[Y]$. From before, we realize this is true if $\exx[XY] = \exx[X]\exx[Y]$. Therefore we wish to find two variables for which this is true. We propose the following random variables: \\$X: i \in \mathbb{Z} \ -2 \leq i \leq -2  \hspace{1cm} Pr[X=i] = 1/5$. \\ Therefore $\exx[X] = -2 \cdot 1/5 + -1 \cdot 1/5 + 0 \cdot 1/5 + 1 \cdot 1/5 + 2 \cdot 1/5 = 0. \\ Y: \ Y = -1 \text{ iff } X =0 \lor X=2. $ Then, $Pr[Y = -1] = 2/5$ \\ $Y = 0 \text{ iff } X = -2 \lor X=-1$. Then, $Pr[Y = 0] = 2/5$ \\ $Y = 2 \text{ iff } X = 1$. Then, $Pr[Y = 2] = 1/5$ \\ Therefore $\exx[Y] = -1 \cdot 2/5 + 0 \cdot 2/5 + 2 \cdot 1/5 = 0$. So, $\exx[X]\exx[Y] = 0$. \\ Now let us calculate $\exx[XY]$. Since $Y$ is completely determined by $X$, we have the following five possibles values of $(X,Y)$ = $(-2,0), (-1,0), (0,-1), (1, 2), (2,-1)$ Each of these occur with probability $1/5$. Therefore, we have $Pr[XY = 0] = 1/5 + 1/5 + 1/5$ and $Pr[XY = 2] = 1/5$ and $Pr[XY = -2] = 1/5$ \\ $\exx[XY] = 0 \cdot 3/5 + 2 \cdot 1/5 + -2 \cdot 1/5 = 0$. \\ In this case, $\exx[XY] = \exx[X]\exx[Y]$ and therefore $Var[X+Y] = Var[X] + Var[Y]$ since the above arguments in parts b-e used the fact that $\exx[XY] = \exx[X]\exx[Y]$
 }}
 \fi
 \end{enumerate}
@@ -175,12 +175,32 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
 \item What is the probability that after $n$ trials, we see exactly
   $n$ heads? Recall that each coin flip has probability $p$ of being a
   head and different tosses of the coin are independent of each other.
+  
+  \ifsolutions{ \answer {
+  Each trial is independent, and the probability of a head for each trial is $p$ so we have probability $p^n$
+  }} 
+  \fi
 \qpart
 \item What is the probability that after $n$ trials, we see exactly $0$ heads?
+
+ \ifsolutions{ \answer {
+   Each trial is independent, and the probability of a head for each trial is $1-p$ so we have probability $(1-p)^n$
+  }} 
+  \fi
 \qpart
 \item How many sequences of $n$ coin flips have exactly 1 head?
+
+ \ifsolutions{ \answer {
+  $n$. We simply choose $1$ of the $n$ flips to be a head so we get $\binom{n}{1}$
+  }} 
+  \fi
 \qpart
-\item How many sequences of $n$ coin flips have exactly $k$ heads? Let  $0 \leq k \leq n$ 
+\item How many sequences of $n$ coin flips have exactly $k$ heads? Let  $0 \leq k \leq n$
+
+ \ifsolutions{ \answer {
+  This time, we count the ways to choose $k$ of the $n$ flips to be a head, so we get $\binom{n}{k}$
+  }} 
+  \fi 
 \qpart
 \item  Let  $0 \leq k \leq n$. What is the probability of a particular
   outcome of $k$ heads occurring? For example, what is the probability
@@ -188,8 +208,18 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
   tails? Does it matter which order the heads and tails are as long as
   there are exactly $k$ heads out of exactly $n$ tosses?
 \qpart
+
+ \ifsolutions{ \answer {
+  Again, because the coin tosses are independent, we multiply the probability of the result of each coin toss. Since we have $k$ heads, the probability of those $k$ heads is $p^k$, but we still have count the probability the rest of the $n-k$ coins are tails which is $(1-p)^{n-k}$. Therefore we get $p^k(1-p)^{n-k}$. It does not matter what order the heads and tails are because multiplication is commutative (that is $a*b = b*a$).
+  }} 
+  \fi
 \item Combine part d and e to compute the probability that we get $k$
   heads in $n$ coin tosses. Call this Pr[$X = k$] since our random variable $X$ counts the number of heads after $n$ flips. 
+  
+ \ifsolutions{ \answer {
+  Part e computes the probability of a particular sequence of $k$ heads and $n-k$ tails. Part d counts \textit{how many} of these sequences exist. Therefore, to count the probability of getting $k$ heads in $n$ coin tosses we multiply our answer to part d and part e. $Pr[X = k] = \binom{n}{k}p^k(1-p)^{n-k}$
+  }} 
+  \fi
 \qpart
 \item We have now specified the distribution of $X$ where $X$ counts
   the number of heads after $n$ flips of a biased coin with a
@@ -198,6 +228,11 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
   must verify that $\sum\nolimits_{k=0}^n Pr[X=k] = 1$. Verify that
   your distribution is valid (all the probabilities sum to 1) when
   $n=2$ and $p=1/3$.  
+  
+ \ifsolutions{ \answer {
+  We wish to show that $Pr[X=0] + Pr[X=1] +Pr[X=2] = 1$ \\ $\sum\nolimits_{k=0}^2 Pr[X=k] = \binom{2}{0}(1/3)^0(1-(1/3))^{2-0} + \binom{2}{1}(1/3)^1(1-(1/3))^{2-1} + \binom{2}{2}(1/3)^2(1-(1/3))^{2-2} \\ = \binom{2}{0}(1/3)^0(2/3)^{2} + \binom{2}{1}(1/3)^1(2/3)^1 + \binom{2}{2}(1/3)^2(2/3)^0 \\ = \binom{2}{0}(4/9) + \binom{2}{1}(2/9) + \binom{2}{2}(1/9) =  1(4/9) + 2(2/9) + 1(1/9) = 4/9 + 4/9 +1/9 \\ = 1 $
+  }} 
+  \fi
 \qpart
 \item Now we want to prove mathematically that this holds for all
   values of $n$ and $p$. The Binomial Theorem states that $(a+b)^n =
@@ -206,15 +241,43 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
   argument to support the Binomial Theorem. Why is the coefficient of
   each term $\binom{n}{k}$? It may help to try some examples for $n=3$
   and $n=4$. 
+  
+   \ifsolutions{ \answer {
+Let's examine the case $n=4$. In this case $(a+b)^4 = (a+b)(a+b)(a+b)(a+b)$ When we expand out these terms, we get $a^4 + a^3b + a^3b + a^3b + a^3b + \ldots $ and some other terms. We have $4$ terms of $a^3b$. Where do these four terms come from? Well, one comes from multiplying the $b$ in the first parentheses and the $a$'s in the other parentheses. Another one comes from multiplying the $b$ in the second parentheses and the $a$'s in the other parentheses. And so on. So, we have $4$ choices which $b$ we pick. Therefore there are $\binom{4}{1}$ terms of $a^3b$, just like the binomial theorem suggests. In general, if we have a term $a^{n-k}b^k$ we have to choose $k$ of the parentheses to multiply the $b$ term in. This can be done $\binom{n}{k}$ so we expect that many terms of $a^{n-k}b^k$. This completes our brief combinatorial argument.
+  }} 
+  \fi 
 \qpart
 \item Use your result from part (h) to show that $\sum_{k=0}^n Pr[X=k] =1$ in general, where $Pr[X=k]$ is the probability you calculated in (f).
-%Now plug in the correct values for $a$ and $b$ so that this looks like your equation of $\sum\nolimits_{i=1}^n Pr[X=i]$. You should be able to prove that the sum of these probabilities is indeed 1.
+ 
+   \ifsolutions{ \answer {
+ We plug in $a = (1-p)$ and $b = p.$ Then we get \\ $(a+b)^n =
+  \sum\nolimits_{k=0}^n \binom{n}{k} a^{n-k}b^k$ By the binomial theorem \\$ =  \sum\nolimits_{k=0}^n \binom{n}{k} (1-p)^{n-k}p^k$ plugging in the values of $a$ and $b$ \\$ = \sum\nolimits_{k=0}^n Pr[X=k]$ using our answer to part f \\Therefore $\sum\nolimits_{k=0}^n Pr[X=k] = (a+b)^n = (1-p+p)^n = 1^n = 1$ \\ Thus this is a valid probability distribution.
+  }} 
+  \fi 
 \qpart
 \item We can say $X \sim B(n,p)$ Which is read as "$X$ is a binomial random variable with parameters $n$ and $p$. We lastly want to calculate $\mathbb{E}[X]$. An easy way to do this is to see $X$ as as sum of independent random variables. Each $X_i$ is an indicator variable that is $1$ if the $i^{\text{th}}$ flip is heads and $0$ if the $i^{\text{th}}$ flip is tails. Argue briefly that $X = \sum\nolimits_{i=1}^nX_i$.
+
+ \ifsolutions{ \answer {
+If $X$ is a count of the total number of heads, we get this count by counting each trial being a head or not. Since each $X_i$ is 1 if and only if the $i^\text{th}$ flip is a head, the $X_i$ count each trial being a head or not. This technique of breaking a random variable into a sum of simpler random variables is a widely-used technique and you should remember to this trick, especially when computing expectations.
+  }} 
+  \fi 
 \qpart
 \item Use the linearity of expectation to calculate $\mathbb{E}[X]$.
+
+ \ifsolutions{ \answer {
+By the linearity of expectation, if $X = \sum\nolimits_{i=1}^nX_i$, then $\exx[X] = \sum\nolimits_{i=1}^n\exx[X_i]$. So now we must compute the expectation of each $X_i$. We notice that each $X_i$ is distributed identically, therefore it is sufficient to compute the expectation of only one $X_i$ and the rest will be identical. \\ Each $X_i$ is 1 (flip heads on $i^{\text{th}}$ flip) with probability $p$ and 0  (flip tails on $i^{\text{th}}$ flip) with probability $1-p$. \\ Therefore, $\exx[X_i] = 1\cdot p + 0 \cdot(1-p) = p$ by definition of expectation. \\ $\exx[X] = \sum\nolimits_{i=1}^n\exx[X_i] = \sum\nolimits_{i=1}^n p = np$ \\ If $X \sim B(n,p)$ then, $\exx[X] = np$
+  }} 
+  \fi 
 \qpart
 \item Looking at what this expectation is, remark on one empirical finding from a virtual lab or the lab we did during discussion that is explained by the expectation you just calculated. Congratulate yourself for finishing a problem by GSI lots-of-parts.
+
+ \ifsolutions{ \answer {
+In Discussion 8A, we saw that after $n$ flips $d$-sided dice, the most common value (counting the number of times we roll a 1) was close to $n/d$. We see that this is similar to flipping a coin with $p=1/d$ since we were only counting the times we roll a 1. The most common value is \underline{not} the same thing as expectation. (Some random variables never take on their expectation). However, we do know that expectation is the weighted-average. So, this finding explains why the histograms we found in Discussion 8A were symmetrical around the expectation. If it weren't symmetrical around the expectation, then the expectation wouldn't actually be the weighted average! 
+
+Dear GSI lots-of-parts: please don't write the final...
+
+  }} 
+  \fi 
 \end{enumerate}
 
 
