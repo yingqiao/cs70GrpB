@@ -54,13 +54,38 @@
 Find four random variables taking values in $\{-1,1\}$ so that any three are independent but all four are not.
 
 \ifsolutions{ \answer{
-Let $X_1,X_2,X_3,X_4$ be i.i.d random variables with $P(X_i=1)=P(X_i=-1)=1/2$. Let $X_4=X_1X_2X_3$. Check that $X_1,X_2,X_3,X_4$ are four random variables such that any three are independent but all four are not. For example, they are not all independent because
-\[
-P(X_1=1,X_2=1,X_3=1,X_4=1)=1/8 \neq
-P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1)
-\]
+We want to define $X_1, X_2, X_3, X_4$ on $\Omega = \{-1, 1\}$ satisfying the independece requirement given in the problem. We recall the coin toss experiment and define $H$ being $1$ while $T$ being $-1$. Therefore, $X_1$ is the random variable representing the result of the first coin toss, similarly for $X_2$ and $X_3$ being the result of the second and third coin toss, all independent of each other.
+\[ P(X_i = 1) = P(X_i = -1) = 1/2 \quad \text{for } i=1,2,3 \] 
+
+Now, $X_4$ should depend on $X_1,X_2,X_3$ to make sure that all four random variables are not independent (remember $X_4$ is still defined on the same $\Omega$). Extending the \textit{pairwise independence example} in Note 13, we can define $X_4 = X_1X_2X_3$, i.e. the event of the number of tails in these three coin tosses being even (e.g. 0 or 2). (You are free to try some other equivalent cases here.) We can check that 
+\begin{align*}
+&P(X_4 = 1) \\ 
+&= P(X_1X_2X_3 = 1) \\ 
+&= P(X_1=1,X_2=1,X_3=1)+P(X_1=-1,X_2=1,X_3=1)+P(X_1=1,X_2=-1,X_3=1)+P(X_1=1,X_2=1,X_3=-1) \\
+&= 4 \cdot P(X_i = 1)^3  \quad\text{from the definition of} X_i, i=1,2,3 \\
+&= 1/2
+\end{align*}
+So, $P(X_4=1)=P(X_4=-1)=1/2$, has the same distribution as the other three randome variables.
+
+Furthermore, we need to check that any three random variables are independent and we can pick $X_1,X_2,X_4$ without loss of generality. And we can see that
+\begin{align*}
+P(X_1=1, X_2=1, X_4=1) &= P(X_1=1, X_2=1, X_1X_2X_3=1) \\
+&= P(X_1=1, X_2=1, X_3=1) \quad \text{we can tell } X_3 \text{ if we know } X_1,X_2 \\
+&= \frac{1}{8} \\
+&= P(X_1=1) P(X_2=1) P(X_4=1) = (\frac{1}{2})^3
+\end{align*}
+
+Finally, we need to check that all four randome variables are not independent. It is true because
+\begin{align*}
+P(X_1=1,X_2=1,X_3=1,X_4=1) &= P(X_1=1, X_2=1, X_3=1) \quad X_4\text{ here is redudant info} \\ 
+&= \frac{1}{8} \\
+&\neq P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1) = (\frac{1}{2})^4
+\end{align*}
+
 }}
 \fi
+
+\newpage
 
 \qns{Expectation Basics} \\ For discrete random variables $X$ and $Y$:
 \begin{enumerate}[a)]
@@ -88,9 +113,14 @@ This is often phrased as ``marginalizing out'' a variable, to retain only the va
 \qpart
 \item Show that $\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)]  = \mathbb{E}[X] + \mathbb{E}[Y]$.
 
-\ifsolutions{ \answer {
+\ifsolutions{ \answer { We know the following facts without proof.
+\[ \min(X,Y)=X, \max(X,Y)=Y \quad\text{if } X < Y\]
+\[ \min(X,Y)=Y, \max(X,Y)=X \quad\text{if } X \geq Y\]
+So, we have
 \begin{align*}
-\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)] & =  \mathbb{E}[\min(X,Y) + \max(X,Y)] &  \text{By linearity of expectation} \\ & = \mathbb{E}[X + Y] \\ & = \mathbb{E}[X] + \mathbb{E}[Y] & \text{By linearity of expectation}
+\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)] & =  \mathbb{E}[\min(X,Y) + \max(X,Y)] &  \text{by linearity of expectation} \\ 
+& = \mathbb{E}[X + Y] & \text{by the above lemma}\\ 
+& = \mathbb{E}[X] + \mathbb{E}[Y] & \text{by linearity of expectation}
 \end{align*}
 
 }}
@@ -101,6 +131,9 @@ This is often phrased as ``marginalizing out'' a variable, to retain only the va
 
 
 \end{enumerate}
+
+\newpage
+
 
 \qns{Variance of Random Variables} %Independent R.V.s}
 
@@ -347,7 +380,7 @@ This fits with our answer from part (b), since $\frac{1}{0.2} = 5$, and we got a
 \end{enumerate}
 
 
-
+\newpage
 
 
 \qns{007} \\
@@ -376,15 +409,44 @@ party?
 [HINT: Think about how to adapt the recursive trick used to calculate
 the expectation of a Geometric Random Variable to this situation. ]
 
-%In particular, you should be able to prove that $E(T) = \frac{1}{3}E(T|A) + \frac{1}{3}E(T|S) + \frac{1}{3}E(T|D)$ 
+
 
 \ifsolutions{ \answer{
-Using the notation in the extremely helpful hint, $E[T]=E[T\,|\, A]\Pr[A]+E[T\,|\, S]\Pr[S]+E[T\,|\, D]\Pr[D]=\frac{1}{3}(E[T\,|\, A]+E[T\,|\, S]+E[T\,|\, D])$.
-Note that $E[T\,|\, A]=E[T]+2$ by the memorylessness of the situation.
-Similarly, $E[T\,|\, S]=E[T]+5$. Lastly, $E[T\,|\, D]=0$ because
-Mr. Bond escapes immediately. So we have that $E[T]=\frac{1}{3}(E[T]+2+E[T]+5+0)$.
-Solving this for $E[T]$, we get that $E[T]=\fbox{\ensuremath{\mathbf{007}}}$.
+Let $T$ be the total number of attempts Mr. Bond must make before he escapes from his imprisonment, i.e. the first $T-1$ attempts are failures - where he either enters the AC duct or the sewer pipe - and the final attempt at trial $T$ sees him escape through the door. Thus $T$ corresponds to the number of coin tosses landing tails until a head turns up, where a tail (Bond fails) comes up with probability $2/3$ while a head (Bond escapes) has probability $1/3$.  Hence similar to problems 5, $T \sim Geom(1/3)$, and therefore by the expectation of a geometric r.v., $E(T) = 3$.
+
+Now define $X_t$ for $t\in\{1,2,\ldots,T-1\}$ to be the time that Bond spends on failed trial $t$.  Then $X$, the total time Bond spends trying to escape, is a r.v. satisfying
+\begin{eqnarray} \label{eqn:bond}
+X &=& \sum_{t=1}^{T-1} X_t.
+\end{eqnarray}
+Clearly the failure trial times $X_1,\ldots,X_{T-1}$ are i.i.d. with distribution
+\begin{equation*}
+X_t = \begin{cases}
+    2 & \mbox{with probability}\ 1/2 \\
+    5 & \mbox{with probability}\ 1/2
+    \end{cases}
+\end{equation*}
+for $1\le t\le T-1$, and so
+\begin{equation*}
+E(X_t) =  2\cdot \frac{1}{2} + 5\cdot\frac{1}{2} = \frac{7}{2}
+\end{equation*}
+Finally, plugging these expectations into equation~(\ref{eqn:bond}) gives us
+\begin{equation*}
+E(X) = E(T-1)\cdot E(X_t) = (3-1)\cdot\frac{7}{2} = 7
+\end{equation*}
+
+{\it Note}: The last step relies on the fact that ``linearity of expectation'' holds for the sum $\sum_{t=1}^{T-1} X_t$ even though the number of terms is not constant but is a random variable $T-1$ (which is independent of the $X_t$).  To get the expectation of the sum we multiply the expectation of each r.v.\ in the sum by the {\it expectation\/} of the number of terms, $T-1$.  Here, for completeness, is a proof of this fact, which uses the idea of {\it conditional expectation}:
+\begin{eqnarray*}
+E \left[\sum_{t=1}^{T-1} X_t \right] 
+&=& \sum_{k=1}^\infty E \left[\sum_{t=1}^{T-1} X_t \mid T = k \right] \cdot\Pr[T=k]\\
+&=& \sum_{k=1}^\infty (k-1)E(X_t) \cdot\Pr[T=k]\\
+&=& E(X_t) \sum_{k=1}^\infty (k-1)\Pr[T=k] \\
+&=& E(X_t) E(T-1)
+\end{eqnarray*}
+as claimed.
+
+%Using the notation in the extremely helpful hint, $E[T]=E[T|A]\Pr[A]+E[T|S]\Pr[S]+E[T|D]\Pr[D]=\frac{1}{3}(E[T|A]+E[T|S]+E[T|D])$. Note that $E[T|A]=E[T]+2$ by the memorylessness of the situation. Similarly, $E[T|S]=E[T]+5$. Lastly, $E[T|D]=0$ because Mr. Bond escapes immediately. So we have that $E[T]=\frac{1}{3}(E[T]+2+E[T]+5+0)$. Solving this for $E[T]$, we get that $E[T]=\fbox{\ensuremath{\mathbf{007}}}$.
 }}
+
 \fi
 
 \iffalse
