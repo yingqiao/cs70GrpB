@@ -1,4 +1,3 @@
-
 \documentclass[]{article}
 % packages
 \usepackage{../../cs70}
@@ -93,6 +92,7 @@ P(X_1=1,X_2=1,X_3=1,X_4=1) &= P(X_1=1, X_2=1, X_3=1) \quad X_4\text{ here is red
 \qpart
 \item Show that for constants $c$ and $d$, $\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y]$.
 
+
 \ifsolutions{ \answer{ Beginning with the left-hand-side:
 		\begin{align*}
 		\mathbb{E}[cX + dY] & = \sum_x \sum_y (cx+dy) \mathbb{P}(x,y) & \text{definition of expectation} \\
@@ -112,6 +112,7 @@ This is often phrased as ``marginalizing out'' a variable, to retain only the va
 
 \qpart
 \item Show that $\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)]  = \mathbb{E}[X] + \mathbb{E}[Y]$.
+
 
 \ifsolutions{ \answer { We know the following facts without proof.
 \[ \min(X,Y)=X, \max(X,Y)=Y \quad\text{if } X < Y\]
@@ -145,10 +146,23 @@ and $X_1, X_2, \cdots, X_n$ are pair-wise independent (this means $\forall{i \ne
 \qpart
 \item In order to compute the variance of the sum of these random variables, first  prove the following lemma: \\ \textbf{Lemma:} If $X$ and $Y$ are independent random variables, then $\exx[XY] = \exx[X] \exx[Y]$. \\  
 (Hint: Let $\mathcal{X}$ be the set of all possible values of $X$ and let $\mathcal{Y}$ be the set of all possible values of $Y$. Now use the definition of expectation, $\exx[XY] = \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} xy \cdot Pr[X=x \cap Y = y]$).
+
 \ifsolutions{ \answer {
-We start with the hint. \\  $\exx[XY] = \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} xy \cdot Pr[X=x \cap Y = y] \\ = \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} xy \cdot Pr[X=x] Pr[Y = y]$ Because $X$ and $Y$ are independent $\\ = \sum\limits_{x \in \mathcal{X}} Pr[X=x] \cdot x \sum\limits_{y \in \mathcal{Y}} y \cdot Pr[Y = y]$ Because $x$ does not change in the inner summation. $\\ = \sum\limits_{x \in \mathcal{X}} Pr[X=x] \cdot x \exx[Y]$ By definition of expectation $\\ = \exx[Y] \cdot \sum\limits_{x \in \mathcal{X}} Pr[X=x] \cdot x = \exx[Y]\exx[X]$
+We start with the hint.  
+\begin{align*}
+\exx[XY] &= \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} xy \cdot Pr[X=x \cap Y = y] \\ 
+&= \sum\limits_{x \in \mathcal{X}} \sum\limits_{y \in \mathcal{Y}} xy \cdot Pr[X=x] Pr[Y = y] 
+&\text{Because $X$ and $Y$ are independent}\\ 
+&= \sum\limits_{x \in \mathcal{X}} Pr[X=x] \cdot x \sum\limits_{y \in \mathcal{Y}} y \cdot Pr[Y = y]
+&\text{Because $x$ does not change in the inner summation}\\ 
+&= \sum\limits_{x \in \mathcal{X}} Pr[X=x] \cdot x \exx[Y] 
+&\text{By definition of expectation} \\ 
+&= \exx[Y] \cdot \sum\limits_{x \in \mathcal{X}} Pr[X=x] \cdot x \\
+&= \exx[Y]\exx[X]
+\end{align*}
 }}
 \fi
+
 
 \qpart
 \item
@@ -156,33 +170,62 @@ We start with the hint. \\  $\exx[XY] = \sum\limits_{x \in \mathcal{X}} \sum\lim
 Prove that $\exx[Z^2] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j]$. \\ 
 (Hint: 
 What happens when you expand out $(X_1 + X_2 + \cdots X_n)^2$?)
+
 \ifsolutions{ \answer {
-We start with the hint, we see that $Z = (X_1 + X_2 + \cdots X_n)$, therefore $Z^2 = (X_1 + X_2 + \cdots X_n)^2$. When we expand this out we get \\ $Z^2 = (X_1 + X_2 + \cdots X_n)\cdot(X_1 + X_2 + \cdots X_n)$ To see what happens here we try a smaller example, $\\ (X_1+X_2+X_3)(X_1+X_2+X_3) = (X_1^2 + X_2^2 + X_3^2 + X_1X_2 + X_1X_3 + X_2X_1 + X_2X_3 + X_3X_1 + X_3X_2)$ In general, we have the squared term of each $X_i$ we are adding, and we have all the possible products of $X_i$ and $X_j$ where order matters and $i \neq j$. Therefore, we can generalize as $\\ (X_1 + X_2 + \cdots X_n)\cdot(X_1 + X_2 + \cdots X_n) = (X_1^2 +X_2^2 + \cdots X_n^2 + X_1X_2 + X_1X_3 + \cdots X_1X_n + X_2X_1 + \cdots X_2X_n + \cdots X_nX_{n-1}) \\ =  \sum\nolimits_{i=1}^n X_i^2 + \sum_{i=1}^n \sum_{j \neq i} X_iX_j$. Therefore, by linearity of expectation. \\ $\exx[Z^2] =  \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j]$
+We start with the hint, we see that $Z = (X_1 + X_2 + \cdots X_n)$, therefore $Z^2 = (X_1 + X_2 + \cdots X_n)^2$. When we expand this out we get 
+\[Z^2 = (X_1 + X_2 + \cdots X_n)\cdot(X_1 + X_2 + \cdots X_n)\] 
+To see what happens here we try a smaller example, 
+\[(X_1+X_2+X_3)(X_1+X_2+X_3) = (X_1^2 + X_2^2 + X_3^2 + X_1X_2 + X_1X_3 + X_2X_1 + X_2X_3 + X_3X_1 + X_3X_2)\]
+In general, we have the squared term of each $X_i$ we are adding, and we have all the possible products of $X_i$ and $X_j$ where order matters and $i \neq j$. Therefore, we can generalize as 
+\begin{align*}
+&(X_1 + X_2 + \cdots X_n)\cdot(X_1 + X_2 + \cdots X_n)\\
+& = (X_1^2 +X_2^2 + \cdots X_n^2 + X_1X_2 + X_1X_3 + \cdots X_1X_n + X_2X_1 + \cdots X_2X_n + \cdots X_nX_{n-1}) \\ 
+& =  \sum\nolimits_{i=1}^n X_i^2 + \sum_{i=1}^n \sum_{j \neq i} X_iX_j
+\end{align*} 
+Therefore, by linearity of expectation. 
+\[\exx[Z^2] =  \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j] \]
 }}
 \fi
 
+
 \qpart
 \item Prove that $\exx[Z]^2 = \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$.
+
 \ifsolutions{ \answer {
-We calculate $\exx[Z]$ and then square it. By linearity of expectation, $\exx[Z] = \exx[X_1] + \exx[X_2] + \cdots + \exx[X_n]$. So, now we wish to calculate $(\exx[X_1] + \cdots + \exx[X_n])^2$. This calculation is similar to what we did before. We will have a term for each $i$ of $\exx[X_i]\exx[X_i]$ and we will have on term for every possible product of $\exx[X_i]$ and $\exx[X_j]$ where order matters and $i \neq j$. Ultimately, \\ $\exx[Z]^2 = \sum\nolimits_{i=1}^n \exx[X_i]\exx[X_i] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j] \\ \exx[Z]^2 = \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$
+We calculate $\exx[Z]$ and then square it. By linearity of expectation, $\exx[Z] = \exx[X_1] + \exx[X_2] + \cdots + \exx[X_n]$. So, now we wish to calculate $(\exx[X_1] + \cdots + \exx[X_n])^2$. This calculation is similar to what we did before. We will have a term for each $i$ of $\exx[X_i]\exx[X_i]$ and we will have a term for every possible product of $\exx[X_i]$ and $\exx[X_j]$ where order matters and $i \neq j$. Ultimately, 
+\begin{align*}
+\exx[Z]^2 &= \sum\nolimits_{i=1}^n \exx[X_i]\exx[X_i] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j] \\ 
+&= \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]
+\end{align*}
 }}
 \fi
+
+
 \qpart
 \item Combine b) and c) to show $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_iX_j] -  \sum\nolimits_{i=1}^n \exx[X_i]^2 - \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]$. Now use the lemma from part a) and rearrange to show that $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] - \exx[X_i]^2$.
 
 \ifsolutions{ \answer {
-Since $Var[Z] = \exx[Z^2] - \exx[Z]^2$ We subtract our answer from c from our answer from b. \\ $Var[Z] = \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j] - \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j] $ We group our summations together $\\ Var[Z] =  \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) + \sum\limits_{j \neq i} ( \exx[X_iX_j] - \exx[X_i]\exx[X_j])$ Since $X_i$ and $X_j$ are pair-wise independent, we use our lemma that $\exx[X_iX_j] = \exx[X_i]\exx[X_j]$ \\ $Var[X] = \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2)$ 
-
+\begin{align*}
+Var[Z] &= \exx[Z^2] - \exx[Z]^2 \\
+&= \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j] - \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]  &\quad\text{subtract answer in c) from answer in b)}\\
+&= \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) + \sum\limits_{j \neq i} ( \exx[X_iX_j] - \exx[X_i]\exx[X_j]) 
+&\quad\text{group summations} \\ 
+&= \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) &\quad\text{$X_i$ and $X_j$ are pair-wise independent, use lemma}
+\end{align*}
 }}
 \fi
 
 \qpart
 \item Finally reason that $Var[Z] = Var[\sum\nolimits_{i=1}^n X_i] =    \sum\nolimits_{i=1}^n Var[X_i]$. This is true if for all $i \neq j$, $X_i$ and $X_j$ are pair-wise independent.
+
 \ifsolutions{ \answer {
 We look at the previous expression and we realize that $Var[X_i] = \exx[X_i^2] - \exx[X_i]^2$. So, $\\Var[X] = \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) = \sum\nolimits_{i=1}^n Var[X_i]$
 
 }}
 \fi
+
+
+\newpage 
 
 \qpart
 \item The proof above does not hold if $X_i$ and $X_j$ are not pair-wise
@@ -193,10 +236,39 @@ We look at the previous expression and we realize that $Var[X_i] = \exx[X_i^2] -
   the variance of the sum is nonetheless the sum of the variances.
 
 \ifsolutions{ \answer {
-First we come up with two random variables $X$ and $Y$ such that $Var[X+Y] \neq Var[X] + Var[Y]$. Let us let $X$ count the number of heads after 1 flip of a fair coin and let $Y$ count the number of tails after the same 1 flip of that coin. Then $X+Y = 1$ always, and therefore the Variance is 0. The Variance of a constant number is 0. However, \\ $Var[X] = \exx[X^2] - \exx[X]^2 = Pr[X=1]\cdot1^2 + Pr[X=0]\cdot0^2 - (Pr[X=1]\cdot1 + Pr[X=0]\cdot0)^2$ \\ $= 1/2\cdot1 - (1/2\cdot1)^2 = 1/2 - 1/4 = 1/4$ \\ The calculation for $Var[Y]$ is the exact same. \\ Therefore, $Var[X] + Var[Y] = 1/4 + 1/4 = 1/2 \neq 0 = Var[X+Y] $ \\ Now we wish to come up with two variables $X$ and $Y$ that are dependent but for which $Var[X+Y] = Var[X] + Var[Y]$. From before, we realize this is true if $\exx[XY] = \exx[X]\exx[Y]$. Therefore we wish to find two variables for which this is true. We propose the following random variables: \\$X: i \in \mathbb{Z} \ -2 \leq i \leq -2  \hspace{1cm} Pr[X=i] = 1/5$. \\ Therefore $\exx[X] = -2 \cdot 1/5 + -1 \cdot 1/5 + 0 \cdot 1/5 + 1 \cdot 1/5 + 2 \cdot 1/5 = 0. \\ Y: \ Y = -1 \text{ iff } X =0 \lor X=2. $ Then, $Pr[Y = -1] = 2/5$ \\ $Y = 0 \text{ iff } X = -2 \lor X=-1$. Then, $Pr[Y = 0] = 2/5$ \\ $Y = 2 \text{ iff } X = 1$. Then, $Pr[Y = 2] = 1/5$ \\ Therefore $\exx[Y] = -1 \cdot 2/5 + 0 \cdot 2/5 + 2 \cdot 1/5 = 0$. So, $\exx[X]\exx[Y] = 0$. \\ Now let us calculate $\exx[XY]$. Since $Y$ is completely determined by $X$, we have the following five possibles values of $(X,Y)$ = $(-2,0), (-1,0), (0,-1), (1, 2), (2,-1)$ Each of these occur with probability $1/5$. Therefore, we have $Pr[XY = 0] = 1/5 + 1/5 + 1/5$ and $Pr[XY = 2] = 1/5$ and $Pr[XY = -2] = 1/5$ \\ $\exx[XY] = 0 \cdot 3/5 + 2 \cdot 1/5 + -2 \cdot 1/5 = 0$. \\ In this case, $\exx[XY] = \exx[X]\exx[Y]$ and therefore $Var[X+Y] = Var[X] + Var[Y]$ since the above arguments in parts b-e used the fact that $\exx[XY] = \exx[X]\exx[Y]$
+First we come up with two random variables $X$ and $Y$ such that $Var[X+Y] \neq Var[X] + Var[Y]$. Let us let $X$ count the number of heads after 1 flip of a fair coin and let $Y$ count the number of tails after the same 1 flip of that coin. Then $X+Y = 1$ always, and therefore the Variance is 0. The Variance of a constant number is 0. However, 
+\begin{align*}
+Var[X] &= \exx[X^2] - \exx[X]^2 \\
+&= Pr[X=1]\cdot1^2 + Pr[X=0]\cdot0^2 - (Pr[X=1]\cdot1 + Pr[X=0]\cdot0)^2 \\ 
+&= 1/2\cdot1 - (1/2\cdot1)^2 \\
+&= 1/2 - 1/4 = 1/4
+\end{align*} 
+
+The calculation for $Var[Y]$ is the exact same. Therefore, 
+\[Var[X] + Var[Y] = 1/4 + 1/4 = 1/2 \neq 0 = Var[X+Y]\] 
+Now we wish to come up with two variables $X$ and $Y$ that are dependent but for which $Var[X+Y] = Var[X] + Var[Y]$. From before, we realize this is true if $\exx[XY] = \exx[X]\exx[Y]$. Therefore we wish to find two variables for which this is true. We propose the following random variables: 
+\[X: \\
+Pr[X=i] = 1/5 \quad\quad \text{for } i \in \mathbb{Z}, \quad -2 \leq i \leq -2  \]
+\[Y: Y=\begin{cases}
+       -1 &\mbox{iff } X=0 \lor X=2 \\
+       0  &\mbox{iff } X=-2 \lor X=-1 \\
+       2  &\mbox{iff } X=1
+       \end{cases} 
+\]
+\[Pr[Y=-1]=2/5, Pr[Y=0]=2/5, Pr[Y=2]=1/5\]
+Therefore 
+\[ \exx[X] = -2 \cdot 1/5 + -1 \cdot 1/5 + 0 \cdot 1/5 + 1 \cdot 1/5 + 2 \cdot 1/5 = 0\] 
+and 
+\[ \exx[Y] = -1 \cdot 2/5 + 0 \cdot 2/5 + 2 \cdot 1/5 = 0\]
+So, $\exx[X]\exx[Y] = 0$. 
+
+Now let us calculate $\exx[XY]$. Since $Y$ is completely determined by $X$, we have the following five possibles values of $(X,Y)$ = $\{ (-2,0), (-1,0), (0,-1), (1, 2), (2,-1) \}$. Each of these occurs with probability $1/5$. Therefore, we have $Pr[XY = 0] = 1/5 + 1/5 + 1/5$ , $Pr[XY = 2] = 1/5$ and $Pr[XY = -2] = 1/5$. So, $\exx[XY] = 0 \cdot 3/5 + 2 \cdot 1/5 + -2 \cdot 1/5 = 0$. In this case, $\exx[XY] = \exx[X]\exx[Y]$ and therefore $Var[X+Y] = Var[X] + Var[Y]$ since the above arguments in parts b)-e) used the fact that $\exx[XY] = \exx[X]\exx[Y]$.
 }}
 \fi
 \end{enumerate}
+
+
+\newpage
   
 \qns{Binomial Distribution}
 In this question we will derive the Binomial Distribution. First it might help if we define the word "distribution." The distribution of a random variable specifies the probability of every possible value of that random variable. For instance, for a random variable that counts the value of a standard 6-sided die after 1 roll, the distribution is $i \in \{1,2,3,4,5,6\} \ Pr[X = i] = 1/6$. %More formally, the distribution of a discrete random variable~$X$ is the collection of values $\{(a \Pr[X=a]):a\in\Aset\}$, where $\Aset$ is the set of all possible values taken by~$X$. 
@@ -263,7 +335,15 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
   $n=2$ and $p=1/3$.  
   
  \ifsolutions{ \answer {
-  We wish to show that $Pr[X=0] + Pr[X=1] +Pr[X=2] = 1$ \\ $\sum\nolimits_{k=0}^2 Pr[X=k] = \binom{2}{0}(1/3)^0(1-(1/3))^{2-0} + \binom{2}{1}(1/3)^1(1-(1/3))^{2-1} + \binom{2}{2}(1/3)^2(1-(1/3))^{2-2} \\ = \binom{2}{0}(1/3)^0(2/3)^{2} + \binom{2}{1}(1/3)^1(2/3)^1 + \binom{2}{2}(1/3)^2(2/3)^0 \\ = \binom{2}{0}(4/9) + \binom{2}{1}(2/9) + \binom{2}{2}(1/9) =  1(4/9) + 2(2/9) + 1(1/9) = 4/9 + 4/9 +1/9 \\ = 1 $
+  We wish to show that $Pr[X=0] + Pr[X=1] +Pr[X=2] = 1$. 
+\begin{align*}
+\sum\nolimits_{k=0}^2 Pr[X=k] &= 
+\binom{2}{0}(1/3)^0(1-(1/3))^{2-0} + \binom{2}{1}(1/3)^1(1-(1/3))^{2-1} + \binom{2}{2}(1/3)^2(1-(1/3))^{2-2} \\ 
+&= \binom{2}{0}(1/3)^0(2/3)^{2} + \binom{2}{1}(1/3)^1(2/3)^1 + \binom{2}{2}(1/3)^2(2/3)^0 \\ 
+&= \binom{2}{0}(4/9) + \binom{2}{1}(2/9) + \binom{2}{2}(1/9) \\
+&=  1(4/9) + 2(2/9) + 1(1/9) = 4/9 + 4/9 +1/9 \\ 
+&= 1
+\end{align*}
   }} 
   \fi
 \qpart
@@ -283,8 +363,15 @@ Let's examine the case $n=4$. In this case $(a+b)^4 = (a+b)(a+b)(a+b)(a+b)$ When
 \item Use your result from part (h) to show that $\sum_{k=0}^n Pr[X=k] =1$ in general, where $Pr[X=k]$ is the probability you calculated in (f).
  
    \ifsolutions{ \answer {
- We plug in $a = (1-p)$ and $b = p.$ Then we get \\ $(a+b)^n =
-  \sum\nolimits_{k=0}^n \binom{n}{k} a^{n-k}b^k$ By the binomial theorem \\$ =  \sum\nolimits_{k=0}^n \binom{n}{k} (1-p)^{n-k}p^k$ plugging in the values of $a$ and $b$ \\$ = \sum\nolimits_{k=0}^n Pr[X=k]$ using our answer to part f \\Therefore $\sum\nolimits_{k=0}^n Pr[X=k] = (a+b)^n = (1-p+p)^n = 1^n = 1$ \\ Thus this is a valid probability distribution.
+ We plug in $a = (1-p)$ and $b = p.$ Then we get
+\begin{align*}
+(a+b)^n &=  \sum\nolimits_{k=0}^n \binom{n}{k} a^{n-k}b^k &\text{By the binomial theorem} \\ 
+&=  \sum\nolimits_{k=0}^n \binom{n}{k} (1-p)^{n-k}p^k &\text{plugging in the values of $a$ and $b$} \\
+&= \sum\nolimits_{k=0}^n Pr[X=k] &\text{using our answer to part f} \\
+&= (a+b)^n = (1-p+p)^n = 1^n \\
+&= 1
+\end{align*}
+Thus this is a valid probability distribution.
   }} 
   \fi 
 \qpart
@@ -298,7 +385,9 @@ If $X$ is a count of the total number of heads, we get this count by counting ea
 \item Use the linearity of expectation to calculate $\mathbb{E}[X]$.
 
  \ifsolutions{ \answer {
-By the linearity of expectation, if $X = \sum\nolimits_{i=1}^nX_i$, then $\exx[X] = \sum\nolimits_{i=1}^n\exx[X_i]$. So now we must compute the expectation of each $X_i$. We notice that each $X_i$ is distributed identically, therefore it is sufficient to compute the expectation of only one $X_i$ and the rest will be identical. \\ Each $X_i$ is 1 (flip heads on $i^{\text{th}}$ flip) with probability $p$ and 0  (flip tails on $i^{\text{th}}$ flip) with probability $1-p$. \\ Therefore, $\exx[X_i] = 1\cdot p + 0 \cdot(1-p) = p$ by definition of expectation. \\ $\exx[X] = \sum\nolimits_{i=1}^n\exx[X_i] = \sum\nolimits_{i=1}^n p = np$ \\ If $X \sim B(n,p)$ then, $\exx[X] = np$
+By the linearity of expectation, if $X = \sum\nolimits_{i=1}^nX_i$, then $\exx[X] = \sum\nolimits_{i=1}^n\exx[X_i]$. So now we must compute the expectation of each $X_i$. We notice that each $X_i$ is distributed identically, therefore it is sufficient to compute the expectation of only one $X_i$ and the rest will be identical. 
+
+Each $X_i$ is 1 (flip heads on $i^{\text{th}}$ flip) with probability $p$ and 0  (flip tails on $i^{\text{th}}$ flip) with probability $1-p$. Therefore, $\exx[X_i] = 1\cdot p + 0 \cdot(1-p) = p$ by definition of expectation. And $\exx[X] = \sum\nolimits_{i=1}^n\exx[X_i] = \sum\nolimits_{i=1}^n p = np$. If $X \sim B(n,p)$ then, $\exx[X] = np$.
   }} 
   \fi 
 \qpart
@@ -313,6 +402,8 @@ Dear GSI lots-of-parts: please don't write the final...
   \fi 
 \end{enumerate}
 
+
+\newpage
 
 \qns{Winning the Lottery} \\ Suppose that every day, Lily buys a
 lottery ticket, and will only stop buying lottery tickets when she
