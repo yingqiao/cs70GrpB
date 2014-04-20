@@ -1,0 +1,30 @@
+\documentclass[11pt]{article}
+\usepackage{../../cs70}
+\usepackage{color}
+\newif\ifsolutions
+\solutionstrue
+\solutionsfalse %flag for solutions
+
+\def\title{Discussion 13B}
+\begin{document}
+\maketitle
+
+
+\begin{enumerate}
+
+
+\item {\bf Homework Polling - Revisited} 
+
+Suppose Prof. Sahai wants to poll the CS 70 students {\em again} about whether the homeworks have been too hard recently.  But now everyone is comfortable enough to answer honestly, either no (0) or yes (1). Let the true fraction of students who think the homework is too hard be $p$. Let the response of the $i^{\text{th}}$ polled student be $X_i$.  Prof. Sahai would like to poll $n$ students, with $n$ large enough that the probability of estimating $p$ to within 2\% is at least 90\%.
+
+\begin{enumerate}[a)]
+
+\item Let $M_n = \frac{1}{n}\sum_{i=1}^n X_i$ be the average of the $n$ responses. What is the expectation of $M_n$? Write an equation that describes the desired probability. Draw a picture of the distribution of $M_n - p$ and mark the region where the desired probability would be obtained.
+
+\vspace{20mm}
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
