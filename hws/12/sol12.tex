@@ -80,12 +80,12 @@ P(X_1=1,X_2=1,X_3=1,X_4=1) &= P(X_1=1, X_2=1, X_3=1) \quad X_4\text{ here is red
 &= \frac{1}{8} \\
 &\neq P(X_1=1)P(X_2=1)P(X_3=1)P(X_4=1) = (\frac{1}{2})^4
 \end{align*}
-
 }}
 \fi
 
-\newpage
 
+
+\newpage
 \qns{Expectation Basics} \\ For discrete random variables $X$ and $Y$:
 \begin{enumerate}[a)]
 
@@ -93,18 +93,33 @@ P(X_1=1,X_2=1,X_3=1,X_4=1) &= P(X_1=1, X_2=1, X_3=1) \quad X_4\text{ here is red
 \item Show that for constants $c$ and $d$, $\mathbb{E}[cX + dY] = c\mathbb{E}[X] + d \mathbb{E}[Y]$.
 
 
-\ifsolutions{ \answer{ Beginning with the left-hand-side:
-		\begin{align*}
-		\mathbb{E}[cX + dY] & = \sum_x \sum_y (cx+dy) \mathbb{P}(x,y) & \text{definition of expectation} \\
-		& = c\sum_x \sum_y x \mathbb{P}(x,y) + d\sum_x \sum_y y \mathbb{P}(x,y) & \text{expand and break up the sum into two parts} \\
-		& = c \sum_x x \sum_y \mathbb{P}(x,y) + d \sum_y y \sum_x \mathbb{P}(x,y) & \text{reorder terms that depend on $x$ or $y$} \\
-		& = c\sum_x x \mathbb{P}(x) + d\sum_y y \mathbb{P}(y) & \text{marginalize over $y$ in the first term and $x$ in the second term} \\
-		& = c\mathbb{E}[X] + d \mathbb{E}[Y]. & \text{arrive at the definition of expectation for $X$ and $Y$}
-		\end{align*}
+\ifsolutions{ 
+\answer{
+I.
+\begin{align*}
+LHS &= \exx[cX+dY] \\
+&= \sum_{\omega \in \Omega}(cX + dY)(\omega) \cdot \Pr[\omega] \\
+&= \sum_{\omega \in \Omega}(c\cdot X(\omega) + d\cdot Y(\omega)) \cdot \Pr[\omega] \\
+&= c\sum_{\omega \in \Omega}(X(\omega) \cdot \Pr[\omega] + d\sum_{\omega \in \Omega}(Y(\omega) \cdot \Pr[\omega] \\
+&= c\exx[X] + d\exx[Y] \\
+&=RHS
+\end{align*}
+}
 
+
+\answer{
+II.(optional)
+
+Beginning with the left-hand-side:
+\begin{align*}
+\mathbb{E}[cX + dY] & = \sum_x \sum_y (cx+dy) \mathbb{P}(x,y) & \text{definition of expectation} \\
+& = c\sum_x \sum_y x \mathbb{P}(x,y) + d\sum_x \sum_y y \mathbb{P}(x,y) & \text{expand and break up the sum into two parts} \\
+& = c \sum_x x \sum_y \mathbb{P}(x,y) + d \sum_y y \sum_x \mathbb{P}(x,y) & \text{reorder terms that depend on $x$ or $y$} \\
+& = c\sum_x x \mathbb{P}(x) + d\sum_y y \mathbb{P}(y) & \text{marginalize over $y$ in the first term and $x$ in the second term} \\
+& = c\mathbb{E}[X] + d \mathbb{E}[Y]. & \text{arrive at the definition of expectation for $X$ and $Y$}
+\end{align*}
 One of the key steps was using the fact that
 \[ \sum_{y} \mathbb{P}(x,y) = \mathbb{P}(x). \]
-
 This is often phrased as ``marginalizing out'' a variable, to retain only the variables of interest.  In this case we are marginalizing out $y$ and retaining only the probability of $x$.
 }}
 \fi
@@ -112,7 +127,6 @@ This is often phrased as ``marginalizing out'' a variable, to retain only the va
 
 \qpart
 \item Show that $\mathbb{E}[\min(X,Y)] + \mathbb{E}[\max(X,Y)]  = \mathbb{E}[X] + \mathbb{E}[Y]$.
-
 
 \ifsolutions{ \answer { We know the following facts without proof.
 \[ \min(X,Y)=X, \max(X,Y)=Y \quad\text{if } X < Y\]
@@ -127,9 +141,7 @@ So, we have
 }}
 \fi
 
-
-%-show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
-
+%show that if $X$ and $Y$ are independent discrete random variables, then \[\mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y].\]  Does this property imply independence?
 
 \end{enumerate}
 
@@ -209,8 +221,8 @@ We calculate $\exx[Z]$ and then square it. By linearity of expectation, $\exx[Z]
 Var[Z] &= \exx[Z^2] - \exx[Z]^2 \\
 &= \sum\nolimits_{i=1}^n \exx[X_i^2] + \sum_{i=1}^n \sum_{j \neq i} \exx[X_iX_j] - \sum\nolimits_{i=1}^n \exx[X_i]^2 + \sum_{i=1}^n \sum\limits_{j \neq i} \exx[X_i] \exx[X_j]  &\quad\text{subtract answer in c) from answer in b)}\\
 &= \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) + \sum\limits_{j \neq i} ( \exx[X_iX_j] - \exx[X_i]\exx[X_j]) 
-&\quad\text{group summations} \\ 
-&= \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) &\quad\text{$X_i$ and $X_j$ are pair-wise independent, use lemma}
+&\quad\text{re-group summations} \\ 
+&= \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) &\quad\text{$X_i$'s are pair-wise independent, use lemma}
 \end{align*}
 }}
 \fi
@@ -219,8 +231,11 @@ Var[Z] &= \exx[Z^2] - \exx[Z]^2 \\
 \item Finally reason that $Var[Z] = Var[\sum\nolimits_{i=1}^n X_i] =    \sum\nolimits_{i=1}^n Var[X_i]$. This is true if for all $i \neq j$, $X_i$ and $X_j$ are pair-wise independent.
 
 \ifsolutions{ \answer {
-We look at the previous expression and we realize that $Var[X_i] = \exx[X_i^2] - \exx[X_i]^2$. So, $\\Var[X] = \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) = \sum\nolimits_{i=1}^n Var[X_i]$
-
+We look at the previous expression and we realize that $Var[X_i] = \exx[X_i^2] - \exx[X_i]^2$. So, 
+\begin{align*}
+Var[Z] &= \sum\nolimits_{i=1}^n (\exx[X_i^2] - \exx[X_i]^2) \\
+&= \sum\nolimits_{i=1}^n Var[X_i]
+\end{align*}
 }}
 \fi
 
@@ -236,33 +251,42 @@ We look at the previous expression and we realize that $Var[X_i] = \exx[X_i^2] -
   the variance of the sum is nonetheless the sum of the variances.
 
 \ifsolutions{ \answer {
-First we come up with two random variables $X$ and $Y$ such that $Var[X+Y] \neq Var[X] + Var[Y]$. Let us let $X$ count the number of heads after 1 flip of a fair coin and let $Y$ count the number of tails after the same 1 flip of that coin. Then $X+Y = 1$ always, and therefore the Variance is 0. The Variance of a constant number is 0. However, 
+First we come up with two random variables $X$ and $Y$ such that $Var[X+Y] \neq Var[X] + Var[Y]$. We let $X$ count the number of heads after 1 flip of a fair coin and let $Y$ count the number of tails after the same 1 flip of that coin. Then $X+Y = 1$ always, and therefore the variance is 0. The variance of a constant number is 0. However, 
 \begin{align*}
 Var[X] &= \exx[X^2] - \exx[X]^2 \\
 &= Pr[X=1]\cdot1^2 + Pr[X=0]\cdot0^2 - (Pr[X=1]\cdot1 + Pr[X=0]\cdot0)^2 \\ 
-&= 1/2\cdot1 - (1/2\cdot1)^2 \\
-&= 1/2 - 1/4 = 1/4
+&= \frac{1}{2}\cdot1 - (\frac{1}{2}\cdot1)^2 \\
+&= \frac{1}{2} - \frac{1}{4} \\
+&= \frac{1}{4}
 \end{align*} 
 
 The calculation for $Var[Y]$ is the exact same. Therefore, 
-\[Var[X] + Var[Y] = 1/4 + 1/4 = 1/2 \neq 0 = Var[X+Y]\] 
+\[Var[X] + Var[Y] = \frac{1}{4} + \frac{1}{4} = \frac{1}{2} \neq 0 = Var[X+Y]\] 
 Now we wish to come up with two variables $X$ and $Y$ that are dependent but for which $Var[X+Y] = Var[X] + Var[Y]$. From before, we realize this is true if $\exx[XY] = \exx[X]\exx[Y]$. Therefore we wish to find two variables for which this is true. We propose the following random variables: 
 \[X: \\
-Pr[X=i] = 1/5 \quad\quad \text{for } i \in \mathbb{Z}, \quad -2 \leq i \leq -2  \]
+Pr[X=i] = \frac{1}{5} \quad\quad \text{for } i \in \mathbb{Z}, \quad -2 \leq i \leq -2  \]
 \[Y: Y=\begin{cases}
        -1 &\mbox{iff } X=0 \lor X=2 \\
        0  &\mbox{iff } X=-2 \lor X=-1 \\
        2  &\mbox{iff } X=1
        \end{cases} 
 \]
-\[Pr[Y=-1]=2/5, Pr[Y=0]=2/5, Pr[Y=2]=1/5\]
+\[Pr[Y=-1]=\frac{2}{5}, Pr[Y=0]=\frac{2}{5}, Pr[Y=2]=\frac{1}{5}\]
 Therefore 
-\[ \exx[X] = -2 \cdot 1/5 + -1 \cdot 1/5 + 0 \cdot 1/5 + 1 \cdot 1/5 + 2 \cdot 1/5 = 0\] 
+\[ \exx[X] = (-2 + (-1) + 0 + 1 + 2) \cdot \frac{1}{5} = 0\] 
 and 
-\[ \exx[Y] = -1 \cdot 2/5 + 0 \cdot 2/5 + 2 \cdot 1/5 = 0\]
+\[ \exx[Y] = (-1 + 0) \cdot \frac{2}{5} + 2 \cdot \frac{1}{5} = 0\]
 So, $\exx[X]\exx[Y] = 0$. 
 
-Now let us calculate $\exx[XY]$. Since $Y$ is completely determined by $X$, we have the following five possibles values of $(X,Y)$ = $\{ (-2,0), (-1,0), (0,-1), (1, 2), (2,-1) \}$. Each of these occurs with probability $1/5$. Therefore, we have $Pr[XY = 0] = 1/5 + 1/5 + 1/5$ , $Pr[XY = 2] = 1/5$ and $Pr[XY = -2] = 1/5$. So, $\exx[XY] = 0 \cdot 3/5 + 2 \cdot 1/5 + -2 \cdot 1/5 = 0$. In this case, $\exx[XY] = \exx[X]\exx[Y]$ and therefore $Var[X+Y] = Var[X] + Var[Y]$ since the above arguments in parts b)-e) used the fact that $\exx[XY] = \exx[X]\exx[Y]$.
+Now let us calculate $\exx[XY]$. Since $Y$ is completely determined by $X$, we have the following five possibles values 
+\[ (X,Y) = \{ (-2,0), (-1,0), (0,-1), (1, 2), (2,-1) \} \]
+Each of these occurs with probability $1/5$. Therefore, we have 
+\[ Pr[XY = 0] = 3\cdot \frac{1}{5} = \frac{3}{5} \quad, 
+Pr[XY = 2] = \frac{1}{5} \quad\text{and } 
+Pr[XY = -2] = \frac{1}{5} \]
+So, $\exx[XY] = 0\cdot \frac{3}{5} + 2\cdot \frac{1}{5} + (-2)\cdot \frac{1}{5} = 0$. 
+
+In this case, $\exx[XY] = \exx[X]\exx[Y]$ and therefore $Var[X+Y] = Var[X] + Var[Y]$ since the above arguments in parts b)-e) used the fact that $\exx[XY] = \exx[X]\exx[Y]$.
 }}
 \fi
 \end{enumerate}
@@ -296,14 +320,14 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
 \item How many sequences of $n$ coin flips have exactly 1 head?
 
  \ifsolutions{ \answer {
-  $n$. We simply choose $1$ of the $n$ flips to be a head so we get $\binom{n}{1}$
+  We simply choose $1$ of the $n$ flips to be a head so we get $\binom{n}{1}=n$.
   }} 
   \fi
 \qpart
 \item How many sequences of $n$ coin flips have exactly $k$ heads? Let  $0 \leq k \leq n$
 
  \ifsolutions{ \answer {
-  This time, we count the ways to choose $k$ of the $n$ flips to be a head, so we get $\binom{n}{k}$
+  This time, we count the ways to choose $k$ of the $n$ flips to be a head, so we get $\binom{n}{k}$.
   }} 
   \fi 
 \qpart
@@ -315,16 +339,18 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
 \qpart
 
  \ifsolutions{ \answer {
-  Again, because the coin tosses are independent, we multiply the probability of the result of each coin toss. Since we have $k$ heads, the probability of those $k$ heads is $p^k$, but we still have count the probability the rest of the $n-k$ coins are tails which is $(1-p)^{n-k}$. Therefore we get $p^k(1-p)^{n-k}$. It does not matter what order the heads and tails are because multiplication is commutative (that is $a*b = b*a$).
+  Again, because the coin tosses are independent, we multiply the probability of the result of each coin toss. Since we have $k$ heads, the probability of those $k$ heads is $p^k$, but we still have to count the probability of the rest of the $n-k$ coins being tails, which is $(1-p)^{n-k}$. Therefore we get $p^k(1-p)^{n-k}$. It does not matter what order the heads and tails are because multiplication is commutative (that is $a*b = b*a$).
   }} 
   \fi
-\item Combine part d and e to compute the probability that we get $k$
+\item Combine part d) and e) to compute the probability that we get $k$
   heads in $n$ coin tosses. Call this Pr[$X = k$] since our random variable $X$ counts the number of heads after $n$ flips. 
   
  \ifsolutions{ \answer {
-  Part e computes the probability of a particular sequence of $k$ heads and $n-k$ tails. Part d counts \textit{how many} of these sequences exist. Therefore, to count the probability of getting $k$ heads in $n$ coin tosses we multiply our answer to part d and part e. $Pr[X = k] = \binom{n}{k}p^k(1-p)^{n-k}$
+  Part e) computes the probability of a particular sequence of $k$ heads and $n-k$ tails. Part d) counts \textit{how many} of these sequences exist. Therefore, to count the probability of getting $k$ heads in $n$ coin tosses we multiply our answer to part d) and part e). 
+ \[ Pr[X = k] = \binom{n}{k}p^k(1-p)^{n-k} \]
   }} 
   \fi
+
 \qpart
 \item We have now specified the distribution of $X$ where $X$ counts
   the number of heads after $n$ flips of a biased coin with a
@@ -338,10 +364,10 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
   We wish to show that $Pr[X=0] + Pr[X=1] +Pr[X=2] = 1$. 
 \begin{align*}
 \sum\nolimits_{k=0}^2 Pr[X=k] &= 
-\binom{2}{0}(1/3)^0(1-(1/3))^{2-0} + \binom{2}{1}(1/3)^1(1-(1/3))^{2-1} + \binom{2}{2}(1/3)^2(1-(1/3))^{2-2} \\ 
-&= \binom{2}{0}(1/3)^0(2/3)^{2} + \binom{2}{1}(1/3)^1(2/3)^1 + \binom{2}{2}(1/3)^2(2/3)^0 \\ 
-&= \binom{2}{0}(4/9) + \binom{2}{1}(2/9) + \binom{2}{2}(1/9) \\
-&=  1(4/9) + 2(2/9) + 1(1/9) = 4/9 + 4/9 +1/9 \\ 
+\binom{2}{0}(\third)^0(1-\third)^{2-0} + \binom{2}{1}(\third)^1(1-\third)^{2-1} + \binom{2}{2}(\third)^2(1-\third)^{2-2} \\ 
+&= \binom{2}{0}(\third)^0(\frac{2}{3})^{2} + \binom{2}{1}(\third)^1(\frac{2}{3})^1 + \binom{2}{2}(\third)^2(\frac{2}{3})^0 \\ 
+&= \binom{2}{0}({4\over9}) + \binom{2}{1}({2\over9}) + \binom{2}{2}({1\over9}) \\
+&= 1\cdot{4\over9} + 2\cdot{2\over9} + 1\cdot{1\over9} \\ 
 &= 1
 \end{align*}
   }} 
@@ -356,48 +382,54 @@ coming up heads) $n$ times. If this sounds familiar, it's been the focus of almo
   and $n=4$. 
   
    \ifsolutions{ \answer {
-Let's examine the case $n=4$. In this case $(a+b)^4 = (a+b)(a+b)(a+b)(a+b)$ When we expand out these terms, we get $a^4 + a^3b + a^3b + a^3b + a^3b + \ldots $ and some other terms. We have $4$ terms of $a^3b$. Where do these four terms come from? Well, one comes from multiplying the $b$ in the first parentheses and the $a$'s in the other parentheses. Another one comes from multiplying the $b$ in the second parentheses and the $a$'s in the other parentheses. And so on. So, we have $4$ choices which $b$ we pick. Therefore there are $\binom{4}{1}$ terms of $a^3b$, just like the binomial theorem suggests. In general, if we have a term $a^{n-k}b^k$ we have to choose $k$ of the parentheses to multiply the $b$ term in. This can be done $\binom{n}{k}$ so we expect that many terms of $a^{n-k}b^k$. This completes our brief combinatorial argument.
+Let's examine the case $n=4$. In this case $(a+b)^4 = (a+b)(a+b)(a+b)(a+b)$. When we expand out these terms, we get $a^4 + a^3b + a^3b + a^3b + a^3b + \ldots $ and some other terms. We have $4$ terms of $a^3b$. Where do these four terms come from? Well, one comes from multiplying the $b$ in the first parentheses and the $a$'s in the other parentheses. Another one comes from multiplying the $b$ in the second parentheses and the $a$'s in the other parentheses. And so on. So, we have $4$ choices which $b$ we pick. Therefore there are $\binom{4}{1}$ terms of $a^3b$, just like the binomial theorem suggests. In general, if we have a term $a^{n-k}b^k$ we have to choose $k$ of the parentheses to multiply the $b$ term in. This can be done $\binom{n}{k}$, so we expect that many terms of $a^{n-k}b^k$. This completes our brief combinatorial argument.
   }} 
   \fi 
 \qpart
-\item Use your result from part (h) to show that $\sum_{k=0}^n Pr[X=k] =1$ in general, where $Pr[X=k]$ is the probability you calculated in (f).
+\item Use your result from part h) to show that $\sum_{k=0}^n Pr[X=k] =1$ in general, where $Pr[X=k]$ is the probability you calculated in f).
  
    \ifsolutions{ \answer {
  We plug in $a = (1-p)$ and $b = p.$ Then we get
 \begin{align*}
-(a+b)^n &=  \sum\nolimits_{k=0}^n \binom{n}{k} a^{n-k}b^k &\text{By the binomial theorem} \\ 
-&=  \sum\nolimits_{k=0}^n \binom{n}{k} (1-p)^{n-k}p^k &\text{plugging in the values of $a$ and $b$} \\
-&= \sum\nolimits_{k=0}^n Pr[X=k] &\text{using our answer to part f} \\
-&= (a+b)^n = (1-p+p)^n = 1^n \\
+\sum\nolimits_{k=0}^n Pr[X=k] 
+&= \sum\nolimits_{k=0}^n \binom{n}{k} (1-p)^{n-k}p^k &\text{using our answer to part f)} \\
+&= \sum\nolimits_{k=0}^n \binom{n}{k} a^{n-k}b^k &\text{plugging in the values of $a$ and $b$} \\
+&= (a+b)^n &\text{by the binomial theorem in part h)} \\  
+&= (1-p+p)^n = 1^n \\ 
 &= 1
 \end{align*}
 Thus this is a valid probability distribution.
   }} 
-  \fi 
+  \fi
+ 
 \qpart
-\item We can say $X \sim B(n,p)$ Which is read as "$X$ is a binomial random variable with parameters $n$ and $p$. We lastly want to calculate $\mathbb{E}[X]$. An easy way to do this is to see $X$ as as sum of independent random variables. Each $X_i$ is an indicator variable that is $1$ if the $i^{\text{th}}$ flip is heads and $0$ if the $i^{\text{th}}$ flip is tails. Argue briefly that $X = \sum\nolimits_{i=1}^nX_i$.
+\item We can say $X \sim Binom(n,p)$ which reads as "$X$ is a binomial random variable with parameters $n$ and $p$. We lastly want to calculate $\mathbb{E}[X]$. An easy way to do this is to see $X$ as sum of independent random variables. Each $X_i$ is an indicator variable that is $1$ if the $i^{\text{th}}$ flip is heads and $0$ if the $i^{\text{th}}$ flip is tails. Argue briefly that $X = \sum\nolimits_{i=1}^nX_i$.
 
  \ifsolutions{ \answer {
-If $X$ is a count of the total number of heads, we get this count by counting each trial being a head or not. Since each $X_i$ is 1 if and only if the $i^\text{th}$ flip is a head, the $X_i$ count each trial being a head or not. This technique of breaking a random variable into a sum of simpler random variables is a widely-used technique and you should remember to this trick, especially when computing expectations.
+If $X$ is a count of the total number of heads, we get this count by counting each trial being a head or not. Since each $X_i$ is 1 if and only if the $i^\text{th}$ flip is a head, the $X_i$ count each trial being a head or not. This technique of breaking a random variable into a sum of simpler random variables is a widely-used technique and you should remember this trick, especially when computing expectations.
   }} 
   \fi 
+
 \qpart
 \item Use the linearity of expectation to calculate $\mathbb{E}[X]$.
 
  \ifsolutions{ \answer {
-By the linearity of expectation, if $X = \sum\nolimits_{i=1}^nX_i$, then $\exx[X] = \sum\nolimits_{i=1}^n\exx[X_i]$. So now we must compute the expectation of each $X_i$. We notice that each $X_i$ is distributed identically, therefore it is sufficient to compute the expectation of only one $X_i$ and the rest will be identical. 
-
-Each $X_i$ is 1 (flip heads on $i^{\text{th}}$ flip) with probability $p$ and 0  (flip tails on $i^{\text{th}}$ flip) with probability $1-p$. Therefore, $\exx[X_i] = 1\cdot p + 0 \cdot(1-p) = p$ by definition of expectation. And $\exx[X] = \sum\nolimits_{i=1}^n\exx[X_i] = \sum\nolimits_{i=1}^n p = np$. If $X \sim B(n,p)$ then, $\exx[X] = np$.
+By the linearity of expectation, if $X = \sum\nolimits_{i=1}^nX_i$, then $\exx[X] = \sum\nolimits_{i=1}^n\exx[X_i]$. So now we must compute the expectation of each $X_i$. We notice that each $X_i$ is distributed identically, therefore it is sufficient to compute the expectation of only one $X_i$ and the rest will be identical. Each $X_i$ is 1 (flip heads on $i^{\text{th}}$ flip) with probability $p$ and 0 (flip tails on $i^{\text{th}}$ flip) with probability $1-p$. Therefore, 
+\[ \exx[X_i] = 1\cdot p + 0\cdot(1-p) = p \]
+by definition of expectation. And 
+\[ \exx[X] = \sum\nolimits_{i=1}^n\exx[X_i] = \sum\nolimits_{i=1}^n p = np\]
+If $X \sim Binom(n,p)$ then, $\exx[X] = np$.
   }} 
   \fi 
+
+
 \qpart
 \item Looking at what this expectation is, remark on one empirical finding from a virtual lab or the lab we did during discussion that is explained by the expectation you just calculated. Congratulate yourself for finishing a problem by GSI lots-of-parts.
 
  \ifsolutions{ \answer {
-In Discussion 8A, we saw that after $n$ flips $d$-sided dice, the most common value (counting the number of times we roll a 1) was close to $n/d$. We see that this is similar to flipping a coin with $p=1/d$ since we were only counting the times we roll a 1. The most common value is \underline{not} the same thing as expectation. (Some random variables never take on their expectation). However, we do know that expectation is the weighted-average. So, this finding explains why the histograms we found in Discussion 8A were symmetrical around the expectation. If it weren't symmetrical around the expectation, then the expectation wouldn't actually be the weighted average! 
+In Discussion 8A, we saw that after $n$ flips of a $d$-sided dice, the most common value of counting the number of times we roll a 1 was close to $n/d$. We see that this is similar to flipping a biased coin with probability $p=1/d$ since we were only counting the times we roll a 1. The most common value is \underline{not} the same thing as expectation. (Some random variables never take on their expectation). However, we do know that expectation is the weighted-average. So, this finding explains why the histograms we found in Discussion 8A were symmetrical around the expectation. If it weren't symmetrical around the expectation, then the expectation wouldn't actually be the weighted average! 
 
-Dear GSI lots-of-parts: please don't write the final...
-
+%Dear GSI lots-of-parts: please don't write the final...
   }} 
   \fi 
 \end{enumerate}
@@ -419,11 +451,13 @@ buys.
   probability $X=x$?  We can denote this $f(x)$. 
 Show that $f(x)$ is a proper probability mass function.
 
-\ifsolutions{ \answer{ The probability of getting $(x-1)$ non-winning lottery tickets is $(1-p)^{x-1}$. Therefore the probability of getting $(x-1)$ non-winning tickets, then a winning ticket is
+\ifsolutions{ \answer{ 
+The probability of getting $(x-1)$ non-winning lottery tickets is $(1-p)^{x-1}$. Therefore the probability of getting $(x-1)$ non-winning tickets, then a winning ticket is
 	\[ f(x) = \mathbb{P}(X=x) = (1-p)^{x-1} p. \]
-	To show this is a valid probability distribution, we need to make sure the sum of $f(x)$ over all possible $x$ is 1. Using the formula for an infinite geometric series,
+To show that this is a valid probability distribution, we need to make sure the sum of $f(x)$ over all possible $x$ is 1. Using the formula for an infinite geometric series,
 	\[ \sum_{x=1}^{\infty} f(x) = p \sum_{x=1}^{\infty} (1-p)^{x-1} = p \cdot \frac{1}{1-(1-p)} = 1. \]
 }}\fi
+
 
 \qpart
 \item (Lab) Using a computer, simulate $m=10,000$ trials of Lily buying lottery tickets until she gets a winner. Use $p=0.2$, and plot a histogram with the number of lottery tickets on the $x$-axis and the fraction of trials with each of these outcomes on the $y$-axis.  Overlay $f(x)$ from part (a). What is the average number of lottery tickets Lily has to buy?
@@ -437,13 +471,20 @@ Example average: 5.057.
 }}\fi
 
 
+\newpage
+
 \qpart
 \item Compute $\mathbb{E}(X)$, the expected value of $X$. How does this relate to the average number of lottery tickets from part (b)? (Hint: use the relation $\mathbb{E}(X) = (1-p) \mathbb{E}(X) + 1$, but first explain where this relation comes from.)
 
 \ifsolutions{ \answer{ 
-This relation comes from the fact that with probability $p$, Lily will only need to buy 1 lottery ticket. But if she is not so lucky the first time, with probability $(1-p)$ she will have to try again.  When she tries again, her expectation from that point hasn't changed, so in a sense she is just starting over. Thus we get 1 plus the original expectation multiplied by the probability of failure on the first day:
-\[ \mathbb{E}(X) = 1 + (1-p) \mathbb{E}(X). \]
-
+This relation comes from the fact that with probability $p$, Lily will only need to buy $1$ lottery ticket. But if she is not so lucky the first time, with probability $(1-p)$ she will have to try again.  When she tries again, her expectation from that point hasn't changed, so in a sense she is just starting over. Thus we get the result from two conditional expectations: 
+\[ \exx(X) = \exx(X|1st)\Pr[1st] + \exx(X|\bar{1st})\Pr[\bar{1st}] \]
+where $\exx(X|1st)=1$ is the expectation of the number of lottery tickets if Lily wins the first time she buy; and $\bar{1st}$ is the complement of this event. Here, $\exx(X|\bar{1st})=1 + \exx(X)$ because Lily has to buy 1 tickt (to lose on the first time) and then start again. Therefore
+\begin{align*}
+\exx(X) &= 1\cdot p + (1+\exx(X))\cdot(1-p) \\
+&= p+(1-p) + (1-p)\exx(X) \\
+&= 1 + (1-p)\exx(X)
+\end{align*}
 Solving for $\mathbb{E}(X)$, we get
 \[ \mathbb{E}(X)- (1-p)\mathbb{E}(X) = 1 \quad \Rightarrow \quad \boxed{\mathbb{E}(X) = \frac{1}{p}} \] 
 
@@ -502,7 +543,25 @@ the expectation of a Geometric Random Variable to this situation. ]
 
 
 
-\ifsolutions{ \answer{
+\ifsolutions{ 
+\answer{
+I.
+
+This problem is very similar to part c) in problem 5. Due to the memorylessness of the scenario, i.e., what Mr. Bond chose in the previous attempt has nothing to do with his current attempt and all the following attempts. It is like starting all over again, as every attempt is just like his first attempt. Let $X$ be the random variable of the time 007 needs to escape. We can start by considering the outcome of Bond's first attempt, and see how the expected time to escape, $E[X]$, changes as a result of this. We have
+\begin{align*}
+E[X] &= E[X|A]\Pr[A] + E[X|S]\Pr[S] + E[X|D]\Pr[D]\\
+&= \frac{1}{3}(E[X|A] + E[X|S] + E[X|D])
+\end{align*}
+where $E[X|A]$ means the expected time to escape given that Bond went through the AC-duct in his first attempt, and similarly for $E[X|S]$ and $E[X|D]$. Now we take a closer look at these conditional expectations. Clearly, $E[X|D] = 0$ because Mr. Bond escapes immediately. Meanwhile, we have $E[X|A] = 2 + E[X]$ because given that 007 chose AC-duct in his first attempt, he wastes $2$ hours and have to try again (which triggers another completely fresh attempt with no memory and thus takes $E[X]$ hours to escape). Similarly, we have $E[X|S] = 5 + E[X]$. So now, we have derived a recursive relation for the expected time to escape
+\[ E[X] = \frac{1}{3}(2+E[X] + 5+E[X] + 0)\]
+Solving this for $E[X]$, we get that $E[X]=\fbox{\ensuremath{\mathbf{007}}}$.
+}
+
+\newpage
+
+\answer{
+II. (optional)
+
 Let $T$ be the total number of attempts Mr. Bond must make before he escapes from his imprisonment, i.e. the first $T-1$ attempts are failures - where he either enters the AC duct or the sewer pipe - and the final attempt at trial $T$ sees him escape through the door. Thus $T$ corresponds to the number of coin tosses landing tails until a head turns up, where a tail (Bond fails) comes up with probability $2/3$ while a head (Bond escapes) has probability $1/3$.  Hence similar to problems 5, $T \sim Geom(1/3)$, and therefore by the expectation of a geometric r.v., $E(T) = 3$.
 
 Now define $X_t$ for $t\in\{1,2,\ldots,T-1\}$ to be the time that Bond spends on failed trial $t$.  Then $X$, the total time Bond spends trying to escape, is a r.v. satisfying
@@ -520,6 +579,7 @@ for $1\le t\le T-1$, and so
 \begin{equation*}
 E(X_t) =  2\cdot \frac{1}{2} + 5\cdot\frac{1}{2} = \frac{7}{2}
 \end{equation*}
+
 Finally, plugging these expectations into equation~(\ref{eqn:bond}) gives us
 \begin{equation*}
 E(X) = E(T-1)\cdot E(X_t) = (3-1)\cdot\frac{7}{2} = 7
@@ -534,14 +594,12 @@ E \left[\sum_{t=1}^{T-1} X_t \right]
 &=& E(X_t) E(T-1)
 \end{eqnarray*}
 as claimed.
-
-%Using the notation in the extremely helpful hint, $E[T]=E[T|A]\Pr[A]+E[T|S]\Pr[S]+E[T|D]\Pr[D]=\frac{1}{3}(E[T|A]+E[T|S]+E[T|D])$. Note that $E[T|A]=E[T]+2$ by the memorylessness of the situation. Similarly, $E[T|S]=E[T]+5$. Lastly, $E[T|D]=0$ because Mr. Bond escapes immediately. So we have that $E[T]=\frac{1}{3}(E[T]+2+E[T]+5+0)$. Solving this for $E[T]$, we get that $E[T]=\fbox{\ensuremath{\mathbf{007}}}$.
 }}
-
 \fi
 
-\iffalse
 
+
+\iffalse
 \qns{(Optional) Balls and boxes}\\
 Suppose $\alpha n$ balls are dropped at random into $n$ boxes so that all $n^{\alpha n}$ assignments have equal probability. Here, $n$ is large enough so that you can treat $\alpha n$ as a natural number. 
 \begin{enumerate}[a)]
