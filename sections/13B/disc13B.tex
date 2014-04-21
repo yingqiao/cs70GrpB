@@ -10,6 +10,14 @@
 \maketitle
 
 
+%-polling questions, ideally something that ends up with having to solve a quadratic equation (he suggested something similar to a problem in note 19)
+%
+%-coupon collecting, instead of expectation, compute the variance
+%
+%-error-correcting code where you compute the channel error, given that you want the overall error to be less than some value
+%
+%-I think the goal is that all of these will end up using Chebyshev's inequality.
+
 \begin{enumerate}
 
 
@@ -24,6 +32,21 @@ Suppose Prof. Sahai wants to poll the CS 70 students {\em again} about whether t
 \vspace{20mm}
 
 \end{enumerate}
+
+\item {\bf How Many Coupons}
+Recall the coupon collecting problem covered in note 17. There are $n$ distinct coupons that wish to collect all $n$ different types of coupons. Every time we buy a box, there is one coupon in, with equal likelihood of being any one of the types of coupons. We want to figure out how many boxes do we need to buy to get one of each coupon. For this problem, we want to bound the probability we have to buy more than $n\log{n}$ coupons.
+\begin{enumerate}[a)]
+\item We represent $X$, the number of boxes we have to buy, as a sum of other random variables. Let $X_i$ represent the number of boxes you buy to go from $i-1$ to $i$ distinct coupons. Write $X$ as a sum of $X_i$'s. Argue that each $X_i$ is an independent geometric distribution.
+\item We wish to use Chebyshev's inequality to bound the probability we have to buy more than $n \log{n}$ boxes. In order to do this, we need to compute the variance of a geometric random variable. We will use the following lemma in our proof: $\sum\nolimits_{k=1}^{\infty} k(k+1)(1-p)^{k-1} = \frac{2}{p^3}$. Prove this lemma. (Hint: what is the sum of the geometric series $\sum\nolimits_{k=0}^{\infty} (1-p)^k$. Take the derivative of both sides, what happens?)
+\item If $X_i \sim Geom(p)$, show that $\mathbb{E}[X_i^2] = \sum\nolimits_{k=1}^{\infty} k(k+1)p(1-p)^{k-1} - \sum\nolimits_{k=1}^{\infty} kpq^{k-1}$
+\item Use your lemma and the fact that $\mathbb{E}[X_i] = 1/p$ to simplify part c to show $\mathbb{E}[X_i^2] = \frac{2}{p^2} - \frac{1}{p} $
+\item Show that variance of a geometric variable with parameter $p$ is $\frac{1-p}{p^2}$ We will use the estimation, $Var[X_i] < \frac{1}{p^2}$
+\item Make use of the fact that $\sum\nolimits_{i=1}^{\infty} \frac{1}{i^2}$ is a positive constant $<2$ to show that the $Var[X] \leq 2n^2$ 
+\item Use Chebyshev's inequality to show that $Pr[ X \geq n^3 + n] \leq 2/n $. (Hint: Recall that we estimated $\mathbb{E}[X] \approx \ln{n} + \gamma$. Recall that $Pr[X \geq \alpha] \leq Pr[X \geq \alpha + y]$ for any positive constant, $y$).
+
+
+\end{enumerate}
+
 
 \end{enumerate}
 
