@@ -3,7 +3,7 @@
 \usepackage{color}
 \newif\ifsolutions
 \solutionstrue
-\solutionsfalse %flag for solutions
+%\solutionsfalse %flag for solutions
 
 \def\title{Discussion 13B}
 \begin{document}
@@ -129,7 +129,7 @@ we want to bound the probability that we have to buy lots of coupons
   random variable with a geometric distribution. 
 
 \ifsolutions{\color{blue}{
-\[ X = \sum\nolimits_{i=0}^n X_i \quad\quad\quad \text{Each} X_i \sim Geo(\frac{n-i}{n}) \]
+\[ X = \sum\nolimits_{i=1}^n X_i \quad\quad\quad \text{Each  } X_i \sim Geo(\frac{n-i}{n}) \]
 }}\fi
 
 \item We wish to use Chebyshev's inequality to bound the probability
@@ -208,14 +208,17 @@ Var[X] &= \sum\nolimits_{i=0}^{n-1} Var[X_i] \\
   \infty$. (Hint: Recall that we estimated in the note that
   $\mathbb{E}[X] \approx n(\ln{n} + \gamma) \approx n \ln{n}$. ) 
 
-\ifsolutions{\color{blue}{ FIX THESE
+\ifsolutions{\color{blue}{ 
+
+
 \begin{align*}
-Pr[ X \geq n^{3/2} + n\ln{n}] &\approx Pr[ X \geq n^{3/2} + \mathbb{E}[X]] \\ 
-&=  Pr[ X - \mathbb{E}[X] \geq n^{3/2} ] \\
-&\leq Pr[ | X - \mathbb{E}[X] | \geq n^{3/2} ] \\
-&\leq \frac{Var[X]}{n^3} \\
-&\leq \frac{2n^2}{n^3} \\
-&= \frac{2}{n}
+Pr[ X \geq \alpha n\ln{n}] &\approx Pr[ X \geq (\alpha-1)n\ln{n} + \mathbb{E}[X]] \\ 
+&=  Pr[ X - \mathbb{E}[X] \geq (\alpha - 1)n\ln{n} ] \\
+&\leq Pr[ | X - \mathbb{E}[X] | \geq (\alpha-1)n\ln{n} ] \\
+&\leq \frac{Var[X]}{((\alpha-1)n\ln{n})^2} \\
+&\leq \frac{2n^2}{((\alpha-1)^2n^2(\ln{n})^2} \\
+&= \frac{2}{(\alpha-1)^2(\ln{n})^2} \\
+& \lim_{n \to \infty} \frac{2}{(\alpha-1)^2(\ln{n})^2}  = 0 \\
 \end{align*}
 }}\fi
 
