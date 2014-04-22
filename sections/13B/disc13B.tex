@@ -69,10 +69,25 @@ By definition $\mathbb{E}[X_i^2] = \sum\nolimits_{k=1}^{\infty} k^2p(1-p)^{k-1}$
 }}\fi
 
 
+
 \item Use your lemma and the fact that $\mathbb{E}[X_i] = 1/p$ to simplify part c to show $\mathbb{E}[X_i^2] = \frac{2}{p^2} - \frac{1}{p} $
+\ifsolutions{\color{blue}{
+We simply plug in our lemma to the left hand term. We also notice that the right hand expression is the expectation of a geometric variable with parameter $p$.
+}}\fi
 \item Show that variance of a geometric variable with parameter $p$ is $\frac{1-p}{p^2}$ We will use the estimation, $Var[X_i] < \frac{1}{p^2}$
-\item Make use of the fact that $\sum\nolimits_{i=1}^{\infty} \frac{1}{i^2}$ is a positive constant $<2$ to show that the $Var[X] \leq 2n^2$ 
-\item Use Chebyshev's inequality to show that $Pr[ X \geq n^3 + n] \leq 2/n $. (Hint: Recall that we estimated $\mathbb{E}[X] \approx \ln{n} + \gamma$. Recall that $Pr[X \geq \alpha] \leq Pr[X \geq \alpha + y]$ for any positive constant, $y$).
+\ifsolutions{\color{blue}{
+$Var[X] = \mathbb{E}[X^2] - \mathbb{E}[X]^2$ \\ $Var[X_i] = \frac{2}{p^2} - \frac{1}{p}  - \frac{1}{p}^2 = 1/p^2 - 1/p = \frac{1-p}{p^2} < \frac{1}{p^2}$
+}}\fi
+\item Make use of the fact that $\sum\nolimits_{i=1}^{\infty} \frac{1}{i^2}$ is a positive constant $\leq2$ to show that the $Var[X] \leq 2n^2$ 
+
+\ifsolutions{\color{blue}{
+We use the fact that since the $X_i$ are independent, \\ $Var[X] = \sum\nolimits_{i=0}^{n-1} Var[X_i]$ \\ $ \leq \sum\nolimits_{i=0}^{n-1} (\frac{n}{n-i})^2 = n^2\sum\nolimits_{i=0}^{n-1} \frac{1}{i}^2 \leq n^2\sum\nolimits_{i=0}^{\infty} \frac{1}{i}^2 \leq 2n^2$
+}}\fi
+\item Use Chebyshev's inequality to show that $Pr[ X \geq n^{3/2} + n] \leq 2/n $. (Hint: Recall that we estimated $\mathbb{E}[X] \approx \ln{n} + \gamma \ll n$. Note that $Pr[X \geq \alpha] \geq Pr[X \geq \alpha + y]$ for any positive constant, $y$).
+
+\ifsolutions{\color{blue}{
+$n^{3/2} + n > n^{3/2} + \mathbb{E}[X]$ so \\ $Pr[ X \geq n^{3/2} + n] \leq Pr[ X \geq n^{3/2} + \mathbb{E}[X]] \\ =  Pr[ X - \mathbb{E}[X] \geq n^{3/2} ] \leq Pr[ | X - \mathbb{E}[X] | \geq n^{3/2} ] \leq \frac{Var[X]}{n^3} \leq \frac{2n^2}{n^3} = 2/n$
+}}\fi
 
 
 \end{enumerate}
