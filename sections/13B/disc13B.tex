@@ -3,7 +3,7 @@
 \usepackage{color}
 \newif\ifsolutions
 \solutionstrue
-%\solutionsfalse %flag for solutions
+\solutionsfalse %flag for solutions
 
 \def\title{Discussion 13B}
 \begin{document}
@@ -22,71 +22,201 @@
 
 \item {\bf Warmup}
 \begin{enumerate}[a)]
-\item Calculate the Variance of a $X$ where $X$ represents the value of a standard 6-sided dice.
-\item Calculate the variance of the binomial distribution
+\item Calculate the variance of a random variable, $X$, where $X$ represents the value of a standard 6-sided dice.
+
+\ifsolutions{\color{blue}{
+\[ \Pr[X=i] = \frac{1}{6} \quad\text{for } i=1,2,\dots,6 \]
+\[ E[X] = \sum_{i=1}^6 i\Pr[X=i] = \frac{1}{6}(1+2+3+\dots+6) = \frac{7}{2} \]
+\[ E[X^2] = \sum_{i=1}^6 i^2\Pr[X=i] = \frac{1}{6}(1+4+9+\dots+36) = \frac{91}{6} \]
+\[ Var[X] = E[X^2] - (E[X])^2 = \frac{35}{12} \]
+}}
+\fi
+
+
+\item Calculate the variance of a random variable defined by the binomial distribution.
+
+\ifsolutions{\color{blue}{
+From HW12, we know that $X = \sum_{i=1}^n X_i$, where
+\begin{equation*}
+X_i = \begin{cases}
+      1 &\mbox{with probability } p \\
+      0 &\mbox{with probability } (1-p)
+      \end{cases}
+\end{equation*}
+and all these $X_i$'s are i.i.d. Bernoulli r.v. So, $Var[X] = \sum_{i=1}^n Var[X_i]$.
+\[ E[X_i] = 1\cdot p + 0\cdot (1-p) = p \]
+\[ E[X_i^2] = 1^2\cdot p + 0^2\cdot (1-p) = p \]
+\[ Var[X_i] = E[X_i^2] - (E[X_i])^2 = p - p^2 = p(1-p) \]
+So, $Var[X] = np(1-p)$.
+}}
+\fi
+
 \end{enumerate}
 
-\vspace{20mm}
+\vspace{25mm}
 
 \item {\bf Homework Polling - Revisited} 
 
-Suppose Prof. Sahai wants to poll the CS 70 students {\em again} about whether the homeworks have been too hard recently.  But now everyone is comfortable enough to answer honestly, either no (0) or yes (1). Let the true fraction of students who think the homework is too hard be $p$. Let the response of the $i^{\text{th}}$ polled student be $X_i$.  Prof. Sahai would like to poll $n$ students, with $n$ large enough that the probability of estimating $p$ to within 2\% is at least 90\%.
+Suppose Prof. Sahai wants to poll the CS 70 students {\em again} about
+whether the homeworks have been too hard recently.  But now everyone
+is comfortable enough to answer honestly, either no (0) or yes
+(1). Let the true fraction of students who think the homework is too
+hard be $p$. Let the response of the $i^{\text{th}}$ polled student be
+$X_i$.  Prof. Sahai would like to poll $n$ students, with $n$ large
+enough that the probability of estimating $p$ to within $\pm 2\% $ is at least 90\%.
 
 \begin{enumerate}[a)]
 
-\item Let $M_n = \frac{1}{n}\sum_{i=1}^n X_i$ be the average of the $n$ responses. What is the expectation of $M_n$? Write an equation that describes the desired probability. Draw a picture of the distribution of $M_n - p$ and mark the region where the desired probability would be obtained.
+\item Let $M_n = \frac{1}{n}\sum_{i=1}^n X_i$ be the average of the
+  $n$ responses. What is the expectation of $M_n$?  
 
-\vspace{20mm}
+  What is the event that we are interested in whose probability we
+  would like to be at least $90\%$? Draw a picture of the distribution
+  of $M_n - p$ and mark the region that corresponds to the event of
+  interest. 
+
+\ifsolutions{\color{blue}{
+\begin{equation*}
+X_i = \begin{cases}
+      1 &\mbox{hw is too hard} \\
+      0 &\mbox{hw is not too hard}
+      \end{cases}
+\end{equation*}
+$X_i$ is i.i.d Bernoulli r.v. with $\Pr[X_i=1] = p$. So, $M_n \sim \frac{1}{n}Binom(n,p)$:
+\[ E[M_n] = \frac{1}{n}\sum_{i=1}^n E[X_i] = \frac{1}{n}\cdot(np) = p\]
+We want 
+\[ \Pr[|M_n - p| < 0.02p] > 0.9 \]
+Or equivalently,
+\[ \Pr[|M_n - p| \geq 0.02p] \leq 0.1 \]
+}}\fi
+
+
+\item Now use Chebyshev's inequality to find a safe $n$ regardless of
+  what $p$ is. 
+\ifsolutions{\color{blue}{
+\[ Var[M_n] = \frac{1}{n^2} \sum_{i=1}^n Var[X_i] = \frac{p(1-p)}{n} \]
+\[ \Pr[|M_n - p|] \geq 0.02p] \leq \frac{Var[M_n]}{(0.02p)^2} = \frac{1-p}{(0.02)^2np} \leq 0.1 \]
+\[ n \geq 25000\frac{1-p}{p}\]
+}}\fi
+
+\item What if instead of wanting an accuracy of $\pm 2\%$ we wanted a
+  relative error of 2\%. This means that if the true value was $p$, we
+  want the answer we get to be within $[0.98 p, 1.02p]$. Can we pull
+  that off using Chebyshev's inequality? Do you think we could pull
+  that off with a single universal choice of $n$ that does not depend
+  on (the unknown) $p$?
+
 
 \end{enumerate}
 
+\newpage
+
 \item {\bf How Many Coupons}
-Recall the coupon collecting problem covered in note 17. There are $n$ distinct coupons that wish to collect all $n$ different types of coupons. Every time we buy a box, there is one coupon in, with equal likelihood of being any one of the types of coupons. We want to figure out how many boxes do we need to buy to get one of each coupon. For this problem, we want to bound the probability we have to buy more than $n\log{n}$ coupons.
+
+Consider the coupon collecting problem covered in note 17. There are
+$n$ distinct types of coupons that we wish to collect. Every time we
+buy a box, there is one coupon in it, with equal likelihood of being
+any one of the types of coupons. We want to figure out how many boxes
+we need to buy in order to get one of each coupon. For this problem,
+we want to bound the probability that we have to buy lots of coupons
+--- say substantially more than $n\log{n}$ coupons. 
+
 \begin{enumerate}[a)]
-\item We represent $X$, the number of boxes we have to buy, as a sum of other random variables. Let $X_i$ represent the number of boxes you buy to go from $i-1$ to $i$ distinct coupons. Write $X$ as a sum of $X_i$'s. Argue that each $X_i$ is an independent geometric distribution.
+\item We represent $X$, the number of boxes we have to buy, as a sum
+  of other random variables. Let $X_i$ represent the number of boxes
+  you buy to go from $i-1$ to $i$ distinct coupons in your hand. Write
+  $X$ as a sum of $X_i$'s. Argue that each $X_i$ is an independent
+  random variable with a geometric distribution. 
 
 \ifsolutions{\color{blue}{
-$X = \sum\nolimits_{i=0}^n X_i$ \hspace{5mm} Each $X_i \sim Geo(\frac{n-i}{n})$
+\[ X = \sum\nolimits_{i=0}^n X_i \quad\quad\quad \text{Each} X_i \sim Geo(\frac{n-i}{n}) \]
 }}\fi
 
-\item We wish to use Chebyshev's inequality to bound the probability we have to buy more than $n \log{n}$ boxes. In order to do this, we need to compute the variance of a geometric random variable. We will use the following lemma in our proof: $\sum\nolimits_{k=1}^{\infty} k(k+1)(1-p)^{k-1} = \frac{2}{p^3}$. Prove this lemma. (Hint: what is the sum of the geometric series $\sum\nolimits_{k=0}^{\infty} (1-p)^k$. Take the derivative of both sides, what happens?)
+\item We wish to use Chebyshev's inequality to bound the probability
+  we have to buy substantially more than $n \ln{n}$ boxes. In order
+  to do this, we need to compute the variance of a geometric random
+  variable. There are multiple ways of doing this, including a
+  recursive trick like that used by Lily's Lottery.
+
+  Another approach is to use series techniques. We use the following
+  lemma in our proof: 
+  $\sum\nolimits_{k=1}^{\infty} k(k+1)(1-p)^{k-1} =
+  \frac{2}{p^3}$. Prove this lemma. (Hint: what is the sum of the
+  geometric series $\sum\nolimits_{k=0}^{\infty} (1-p)^k$. Take the
+  derivative of both sides, what happens?)
 
 \ifsolutions{\color{blue}{
-$\sum\nolimits_{k=0}^{\infty} (1-p)^k = \frac{1}{p}$ take derivative of both sides twice. \\ $-\sum\nolimits_{k=0}^{\infty} k(1-p)^{k-1} = -\frac{1}{p^2}$  \\ $\sum\nolimits_{k=0}^{\infty} k(k-1)(1-p)^{k-2} = \frac{2}{p^3}$ Notice that $k=0$ means the LHS is 0
-\\ $\sum\nolimits_{k=1}^{\infty} k(k-1)(1-p)^{k-2} = \frac{2}{p^3}$ 
-
-$\sum\nolimits_{j=0}^{\infty} (j+1)j(1-p)^{j-1} = \frac{2}{p^3}$ change summation bounds  $j = k-1$
-
+\begin{align*}
+\sum\nolimits_{k=0}^{\infty} (1-p)^k &= \frac{1}{p} &\text{take derivative of both sides twice} \\ 
+-\sum\nolimits_{k=0}^{\infty} k(1-p)^{k-1} &= -\frac{1}{p^2}  &\text{1st}\\ 
+\sum\nolimits_{k=0}^{\infty} k(k-1)(1-p)^{k-2} &= \frac{2}{p^3} &\text{2nd, LHS $k=0$ term is 0}\\ 
+\sum\nolimits_{k=1}^{\infty} k(k-1)(1-p)^{k-2} &= \frac{2}{p^3} \\
+\sum\nolimits_{j=0}^{\infty} (j+1)j(1-p)^{j-1} &= \frac{2}{p^3} 
+&\text{change summation bounds} j = k-1 \\
+\sum\nolimits_{j=1}^{\infty} j(j+1)(1-p)^{j-1} &= \frac{2}{p^3} &\text{LHS $j=0$ term is 0}
+\end{align*}
 }}\fi
-
-
 
 
 \item If $X_i \sim Geom(p)$, show that $\mathbb{E}[X_i^2] = \sum\nolimits_{k=1}^{\infty} k(k+1)p(1-p)^{k-1} - \sum\nolimits_{k=1}^{\infty} kp(1-p)^{k-1}$
 
 \ifsolutions{\color{blue}{
-By definition $\mathbb{E}[X_i^2] = \sum\nolimits_{k=1}^{\infty} k^2p(1-p)^{k-1}$ since $k^2 = k(k+1) - k$ we plug that in to get the answer 
+By definition $\mathbb{E}[X_i^2] = \sum\nolimits_{k=1}^{\infty} k^2p(1-p)^{k-1}$. Since $k^2 = k(k+1) - k$, we can plug that in to get the answer. 
 }}\fi
 
 
-
-\item Use your lemma and the fact that $\mathbb{E}[X_i] = 1/p$ to simplify part c to show $\mathbb{E}[X_i^2] = \frac{2}{p^2} - \frac{1}{p} $
-\ifsolutions{\color{blue}{
-We simply plug in our lemma to the left hand term. We also notice that the right hand expression is the expectation of a geometric variable with parameter $p$.
-}}\fi
-\item Show that variance of a geometric variable with parameter $p$ is $\frac{1-p}{p^2}$ We will use the estimation, $Var[X_i] < \frac{1}{p^2}$
-\ifsolutions{\color{blue}{
-$Var[X] = \mathbb{E}[X^2] - \mathbb{E}[X]^2$ \\ $Var[X_i] = \frac{2}{p^2} - \frac{1}{p}  - \frac{1}{p}^2 = 1/p^2 - 1/p = \frac{1-p}{p^2} < \frac{1}{p^2}$
-}}\fi
-\item Make use of the fact that $\sum\nolimits_{i=1}^{\infty} \frac{1}{i^2}$ is a positive constant $\leq2$ to show that the $Var[X] \leq 2n^2$ 
+\item Use your lemma and the fact that $\mathbb{E}[X_i] = 1/p$ to simplify part c) to show $\mathbb{E}[X_i^2] = \frac{2}{p^2} - \frac{1}{p} $
 
 \ifsolutions{\color{blue}{
-We use the fact that since the $X_i$ are independent, \\ $Var[X] = \sum\nolimits_{i=0}^{n-1} Var[X_i]$ \\ $ \leq \sum\nolimits_{i=0}^{n-1} (\frac{n}{n-i})^2 = n^2\sum\nolimits_{i=0}^{n-1} \frac{1}{i}^2 \leq n^2\sum\nolimits_{i=0}^{\infty} \frac{1}{i}^2 \leq 2n^2$
+We simply plug in our lemma to the first sum term in part c). We also notice that the second sum term is just the expectation of a geometric variable with parameter $p$. So, we get 
+\[ \mathbb{E}[X_i^2] = p\cdot \frac{2}{p^3} - \frac{1}{p} \]
 }}\fi
-\item Use Chebyshev's inequality to show that $Pr[ X \geq n^{3/2} + n \ln{n}] \leq 2/n $. (Hint: Recall that we estimated $\mathbb{E}[X] \approx n(\ln{n} + \gamma) \approx n \ln{n}$. )
+
+
+\item Show that variance of a geometric variable with parameter $p$ is
+  $\frac{1-p}{p^2}$. We will later use the simpler upper bound, $Var[X_i] < \frac{1}{p^2}$.
 
 \ifsolutions{\color{blue}{
-$Pr[ X \geq n^{3/2} + n\ln{n}] \approx Pr[ X \geq n^{3/2} + \mathbb{E}[X]] \\ =  Pr[ X - \mathbb{E}[X] \geq n^{3/2} ] \leq Pr[ | X - \mathbb{E}[X] | \geq n^{3/2} ] \leq \frac{Var[X]}{n^3} \leq \frac{2n^2}{n^3} = 2/n$
+\begin{align*}
+Var[X_i] &= \mathbb{E}[X_i^2] - \mathbb{E}[X_i]^2 \\ 
+&= \frac{2}{p^2} - \frac{1}{p}  - (\frac{1}{p})^2 \\
+&= \frac{1}{p^2} - \frac{1}{p} \\
+&= \frac{1-p}{p^2} < \frac{1}{p^2}
+\end{align*}
+}}\fi
+
+
+\item Make use of the fact that $\sum\nolimits_{i=1}^{\infty}
+  \frac{1}{i^2}$ is a positive constant $\frac{\pi^2}{6} \leq 2$ to show that the $Var[X] \leq 2n^2$ 
+
+\ifsolutions{\color{blue}{
+We use the fact that the $X_i$'s are independent, 
+\begin{align*}
+Var[X] &= \sum\nolimits_{i=0}^{n-1} Var[X_i] \\ 
+&\leq \sum\nolimits_{i=0}^{n-1} (\frac{n}{n-i})^2 \\
+&= n^2\sum\nolimits_{i=0}^{n-1} \frac{1}{i}^2 \\
+&\leq n^2\sum\nolimits_{i=0}^{\infty} \frac{1}{i}^2 \\
+&\leq 2n^2
+\end{align*}
+}}\fi
+
+\item This means that the standard deviation for $X$ scales like $n$
+  and not like the expectation $n \ln n$. 
+
+ Use Chebyshev's inequality to show that $Pr[ X \geq \alpha n
+  \ln{n}]$ tends to zero for any $\alpha > 1$ as $n \rightarrow
+  \infty$. (Hint: Recall that we estimated in the note that
+  $\mathbb{E}[X] \approx n(\ln{n} + \gamma) \approx n \ln{n}$. ) 
+
+\ifsolutions{\color{blue}{ FIX THESE
+\begin{align*}
+Pr[ X \geq n^{3/2} + n\ln{n}] &\approx Pr[ X \geq n^{3/2} + \mathbb{E}[X]] \\ 
+&=  Pr[ X - \mathbb{E}[X] \geq n^{3/2} ] \\
+&\leq Pr[ | X - \mathbb{E}[X] | \geq n^{3/2} ] \\
+&\leq \frac{Var[X]}{n^3} \\
+&\leq \frac{2n^2}{n^3} \\
+&= \frac{2}{n}
+\end{align*}
 }}\fi
 
 
