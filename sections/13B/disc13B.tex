@@ -85,9 +85,9 @@ X_i = \begin{cases}
 $X_i$ is i.i.d Bernoulli r.v. with $\Pr[X_i=1] = p$. So, $M_n \sim \frac{1}{n}Binom(n,p)$:
 \[ E[M_n] = \frac{1}{n}\sum_{i=1}^n E[X_i] = \frac{1}{n}\cdot(np) = p\]
 We want 
-\[ \Pr[|M_n - p| < 0.02p] > 0.9 \]
+\[ \Pr[|M_n - p| < 0.02] > 0.9 \]
 Or equivalently,
-\[ \Pr[|M_n - p| \geq 0.02p] \leq 0.1 \]
+\[ \Pr[|M_n - p| \geq 0.02] \leq 0.1 \]
 }}\fi
 
 
@@ -95,8 +95,9 @@ Or equivalently,
   what $p$ is. 
 \ifsolutions{\color{blue}{
 \[ Var[M_n] = \frac{1}{n^2} \sum_{i=1}^n Var[X_i] = \frac{p(1-p)}{n} \]
-\[ \Pr[|M_n - p|] \geq 0.02p] \leq \frac{Var[M_n]}{(0.02p)^2} = \frac{1-p}{(0.02)^2np} \leq 0.1 \]
-\[ n \geq 25000\frac{1-p}{p}\]
+\[ \Pr[|M_n - p|] \geq 0.02] \leq \frac{Var[M_n]}{0.02^2} = \frac{p(1-p)}{(0.02)^2n} \leq 0.1 \]
+\[ n \geq 25000p(1-p) \leq 6250 \]
+Here, $p(1-p) \leq 1/4$ when equality holds of $p=1/2$.
 }}\fi
 
 \item What if instead of wanting an accuracy of $\pm 2\%$ we wanted a
@@ -105,6 +106,18 @@ Or equivalently,
   that off using Chebyshev's inequality? Do you think we could pull
   that off with a single universal choice of $n$ that does not depend
   on (the unknown) $p$?
+
+\ifsolutions{\color{blue}{
+We want
+\[ \Pr[0.98p < M_n < 1.02p] > 0.9 \]
+\[ \Pr[|M_n - p| \geq 0.02p] \leq 0.1 \]
+So, plugging in the $Var[M_n]$ in the Chebyshev's inequality, we have
+\[ \Pr[|M_n - p| \geq 0.02p] \leq \frac{Var[M_n]}{(0.02p)^2} =\frac{1-p}{0.02^2np} \leq 0.1 \]
+Solving this, we get
+\[ n \geq 25000 \frac{1-p}{p}\]
+It depends on $p$ as there is no simple bounds on $\frac{1-p}{p}=1/p - 1$.
+}}\fi
+
 
 
 \end{enumerate}
