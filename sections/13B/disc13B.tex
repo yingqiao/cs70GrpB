@@ -142,7 +142,7 @@ we want to bound the probability that we have to buy lots of coupons
   random variable with a geometric distribution. 
 
 \ifsolutions{\color{blue}{
-\[ X = \sum\nolimits_{i=1}^n X_i \quad\quad\quad \text{Each  } X_i \sim Geo(\frac{n-i}{n}) \]
+\[ X = \sum\nolimits_{i=1}^n X_i \quad\quad\quad \text{Each  } X_i \sim \text{Geo}\left(\frac{n-i+1}{n}\right) \]
 }}\fi
 
 \item We wish to use Chebyshev's inequality to bound the probability
@@ -205,10 +205,10 @@ Var[X_i] &= \mathbb{E}[X_i^2] - \mathbb{E}[X_i]^2 \\
 \ifsolutions{\color{blue}{
 We use the fact that the $X_i$'s are independent, 
 \begin{align*}
-Var[X] &= \sum\nolimits_{i=0}^{n-1} Var[X_i] \\ 
-&\leq \sum\nolimits_{i=0}^{n-1} (\frac{n}{n-i})^2 \\
-&= n^2\sum\nolimits_{i=0}^{n-1} \frac{1}{i}^2 \\
-&\leq n^2\sum\nolimits_{i=0}^{\infty} \frac{1}{i}^2 \\
+Var[X] &= \sum\nolimits_{i=1}^{n} Var[X_i] \\ 
+&\leq \sum\nolimits_{i=1}^{n} \left(\frac{n}{n-i+1}\right)^2 \\
+&= n^2\sum\nolimits_{j=1}^{n} \frac{1}{j^2} \\
+&\leq n^2\sum\nolimits_{j=1}^{\infty} \frac{1}{j^2} \\
 &\leq 2n^2
 \end{align*}
 }}\fi
