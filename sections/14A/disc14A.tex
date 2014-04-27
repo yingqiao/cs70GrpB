@@ -1,0 +1,156 @@
+\documentclass[11pt]{article}
+\usepackage{../../cs70}
+\usepackage{color}
+\newif\ifsolutions
+\solutionstrue
+\solutionsfalse %flag for solutions
+
+\def\title{Discussion 14A}
+\begin{document}
+\maketitle
+
+
+
+\begin{enumerate}
+
+\item {\bf How Many Coupons - disc 13B}
+
+Consider the coupon collecting problem covered in note 17. There are
+$n$ distinct types of coupons that we wish to collect. Every time we
+buy a box, there is one coupon in it, with equal likelihood of being
+any one of the types of coupons. We want to figure out how many boxes
+we need to buy in order to get one of each coupon. For this problem,
+we want to bound the probability that we have to buy lots of coupons
+--- say substantially more than $n\log{n}$ coupons. 
+
+\begin{enumerate}[a)]
+\item We represent $X$, the number of boxes we have to buy, as a sum
+  of other random variables. Let $X_i$ represent the number of boxes
+  you buy to go from $i-1$ to $i$ distinct coupons in your hand. Write
+  $X$ as a sum of $X_i$'s. Argue that each $X_i$ is an independent
+  random variable with a geometric distribution. 
+
+\ifsolutions{\color{blue}{
+\[ X = \sum\nolimits_{i=1}^n X_i \quad\quad\quad \text{Each  } X_i \sim \text{Geo}\left(\frac{n-i+1}{n}\right) \]
+}}\fi
+
+\item We wish to use Chebyshev's inequality to bound the probability
+  we have to buy substantially more than $n \ln{n}$ boxes. In order
+  to do this, we need to compute the variance of a geometric random
+  variable. There are multiple ways of doing this, including a
+  recursive trick like that used by Lily's Lottery.
+
+  Another approach is to use series techniques. We use the following
+  lemma in our proof: 
+  $\sum\nolimits_{k=1}^{\infty} k(k+1)(1-p)^{k-1} =
+  \frac{2}{p^3}$. Prove this lemma. (Hint: what is the sum of the
+  geometric series $\sum\nolimits_{k=0}^{\infty} (1-p)^k$. Take the
+  derivative of both sides, what happens?)
+
+\ifsolutions{\color{blue}{
+\begin{align*}
+\sum\nolimits_{k=0}^{\infty} (1-p)^k &= \frac{1}{p} &\text{take derivative of both sides twice} \\ 
+-\sum\nolimits_{k=0}^{\infty} k(1-p)^{k-1} &= -\frac{1}{p^2}  &\text{1st}\\ 
+\sum\nolimits_{k=0}^{\infty} k(k-1)(1-p)^{k-2} &= \frac{2}{p^3} &\text{2nd, LHS $k=0$ term is 0}\\ 
+\sum\nolimits_{k=1}^{\infty} k(k-1)(1-p)^{k-2} &= \frac{2}{p^3} \\
+\sum\nolimits_{j=0}^{\infty} (j+1)j(1-p)^{j-1} &= \frac{2}{p^3} 
+&\text{change summation bounds} j = k-1 \\
+\sum\nolimits_{j=1}^{\infty} j(j+1)(1-p)^{j-1} &= \frac{2}{p^3} &\text{LHS $j=0$ term is 0}
+\end{align*}
+}}\fi
+
+
+\item If $X_i \sim Geom(p)$, show that $\mathbb{E}[X_i^2] = \sum\nolimits_{k=1}^{\infty} k(k+1)p(1-p)^{k-1} - \sum\nolimits_{k=1}^{\infty} kp(1-p)^{k-1}$
+
+\ifsolutions{\color{blue}{
+By definition $\mathbb{E}[X_i^2] = \sum\nolimits_{k=1}^{\infty} k^2p(1-p)^{k-1}$. Since $k^2 = k(k+1) - k$, we can plug that in to get the answer. 
+}}\fi
+
+
+\item Use your lemma and the fact that $\mathbb{E}[X_i] = 1/p$ to simplify part c) to show $\mathbb{E}[X_i^2] = \frac{2}{p^2} - \frac{1}{p} $
+
+\ifsolutions{\color{blue}{
+We simply plug in our lemma to the first sum term in part c). We also notice that the second sum term is just the expectation of a geometric variable with parameter $p$. So, we get 
+\[ \mathbb{E}[X_i^2] = p\cdot \frac{2}{p^3} - \frac{1}{p} \]
+}}\fi
+
+
+\item Show that variance of a geometric variable with parameter $p$ is
+  $\frac{1-p}{p^2}$. We will later use the simpler upper bound, $Var[X_i] < \frac{1}{p^2}$.
+
+\ifsolutions{\color{blue}{
+\begin{align*}
+Var[X_i] &= \mathbb{E}[X_i^2] - \mathbb{E}[X_i]^2 \\ 
+&= \frac{2}{p^2} - \frac{1}{p}  - (\frac{1}{p})^2 \\
+&= \frac{1}{p^2} - \frac{1}{p} \\
+&= \frac{1-p}{p^2} < \frac{1}{p^2}
+\end{align*}
+}}\fi
+
+
+\item Make use of the fact that $\sum\nolimits_{i=1}^{\infty}
+  \frac{1}{i^2}$ is a positive constant $\frac{\pi^2}{6} \leq 2$ to show that the $Var[X] \leq 2n^2$ 
+
+\ifsolutions{\color{blue}{
+We use the fact that the $X_i$'s are independent, 
+\begin{align*}
+Var[X] &= \sum\nolimits_{i=1}^{n} Var[X_i] \\ 
+&\leq \sum\nolimits_{i=1}^{n} \left(\frac{n}{n-i+1}\right)^2 \\
+&= n^2\sum\nolimits_{j=1}^{n} \frac{1}{j^2} \\
+&\leq n^2\sum\nolimits_{j=1}^{\infty} \frac{1}{j^2} \\
+&\leq 2n^2
+\end{align*}
+}}\fi
+
+\item This means that the standard deviation for $X$ scales like $n$
+  and not like the expectation $n \ln n$. 
+
+ Use Chebyshev's inequality to show that $Pr[ X \geq \alpha n
+  \ln{n}]$ tends to zero for any $\alpha > 1$ as $n \rightarrow
+  \infty$. (Hint: Recall that we estimated in the note that
+  $\mathbb{E}[X] \approx n(\ln{n} + \gamma) \approx n \ln{n}$. ) 
+
+\ifsolutions{\color{blue}{ 
+
+
+\begin{align*}
+Pr[ X \geq \alpha n\ln{n}] &\approx Pr[ X \geq (\alpha-1)n\ln{n} + \mathbb{E}[X]] \\ 
+&=  Pr[ X - \mathbb{E}[X] \geq (\alpha - 1)n\ln{n} ] \\
+&\leq Pr[ | X - \mathbb{E}[X] | \geq (\alpha-1)n\ln{n} ] \\
+&\leq \frac{Var[X]}{((\alpha-1)n\ln{n})^2} \\
+&\leq \frac{2n^2}{((\alpha-1)^2n^2(\ln{n})^2} \\
+&= \frac{2}{(\alpha-1)^2(\ln{n})^2} \\
+& \lim_{n \to \infty} \frac{2}{(\alpha-1)^2(\ln{n})^2}  = 0 \\
+\end{align*}
+}}\fi
+
+
+\end{enumerate}
+
+\item{How many errors}
+We want to send a length-$n$ message through a noisy channel with $50$\% redundancy. In order to ensure an overall probability of $0.9$ that the receiver can decode the message correctly, how noisy can the channel be? i.e. what is the highest probability of single-bit error that we can tolerate?
+
+\ifsolutions{\color{blue}{
+We have $0.5n$ redundant bits, so we can recover $k=0.5n$ erasure errors (and $k=0.25n$ general errors). Let $p$ be the probablility of single-bit error; $X$ be the number of error bits in the length-$1.5n$ message. The overall error probablity should be bounded by 
+\[ \Pr[ X \leq k ] \geq 0.9 \]
+\[ \Pr[ X > k ] < 0.1 \]
+where
+\[ X= \sum_{i=1}^{1.5n} X_i\]
+\[ X_i = \begin{cases}
+         1 &\mbox {error bit : with prob. }p \\
+         0 &\mbox {good bit: with prob. }(1-p)
+         \end{cases}
+\]
+So,
+\[ \mathbb{E}(X) = 1.5np\]
+\[ Var[X] = 1.5np(1-p)\]
+
+Therefore, we solve using Chebyshev's inequality and get 
+\[ \Pr[ X > k ] = \Pr[ X - 1.5np > k - 1.5np] = \Pr[ X - 1.5np > 0.5n(1-3p)] \]
+\[ \leq \frac{Var[X]}{(k-1.5np)^2} = \frac{1.5np(1-p)}{0.25n^2(1-3p)^2} < 0.1\]
+\[ 60p(1-p) < n(1-3p)^2\]
+}}\fi
+
+\end{enumerate}
+
+\end{document}
